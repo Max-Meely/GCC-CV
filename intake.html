@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Order your CV | KINETIX</title><meta name="description" content="KINETIX - professional CVs, certificates and career documents for jobs in the UAE and GCC.">
+<link rel="icon" href="kinetix-logo.png">
+<script>try{var t=localStorage.getItem('kx-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<style>:root{--bg:#f6f7f9;--card:#fff;--ink:#0f1b2d;--muted:#5a6575;--line:#dde2e9;--soft:#eef2f7;--acc:#1561d6;--acc2:#0d47a1;--on:#fff;--ok:#1e7b4f;--okbg:#e6f4ec;--err:#b33a2b;--errbg:#fbebe8;--warn:#8a5a00;--warnbg:#fff4dc;--r:10px;--sh:0 1px 2px rgba(15,27,45,.06)}
+:root[data-theme=dark]{--bg:#0c1219;--card:#131b25;--ink:#e8edf4;--muted:#9aa6b6;--line:#243040;--soft:#1a2431;--acc:#5b9bff;--acc2:#8ab8ff;--on:#06111f;--ok:#58c38d;--okbg:#12281f;--err:#f08a78;--errbg:#2d1713;--warn:#e6b450;--warnbg:#2b2210;--sh:none}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+a{color:var(--acc)}img{max-width:100%}
+h1,h2,h3{line-height:1.25;margin:0 0 .5em;letter-spacing:-.01em}h1{font-size:clamp(1.7rem,4.5vw,2.4rem)}h2{font-size:1.35rem}h3{font-size:1.05rem}
+p{margin:0 0 1em}.muted{color:var(--muted)}.small{font-size:.875rem}.sr{position:absolute;left:-9999px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+.ic{width:1.1em;height:1.1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.17em;flex:none}
+/* header */
+.top{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.top .wrap{display:flex;align-items:center;gap:16px;min-height:56px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-weight:700;letter-spacing:.08em}
+.brand img{height:30px;width:auto;display:block}
+.nav{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
+.nav a{padding:8px 10px;border-radius:8px;color:var(--muted);text-decoration:none;font-size:.92rem}
+.nav a:hover,.nav a[aria-current]{color:var(--ink);background:var(--soft)}
+.tt{background:none;border:1px solid var(--line);border-radius:8px;color:var(--ink);width:36px;height:36px;cursor:pointer;display:grid;place-items:center}
+@media(max-width:720px){.top .wrap{flex-wrap:wrap;padding-top:8px;padding-bottom:8px}.nav{order:3;width:100%;margin:0;justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}.nav a{white-space:nowrap}.tt{margin-left:auto}}
+/* layout */
+main{padding:28px 0 56px}.hero{padding:36px 0 8px}.hero p{max-width:60ch;font-size:1.05rem;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--sh)}
+.grid{display:grid;gap:14px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:760px){.g2,.g3{grid-template-columns:1fr}}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.sp{justify-content:space-between}
+hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:.9rem}footer .wrap{display:flex;gap:18px;flex-wrap:wrap;justify-content:space-between}
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:9px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 .95rem inherit;font-family:inherit;cursor:pointer;text-decoration:none}
+.btn:hover{border-color:var(--acc)}.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,.opt:focus-within{outline:2px solid var(--acc);outline-offset:2px}
+.btn.pri{background:var(--acc);border-color:var(--acc);color:var(--on)}.btn.pri:hover{background:var(--acc2);border-color:var(--acc2)}
+.btn[disabled],.btn[aria-busy=true]{opacity:.65;cursor:not-allowed}.btn.sm{min-height:36px;padding:0 12px;font-size:.88rem}.btn.ghost{background:none}
+.spin{width:16px;height:16px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:sp .8s linear infinite;display:none}[aria-busy=true] .spin{display:inline-block}@keyframes sp{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.spin{animation-duration:2s}}
+/* forms */
+label.l,.l{display:block;font-weight:600;font-size:.9rem;margin:0 0 5px}.l .opt-t{font-weight:400;color:var(--muted)}
+input,select,textarea{width:100%;min-height:44px;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit}
+textarea{min-height:92px;resize:vertical}input[type=checkbox],input[type=radio]{width:auto;min-height:0;accent-color:var(--acc)}
+input:invalid:not(:placeholder-shown):not(:focus){border-color:var(--err)}
+.f{margin-bottom:14px}.f .h{font-size:.82rem;color:var(--muted);margin-top:4px}.f .e{font-size:.82rem;color:var(--err);margin-top:4px;display:none}.f.bad .e{display:block}.f.bad input,.f.bad select,.f.bad textarea{border-color:var(--err)}
+.fs{border:0;padding:0;margin:0 0 14px;min-width:0}.fs legend{font-weight:600;font-size:.9rem;padding:0;margin-bottom:6px}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
+.opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:9px;padding:11px 12px;cursor:pointer;background:var(--card)}.opt:hover{border-color:var(--acc)}
+.opt input{margin-top:4px}.opt b{display:block;font-size:.95rem}.opt span{font-size:.84rem;color:var(--muted)}.opt:has(input:checked){border-color:var(--acc);background:var(--soft)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:3px 11px;font-size:.84rem}
+/* steps */
+.steps{display:flex;gap:6px;margin:0 0 6px;padding:0;list-style:none}.steps li{flex:1;height:5px;border-radius:3px;background:var(--line)}.steps li.on{background:var(--acc)}
+.stepname{font-size:.88rem;color:var(--muted);margin-bottom:16px}
+.bar{height:8px;border-radius:5px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .25s}
+/* notices */
+.note{border-radius:9px;padding:11px 14px;font-size:.92rem;border:1px solid var(--line);background:var(--soft)}.note.ok{background:var(--okbg);border-color:transparent;color:var(--ok)}.note.err{background:var(--errbg);border-color:transparent;color:var(--err)}.note.warn{background:var(--warnbg);border-color:transparent;color:var(--warn)}
+/* tables / price */
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600}.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tw{overflow-x:auto}.tag{display:inline-block;font-size:.76rem;padding:2px 8px;border-radius:999px;background:var(--soft);border:1px solid var(--line);color:var(--muted)}
+.tag.ok{background:var(--okbg);color:var(--ok);border-color:transparent}.tag.warn{background:var(--warnbg);color:var(--warn);border-color:transparent}.tag.err{background:var(--errbg);color:var(--err);border-color:transparent}
+/* dialog + toast */
+dialog{border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);max-width:min(460px,92vw);padding:22px}dialog::backdrop{background:rgba(15,27,45,.45)}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:9px;font-size:.92rem;display:none;z-index:50;max-width:90vw}
+.drop{border:1.5px dashed var(--line);border-radius:10px;padding:18px;text-align:center;background:var(--soft);cursor:pointer}.drop:hover,.drop.over{border-color:var(--acc)}
+.files{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-top:10px}.file{border:1px solid var(--line);border-radius:8px;padding:6px;font-size:.78rem;background:var(--card);position:relative}.file img{width:100%;height:76px;object-fit:cover;border-radius:5px;display:block;background:var(--soft)}.file .nm{margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.file button{position:absolute;top:3px;right:3px;width:24px;height:24px;border-radius:50%;border:0;background:var(--ink);color:var(--bg);cursor:pointer;line-height:1}
+.hide{display:none!important}
+@media print{.top,footer,.nav,.btn{display:none}}
+</style></head><body><svg xmlns="http://www.w3.org/2000/svg" style="display:none"><defs>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6"/></symbol>
+<symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.7 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></symbol>
+</defs></svg>
+
+<header class="top"><div class="wrap"><a class="brand" href="index.html"><img src="kinetix-logo.png" alt="" width="32" height="30">KINETIX</a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html" aria-current="page">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html">PDF tools</a><a href="order-status.html">Track order</a></nav><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></header>
+<main><div class="wrap" style="max-width:760px">
+<h1>Order your CV</h1>
+<p class="muted">Takes about five minutes. You only need to tell us who you are and the job you want. We write the duties and skills for your role. Anything marked optional can be skipped.</p>
+<div id="notready" class="note warn hide" style="margin-bottom:14px">This form is not connected to the server yet. Add the Apps Script URL to <b>config.js</b>.</div>
+<ol class="steps" id="steps" aria-hidden="true"></ol>
+<div class="stepname" id="stepname" aria-live="polite"></div>
+
+<form id="f" novalidate autocomplete="on">
+<!-- 1 -->
+<section data-step="Package and style" class="card">
+  <h2>Choose your package</h2>
+  <div class="opts" id="svcs" role="radiogroup" aria-label="Package"></div>
+  <hr>
+  <fieldset class="fs"><legend>Add-ons</legend>
+    <label class="opt"><input type="checkbox" name="cover"><div><b>Matching cover letter</b><span id="coverTxt">Same design as your CV, written for your target role.</span></div></label>
+    <label class="opt" style="margin-top:8px"><input type="checkbox" name="rush"><div><b>Express delivery</b><span id="rushTxt">Priority handling.</span></div></label>
+  </fieldset>
+  <hr>
+  <fieldset class="fs"><legend>CV style</legend><div class="opts" id="styles" role="radiogroup" aria-label="CV style"></div>
+  <p class="h muted small" style="margin-top:8px">ATS styles are plain on purpose so recruitment software can read them. Other styles are for sending directly to people.</p></fieldset>
+</section>
+
+<!-- 2 -->
+<section data-step="About you" class="card hide">
+  <h2>About you</h2>
+  <div class="grid g2">
+    <div class="f"><label class="l" for="fullName">Full name</label><input id="fullName" name="fullName" data-req autocomplete="name" placeholder="As on your passport"><div class="e">Enter your full name.</div></div>
+    <div class="f"><label class="l" for="email">Email</label><input id="email" name="email" type="email" data-req autocomplete="email" inputmode="email"><div class="e">Enter a valid email address.</div></div>
+    <div class="f"><label class="l" for="phone">Phone / WhatsApp</label><input id="phone" name="phone" type="tel" data-req autocomplete="tel" inputmode="tel" placeholder="+971 5x xxx xxxx"><div class="e">Enter your phone number with country code.</div></div>
+    <div class="f"><label class="l" for="nationality">Nationality</label><select id="nationality" name="nationality" data-req></select><div class="e">Select your nationality.</div></div>
+    <div class="f"><label class="l" for="country">Where are you now?</label><select id="country" name="country" data-req></select><div class="e">Select your current country.</div></div>
+    <div class="f"><label class="l" for="city">City / area</label><select id="city" name="city"></select><input id="cityOther" name="cityOther" class="hide" placeholder="Type your city" style="margin-top:8px"></div>
+    <div class="f"><label class="l" for="dob">Date of birth <span class="opt-t">(optional)</span></label><input id="dob" name="dob" type="date"></div>
+    <div class="f"><label class="l" for="marital">Marital status <span class="opt-t">(optional)</span></label><select id="marital" name="marital"></select></div>
+  </div>
+  <fieldset class="fs"><legend>Languages</legend><div id="langs"></div><button class="btn sm ghost" type="button" data-add="lang"><svg class="ic"><use href="#i-plus"/></svg>Add language</button></fieldset>
+  <div class="grid g2">
+    <div class="f"><label class="l" for="licence">Driving licence <span class="opt-t">(optional)</span></label><select id="licence" name="licence"></select></div>
+    <div class="f"><label class="l" for="photoIn">Photo <span class="opt-t">(optional, for non-ATS styles)</span></label><input id="photoIn" type="file" accept="image/*"><div class="h" id="photoNote">Plain background, head and shoulders.</div></div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section data-step="Target job" class="card hide">
+  <h2>The job you want</h2>
+  <div class="grid g2">
+    <div class="f"><label class="l" for="industry">Industry</label><select id="industry" name="industry" data-req></select><div class="e">Select an industry.</div></div>
+    <div class="f"><label class="l" for="role">Role</label><select id="role" name="role" data-req></select><div class="e">Select a role.</div></div>
+    <div class="f hide" id="roleOtherF"><label class="l" for="roleOther">Your job title</label><input id="roleOther" name="roleOther"><div class="e">Type the job title.</div></div>
+    <div class="f"><label class="l" for="level">Experience level</label><select id="level" name="level" data-req></select><div class="e">Select your level.</div></div>
+    <div class="f"><label class="l" for="years">Total years of experience</label><input id="years" name="years" type="number" min="0" max="50" inputmode="numeric" data-req><div class="e">Enter a number from 0 to 50.</div></div>
+    <div class="f"><label class="l" for="visa">Visa status</label><select id="visa" name="visa" data-req></select><div class="e">Select your visa status.</div></div>
+    <div class="f hide" id="visaExpF"><label class="l" for="visaExp">Visa expiry / grace period ends <span class="opt-t">(optional)</span></label><input id="visaExp" name="visaExp" type="date"></div>
+    <div class="f"><label class="l" for="avail">Availability</label><select id="avail" name="avail" data-req></select><div class="e">Select when you can start.</div></div>
+  </div>
+  <div class="note" id="skillNote" style="margin-bottom:14px"><b>Skills and duties are on us.</b> Pick your role and we add a full set of skills and responsibilities for it, plus a professional summary. <span id="skillPrev"></span></div>
+  <div class="f"><label class="l" for="extraSkills">Extra skills or software you want included <span class="opt-t">(optional)</span></label><textarea id="extraSkills" name="extraSkills" placeholder="e.g. SAP, 6G welding, Arabic typing, NEBOSH IGC"></textarea></div>
+  <fieldset class="fs"><legend>Where do you want to work? <span class="opt-t" style="font-weight:400">(optional)</span></legend><div class="opts" id="prefLoc"></div></fieldset>
+</section>
+
+<!-- 4 -->
+<section data-step="Work history" class="card hide">
+  <h2>Work history</h2>
+  <p class="muted small">Most recent first. Leave the duties box empty and we will write them for the job title. If you are a fresher, skip this step.</p>
+  <div id="exps"></div><button class="btn sm ghost" type="button" data-add="exp"><svg class="ic"><use href="#i-plus"/></svg>Add job</button>
+</section>
+
+<!-- 5 -->
+<section data-step="Education and certificates" class="card hide">
+  <h2>Education</h2>
+  <div id="edus"></div><button class="btn sm ghost" type="button" data-add="edu"><svg class="ic"><use href="#i-plus"/></svg>Add education</button>
+  <hr>
+  <h2>Certificates and licences</h2>
+  <p class="muted small">List each certificate (for example Safety, Welding, Forklift, Driving, Medical). Add scans or photos if you want us to keep them with your order.</p>
+  <div id="certs"></div><button class="btn sm ghost" type="button" data-add="cert"><svg class="ic"><use href="#i-plus"/></svg>Add certificate</button>
+  <fieldset class="fs" style="margin-top:16px"><legend>Order of certificates on your CV</legend>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="certOrder" value="relevance" checked><div><b>Most relevant first</b><span>Matches the job you chose</span></div></label>
+      <label class="opt"><input type="radio" name="certOrder" value="newest"><div><b>Newest first</b><span>By year</span></div></label>
+      <label class="opt"><input type="radio" name="certOrder" value="listed"><div><b>As I listed them</b><span>Exactly my order</span></div></label>
+    </div></fieldset>
+  <div class="f"><div class="l">Certificate scans or photos <span class="opt-t">(optional)</span></div>
+    <label class="drop" id="drop" for="fileIn"><svg class="ic"><use href="#i-up"/></svg> Tap to add files, or drop them here<div class="h muted small">JPG, PNG or PDF. Photos are shrunk on your phone before sending.</div></label>
+    <input id="fileIn" type="file" multiple accept="image/*,application/pdf" class="sr"><div class="files" id="files"></div><div class="h" id="fileNote"></div></div>
+</section>
+
+<!-- 6 -->
+<section data-step="Review and payment" class="card hide">
+  <h2>Review</h2>
+  <div id="review"></div>
+  <hr>
+  <h2>How will you pay?</h2>
+  <p class="muted small">Payment is 100% upfront. Pick how you plan to pay and we will confirm on WhatsApp. No extra charges are added to any method.</p>
+  <div class="opts" id="pays" role="radiogroup" aria-label="Payment method"></div>
+  <div class="f" style="margin-top:14px"><label class="l" for="notes">Anything else we should know? <span class="opt-t">(optional)</span></label><textarea id="notes" name="notes" placeholder="Job advert link, company name, countries you are applying to..."></textarea></div>
+  <label class="opt"><input type="checkbox" name="consent" data-req><div><b>I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms of Service</a> and <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a></b><span>I confirm my details are correct. 24-48 hour turnaround, one free minor revision within 3 days, extra revisions AED 15.</span></div></label>
+  <div class="f bad" id="consentE" style="display:none"><div class="e" style="display:block">Please agree to the Terms of Service and Privacy Policy to continue.</div></div>
+  <div class="note" style="margin-top:14px"><div class="row sp"><b>Total</b><b id="total">AED 0</b></div><div class="small muted" id="totalDetail"></div></div>
+</section>
+
+<div class="row sp" style="margin-top:16px">
+  <button class="btn" type="button" id="back"><svg class="ic"><use href="#i-back"/></svg>Back</button>
+  <button class="btn pri" type="button" id="next"><span id="nextTxt">Continue</span><span class="spin" aria-hidden="true"></span><svg class="ic" id="nextIc"><use href="#i-arrow"/></svg></button>
+</div>
+<div id="err" class="note err hide" role="alert" style="margin-top:14px"></div>
+</form>
+
+<!-- progress dialog -->
+<dialog id="prog" aria-labelledby="progT">
+  <h2 id="progT">Sending your order</h2>
+  <ol id="stages" style="list-style:none;padding:0;margin:0 0 14px"></ol>
+  <div class="bar" aria-hidden="true"><i id="barI"></i></div>
+  <p class="small muted" id="progNote" style="margin-top:12px">Please keep this page open.</p>
+</dialog>
+
+<!-- success -->
+<section id="done" class="card hide" tabindex="-1">
+  <div class="note ok" style="margin-bottom:16px"><b>Thank you, <span id="dName"></span>. Your order is in.</b></div>
+  <p class="muted small" style="margin-bottom:4px">Your reference number</p>
+  <div class="row"><div style="font-size:1.9rem;font-weight:700;letter-spacing:.02em" id="dRef"></div><button class="btn sm" type="button" id="copyRef"><svg class="ic"><use href="#i-copy"/></svg>Copy</button></div>
+  <p class="muted small">Save it. You can track progress or request a revision with this number.</p>
+  <div id="dWarn" class="note warn hide" style="margin-bottom:12px"></div>
+  <hr>
+  <h3>What happens next</h3>
+  <ol style="padding-left:20px;margin:0 0 14px"><li>Pay the total below and send the confirmation on WhatsApp.</li><li>We write and design your documents, usually within 24 to 48 hours.</li><li>You get a copy by email and in your order page. One minor revision is free for 3 days.</li></ol>
+  <div class="card" style="background:var(--soft);box-shadow:none"><div class="row sp"><b id="dTotalL">Amount due</b><b id="dTotal"></b></div><div id="dPay" class="small" style="margin-top:8px"></div></div>
+  <div class="row" style="margin-top:16px"><a class="btn pri" id="dWa" href="#" target="_blank" rel="noopener"><svg class="ic"><use href="#i-msg"/></svg>Send payment proof on WhatsApp</a><a class="btn" id="dTrack" href="order-status.html">Track order</a></div>
+</section>
+</div></main>
+
+
+<footer><div class="wrap" style="display:block"><div class="row" style="gap:6px 18px;margin-bottom:12px"><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a><a href="legal-notice.html">Legal Notice</a><a href="copyright.html">Copyright Notice</a><a href="blog.html">Blog</a><a href="contact.html">Contact Us</a></div><div class="row sp"><span>&copy; <span data-year></span> KINETIX GCC CV. All rights reserved.</span><span>Contact us <a data-c="wa-ae" href="#"></a> (WhatsApp)</span></div></div></footer>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="config.js"></script>
+<script>(function () {
+  var W = window, D = document;
+  var KX = W.KX = {};
+  KX.$ = function (s, r) { return (r || D).querySelector(s); };
+  KX.$$ = function (s, r) { return Array.prototype.slice.call((r || D).querySelectorAll(s)); };
+  KX.cfg = W.KX_CONFIG || {};
+  KX.icon = function (n) { return '<svg class="ic" aria-hidden="true"><use href="#i-' + n + '"/></svg>'; };
+  KX.esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  KX.money = function (n) { return 'AED ' + n; };
+  KX.store = {
+    get: function (k) { try { return W.localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { W.localStorage.setItem(k, v); } catch (e) {} },
+    del: function (k) { try { W.localStorage.removeItem(k); } catch (e) {} }
+  };
+  /* theme */
+  KX.theme = function () {
+    var t = KX.store.get('kx-theme');
+    if (!t) t = (W.matchMedia && W.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    D.documentElement.setAttribute('data-theme', t);
+    var b = KX.$('#theme'); if (b) b.innerHTML = KX.icon(t === 'dark' ? 'sun' : 'moon');
+    return t;
+  };
+  KX.toggleTheme = function () { var n = D.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; KX.store.set('kx-theme', n); KX.theme(); };
+  /* toast */
+  var tt;
+  KX.toast = function (m) { var t = KX.$('#toast'); if (!t) return; t.textContent = m; t.style.display = 'block'; clearTimeout(tt); tt = setTimeout(function () { t.style.display = 'none'; }, 2600); };
+  /* backend */
+  KX.ready = function () { var u = KX.cfg.SCRIPT_URL || ''; return /^https:\/\/script\.google(usercontent)?\.com\//.test(u); };
+  KX.api = function (action, payload, opt) {
+    opt = opt || {};
+    return new Promise(function (res, rej) {
+      if (!KX.ready()) return rej(new Error('The site is not connected yet. Add the Apps Script URL to config.js.'));
+      var x = new XMLHttpRequest();
+      x.open('POST', KX.cfg.SCRIPT_URL, true);
+      x.setRequestHeader('Content-Type', 'text/plain;charset=utf-8');
+      x.timeout = opt.timeout || 120000;
+      if (x.upload && opt.onUp) x.upload.onprogress = function (e) { if (e.lengthComputable) opt.onUp(e.loaded / e.total); };
+      if (opt.onUp && x.upload) x.upload.onload = function () { opt.onUp(1, true); };
+      x.onload = function () {
+        var j; try { j = JSON.parse(x.responseText); } catch (e) { return rej(new Error('The server returned an unexpected reply. The Apps Script deployment may be out of date (Deploy > Manage deployments > New version).')); }
+        if (j && j.ok === false) return rej(Object.assign(new Error(j.error || 'Request failed'), { data: j }));
+        res(j);
+      };
+      x.onerror = function () { rej(new Error('Could not reach the server. Check your connection, or re-deploy the Apps Script as "Anyone".')); };
+      x.ontimeout = function () { rej(new Error('The server took too long to answer. Your order may still have been received - check your order status in a few minutes before resending.')); };
+      var body = Object.assign({ action: action }, payload || {});
+      x.send(JSON.stringify(body));
+    });
+  };
+  /* images */
+  KX.readB64 = function (f) { return new Promise(function (res, rej) { var r = new FileReader(); r.onload = function () { res(String(r.result).split(',')[1] || ''); }; r.onerror = rej; r.readAsDataURL(f); }); };
+  KX.shrink = function (file, max, q) {
+    max = max || 1600; q = q || 0.78;
+    if (!/^image\/(jpeg|png|webp)$/.test(file.type)) return KX.readB64(file).then(function (b) { return { b64: b, type: file.type || 'application/octet-stream', size: file.size }; });
+    return new Promise(function (res, rej) {
+      var url = URL.createObjectURL(file), im = new Image();
+      im.onload = function () {
+        var s = Math.min(1, max / Math.max(im.width, im.height)), c = D.createElement('canvas');
+        c.width = Math.round(im.width * s); c.height = Math.round(im.height * s);
+        var g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); g.drawImage(im, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url);
+        var d = c.toDataURL('image/jpeg', q); res({ b64: d.split(',')[1], type: 'image/jpeg', size: Math.round(d.length * 0.75), thumb: s < 1 ? null : d });
+      };
+      im.onerror = function () { URL.revokeObjectURL(url); KX.readB64(file).then(function (b) { res({ b64: b, type: file.type, size: file.size }); }, rej); };
+      im.src = url;
+    });
+  };
+  KX.fill = function (sel, list, ph) {
+    sel.innerHTML = (ph ? '<option value="">' + KX.esc(ph) + '</option>' : '') + list.map(function (o) { var v = typeof o === 'string' ? o : o.k, l = typeof o === 'string' ? o : o.l; return '<option value="' + KX.esc(v) + '">' + KX.esc(l) + '</option>'; }).join('');
+  };
+  KX.svc = function (k) { var l = KX.cfg.services || []; for (var i = 0; i < l.length; i++) if (l[i].k === k) return l[i]; return null; };
+  KX.init = function () {
+    KX.theme();
+    var b = KX.$('#theme'); if (b) b.addEventListener('click', KX.toggleTheme);
+    KX.$$('[data-year]').forEach(function (e) { e.textContent = new Date().getFullYear(); });
+    KX.$$('[data-c]').forEach(function (e) {
+      var c = KX.cfg.contacts || {}, k = e.getAttribute('data-c');
+      if (k === 'wa') { e.href = 'https://wa.me/' + String(c.whatsappKE || '').replace(/\D/g, ''); }
+      if (k === 'wa-ae') { e.href = 'https://wa.me/' + String(c.phoneAE || '').replace(/\D/g, ''); }
+      if (k === 'mail') { e.href = 'mailto:' + (c.email || ''); }
+      if (!e.hasAttribute('data-keep')) e.textContent = k === 'wa' ? c.whatsappKE : k === 'wa-ae' ? c.phoneAE : c.email;
+    });
+  };
+  if (D.readyState === 'loading') D.addEventListener('DOMContentLoaded', KX.init); else KX.init();
+})();
+</script>
+<script>var KX_CATALOG={"levels":[{"key":"fresher","label":"Fresher / Entry level","years":"0-1","adj":"Motivated"},{"key":"junior","label":"Junior (1-3 years)","years":"1-3","adj":"Dependable"},{"key":"experienced","label":"Experienced (3-7 years)","years":"3-7","adj":"Experienced"},{"key":"senior","label":"Senior (7-12 years)","years":"7-12","adj":"Highly experienced"},{"key":"expert","label":"Expert (12+ years)","years":"12+","adj":"Seasoned"}],"industries":[{"key":"warehouse","label":"Warehouse & Logistics","desc":"Stores, inventory, forklift, dispatch","roles":[{"label":"Warehouse Assistant","skills":["Material handling","Stock labelling","Pallet wrapping","Goods inspection","Basic forklift awareness","Teamwork","Inventory control","Stock counting and cycle counts","Receiving and put-away","Order picking and packing","Dispatch and loading","WMS and ERP data entry"]},{"label":"Storekeeper","skills":["Store management","Material requisition","FIFO and FEFO","Bin card maintenance","MS Excel","Supplier coordination","Inventory control","Stock counting and cycle counts","Receiving and put-away","Order picking and packing","Dispatch and loading","WMS and ERP data entry"]},{"label":"Forklift Operator","skills":["Forklift operation","Reach truck","Pallet racking","Load securing","Pre-use inspection","Spatial awareness","Inventory control","Stock counting and cycle counts","Receiving and put-away","Order picking and packing","Dispatch and loading","WMS and ERP data entry"]},{"label":"Inventory Controller","skills":["Cycle counting","Stock analysis","SAP or Oracle inventory","Advanced MS Excel","Variance analysis","Reporting","Inventory control","Stock counting and cycle counts","Receiving and put-away","Order picking and packing","Dispatch and loading","WMS and ERP data entry"]},{"label":"Warehouse Supervisor","skills":["Team supervision","Shift planning","KPI tracking","Process improvement","Conflict resolution","Warehouse safety","Inventory control","Stock counting and cycle counts","Receiving and put-away","Order picking and packing","Dispatch and loading","WMS and ERP data entry"]},{"label":"Picker / Packer","skills":["Order picking","Packing and wrapping","Label printing","Accuracy and speed","RF scanning","Quality checking","Inventory control","Stock counting and cycle counts","Receiving and put-away","Order picking and packing","Dispatch and loading","WMS and ERP data entry"]},{"label":"Delivery Driver","skills":["UAE driving licence","Route planning","GPS navigation","Customer service","Proof of delivery","Time management","Inventory control","Stock counting and cycle counts","Receiving and put-away","Order picking and packing","Dispatch and loading","WMS and ERP data entry"]},{"label":"Logistics Coordinator","skills":["Freight coordination","Customs documentation","Shipment tracking","ERP and TMS","Incoterms","Vendor management","Inventory control","Stock counting and cycle counts","Receiving and put-away","Order picking and packing","Dispatch and loading","WMS and ERP data entry"]}]},{"key":"construction","label":"Construction & Civil","desc":"Site trades, civil, labour, equipment","roles":[{"label":"General Labourer","skills":["Manual handling","Concrete mixing","Excavation support","Site cleaning","Following instructions","Physical fitness","Reading drawings and work instructions","Site safety and PPE compliance","Quality workmanship","Hand and power tools","Material handling","Housekeeping"]},{"label":"Mason","skills":["Blockwork","Plastering","Tiling basics","Levelling and plumbing","Reading drawings","Quality finishing","Reading drawings and work instructions","Site safety and PPE compliance","Quality workmanship","Hand and power tools","Material handling","Housekeeping"]},{"label":"Carpenter / Shuttering","skills":["Formwork","Timber cutting","Door and frame fitting","Power tools","Setting out","Concrete pour support","Reading drawings and work instructions","Site safety and PPE compliance","Quality workmanship","Hand and power tools","Material handling","Housekeeping"]},{"label":"Steel Fixer","skills":["Rebar fixing","Bar bending schedules","Structural drawings","Cover and spacing","Tying","Site safety","Reading drawings and work instructions","Site safety and PPE compliance","Quality workmanship","Hand and power tools","Material handling","Housekeeping"]},{"label":"Scaffolder","skills":["Tube and fitting scaffold","Scaffold inspection","Working at height","Rope and rigging basics","Scaffold tagging","Teamwork","Reading drawings and work instructions","Site safety and PPE compliance","Quality workmanship","Hand and power tools","Material handling","Housekeeping"]},{"label":"Site Foreman","skills":["Crew leadership","Work planning","Daily progress reports","Quality control","Toolbox talks","Material planning","Reading drawings and work instructions","Site safety and PPE compliance","Quality workmanship","Hand and power tools","Material handling","Housekeeping"]},{"label":"Civil Engineer","skills":["AutoCAD","Primavera or MS Project","Quantity take-off","Concrete technology","RFIs and submittals","Site supervision","Reading drawings and work instructions","Site safety and PPE compliance","Quality workmanship","Hand and power tools","Material handling","Housekeeping"]},{"label":"Surveyor","skills":["Total station","Auto level","AutoCAD","Setting out","Earthwork volumes","GPS surveying","Reading drawings and work instructions","Site safety and PPE compliance","Quality workmanship","Hand and power tools","Material handling","Housekeeping"]},{"label":"Heavy Equipment Operator","skills":["Excavator","Wheel loader","Grader","Equipment inspection","Banksman signals","Earthmoving","Reading drawings and work instructions","Site safety and PPE compliance","Quality workmanship","Hand and power tools","Material handling","Housekeeping"]}]},{"key":"oilgas","label":"Oil & Gas / Industrial","desc":"Shutdowns, pipes, rigging, inspection","roles":[{"label":"Helper / Job Performer","skills":["Tool handling","Permit awareness","Housekeeping","Hole watch","Fire watch","Following supervisors","Permit to work compliance","HSE standards (ADNOC, ISO 45001)","Reading P&IDs and isometrics","Hand and power tools","Working at height","Confined space awareness"]},{"label":"Rigger","skills":["Rigging and slinging","Lift plan awareness","Crane signals","Load calculation basics","Lifting gear inspection","Heavy lift safety","Permit to work compliance","HSE standards (ADNOC, ISO 45001)","Reading P&IDs and isometrics","Hand and power tools","Working at height","Confined space awareness"]},{"label":"Pipe Fitter","skills":["Pipe fitting","Isometric reading","Flange and bolt torquing","Hydrotest support","Spool fabrication","Fit-up and alignment","Permit to work compliance","HSE standards (ADNOC, ISO 45001)","Reading P&IDs and isometrics","Hand and power tools","Working at height","Confined space awareness"]},{"label":"Welder (6G)","skills":["TIG welding","SMAW","6G position","WPS and PQR awareness","Weld inspection","Hot work safety","Permit to work compliance","HSE standards (ADNOC, ISO 45001)","Reading P&IDs and isometrics","Hand and power tools","Working at height","Confined space awareness"]},{"label":"Mechanical Technician","skills":["Pump maintenance","Shaft alignment","Bearing replacement","Gearbox overhaul","LOTO","CMMS records","Permit to work compliance","HSE standards (ADNOC, ISO 45001)","Reading P&IDs and isometrics","Hand and power tools","Working at height","Confined space awareness"]},{"label":"Instrument Technician","skills":["Instrument calibration","Loop checking","HART communicator","Hazardous area (Ex)","Control valves","Cable termination","Permit to work compliance","HSE standards (ADNOC, ISO 45001)","Reading P&IDs and isometrics","Hand and power tools","Working at height","Confined space awareness"]},{"label":"Painter / Sandblaster","skills":["Abrasive blasting","Industrial painting","DFT measurement","Surface preparation","Spray equipment","Coating inspection awareness","Permit to work compliance","HSE standards (ADNOC, ISO 45001)","Reading P&IDs and isometrics","Hand and power tools","Working at height","Confined space awareness"]},{"label":"Insulator","skills":["Pipe insulation","Metal cladding","Vapour barriers","Cold and hot insulation","Scaffold use","Measuring and cutting","Permit to work compliance","HSE standards (ADNOC, ISO 45001)","Reading P&IDs and isometrics","Hand and power tools","Working at height","Confined space awareness"]},{"label":"Crane Operator / Banksman","skills":["Mobile crane","Load charts","Lift plan","Signalling","Crane inspection","Site traffic control","Permit to work compliance","HSE standards (ADNOC, ISO 45001)","Reading P&IDs and isometrics","Hand and power tools","Working at height","Confined space awareness"]},{"label":"QA/QC Inspector","skills":["Welding inspection","Coating inspection","NDT awareness","ITP and NCR","Quality dossiers","Standards (ASME, API)","Permit to work compliance","HSE standards (ADNOC, ISO 45001)","Reading P&IDs and isometrics","Hand and power tools","Working at height","Confined space awareness"]},{"label":"Planner","skills":["Primavera P6","MS Project","Progress measurement","Look-ahead planning","Critical path","Reporting","Permit to work compliance","HSE standards (ADNOC, ISO 45001)","Reading P&IDs and isometrics","Hand and power tools","Working at height","Confined space awareness"]}]},{"key":"hse","label":"HSE & Safety","desc":"Safety officers, permits, fire, first aid","roles":[{"label":"HSE Officer","skills":["NEBOSH","OSHA","Risk assessment","Incident investigation","HSE reporting","Safety audits","Permit to work system","Toolbox talks and inductions","Site inspections and audits","Emergency response","PPE compliance","HSE reporting and statistics"]},{"label":"Safety Supervisor","skills":["Permit auditing","Confined space","Hot work control","Scaffold inspection","Safety training","Leadership","Risk assessment","Incident investigation","Permit to work system","Toolbox talks and inductions","Site inspections and audits","Emergency response"]},{"label":"Fire Watch / Marshal","skills":["Fire extinguisher use","Emergency response","Hot work awareness","Site observation","Evacuation procedures","Alertness","Risk assessment","Incident investigation","Permit to work system","Toolbox talks and inductions","Site inspections and audits","PPE compliance"]},{"label":"Permit Receiver","skills":["Permit to work","Gas testing awareness","Toolbox briefing","LOTO","Hot work","Confined space","Risk assessment","Incident investigation","Permit to work system","Toolbox talks and inductions","Site inspections and audits","Emergency response"]},{"label":"Medic / First Aider","skills":["First aid and CPR","Emergency care","Medical records","Health education","Vital signs","Stock control","Risk assessment","Incident investigation","Permit to work system","Toolbox talks and inductions","Site inspections and audits","Emergency response"]}]},{"key":"factory","label":"Factory & Manufacturing","desc":"Machines, production, QC, packaging","roles":[{"label":"Machine Operator","skills":["CNC basics","Machine setup","Measuring instruments","Production records","5S","Troubleshooting","Machine operation","Quality inspection","Production targets","GMP and 5S","Safety and PPE","Line clearance"]},{"label":"Production Supervisor","skills":["Production planning","OEE and KPIs","Lean and 5S","Team leadership","Shift reporting","Root cause analysis","Machine operation","Quality inspection","Production targets","GMP and 5S","Safety and PPE","Line clearance"]},{"label":"QC Inspector","skills":["Quality inspection","Calipers and gauges","ISO 9001","NCR","Sampling plans","Documentation","Machine operation","Production targets","GMP and 5S","Safety and PPE","Line clearance","Packing and labelling"]},{"label":"Packaging Operator","skills":["Packing line","Labelling","Visual inspection","Palletising","GMP","Speed and accuracy","Machine operation","Quality inspection","Production targets","GMP and 5S","Safety and PPE","Line clearance"]},{"label":"Maintenance Technician","skills":["Mechanical maintenance","Basic electrical","Hydraulics and pneumatics","Fault finding","Preventive maintenance","Work orders","Machine operation","Quality inspection","Production targets","GMP and 5S","Safety and PPE","Line clearance"]}]},{"key":"corporate","label":"Corporate & Admin","desc":"Admin, accounts, HR, procurement, documents","roles":[{"label":"Admin Assistant","skills":["Office administration","Correspondence","Diary management","Filing","MS Office","Multitasking","MS Office (Word, Excel, Outlook)","Data entry","Filing and record keeping","Email and phone communication","Scheduling","Report preparation"]},{"label":"Document Controller","skills":["Aconex or similar EDMS","Transmittals","Revision control","Drawing registers","Filing and archiving","Attention to detail","MS Office (Word, Excel, Outlook)","Data entry","Filing and record keeping","Email and phone communication","Scheduling","Report preparation"]},{"label":"Accountant","skills":["Tally","QuickBooks","SAP or Oracle","VAT (UAE)","Bank reconciliation","Financial reporting","MS Office (Word, Excel, Outlook)","Data entry","Filing and record keeping","Email and phone communication","Scheduling","Report preparation"]},{"label":"HR Officer","skills":["UAE labour law","Visa processing","Recruitment","HRIS","Payroll inputs","Employee relations","MS Office (Word, Excel, Outlook)","Data entry","Filing and record keeping","Email and phone communication","Scheduling","Report preparation"]},{"label":"Receptionist","skills":["Front desk","Telephone etiquette","Visitor management","English and Arabic basics","MS Office","Grooming and presentation","MS Office (Word, Excel, Outlook)","Data entry","Filing and record keeping","Email and phone communication","Scheduling","Report preparation"]},{"label":"Procurement Officer","skills":["Sourcing","Negotiation","RFQ and PO","Vendor management","ERP","Cost comparison","MS Office (Word, Excel, Outlook)","Data entry","Filing and record keeping","Email and phone communication","Scheduling","Report preparation"]},{"label":"Customer Service Representative","skills":["Customer handling","CRM","Complaint resolution","Communication","Call handling","Patience","MS Office (Word, Excel, Outlook)","Data entry","Filing and record keeping","Email and phone communication","Scheduling","Report preparation"]}]},{"key":"healthcare","label":"Healthcare","desc":"Nursing, caregiving, lab, pharmacy","roles":[{"label":"Nurse","skills":["Patient assessment","IV therapy","Wound care","DHA, DOH or MOH licence","BLS and ACLS","Care planning","Patient care","Infection control","Vital signs monitoring","Medical records","Medication safety","BLS / CPR"]},{"label":"Caregiver","skills":["Personal care","Elderly care","Mobility support","Patient safety","Compassion","Basic first aid","Patient care","Infection control","Vital signs monitoring","Medical records","Medication safety","BLS / CPR"]},{"label":"Laboratory Technician","skills":["Sample collection","Analyser operation","Quality control","Biosafety","LIS data entry","Microscopy","Patient care","Infection control","Vital signs monitoring","Medical records","Medication safety","BLS / CPR"]},{"label":"Pharmacy Assistant","skills":["Dispensing support","Stock control","Insurance claims","Customer service","Expiry control","Pharmacy software","Patient care","Infection control","Vital signs monitoring","Medical records","Medication safety","BLS / CPR"]}]},{"key":"hospitality","label":"Hospitality & Food","desc":"Hotels, restaurants, housekeeping, kitchens","roles":[{"label":"Waiter / Waitress","skills":["Table service","POS system","Menu knowledge","Upselling","Guest relations","Food safety","Guest service","Food and beverage service","Hygiene and food safety","POS operation","Teamwork under pressure","Complaint handling"]},{"label":"Housekeeping Attendant","skills":["Room cleaning","Linen handling","Chemical safety","Time management","Attention to detail","Trolley setup","Guest service","Food and beverage service","Hygiene and food safety","Upselling","POS operation","Teamwork under pressure"]},{"label":"Cook / Commis Chef","skills":["Food preparation","HACCP","Knife skills","Grill and fry","Portion control","Kitchen hygiene","Guest service","Food and beverage service","Hygiene and food safety","Upselling","POS operation","Teamwork under pressure"]},{"label":"Barista","skills":["Espresso preparation","Latte art","POS","Machine cleaning","Customer service","Speed under pressure","Guest service","Food and beverage service","Hygiene and food safety","Upselling","POS operation","Teamwork under pressure"]},{"label":"Front Desk Agent","skills":["PMS (Opera or similar)","Reservations","Guest handling","Cash handling","English and Arabic basics","Upselling","Guest service","Food and beverage service","Hygiene and food safety","POS operation","Teamwork under pressure","Complaint handling"]}]},{"key":"security","label":"Security Services","desc":"Guards, CCTV, supervisors","roles":[{"label":"Security Guard","skills":["Access control","Patrolling","Report writing","Fire awareness","Radio use","Vigilance","Incident reporting","Emergency response","CCTV monitoring","Fire safety awareness","Observation skills","Customer service"]},{"label":"CCTV Operator","skills":["CCTV monitoring","Alarm systems","Incident logging","Radio dispatch","Confidentiality","Concentration","Access control","Patrolling","Incident reporting","Emergency response","Fire safety awareness","Report writing"]},{"label":"Security Supervisor","skills":["Team supervision","Roster planning","Incident management","Training","Client liaison","Risk awareness","Access control","Patrolling","Incident reporting","Emergency response","CCTV monitoring","Fire safety awareness"]}]},{"key":"retail","label":"Retail & Sales","desc":"Shops, cashiers, merchandising, supervisors","roles":[{"label":"Sales Associate","skills":["Selling skills","Product knowledge","Customer relations","POS","Merchandising","Persuasion","Customer service","Sales and upselling","POS and cash handling","Visual merchandising","Stock replenishment","Inventory counts"]},{"label":"Cashier","skills":["Cash handling","POS operation","Accuracy","Customer service","Till reconciliation","Speed","Sales and upselling","POS and cash handling","Product knowledge","Visual merchandising","Stock replenishment","Inventory counts"]},{"label":"Store Supervisor","skills":["Team leadership","Sales analysis","Stock management","Scheduling","Visual merchandising","Customer escalation","Customer service","Sales and upselling","POS and cash handling","Product knowledge","Stock replenishment","Inventory counts"]},{"label":"Merchandiser","skills":["Planograms","Shelf management","Visit reporting","Promotion setup","Retail relationships","Route planning","Customer service","Sales and upselling","POS and cash handling","Product knowledge","Visual merchandising","Stock replenishment"]}]},{"key":"facilities","label":"Facilities, MEP & Driving","desc":"Electrical, HVAC, plumbing, cleaning, driving","roles":[{"label":"Electrician","skills":["Electrical installation","Fault finding","Cable termination","DEWA or ADDC standards","Testing and inspection","LOTO","Preventive maintenance","Fault finding and repair","Work order records","Hand and power tools","Safety and PPE","Reading drawings and wiring diagrams"]},{"label":"AC / HVAC Technician","skills":["HVAC servicing","Refrigerant handling","Fault diagnosis","Duct and coil cleaning","Thermostat controls","Service reports","Preventive maintenance","Fault finding and repair","Work order records","Hand and power tools","Safety and PPE","Reading drawings and wiring diagrams"]},{"label":"Plumber","skills":["Pipe installation","Leak detection","Sanitary fittings","Soldering","Drainage","Pressure testing","Preventive maintenance","Fault finding and repair","Work order records","Hand and power tools","Safety and PPE","Reading drawings and wiring diagrams"]},{"label":"Cleaner","skills":["Floor care","Sanitising","Chemical safety","Machine use","Attention to detail","Reliability","Preventive maintenance","Fault finding and repair","Work order records","Hand and power tools","Safety and PPE","Reading drawings and wiring diagrams"]},{"label":"Light Vehicle Driver","skills":["UAE driving licence","Route knowledge","Defensive driving","Vehicle care","Punctuality","Customer courtesy","Preventive maintenance","Fault finding and repair","Work order records","Hand and power tools","Safety and PPE","Reading drawings and wiring diagrams"]},{"label":"Handyman / Maintenance Helper","skills":["Basic carpentry","Minor plumbing","Basic electrical","Painting","Repair work","Flexibility","Preventive maintenance","Fault finding and repair","Work order records","Hand and power tools","Safety and PPE","Reading drawings and wiring diagrams"]}]}]};
+</script>
+<script>var KX_DATA = (function () {
+  var africa = ["Algeria","Angola","Benin","Botswana","Burkina Faso","Burundi","Cameroon","Cape Verde","Central African Republic","Chad","Comoros","Congo (Brazzaville)","DR Congo","Cote d'Ivoire","Djibouti","Egypt","Equatorial Guinea","Eritrea","Eswatini","Ethiopia","Gabon","Gambia","Ghana","Guinea","Guinea-Bissau","Kenya","Lesotho","Liberia","Libya","Madagascar","Malawi","Mali","Mauritania","Mauritius","Morocco","Mozambique","Namibia","Niger","Nigeria","Rwanda","Sao Tome and Principe","Senegal","Seychelles","Sierra Leone","Somalia","South Africa","South Sudan","Sudan","Tanzania","Togo","Tunisia","Uganda","Zambia","Zimbabwe"];
+  var asia = ["Bangladesh","India","Nepal","Pakistan","Sri Lanka","Philippines","Indonesia","Afghanistan","Myanmar"];
+  var gcc = ["United Arab Emirates","Saudi Arabia","Qatar","Kuwait","Bahrain","Oman"];
+  var other = ["Jordan","Lebanon","Syria","Iraq","Yemen","Palestine","Turkey","Iran","Other"];
+  function uniq(a) { return a.filter(function (x, i) { return a.indexOf(x) === i; }); }
+  var nationalities = uniq(africa.concat(asia, gcc, other)).sort();
+  var locations = [
+    { c: "United Arab Emirates", g: "UAE", cities: ["Abu Dhabi","Dubai","Sharjah","Ajman","Ras Al Khaimah","Fujairah","Umm Al Quwain","Al Ain","Mussafah","Musaffah ICAD","Ruwais","Jebel Ali","Khalifa Industrial Zone (KIZAD)","Ghantoot","Al Dhafra / Madinat Zayed","Habshan","Ruwais / Western Region","Offshore / Island sites"] },
+    { c: "Saudi Arabia", g: "KSA", cities: ["Riyadh","Jeddah","Dammam","Al Khobar","Jubail","Yanbu","Mecca","Medina","NEOM / Tabuk","Other"] },
+    { c: "Qatar", g: "QAT", cities: ["Doha","Al Wakrah","Al Khor","Ras Laffan","Mesaieed","Other"] },
+    { c: "Kuwait", g: "KWT", cities: ["Kuwait City","Ahmadi","Hawally","Shuaiba","Other"] },
+    { c: "Bahrain", g: "BHR", cities: ["Manama","Muharraq","Riffa","Sitra","Other"] },
+    { c: "Oman", g: "OMN", cities: ["Muscat","Sohar","Salalah","Duqm","Nizwa","Other"] }
+  ];
+  return {
+    nationalities: nationalities,
+    gcc: gcc,
+    locations: locations,
+    homeRegions: ["East Africa","West Africa","Southern Africa","North Africa","Central Africa","South Asia","South-East Asia","Middle East","Other"],
+    visa: [
+      { k: "employment", l: "Employment visa (UAE)" },
+      { k: "visit", l: "Visit / tourist visa" },
+      { k: "cancelled", l: "Visa cancelled - in UAE (grace period)" },
+      { k: "residence_family", l: "Family / dependent residence" },
+      { k: "golden", l: "Golden visa / investor" },
+      { k: "freelance", l: "Freelance / self-employed permit" },
+      { k: "outside", l: "Outside the UAE - needs a visa" },
+      { k: "demob", l: "Ready for demobilisation (immediate)" },
+      { k: "noc", l: "NOC available from current employer" },
+      { k: "gcc_resident", l: "Resident in another GCC country" }
+    ],
+    availability: [
+      { k: "immediate", l: "Immediate" },
+      { k: "1w", l: "Within 1 week" },
+      { k: "2w", l: "Within 2 weeks" },
+      { k: "1m", l: "1 month notice" },
+      { k: "2m", l: "2 months notice" },
+      { k: "3m", l: "3 months notice" }
+    ],
+    education: [
+      { k: "none", l: "No formal schooling listed", r: 0 },
+      { k: "primary", l: "Primary school", r: 1 },
+      { k: "secondary", l: "Secondary / High school certificate", r: 2 },
+      { k: "vocational", l: "Vocational / Trade certificate", r: 3 },
+      { k: "diploma", l: "Diploma", r: 4 },
+      { k: "higher_diploma", l: "Higher national diploma", r: 5 },
+      { k: "bachelor", l: "Bachelor's degree", r: 6 },
+      { k: "postgrad", l: "Postgraduate diploma", r: 7 },
+      { k: "master", l: "Master's degree", r: 8 },
+      { k: "phd", l: "Doctorate (PhD)", r: 9 }
+    ],
+    languages: ["English","Arabic","Hindi","Urdu","Swahili","French","Amharic","Hausa","Yoruba","Igbo","Luganda","Somali","Tagalog","Bengali","Nepali","Tamil","Malayalam","Portuguese","Shona","Zulu","Other"],
+    langLevels: ["Native","Fluent","Good","Basic"],
+    licenceCountries: ["UAE","Home country only","None"],
+    marital: ["Single","Married","Divorced","Widowed"],
+    styles: [
+      { k: "ats_classic", l: "Classic ATS", ats: true, d: "Single column, plain headings. Passes recruitment software." },
+      { k: "ats_compact", l: "Compact ATS", ats: true, d: "Tighter spacing to fit a long history on two pages." },
+      { k: "exec_navy", l: "Executive", ats: false, d: "Navy header band, clean sections. Corporate and office roles." },
+      { k: "side_navy", l: "Modern sidebar", ats: false, d: "Dark sidebar with contact, skills and languages." },
+      { k: "side_teal", l: "Fresh sidebar", ats: false, d: "Light sidebar with a teal accent." },
+      { k: "site_bold", l: "Site-ready", ats: false, d: "Bold charcoal and amber. Trades, oil and gas, site work." }
+    ],
+    certKinds: ["Safety","Technical / Trade","Professional","Medical","Driving / Equipment","Academic","Other"]
+  };
+})();
+</script>
+<script>
+(function(){
+var $=KX.$,$$=KX.$$,esc=KX.esc,C=KX.cfg,D=KX_DATA,CAT=KX_CATALOG;
+var F=$('#f'),steps=$$('section[data-step]',F),cur=0,state={photo:null,files:[]},sending=false;
+var DRAFT='kx-draft-v2';
+var icCheck=KX.icon('check');
+if(!KX.ready())$('#notready').classList.remove('hide');
+
+/* ---------- fill static lists ---------- */
+KX.fill($('#nationality'),D.nationalities,'Select nationality');
+var ctry=[];D.locations.forEach(function(l){ctry.push(l.c)});ctry.push('Outside the GCC');
+KX.fill($('#country'),ctry,'Select country');
+KX.fill($('#marital'),D.marital,'Prefer not to say');
+KX.fill($('#licence'),D.licenceCountries,'Not specified');
+KX.fill($('#visa'),D.visa,'Select visa status');
+KX.fill($('#avail'),D.availability,'Select availability');
+KX.fill($('#industry'),CAT.industries.map(function(i){return{k:i.key,l:i.label}}),'Select industry');
+KX.fill($('#level'),CAT.levels.map(function(l){return{k:l.key,l:l.label}}),'Select level');
+
+/* ---------- packages, styles, payments ---------- */
+var intakeSvcs=(C.services||[]).filter(function(s){return s.cat==='cv'||s.cat==='bundle'});
+$('#svcs').innerHTML=intakeSvcs.map(function(s,i){return '<label class="opt"><input type="radio" name="service" value="'+s.k+'"'+(i===0?' checked':'')+'><div><b>'+esc(s.name)+' - '+KX.money(s.price)+'</b><span>'+esc(s.note)+'</span></div></label>'}).join('');
+$('#styles').innerHTML=D.styles.map(function(s,i){return '<label class="opt"><input type="radio" name="style" value="'+s.k+'"'+(i===0?' checked':'')+'><div><b>'+esc(s.l)+(s.ats?' <span class="tag ok">ATS</span>':'')+'</b><span>'+esc(s.d)+'</span></div></label>'}).join('');
+$('#pays').innerHTML=(C.payments||[]).map(function(p,i){return '<label class="opt"><input type="radio" name="pay" value="'+p.k+'"'+(i===0?' checked':'')+'><div><b>'+esc(p.name)+'</b><span>'+(p.lines&&p.lines.length?p.lines.map(function(l){return esc(l[0])+': '+esc(l[1])}).join(' &middot; '):'Details sent on WhatsApp')+'</span></div></label>'}).join('');
+function val(n){var e=F.elements[n];return e?(e.type==='checkbox'?e.checked:e.value):''}
+function radio(n){var e=F.querySelector('input[name="'+n+'"]:checked');return e?e.value:''}
+function svc(){return KX.svc(radio('service'))}
+function includes(k){var s=svc();return !!(s&&s.includes&&s.includes.indexOf(k)>-1)}
+function price(){var s=svc()||{price:0,rush:0},t=s.price,d=[s.name+' '+KX.money(s.price)];
+  if(val('cover')&&!includes('cover')){var cp=(C.coverLetter&&C.coverLetter.price)||0;if(cp){t+=cp;d.push('Cover letter '+KX.money(cp))}}
+  if(val('rush')){t+=s.rush;d.push('Express '+KX.money(s.rush))}
+  return{total:t,detail:d.join(' + ')}}
+function refreshPrice(){
+  var s=svc()||{rush:0},cp=(C.coverLetter&&C.coverLetter.price)||0;
+  $('#rushTxt').textContent='Priority handling for +'+KX.money(s.rush)+'.';
+  if(includes('cover')){F.elements.cover.checked=true;F.elements.cover.disabled=true;$('#coverTxt').textContent='Included in this package.'}
+  else{F.elements.cover.disabled=false;$('#coverTxt').textContent='Same design as your CV, written for your target role'+(cp?' (+'+KX.money(cp)+').':'. No extra charge.')}
+  var p=price();$('#total').textContent=KX.money(p.total);$('#totalDetail').textContent=p.detail;}
+$('#svcs').addEventListener('change',function(){var s=svc();if(s&&s.k==='cv_ats'){var a=F.querySelector('input[name=style][value=ats_classic]');if(a)a.checked=true}refreshPrice()});
+F.elements.cover.addEventListener('change',refreshPrice);F.elements.rush.addEventListener('change',refreshPrice);
+
+/* ---------- location cascade ---------- */
+function cities(){var c=val('country'),sel=$('#city'),l=D.locations.filter(function(x){return x.c===c})[0];
+  if(l){KX.fill(sel,l.cities,'Select city');sel.classList.remove('hide');}
+  else{sel.innerHTML='<option value="Other">Other</option>';sel.classList.add('hide');}
+  $('#cityOther').classList.toggle('hide',!(c&&!l));}
+$('#country').addEventListener('change',cities);
+$('#city').addEventListener('change',function(){$('#cityOther').classList.toggle('hide',val('city')!=='Other')});
+(function(){var h='<label class="opt"><input type="checkbox" name="pref" value="Any UAE location"><div><b>Anywhere in the UAE</b></div></label>';
+  h+=D.locations[0].cities.slice(0,8).map(function(c){return '<label class="opt"><input type="checkbox" name="pref" value="'+esc(c)+'"><div><b>'+esc(c)+'</b></div></label>'}).join('');
+  h+=D.locations.slice(1).map(function(l){return '<label class="opt"><input type="checkbox" name="pref" value="'+esc(l.c)+'"><div><b>'+esc(l.c)+'</b></div></label>'}).join('');
+  h+='<label class="opt"><input type="checkbox" name="pref" value="Open to relocate"><div><b>Open to relocate</b></div></label>';
+  $('#prefLoc').innerHTML=h})();
+
+/* ---------- cascade industry > role ---------- */
+function roles(){var i=CAT.industries.filter(function(x){return x.key===val('industry')})[0],sel=$('#role');
+  if(!i){sel.innerHTML='<option value="">Select industry first</option>';skillPrev();return}
+  KX.fill(sel,i.roles.map(function(r){return r.label}).concat(['Other (type your own)']),'Select role');skillPrev();}
+function skillPrev(){var i=CAT.industries.filter(function(x){return x.key===val('industry')})[0],r=i&&i.roles.filter(function(x){return x.label===val('role')})[0],p=$('#skillPrev');
+  $('#roleOtherF').classList.toggle('hide',val('role').indexOf('Other')!==0);
+  p.innerHTML=r?'<br><span class="small muted">Example skills we will include:</span><div class="chips" style="margin-top:6px">'+r.skills.slice(0,8).map(function(s){return '<span class="chip">'+esc(s)+'</span>'}).join('')+'</div>':''}
+$('#industry').addEventListener('change',roles);$('#role').addEventListener('change',skillPrev);
+$('#level').addEventListener('change',function(){var m={fresher:0,junior:1,experienced:3,senior:7,expert:12}[val('level')];if(m!=null&&!val('years'))F.elements.years.value=m});
+$('#visa').addEventListener('change',function(){$('#visaExpF').classList.toggle('hide',['employment','visit','cancelled','golden','freelance'].indexOf(val('visa'))<0)});
+
+/* ---------- repeaters ---------- */
+var T={
+ lang:function(){return '<div class="row rrow" style="margin-bottom:8px"><select data-k="lang" style="flex:2;min-width:140px">'+D.languages.map(function(l){return '<option>'+l+'</option>'}).join('')+'</select><select data-k="lvl" style="flex:1;min-width:110px">'+D.langLevels.map(function(l){return '<option>'+l+'</option>'}).join('')+'</select><button class="btn sm ghost" type="button" data-rm aria-label="Remove language">'+KX.icon('x')+'</button></div>'},
+ exp:function(){return '<div class="card rrow" style="margin-bottom:12px;box-shadow:none"><div class="grid g2"><div class="f"><label class="l">Job title</label><input data-k="title" autocomplete="off"></div><div class="f"><label class="l">Company</label><input data-k="company" autocomplete="off"></div><div class="f"><label class="l">Country</label><input data-k="country" placeholder="e.g. UAE, Kenya"></div><div class="f"><label class="l">City <span class="opt-t">(optional)</span></label><input data-k="city"></div><div class="f"><label class="l">From</label><input data-k="from" type="month"></div><div class="f"><label class="l">To</label><input data-k="to" type="month"><label class="row small" style="margin-top:6px;gap:6px"><input type="checkbox" data-k="current"> I still work here</label></div></div><div class="f"><label class="l">Your duties <span class="opt-t">(optional - we write them if empty)</span></label><textarea data-k="duties" placeholder="One duty per line"></textarea></div><button class="btn sm ghost" type="button" data-rm>'+KX.icon('x')+'Remove job</button></div>'},
+ edu:function(){return '<div class="card rrow" style="margin-bottom:12px;box-shadow:none"><div class="grid g2"><div class="f"><label class="l">Level</label><select data-k="level">'+D.education.map(function(e){return '<option value="'+e.k+'">'+e.l+'</option>'}).join('')+'</select></div><div class="f"><label class="l">Course / field</label><input data-k="field" placeholder="e.g. Mechanical Engineering"></div><div class="f"><label class="l">School / institution</label><input data-k="school"></div><div class="f"><label class="l">Country</label><input data-k="country"></div><div class="f"><label class="l">Year completed</label><input data-k="year" inputmode="numeric" maxlength="4" placeholder="2019"></div></div><button class="btn sm ghost" type="button" data-rm>'+KX.icon('x')+'Remove</button></div>'},
+ cert:function(){return '<div class="card rrow" style="margin-bottom:12px;box-shadow:none"><div class="grid g2"><div class="f"><label class="l">Certificate name</label><input data-k="name" placeholder="e.g. NEBOSH IGC, Forklift Licence"></div><div class="f"><label class="l">Issued by</label><input data-k="issuer"></div><div class="f"><label class="l">Year</label><input data-k="year" inputmode="numeric" maxlength="4"></div><div class="f"><label class="l">Type</label><select data-k="kind">'+D.certKinds.map(function(k){return '<option>'+k+'</option>'}).join('')+'</select></div></div><button class="btn sm ghost" type="button" data-rm>'+KX.icon('x')+'Remove</button></div>'}
+};
+var HOST={lang:'#langs',exp:'#exps',edu:'#edus',cert:'#certs'};
+function add(k,v){var h=$(HOST[k]),d=document.createElement('div');d.innerHTML=T[k]();var r=d.firstChild;h.appendChild(r);
+  if(v)Object.keys(v).forEach(function(n){var e=r.querySelector('[data-k="'+n+'"]');if(e){if(e.type==='checkbox')e.checked=!!v[n];else e.value=v[n]}});return r}
+F.addEventListener('click',function(e){var a=e.target.closest('[data-add]'),r=e.target.closest('[data-rm]');
+  if(a){add(a.getAttribute('data-add'));return}
+  if(r){var row=r.closest('.rrow');if(row)row.parentNode.removeChild(row)}});
+function rows(k){return $$('.rrow',$(HOST[k])).map(function(r){var o={};$$('[data-k]',r).forEach(function(e){o[e.getAttribute('data-k')]=e.type==='checkbox'?e.checked:e.value.trim()});return o})}
+add('lang',{lang:'English',lvl:'Good'});add('exp');add('edu');
+
+/* ---------- files ---------- */
+var MAXF=12,fid=0;
+function renderFiles(){var h=$('#files');h.innerHTML='';state.files.forEach(function(f){var d=document.createElement('div');d.className='file';
+  d.innerHTML=(f.thumb?'<img alt="" src="'+f.thumb+'">':'<div style="height:76px;display:grid;place-items:center;background:var(--soft);border-radius:5px">'+KX.icon('file')+'</div>')+'<div class="nm">'+esc(f.name)+'</div><button type="button" aria-label="Remove '+esc(f.name)+'">&times;</button>';
+  d.querySelector('button').onclick=function(){state.files=state.files.filter(function(x){return x.id!==f.id});renderFiles()};h.appendChild(d)});
+  var kb=state.files.reduce(function(a,f){return a+f.size},0)+(state.photo?state.photo.size:0);$('#fileNote').textContent=state.files.length?state.files.length+' file(s), about '+(kb/1048576).toFixed(1)+' MB':''}
+function addFiles(list){var arr=Array.prototype.slice.call(list),p=Promise.resolve();
+  arr.forEach(function(file){p=p.then(function(){
+    if(state.files.length>=MAXF){KX.toast('Maximum '+MAXF+' files');return}
+    if(file.size>15*1048576){KX.toast(file.name+' is too large (15 MB max)');return}
+    return KX.shrink(file,1600,.78).then(function(r){state.files.push({id:++fid,name:file.name,type:r.type,b64:r.b64,size:r.size,thumb:/^image/.test(r.type)?'data:'+r.type+';base64,'+r.b64:null});renderFiles()})
+  })});return p}
+$('#fileIn').addEventListener('change',function(e){addFiles(e.target.files).then(function(){e.target.value=''})});
+var dz=$('#drop');['dragover','dragenter'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.add('over')})});['dragleave','drop'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.remove('over')})});dz.addEventListener('drop',function(e){addFiles(e.dataTransfer.files)});
+$('#photoIn').addEventListener('change',function(e){var f=e.target.files[0];if(!f){state.photo=null;return}
+  KX.shrink(f,700,.82).then(function(r){state.photo={b64:r.b64,type:r.type,size:r.size};$('#photoNote').textContent='Photo added ('+Math.round(r.size/1024)+' KB).'})});
+
+/* ---------- steps ---------- */
+$('#steps').innerHTML=steps.map(function(){return '<li></li>'}).join('');
+function show(n){cur=n;steps.forEach(function(s,i){s.classList.toggle('hide',i!==n)});
+  $$('#steps li').forEach(function(l,i){l.classList.toggle('on',i<=n)});
+  $('#stepname').textContent='Step '+(n+1)+' of '+steps.length+' - '+steps[n].getAttribute('data-step');
+  $('#back').style.visibility=n?'visible':'hidden';
+  var last=n===steps.length-1;$('#nextTxt').textContent=last?'Submit order':'Continue';$('#nextIc').classList.toggle('hide',last);
+  if(last)buildReview();refreshPrice();saveDraft();window.scrollTo({top:0});$('#err').classList.add('hide')}
+function validate(n){var ok=true,first=null;$$('[data-req]',steps[n]).forEach(function(e){
+  var f=e.closest('.f'),bad=false;
+  if(e.closest('.hide'))return;
+  if(e.type==='checkbox'){bad=!e.checked;var c=$('#consentE');c.style.display=bad?'block':'none';if(bad)ok=false;return}
+  if(e.type==='email')bad=!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.value.trim());
+  else if(e.type==='tel')bad=e.value.replace(/\D/g,'').length<7;
+  else if(e.type==='number')bad=e.value===''||+e.value<0||+e.value>50;
+  else bad=!e.value.trim();
+  if(f)f.classList.toggle('bad',bad);if(bad){ok=false;if(!first)first=e}});
+  if(n===2&&val('role').indexOf('Other')===0&&!val('roleOther').trim()){$('#roleOtherF').classList.add('bad');ok=false}
+  if(first)first.focus();return ok}
+$('#next').addEventListener('click',function(){
+  if(sending)return;
+  if(!validate(cur)){KX.toast('Please complete the highlighted fields');return}
+  if(cur<steps.length-1)show(cur+1);else submit()});
+$('#back').addEventListener('click',function(){if(cur>0&&!sending)show(cur-1)});
+F.addEventListener('input',function(e){var f=e.target.closest&&e.target.closest('.f');if(f)f.classList.remove('bad')});
+
+/* ---------- collect / draft ---------- */
+function collect(){
+  var ind=CAT.industries.filter(function(x){return x.key===val('industry')})[0];
+  var role=val('role').indexOf('Other')===0?val('roleOther').trim():val('role');
+  var city=val('city')==='Other'||!$('#city').options.length||$('#city').value===''?val('cityOther').trim()||val('city'):val('city');
+  return{v:2,service:radio('service'),cover:!!val('cover')||includes('cover'),rush:!!val('rush'),style:radio('style'),
+    person:{fullName:val('fullName').trim(),email:val('email').trim(),phone:val('phone').trim(),nationality:val('nationality'),country:val('country'),city:city,dob:val('dob'),marital:val('marital'),licence:val('licence'),languages:rows('lang').filter(function(l){return l.lang})},
+    target:{industry:val('industry'),industryLabel:ind?ind.label:'',role:role,level:val('level'),years:+val('years')||0,visa:val('visa'),visaExp:val('visaExp'),avail:val('avail'),extraSkills:val('extraSkills').trim(),prefLoc:$$('input[name=pref]:checked').map(function(e){return e.value})},
+    experience:rows('exp').filter(function(x){return x.title||x.company}),
+    education:rows('edu').filter(function(x){return x.field||x.school}),
+    certificates:rows('cert').filter(function(x){return x.name}),certOrder:radio('certOrder'),
+    pay:radio('pay'),notes:val('notes').trim(),total:price().total}}
+function saveDraft(){try{var raw={};$$('input,select,textarea',F).forEach(function(e){if(e.name&&e.type!=='file'&&e.type!=='radio'&&e.type!=='checkbox')raw[e.name]=e.value});
+  raw._radio={service:radio('service'),style:radio('style'),certOrder:radio('certOrder'),pay:radio('pay')};
+  raw._chk={cover:!!val('cover'),rush:!!val('rush'),pref:$$('input[name=pref]:checked').map(function(e){return e.value})};
+  raw._rows={lang:rows('lang'),exp:rows('exp'),edu:rows('edu'),cert:rows('cert')};raw._step=cur;
+  KX.store.set(DRAFT,JSON.stringify(raw))}catch(e){}}
+function restore(){var j=KX.store.get(DRAFT);if(!j)return;try{var raw=JSON.parse(j);
+  Object.keys(raw).forEach(function(k){if(k[0]==='_')return;var e=F.elements[k];if(e&&e.type!=='radio'&&e.type!=='checkbox'&&e.type!=='file')e.value=raw[k]});
+  Object.keys(raw._radio||{}).forEach(function(n){var e=F.querySelector('input[name="'+n+'"][value="'+raw._radio[n]+'"]');if(e)e.checked=true});
+  F.elements.cover.checked=!!(raw._chk&&raw._chk.cover);F.elements.rush.checked=!!(raw._chk&&raw._chk.rush);
+  ((raw._chk&&raw._chk.pref)||[]).forEach(function(v){var e=F.querySelector('input[name=pref][value="'+v+'"]');if(e)e.checked=true});
+  cities();if(raw.city)$('#city').value=raw.city;roles();if(raw.role)$('#role').value=raw.role;skillPrev();$('#visa').dispatchEvent(new Event('change'));
+  ['lang','exp','edu','cert'].forEach(function(k){var l=(raw._rows||{})[k]||[];if(l.length){$(HOST[k]).innerHTML='';l.forEach(function(v){add(k,v)})}});
+  $('#city').classList.toggle('hide',false);
+  if(raw.fullName){$('#notready').insertAdjacentHTML('afterend','<div class="note" id="resumed" style="margin-bottom:14px">We restored your unfinished order. <button type="button" class="btn sm ghost" id="clearDraft">Start over</button></div>');$('#clearDraft').onclick=function(){KX.store.del(DRAFT);location.reload()}}
+  }catch(e){}}
+
+/* ---------- review ---------- */
+function buildReview(){var d=collect(),s=svc(),st=D.styles.filter(function(x){return x.k===d.style})[0],vis=D.visa.filter(function(x){return x.k===d.target.visa})[0],av=D.availability.filter(function(x){return x.k===d.target.avail})[0];
+  function r(a,b){return '<tr><th style="width:38%">'+a+'</th><td>'+esc(b||'-')+'</td></tr>'}
+  $('#review').innerHTML='<div class="tw"><table>'+r('Package',s?s.name:'')+r('Style',st?st.l:'')+r('Cover letter',d.cover?'Yes':'No')+r('Express',d.rush?'Yes':'No')+r('Name',d.person.fullName)+r('Contact',d.person.email+' / '+d.person.phone)+r('Nationality',d.person.nationality)+r('Location',[d.person.city,d.person.country].filter(Boolean).join(', '))+r('Target',d.target.role+' ('+d.target.industryLabel+')')+r('Experience',d.target.years+' years')+r('Visa',vis?vis.l:'')+r('Availability',av?av.l:'')+r('Jobs / education / certificates',d.experience.length+' / '+d.education.length+' / '+d.certificates.length)+r('Files',state.files.length+(state.photo?' + photo':''))+'</table></div>'}
+
+/* ---------- submit ---------- */
+var STAGES=['Preparing your details','Uploading','Writing your documents','Finishing'];
+function stageUI(i,note){$('#stages').innerHTML=STAGES.map(function(s,j){var st=j<i?icCheck:(j===i?'<span class="spin" style="display:inline-block;color:var(--acc)"></span>':'<span style="display:inline-block;width:16px"></span>');return '<li class="row" style="gap:10px;padding:5px 0;color:'+(j>i?'var(--muted)':'var(--ink)')+'">'+st+'<span>'+s+'</span></li>'}).join('');if(note)$('#progNote').textContent=note}
+function setBar(p){$('#barI').style.width=Math.round(p*100)+'%'}
+function busy(b){sending=b;var n=$('#next');n.setAttribute('aria-busy',b?'true':'false');n.disabled=b;$('#back').disabled=b}
+function submit(){
+  var d=collect();if(!KX.ready()){showErr('This form is not connected to the server yet. Please message us on WhatsApp.');return}
+  busy(true);$('#err').classList.add('hide');var dlg=$('#prog');try{dlg.showModal()}catch(e){dlg.setAttribute('open','')}
+  setBar(.04);stageUI(0);
+  d.photo=state.photo?{type:state.photo.type,data:state.photo.b64}:null;
+  d.files=state.files.map(function(f){return{name:f.name,type:f.type,data:f.b64}});
+  var size=JSON.stringify(d).length;
+  if(size>30*1048576){dlg.close();busy(false);showErr('Your files are too large. Remove some and try again.');return}
+  var t0=Date.now(),tick;
+  setTimeout(function(){stageUI(1);setBar(.1);
+    KX.api('submit',d,{timeout:240000,onUp:function(p,done){setBar(.1+p*.5);if(done){stageUI(2,'Your documents are being written. This can take up to a minute.');
+      var w=.6;tick=setInterval(function(){w=Math.min(.95,w+(0.95-w)*.04);setBar(w)},1000)}}})
+   .then(function(r){clearInterval(tick);stageUI(4);setBar(1);setTimeout(function(){try{dlg.close()}catch(e){}busy(false);success(r,d)},350)})
+   .catch(function(e){clearInterval(tick);try{dlg.close()}catch(x){}busy(false);showErr(e.message)});
+  },80);
+}
+function showErr(m){var e=$('#err');e.textContent=m;e.classList.remove('hide');e.scrollIntoView({block:'center'})}
+function success(r,d){KX.store.del(DRAFT);
+  F.classList.add('hide');$('#steps').classList.add('hide');$('#stepname').classList.add('hide');
+  var s=svc(),p=(C.payments||[]).filter(function(x){return x.k===d.pay})[0]||{name:'',lines:[]},ref=r.ref;
+  $('#dName').textContent=d.person.fullName.split(' ')[0];$('#dRef').textContent=ref;$('#dTotal').textContent=KX.money(d.total);
+  $('#dPay').innerHTML='<b>'+esc(p.name)+'</b>'+(p.lines.length?p.lines.map(function(l){return '<div>'+esc(l[0])+': <b>'+esc(l[1])+'</b></div>'}).join(''):'<div>We will send the payment details on WhatsApp.</div>')+'<div class="muted" style="margin-top:6px">Use '+esc(ref)+' as the payment reference where possible.</div>';
+  var msg='Hello KINETIX, I have just placed order '+ref+' ('+(s?s.name:'')+', '+KX.money(d.total)+'). Payment via '+p.name+'.';
+  var w=(C.contacts&&C.contacts.whatsappKE||'').replace(/\D/g,'');$('#dWa').href='https://wa.me/'+w+'?text='+encodeURIComponent(msg);
+  $('#dTrack').href='order-status.html?ref='+encodeURIComponent(ref);
+  if(r.warnings&&r.warnings.length){var w2=$('#dWarn');w2.classList.remove('hide');w2.textContent='Your order was received. Some automatic extras did not complete, so we will follow up personally.'}
+  $('#copyRef').onclick=function(){try{navigator.clipboard.writeText(ref);KX.toast('Reference copied')}catch(e){KX.toast(ref)}};
+  var dn=$('#done');dn.classList.remove('hide');dn.focus();window.scrollTo({top:0})}
+
+restore();cities();show(Math.min(cur,0));
+F.addEventListener('change',saveDraft);
+})();
+</script>
+</body></html>
