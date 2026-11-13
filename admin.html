@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Admin | KINETIX</title><meta name="robots" content="noindex"><meta name="description" content="KINETIX - professional CVs, certificates and career documents for jobs in the UAE and GCC.">
-<link rel="icon" href="kinetix-logo.png">
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#071633"><link rel="icon" href="favicon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>try{var t=localStorage.getItem('kx-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <style>:root{--bg:#f6f7f9;--card:#fff;--ink:#0f1b2d;--muted:#5a6575;--line:#dde2e9;--soft:#eef2f7;--acc:#1561d6;--acc2:#0d47a1;--on:#fff;--ok:#1e7b4f;--okbg:#e6f4ec;--err:#b33a2b;--errbg:#fbebe8;--warn:#8a5a00;--warnbg:#fff4dc;--r:10px;--sh:0 1px 2px rgba(15,27,45,.06)}
 :root[data-theme=dark]{--bg:#0c1219;--card:#131b25;--ink:#e8edf4;--muted:#9aa6b6;--line:#243040;--soft:#1a2431;--acc:#5b9bff;--acc2:#8ab8ff;--on:#06111f;--ok:#58c38d;--okbg:#12281f;--err:#f08a78;--errbg:#2d1713;--warn:#e6b450;--warnbg:#2b2210;--sh:none}
@@ -16,7 +16,7 @@ p{margin:0 0 1em}.muted{color:var(--muted)}.small{font-size:.875rem}.sr{position
 .top{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
 .top .wrap{display:flex;align-items:center;gap:16px;min-height:56px}
 .brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-weight:700;letter-spacing:.08em}
-.brand img{height:30px;width:auto;display:block}
+.brand img{height:30px;width:auto;display:block}.brand .bm{height:34px}.brand .wm{display:inline-flex;align-items:center;gap:2px;letter-spacing:.06em}.brand .wm img{height:22px;margin-right:-2px}
 .nav{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
 .nav a{padding:8px 10px;border-radius:8px;color:var(--muted);text-decoration:none;font-size:.92rem}
 .nav a:hover,.nav a[aria-current]{color:var(--ink);background:var(--soft)}
@@ -81,7 +81,7 @@ dialog{border:1px solid var(--line);border-radius:12px;background:var(--card);co
 <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></symbol>
 </defs></svg>
 
-<header class="top"><div class="wrap"><a class="brand" href="index.html"><img src="kinetix-logo.png" alt="" width="32" height="30">KINETIX</a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html">PDF tools</a><a href="order-status.html">Track order</a></nav><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></header>
+<header class="top"><div class="wrap"><a class="brand" href="index.html" aria-label="KINETIX home"><img class="bm" src="kinetix-logo.png" alt="" width="45" height="34"><span class="wm" aria-hidden="true"><img src="kinetix-k.png" alt="" width="25" height="22">INETIX</span></a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html">PDF tools</a><a href="order-status.html">Track order</a></nav><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></header>
 <main><div class="wrap">
 <h1>Orders</h1>
 <section id="login" class="card" style="max-width:420px">
@@ -98,7 +98,7 @@ dialog{border:1px solid var(--line);border-radius:12px;background:var(--card);co
 <dialog id="dlg" style="max-width:min(640px,94vw)"><div id="dBody"></div></dialog>
 </div></main>
 
-<footer><div class="wrap" style="display:block"><div class="row" style="gap:6px 18px;margin-bottom:12px"><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a><a href="legal-notice.html">Legal Notice</a><a href="copyright.html">Copyright Notice</a><a href="blog.html">Blog</a><a href="contact.html">Contact Us</a></div><div class="row sp"><span>&copy; <span data-year></span> KINETIX GCC CV. All rights reserved.</span><span>Contact us <a data-c="wa-ae" href="#"></a> (WhatsApp)</span></div></div></footer>
+<footer><div class="wrap" style="display:block"><div class="row" style="gap:6px 18px;margin-bottom:12px"><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a><a href="legal-notice.html">Legal Notice</a><a href="copyright.html">Copyright Notice</a><a href="blog.html">Blog</a><a href="samples.html">Sample CVs</a><a href="contact.html">Contact Us</a><a href="#" id="kx-install" hidden>Install app</a></div><div class="row sp"><span>&copy; <span data-year></span> KINETIX GCC CV. All rights reserved.</span><span>Contact us <a data-c="wa-ae" href="#"></a> (WhatsApp)</span></div></div></footer>
 <div id="toast" role="status" aria-live="polite"></div>
 <script src="config.js"></script>
 <script>(function () {
@@ -176,6 +176,20 @@ dialog{border:1px solid var(--line);border-radius:12px;background:var(--card);co
     KX.theme();
     var b = KX.$('#theme'); if (b) b.addEventListener('click', KX.toggleTheme);
     KX.$$('[data-year]').forEach(function (e) { e.textContent = new Date().getFullYear(); });
+
+  /* PWA: register the service worker and offer "Install app" */
+  (function () {
+    try { if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) navigator.serviceWorker.register('sw.js'); } catch (e) {}
+    var b = document.getElementById('kx-install'), ev = null;
+    if (!b || (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone) return;
+    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); ev = e; b.hidden = false; });
+    if (/iphone|ipad|ipod/i.test(navigator.userAgent)) b.hidden = false;
+    b.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (ev) { ev.prompt(); ev = null; b.hidden = true; }
+      else alert('To install: tap the Share button in Safari, then "Add to Home Screen".');
+    });
+  })();
     KX.$$('[data-c]').forEach(function (e) {
       var c = KX.cfg.contacts || {}, k = e.getAttribute('data-c');
       if (k === 'wa') { e.href = 'https://wa.me/' + String(c.whatsappKE || '').replace(/\D/g, ''); }
@@ -215,9 +229,16 @@ function detail(o){var b=$('#dBody');
  +'<div class="grid g2" style="margin-top:14px"><div class="f"><label class="l" for="ds">Status</label><select id="ds">'+opt([['received','Received'],['in_progress','In progress'],['review','Final check'],['delivered','Delivered'],['on_hold','On hold']],o.status)+'</select></div><div class="f"><label class="l" for="dp">Payment</label><select id="dp">'+opt([['unpaid','Unpaid'],['paid','Paid']],o.paid)+'</select></div></div>'
  +'<div class="f"><label class="l" for="dn">Message shown to client (optional)</label><textarea id="dn">'+esc(o.note||'')+'</textarea></div>'
  +'<label class="opt" style="margin-bottom:12px"><input type="checkbox" id="dm"><div><b>Email the finished files to the client</b><span>Sends the PDF and Word copies from the order folder when saved.</span></div></label>'
+ +'<div class="row" style="margin-bottom:12px"><a class="btn sm" id="dwa" target="_blank" rel="noopener" href="#">WhatsApp client</a><button class="btn sm" type="button" id="dpr">Copy AI prompt</button><button class="btn sm" type="button" id="djs">Copy JSON</button></div>'
  +'<div class="row"><button class="btn pri" type="button" id="dsv"><span>Save</span><span class="spin"></span></button></div>';
  var dlg=$('#dlg');try{dlg.showModal()}catch(e){dlg.setAttribute('open','')}
  $('#dc').onclick=function(){dlg.close()};
+ var ph=String(o.phone||'').replace(/[^0-9]/g,''),first=String(o.name||'').split(' ')[0];
+ $('#dwa').href='https://wa.me/'+ph+'?text='+encodeURIComponent('Hello '+first+', this is KINETIX about your order '+o.ref+'. ');
+ function cp(t,btn){if(!t){KX.toast('Nothing saved for this order');return}var done=function(){KX.toast('Copied')};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){KX.toast('Copy failed')})}
+  else{var x=document.createElement('textarea');x.value=t;document.body.appendChild(x);x.select();try{document.execCommand('copy');done()}catch(e){KX.toast('Copy failed')}x.remove()}}
+ $('#dpr').onclick=function(){cp(o.prompt)};$('#djs').onclick=function(){cp(o.json)};
  $('#dsv').onclick=function(){var x=this;x.setAttribute('aria-busy','true');x.disabled=true;
   call('admin_update',{ref:o.ref,status:$('#ds').value,paid:$('#dp').value,note:$('#dn').value,sendFiles:$('#dm').checked}).then(function(j){KX.toast(j.message||'Saved');dlg.close();return load()}).catch(function(e){KX.toast(e.message)}).then(function(){x.setAttribute('aria-busy','false');x.disabled=false})}}
 var k=ss('kx-k');if(k){KEY=k;load().catch(function(){ss('kx-k',null);KEY=''})}

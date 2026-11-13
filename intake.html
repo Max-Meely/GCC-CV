@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Order your CV | KINETIX</title><meta name="description" content="KINETIX - professional CVs, certificates and career documents for jobs in the UAE and GCC.">
-<link rel="icon" href="kinetix-logo.png">
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#071633"><link rel="icon" href="favicon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>try{var t=localStorage.getItem('kx-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <style>:root{--bg:#f6f7f9;--card:#fff;--ink:#0f1b2d;--muted:#5a6575;--line:#dde2e9;--soft:#eef2f7;--acc:#1561d6;--acc2:#0d47a1;--on:#fff;--ok:#1e7b4f;--okbg:#e6f4ec;--err:#b33a2b;--errbg:#fbebe8;--warn:#8a5a00;--warnbg:#fff4dc;--r:10px;--sh:0 1px 2px rgba(15,27,45,.06)}
 :root[data-theme=dark]{--bg:#0c1219;--card:#131b25;--ink:#e8edf4;--muted:#9aa6b6;--line:#243040;--soft:#1a2431;--acc:#5b9bff;--acc2:#8ab8ff;--on:#06111f;--ok:#58c38d;--okbg:#12281f;--err:#f08a78;--errbg:#2d1713;--warn:#e6b450;--warnbg:#2b2210;--sh:none}
@@ -16,7 +16,7 @@ p{margin:0 0 1em}.muted{color:var(--muted)}.small{font-size:.875rem}.sr{position
 .top{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
 .top .wrap{display:flex;align-items:center;gap:16px;min-height:56px}
 .brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-weight:700;letter-spacing:.08em}
-.brand img{height:30px;width:auto;display:block}
+.brand img{height:30px;width:auto;display:block}.brand .bm{height:34px}.brand .wm{display:inline-flex;align-items:center;gap:2px;letter-spacing:.06em}.brand .wm img{height:22px;margin-right:-2px}
 .nav{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
 .nav a{padding:8px 10px;border-radius:8px;color:var(--muted);text-decoration:none;font-size:.92rem}
 .nav a:hover,.nav a[aria-current]{color:var(--ink);background:var(--soft)}
@@ -81,10 +81,10 @@ dialog{border:1px solid var(--line);border-radius:12px;background:var(--card);co
 <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></symbol>
 </defs></svg>
 
-<header class="top"><div class="wrap"><a class="brand" href="index.html"><img src="kinetix-logo.png" alt="" width="32" height="30">KINETIX</a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html" aria-current="page">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html">PDF tools</a><a href="order-status.html">Track order</a></nav><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></header>
+<header class="top"><div class="wrap"><a class="brand" href="index.html" aria-label="KINETIX home"><img class="bm" src="kinetix-logo.png" alt="" width="45" height="34"><span class="wm" aria-hidden="true"><img src="kinetix-k.png" alt="" width="25" height="22">INETIX</span></a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html" aria-current="page">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html">PDF tools</a><a href="order-status.html">Track order</a></nav><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></header>
 <main><div class="wrap" style="max-width:760px">
 <h1>Order your CV</h1>
-<p class="muted">Takes about five minutes. You only need to tell us who you are and the job you want. We write the duties and skills for your role. Anything marked optional can be skipped.</p>
+<p class="muted">Takes about five minutes. You only need to tell us who you are and the job you want. We write the duties and skills for your role. Anything marked optional can be skipped. <a href="samples.html">See sample CVs</a> or <a href="how-it-works.html">watch the 1-minute guide</a>.</p>
 <div id="notready" class="note warn hide" style="margin-bottom:14px">This form is not connected to the server yet. Add the Apps Script URL to <b>config.js</b>.</div>
 <ol class="steps" id="steps" aria-hidden="true"></ol>
 <div class="stepname" id="stepname" aria-live="polite"></div>
@@ -137,7 +137,7 @@ dialog{border:1px solid var(--line);border-radius:12px;background:var(--card);co
     <div class="f hide" id="visaExpF"><label class="l" for="visaExp">Visa expiry / grace period ends <span class="opt-t">(optional)</span></label><input id="visaExp" name="visaExp" type="date"></div>
     <div class="f"><label class="l" for="avail">Availability</label><select id="avail" name="avail" data-req></select><div class="e">Select when you can start.</div></div>
   </div>
-  <div class="note" id="skillNote" style="margin-bottom:14px"><b>Skills and duties are on us.</b> Pick your role and we add a full set of skills and responsibilities for it, plus a professional summary. <span id="skillPrev"></span></div>
+  <div class="note" id="skillNote" style="margin-bottom:14px"><b>Skills and duties are on us.</b> Pick your role and we write a professional summary, core competencies, key skills, professional skills and at least 10 duties for every job. Your CV ends with "References available upon request". You receive both PDF and Word files. <span id="skillPrev"></span></div>
   <div class="f"><label class="l" for="extraSkills">Extra skills or software you want included <span class="opt-t">(optional)</span></label><textarea id="extraSkills" name="extraSkills" placeholder="e.g. SAP, 6G welding, Arabic typing, NEBOSH IGC"></textarea></div>
   <fieldset class="fs"><legend>Where do you want to work? <span class="opt-t" style="font-weight:400">(optional)</span></legend><div class="opts" id="prefLoc"></div></fieldset>
 </section>
@@ -206,14 +206,14 @@ dialog{border:1px solid var(--line);border-radius:12px;background:var(--card);co
   <div id="dWarn" class="note warn hide" style="margin-bottom:12px"></div>
   <hr>
   <h3>What happens next</h3>
-  <ol style="padding-left:20px;margin:0 0 14px"><li>Pay the total below and send the confirmation on WhatsApp.</li><li>We write and design your documents, usually within 24 to 48 hours.</li><li>You get a copy by email and in your order page. One minor revision is free for 3 days.</li></ol>
+  <ol style="padding-left:20px;margin:0 0 14px"><li>Pay the total below and send the confirmation on WhatsApp.</li><li>We write and design your documents, usually within 24 to 48 hours.</li><li>You get a copy by email (check your spam folder too) and in your order page. One minor revision is free for 3 days.</li></ol>
   <div class="card" style="background:var(--soft);box-shadow:none"><div class="row sp"><b id="dTotalL">Amount due</b><b id="dTotal"></b></div><div id="dPay" class="small" style="margin-top:8px"></div></div>
   <div class="row" style="margin-top:16px"><a class="btn pri" id="dWa" href="#" target="_blank" rel="noopener"><svg class="ic"><use href="#i-msg"/></svg>Send payment proof on WhatsApp</a><a class="btn" id="dTrack" href="order-status.html">Track order</a></div>
 </section>
 </div></main>
 
 
-<footer><div class="wrap" style="display:block"><div class="row" style="gap:6px 18px;margin-bottom:12px"><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a><a href="legal-notice.html">Legal Notice</a><a href="copyright.html">Copyright Notice</a><a href="blog.html">Blog</a><a href="contact.html">Contact Us</a></div><div class="row sp"><span>&copy; <span data-year></span> KINETIX GCC CV. All rights reserved.</span><span>Contact us <a data-c="wa-ae" href="#"></a> (WhatsApp)</span></div></div></footer>
+<footer><div class="wrap" style="display:block"><div class="row" style="gap:6px 18px;margin-bottom:12px"><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a><a href="legal-notice.html">Legal Notice</a><a href="copyright.html">Copyright Notice</a><a href="blog.html">Blog</a><a href="samples.html">Sample CVs</a><a href="contact.html">Contact Us</a><a href="#" id="kx-install" hidden>Install app</a></div><div class="row sp"><span>&copy; <span data-year></span> KINETIX GCC CV. All rights reserved.</span><span>Contact us <a data-c="wa-ae" href="#"></a> (WhatsApp)</span></div></div></footer>
 <div id="toast" role="status" aria-live="polite"></div>
 <script src="config.js"></script>
 <script>(function () {
@@ -291,6 +291,20 @@ dialog{border:1px solid var(--line);border-radius:12px;background:var(--card);co
     KX.theme();
     var b = KX.$('#theme'); if (b) b.addEventListener('click', KX.toggleTheme);
     KX.$$('[data-year]').forEach(function (e) { e.textContent = new Date().getFullYear(); });
+
+  /* PWA: register the service worker and offer "Install app" */
+  (function () {
+    try { if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) navigator.serviceWorker.register('sw.js'); } catch (e) {}
+    var b = document.getElementById('kx-install'), ev = null;
+    if (!b || (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone) return;
+    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); ev = e; b.hidden = false; });
+    if (/iphone|ipad|ipod/i.test(navigator.userAgent)) b.hidden = false;
+    b.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (ev) { ev.prompt(); ev = null; b.hidden = true; }
+      else alert('To install: tap the Share button in Safari, then "Add to Home Screen".');
+    });
+  })();
     KX.$$('[data-c]').forEach(function (e) {
       var c = KX.cfg.contacts || {}, k = e.getAttribute('data-c');
       if (k === 'wa') { e.href = 'https://wa.me/' + String(c.whatsappKE || '').replace(/\D/g, ''); }
@@ -440,7 +454,7 @@ $('#visa').addEventListener('change',function(){$('#visaExpF').classList.toggle(
 /* ---------- repeaters ---------- */
 var T={
  lang:function(){return '<div class="row rrow" style="margin-bottom:8px"><select data-k="lang" style="flex:2;min-width:140px">'+D.languages.map(function(l){return '<option>'+l+'</option>'}).join('')+'</select><select data-k="lvl" style="flex:1;min-width:110px">'+D.langLevels.map(function(l){return '<option>'+l+'</option>'}).join('')+'</select><button class="btn sm ghost" type="button" data-rm aria-label="Remove language">'+KX.icon('x')+'</button></div>'},
- exp:function(){return '<div class="card rrow" style="margin-bottom:12px;box-shadow:none"><div class="grid g2"><div class="f"><label class="l">Job title</label><input data-k="title" autocomplete="off"></div><div class="f"><label class="l">Company</label><input data-k="company" autocomplete="off"></div><div class="f"><label class="l">Country</label><input data-k="country" placeholder="e.g. UAE, Kenya"></div><div class="f"><label class="l">City <span class="opt-t">(optional)</span></label><input data-k="city"></div><div class="f"><label class="l">From</label><input data-k="from" type="month"></div><div class="f"><label class="l">To</label><input data-k="to" type="month"><label class="row small" style="margin-top:6px;gap:6px"><input type="checkbox" data-k="current"> I still work here</label></div></div><div class="f"><label class="l">Your duties <span class="opt-t">(optional - we write them if empty)</span></label><textarea data-k="duties" placeholder="One duty per line"></textarea></div><button class="btn sm ghost" type="button" data-rm>'+KX.icon('x')+'Remove job</button></div>'},
+ exp:function(){return '<div class="card rrow" style="margin-bottom:12px;box-shadow:none"><div class="grid g2"><div class="f"><label class="l">Job title</label><input data-k="title" autocomplete="off"></div><div class="f"><label class="l">Company</label><input data-k="company" autocomplete="off"></div><div class="f"><label class="l">Country</label><input data-k="country" placeholder="e.g. UAE, Kenya"></div><div class="f"><label class="l">City <span class="opt-t">(optional)</span></label><input data-k="city"></div><div class="f"><label class="l">From</label><input data-k="from" type="month"></div><div class="f"><label class="l">To</label><input data-k="to" type="month"><label class="row small" style="margin-top:6px;gap:6px"><input type="checkbox" data-k="current"> I still work here</label></div></div><div class="f"><label class="l">Your duties <span class="opt-t">(optional - we write them if empty)</span></label><textarea data-k="duties" placeholder="One duty per line"></textarea></div><div class="f"><label class="l">About the company <span class="opt-t">(optional)</span></label><input data-k="about" placeholder="e.g. Leading contractor on a petrochemical expansion" maxlength="220"></div><div class="f"><label class="l">Projects you worked on <span class="opt-t">(optional, one per line)</span></label><textarea data-k="project" placeholder="e.g. Borouge 4 shutdown, Ruwais"></textarea></div><button class="btn sm ghost" type="button" data-rm>'+KX.icon('x')+'Remove job</button></div>'},
  edu:function(){return '<div class="card rrow" style="margin-bottom:12px;box-shadow:none"><div class="grid g2"><div class="f"><label class="l">Level</label><select data-k="level">'+D.education.map(function(e){return '<option value="'+e.k+'">'+e.l+'</option>'}).join('')+'</select></div><div class="f"><label class="l">Course / field</label><input data-k="field" placeholder="e.g. Mechanical Engineering"></div><div class="f"><label class="l">School / institution</label><input data-k="school"></div><div class="f"><label class="l">Country</label><input data-k="country"></div><div class="f"><label class="l">Year completed</label><input data-k="year" inputmode="numeric" maxlength="4" placeholder="2019"></div></div><button class="btn sm ghost" type="button" data-rm>'+KX.icon('x')+'Remove</button></div>'},
  cert:function(){return '<div class="card rrow" style="margin-bottom:12px;box-shadow:none"><div class="grid g2"><div class="f"><label class="l">Certificate name</label><input data-k="name" placeholder="e.g. NEBOSH IGC, Forklift Licence"></div><div class="f"><label class="l">Issued by</label><input data-k="issuer"></div><div class="f"><label class="l">Year</label><input data-k="year" inputmode="numeric" maxlength="4"></div><div class="f"><label class="l">Type</label><select data-k="kind">'+D.certKinds.map(function(k){return '<option>'+k+'</option>'}).join('')+'</select></div></div><button class="btn sm ghost" type="button" data-rm>'+KX.icon('x')+'Remove</button></div>'}
 };
