@@ -129,8 +129,7 @@ dialog{border:1px solid var(--line);border-radius:12px;background:var(--card);co
       x.open('POST', KX.cfg.SCRIPT_URL, true);
       x.setRequestHeader('Content-Type', 'text/plain;charset=utf-8');
       x.timeout = opt.timeout || 120000;
-      if (x.upload && opt.onUp) x.upload.onprogress = function (e) { if (e.lengthComputable) opt.onUp(e.loaded / e.total); };
-      if (opt.onUp && x.upload) x.upload.onload = function () { opt.onUp(1, true); };
+      /* No upload listeners on purpose: they force a CORS preflight, which Apps Script cannot answer. */
       x.onload = function () {
         var j; try { j = JSON.parse(x.responseText); } catch (e) { return rej(new Error('The server returned an unexpected reply. The Apps Script deployment may be out of date (Deploy > Manage deployments > New version).')); }
         if (j && j.ok === false) return rej(Object.assign(new Error(j.error || 'Request failed'), { data: j }));
@@ -140,6 +139,7 @@ dialog{border:1px solid var(--line);border-radius:12px;background:var(--card);co
       x.ontimeout = function () { rej(new Error('The server took too long to answer. Your order may still have been received - check your order status in a few minutes before resending.')); };
       var body = Object.assign({ action: action }, payload || {});
       x.send(JSON.stringify(body));
+      if (opt.onUp) { var n = 0, up = setInterval(function () { n++; opt.onUp(Math.min(0.9, n * 0.08)); }, 700); setTimeout(function () { clearInterval(up); try { opt.onUp(1, true); } catch (e) {} }, 6000); }
     });
   };
   /* images */
