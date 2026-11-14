@@ -4,21 +4,21 @@ window.KX_CONFIG = {
   SCRIPT_URL: "https://script.google.com/macros/s/AKfycbwkpBLLJGhVbKW-y7fhAND6oSdUb0HcbxNZBOaWVdpNltdFGE78ULDgjuoJ-hoYR9-Hqg/exec",
 
   contacts: {
-    whatsappKE: "+254 758 587 881",   // WhatsApp only
-    phoneAE: "+971 54 456 4191",       // calls and WhatsApp
-    email: "maxmeely@pm.me"
+    whatsappKE: "+254 758 587 881",   // WhatsApp only (never shown on the site, only used by the WhatsApp buttons)
+    phoneAE: "+971 54 456 4191",       // calls and WhatsApp (never shown on the site)
+    email: "maxmeely@pm.me"            // shown with a Proton Mail icon
   },
 
-  // Prices in AED. rush = express surcharge for that service.
+  // Prices in AED. Visitors can switch currency on the site (see "currencies" below).
   services: [
-    { k: "cv_standard", name: "Standard CV", price: 40, rush: 20, note: "Professionally written, 1-2 pages", cat: "cv" },
-    { k: "cv_ats", name: "ATS & Technical CV", price: 50, rush: 20, note: "Keyword-optimised for screening systems", cat: "cv" },
-    { k: "cv_express", name: "Express CV Guide", price: 40, rush: 20, note: "Quick-turn CV with application guidance", cat: "cv" },
-    { k: "linkedin_basic", name: "LinkedIn Basic", price: 50, rush: 20, note: "Headline, About and experience", cat: "other" },
-    { k: "linkedin_full", name: "LinkedIn Full", price: 100, rush: 20, note: "Full profile, skills and keyword strategy", cat: "other" },
-    { k: "cert_single", name: "Single Certificate", price: 60, rush: 10, note: "Professional certificate layout", cat: "docs" },
-    { k: "cert_batch", name: "Certificate Batch", price: 150, priceTo: 200, rush: 20, note: "Several certificates, one consistent style", cat: "docs" },
-    { k: "doc_cleanup", name: "Offer Letter / Document Cleanup", price: 40, rush: 10, note: "Tidy, align and standardise a document", cat: "docs" },
+    { k: "cv_standard", name: "Standard CV", price: 40, note: "Professionally written, 1-2 pages", icon: "file", cat: "cv" },
+    { k: "cv_ats", name: "ATS & Technical CV", price: 50, note: "Keyword-optimised for screening systems", icon: "shield", cat: "cv" },
+    { k: "cv_express", name: "Express CV Guide", price: 40, note: "Quick-turn CV with application guidance", icon: "zap", cat: "cv" },
+    { k: "linkedin_basic", name: "LinkedIn Basic", price: 50, note: "Headline, About and experience", icon: "in", cat: "other" },
+    { k: "linkedin_full", name: "LinkedIn Full", price: 100, note: "Full profile, skills and keyword strategy", icon: "in", cat: "other" },
+    { k: "cert_single", name: "Single Certificate", price: 60, note: "Professional certificate layout", icon: "award", cat: "docs" },
+    { k: "cert_batch", name: "Certificate Batch", price: 150, priceTo: 200, note: "Several certificates, one consistent style", icon: "award", cat: "docs" },
+    { k: "doc_cleanup", name: "Offer Letter / Document Cleanup", price: 40, note: "Tidy, align and standardise a document", icon: "edit", cat: "docs" },
     { k: "pkg_site", name: "Site Job Package", price: 90, rush: 30, note: "CV, cover letter and certificate arrangement", includes: ["cover"], cat: "bundle" },
     { k: "pkg_career", name: "Full Career Package", price: 160, rush: 30, note: "CV, cover letter, LinkedIn and certificate pack", includes: ["cover", "linkedin"], cat: "bundle" }
   ],
@@ -44,10 +44,39 @@ window.KX_CONFIG = {
 
   // Payment methods. Leave details empty to show "Ask on WhatsApp".
   payments: [
-    { k: "mpesa", name: "M-Pesa", lines: [["Number", "0758587881"]] },
-    { k: "equity", name: "Equity Bank", lines: [["Paybill", "247247"], ["Account", "0758587881"]] },
-    { k: "cash", name: "Cash", lines: [["Where", "Arrange on WhatsApp"]] },
-    { k: "card", name: "Card", lines: [] },
-    { k: "binance", name: "Binance", lines: [] }
+    { k: "mpesa", name: "M-Pesa", icon: "phone", lines: [["Number", "0758587881", true]] },
+    { k: "equity", name: "Equity Bank", icon: "bank", lines: [["Paybill", "247247", true], ["Account", "0758587881", true]] },
+    { k: "cash", name: "Cash", icon: "cash", lines: [["Where", "Arrange on WhatsApp"]] },
+    { k: "card", name: "Card", icon: "card", lines: [] },
+    { k: "binance", name: "Binance Pay", icon: "coin", logo: "binance-logo.png", qr: "binance-pay.png", lines: [["Binance Pay name", "MaxMeely", true]] }
+  ],
+
+  // Currency switcher. rate = how much of that currency 1 AED is worth. These are fallback rates;
+  // the site refreshes them from a free live-rates service when the visitor is online.
+  // step rounds the shown price to a tidy number. Prices are always charged in AED (or the equivalent we confirm on WhatsApp).
+  currencies: [
+    { c: "AED", s: "AED ", rate: 1, dp: 0, step: 1 },
+    { c: "USD", s: "US$", rate: 0.2723, dp: 2, step: 0.5 },
+    { c: "KES", s: "KSh ", rate: 35.2, dp: 0, step: 10 },
+    { c: "EUR", s: "\u20ac", rate: 0.252, dp: 2, step: 0.5 },
+    { c: "GBP", s: "\u00a3", rate: 0.214, dp: 2, step: 0.5 },
+    { c: "SAR", s: "SAR ", rate: 1.021, dp: 0, step: 1 },
+    { c: "QAR", s: "QAR ", rate: 0.991, dp: 0, step: 1 },
+    { c: "KWD", s: "KWD ", rate: 0.0836, dp: 2, step: 0.05 },
+    { c: "OMR", s: "OMR ", rate: 0.1047, dp: 2, step: 0.05 },
+    { c: "BHD", s: "BHD ", rate: 0.1024, dp: 2, step: 0.05 },
+    { c: "INR", s: "\u20b9", rate: 23.8, dp: 0, step: 5 },
+    { c: "PKR", s: "PKR ", rate: 76, dp: 0, step: 10 },
+    { c: "PHP", s: "\u20b1", rate: 15.5, dp: 0, step: 5 },
+    { c: "NPR", s: "NPR ", rate: 36.8, dp: 0, step: 5 },
+    { c: "BDT", s: "BDT ", rate: 32.7, dp: 0, step: 5 },
+    { c: "LKR", s: "LKR ", rate: 82, dp: 0, step: 10 },
+    { c: "EGP", s: "EGP ", rate: 13.6, dp: 0, step: 5 },
+    { c: "UGX", s: "UGX ", rate: 994, dp: 0, step: 100 },
+    { c: "TZS", s: "TZS ", rate: 708, dp: 0, step: 100 },
+    { c: "NGN", s: "\u20a6", rate: 422, dp: 0, step: 100 },
+    { c: "ZAR", s: "ZAR ", rate: 4.9, dp: 0, step: 1 },
+    { c: "CAD", s: "CA$", rate: 0.373, dp: 2, step: 0.5 },
+    { c: "AUD", s: "A$", rate: 0.408, dp: 2, step: 0.5 }
   ]
 };
