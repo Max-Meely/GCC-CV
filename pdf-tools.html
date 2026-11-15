@@ -99,6 +99,12 @@ table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:11px 12p
 .rate{display:flex;align-items:center;gap:14px;justify-content:space-between;padding:14px 4px;border-bottom:1px solid var(--line)}.rate:last-child{border:0}.rate b{display:block}.rate .pr{font-weight:800;font-size:1.15rem;white-space:nowrap;font-variant-numeric:tabular-nums}
 /* dialog + toast */
 dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24px}dialog::backdrop{background:rgba(8,14,30,.5);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+#sitemenu{max-width:min(720px,94vw);width:100%;padding:22px}
+.smgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px 20px}
+.smgrid h3{font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:10px}
+.smgrid>div{display:flex;flex-direction:column;gap:2px}
+.smgrid a{color:var(--ink);text-decoration:none;padding:7px 8px;margin:0 -8px;border-radius:10px;font-size:.94rem;font-weight:600}
+.smgrid a:hover{background:var(--soft);color:var(--acc)}
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:12px;font-size:.92rem;display:none;z-index:90;max-width:90vw;box-shadow:0 10px 30px rgba(0,0,0,.3)}
 .drop{display:block;border:2px dashed var(--line);border-radius:16px;padding:20px;text-align:center;background:var(--soft);cursor:pointer;transition:border-color .15s,background .15s}.drop:hover,.drop.over{border-color:var(--acc);background:rgba(29,78,216,.1)}
 .files{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:10px;margin-top:12px}.file{border:1px solid var(--bd);border-radius:14px;padding:7px;font-size:.78rem;background:var(--card2);position:relative}.file img,.file canvas{width:100%;height:104px;object-fit:cover;border-radius:9px;display:block;background:var(--soft)}.file .th{height:104px;display:grid;place-items:center;background:var(--soft);border-radius:9px;color:var(--muted)}.file .nm{margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.file .x{position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;border:0;background:rgba(10,20,40,.78);color:#fff;cursor:pointer;line-height:1}.file .mv{display:flex;gap:4px;margin-top:5px}.file .mv button{flex:1;min-height:28px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}.file .no{position:absolute;top:4px;left:4px;background:var(--accg);color:#fff;border-radius:999px;padding:0 8px;font-weight:700;font-size:.74rem;line-height:22px}
@@ -237,6 +243,12 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 </style></head><body><svg xmlns="http://www.w3.org/2000/svg" style="display:none"><defs>
 <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
 <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+<symbol id="i-vol" viewBox="0 0 24 24"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></symbol>
+<symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M16 9l5 5M21 9l-5 5"/></symbol>
+<symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
 <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
 <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
 <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></symbol>
@@ -295,7 +307,15 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14h6M9 17h4"/></symbol>
 </defs></svg>
 
-<header class="top"><div class="wrap"><a class="brand" href="index.html" aria-label="KINETIX home"><img class="bm" src="kinetix-logo.png" alt="" width="45" height="34"><span class="wm" aria-hidden="true"><img src="kinetix-k.png" alt="" width="25" height="22">INETIX</span></a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html" aria-current="page">PDF tools</a><a href="order-status.html">Track order</a></nav><div class="tools"><button class="tt kxapp" type="button" data-install aria-label="Install the KINETIX app"><svg class="ic"><use href="#i-down"/></svg><span>App</span></button><span class="curwrap"><svg class="ic"><use href="#i-globe"/></svg><select class="curs" id="cur" aria-label="Currency"><option>AED</option></select></span><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></div></header>
+<header class="top"><div class="wrap"><a class="brand" href="index.html" aria-label="KINETIX home"><img class="bm" src="kinetix-logo.png" alt="" width="45" height="34"><span class="wm" aria-hidden="true"><img src="kinetix-k.png" alt="" width="25" height="22">INETIX</span></a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html" aria-current="page">PDF tools</a><a href="order-status.html">Track order</a></nav><div class="tools"><button class="tt" id="menubtn" type="button" aria-haspopup="dialog" aria-label="Browse all pages"><svg class="ic"><use href="#i-menu"/></svg></button><button class="tt kxapp" type="button" data-install aria-label="Install the KINETIX app"><svg class="ic"><use href="#i-down"/></svg><span>App</span></button><span class="curwrap"><svg class="ic"><use href="#i-globe"/></svg><select class="curs" id="cur" aria-label="Currency"><option>AED</option></select></span><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></div></header>
+<dialog id="sitemenu" aria-label="Browse KINETIX">
+<div class="row sp" style="margin-bottom:6px"><b style="font-size:1.1rem">Browse KINETIX</b><button type="button" class="tt" id="menux" aria-label="Close menu"><svg class="ic"><use href="#i-x"/></svg></button></div>
+<div class="smgrid">
+<div><h3>Get started</h3><a href="index.html">Home</a><a href="how-it-works.html">How it works</a><a href="intake.html">Order a CV</a><a href="other-services.html">Other services</a><a href="samples.html">Sample CVs</a></div>
+<div><h3>Free PDF tools</h3><a href="pdf-tools.html">All free PDF tools</a><a href="pdf-fill.html">Fill and sign PDF</a><a href="signature-tool.html">Signature maker</a><a href="pdf-unlock.html">PDF password remover</a><a href="pdf-help.html">Free help ticket</a><a href="tutorials.html">Video tutorials</a></div>
+<div><h3>Company</h3><a href="about.html">What we do</a><a href="blog.html">Blog</a><a href="contact.html">Contact us</a><a href="order-status.html">Track your order</a></div>
+<div><h3>Legal</h3><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a><a href="legal-notice.html">Legal Notice</a><a href="copyright.html">Copyright Notice</a></div>
+</div></dialog>
 <style>
 .tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0 20px}
 .tc{display:flex;flex-direction:column;gap:8px;align-items:flex-start;text-align:left;padding:15px;border-radius:18px;border:1px solid var(--bd);background:var(--card);cursor:pointer;color:var(--ink);font:inherit;-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);box-shadow:var(--sh);transition:transform .12s,border-color .15s}
@@ -521,6 +541,14 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
     t.onclick = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); }; document.body.appendChild(t);
     window.addEventListener('scroll', function () { t.classList.toggle('on', window.scrollY > 500); }, { passive: true });
   })();
+  /* site menu: browse every page */
+  (function () {
+    var btn = document.getElementById('menubtn'), dlg = document.getElementById('sitemenu'), xb = document.getElementById('menux');
+    if (!btn || !dlg) return;
+    btn.addEventListener('click', function () { try { dlg.showModal(); } catch (e) { dlg.setAttribute('open', ''); } });
+    if (xb) xb.onclick = function () { dlg.close(); };
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  })();
   /* PWA: register the service worker and offer "Install app" */
   (function () {
     window.addEventListener('load', function () { kxOffline(); });
@@ -639,6 +667,29 @@ function kxOffline() {
   checkUpdate();
 }
 </script>
+<script>/* KXZIP: tiny dependency-free ZIP writer (stored/uncompressed entries only - our files are
+   already-compressed PDFs/images, so DEFLATE would buy nothing). Works fully offline, no CDN. */
+(function(){
+var CRCT=(function(){var t=new Uint32Array(256);for(var n=0;n<256;n++){var c=n;for(var k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);t[n]=c>>>0}return t})();
+function crc32(buf){var crc=0xFFFFFFFF;for(var i=0;i<buf.length;i++)crc=CRCT[(crc^buf[i])&0xFF]^(crc>>>8);return(crc^0xFFFFFFFF)>>>0}
+function u16(v){return[v&255,(v>>8)&255]}
+function u32(v){return[v&255,(v>>8)&255,(v>>16)&255,(v>>>24)&255]}
+function strBytes(s){var a=[];for(var i=0;i<s.length;i++){var c=s.charCodeAt(i);if(c<128)a.push(c);else a.push(95)}return a} // ascii-safe names
+function dosDT(d){d=d||new Date();var time=((d.getHours()&31)<<11)|((d.getMinutes()&63)<<5)|((d.getSeconds()>>1)&31),date=(((Math.max(0,d.getFullYear()-1980))&127)<<9)|(((d.getMonth()+1)&15)<<5)|(d.getDate()&31);return{time:time,date:date}}
+function make(entries){ // entries: [{name:string, data:Uint8Array|ArrayBuffer}]
+ var parts=[],central=[],offset=0,dt=dosDT(),count=0;
+ entries.forEach(function(e){
+  var data=e.data instanceof Uint8Array?e.data:new Uint8Array(e.data),nb=strBytes(e.name),crc=crc32(data),size=data.length;
+  var lfh=new Uint8Array([].concat(u32(0x04034b50),u16(20),u16(0),u16(0),u16(dt.time),u16(dt.date),u32(crc),u32(size),u32(size),u16(nb.length),u16(0),nb));
+  parts.push(lfh,data);
+  central.push(new Uint8Array([].concat(u32(0x02014b50),u16(20),u16(20),u16(0),u16(0),u16(dt.time),u16(dt.date),u32(crc),u32(size),u32(size),u16(nb.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(offset),nb)));
+  offset+=lfh.length+data.length;count++});
+ var centralStart=offset,centralSize=0;central.forEach(function(c){centralSize+=c.length});
+ var eocd=new Uint8Array([].concat(u32(0x06054b50),u16(0),u16(0),u16(count),u16(count),u32(centralSize),u32(centralStart),u16(0)));
+ return new Blob(parts.concat(central,[eocd]),{type:'application/zip'})}
+window.KXZIP={make:make};
+})();
+</script>
 <script>
 (function(){
 var $=KX.$,esc=KX.esc,busy=false,urls=[];
@@ -658,10 +709,11 @@ function fn(id){return $('#'+id)}
 var TOOLS=[
  {k:'merge',n:'Merge PDFs',d:'Combine several PDFs into one. Reorder with the arrows.',multi:true,accept:'application/pdf',opts:'',
   run:function(L){return pdfLib().then(function(P){return P.PDFDocument.create().then(function(out){var chain=Promise.resolve();L.forEach(function(f,i){chain=chain.then(function(){return bytes(f).then(function(b){return P.PDFDocument.load(b,{ignoreEncryption:true})}).then(function(d){return out.copyPages(d,d.getPageIndices())}).then(function(pg){pg.forEach(function(p){out.addPage(p)});bar((i+1)/L.length*.9)})})});return chain.then(function(){return out.save()}).then(function(u){return[{name:'merged.pdf',blob:blobOf(u)}]})})})}},
- {k:'split',n:'Split PDF',d:'Cut a PDF into separate files by page ranges, or one file per page.',opts:'<div class="f"><label class="l" for="o1">Page ranges <span class="opt-t">(optional)</span></label><input id="o1" placeholder="e.g. 1-3, 4-6, 7  (empty = every page)"></div>',
-  run:function(L){return pdfLib().then(function(P){return bytes(L[0]).then(function(b){return P.PDFDocument.load(b,{ignoreEncryption:true})}).then(function(src){var n=src.getPageCount(),txt=fn('o1').value.trim(),parts=txt?txt.split(',').map(function(s){return ranges(s,n)}).filter(function(a){return a.length}):src.getPageIndices().map(function(i){return[i]}),res=[],chain=Promise.resolve();
-   if(parts.length>60)throw new Error('That would make '+parts.length+' files. Use fewer ranges.');
-   parts.forEach(function(ix,i){chain=chain.then(function(){return P.PDFDocument.create().then(function(o){return o.copyPages(src,ix).then(function(pg){pg.forEach(function(p){o.addPage(p)});return o.save()})}).then(function(u){res.push({name:base(L[0].name)+'-part'+(i+1)+'.pdf',blob:blobOf(u)});bar((i+1)/parts.length)})})});return chain.then(function(){return res})})})}},
+ {k:'split',n:'Split PDF',d:'Cut a PDF into separate files, one per page or by the ranges you choose. Download each one, or all of them together as a ZIP.',opts:'<div class="f"><div class="opts" id="splitMode" role="radiogroup" aria-label="How to split"><label class="opt"><input type="radio" name="splitMode" value="each" checked><div><b>One file per page</b><span>Every page becomes its own PDF</span></div></label><label class="opt"><input type="radio" name="splitMode" value="ranges"><div><b>Custom ranges</b><span>Choose your own groups of pages</span></div></label></div></div><div class="f hide" id="o1wrap"><label class="l" for="o1">Page ranges</label><input id="o1" placeholder="e.g. 1-3, 4-6, 7"></div>',
+  run:function(L){return pdfLib().then(function(P){return bytes(L[0]).then(function(b){return P.PDFDocument.load(b,{ignoreEncryption:true})}).then(function(src){var n=src.getPageCount(),mode=(document.querySelector('input[name=splitMode]:checked')||{}).value||'each',txt=fn('o1').value.trim(),parts=mode==='ranges'?txt.split(',').map(function(s){return ranges(s,n)}).filter(function(a){return a.length}):src.getPageIndices().map(function(i){return[i]}),res=[],chain=Promise.resolve();
+   if(mode==='ranges'&&!parts.length)throw new Error('Enter at least one page range, e.g. 1-3, 4-6.');
+   if(parts.length>400)throw new Error('That would make '+parts.length+' files. Use fewer ranges, or split a smaller file.');
+   parts.forEach(function(ix,i){chain=chain.then(function(){return P.PDFDocument.create().then(function(o){return o.copyPages(src,ix).then(function(pg){pg.forEach(function(p){o.addPage(p)});return o.save()})}).then(function(u){res.push({name:base(L[0].name)+(mode==='each'?'-page'+(i+1):'-part'+(i+1))+'.pdf',blob:blobOf(u)});bar((i+1)/parts.length)})})});return chain.then(function(){return res})})})}},
  {k:'rotate',n:'Rotate pages',d:'Turn all pages, or only the pages you choose.',opts:'<div class="grid g2"><div class="f"><label class="l" for="o1">Rotate</label><select id="o1"><option value="90">90 degrees clockwise</option><option value="180">180 degrees</option><option value="270">90 degrees counter-clockwise</option></select></div><div class="f"><label class="l" for="o2">Pages <span class="opt-t">(optional)</span></label><input id="o2" placeholder="e.g. 2, 4-6  (empty = all)"></div></div>',
   run:function(L){return pdfLib().then(function(P){return bytes(L[0]).then(function(b){return P.PDFDocument.load(b,{ignoreEncryption:true})}).then(function(d){var n=d.getPageCount(),t=fn('o2').value.trim(),ix=t?ranges(t,n):d.getPageIndices(),a=+fn('o1').value;ix.forEach(function(i){var p=d.getPage(i);p.setRotation(P.degrees((p.getRotation().angle+a)%360))});bar(.8);return d.save()}).then(function(u){return[{name:base(L[0].name)+'-rotated.pdf',blob:blobOf(u)}]})})}},
  {k:'remove',n:'Remove pages',d:'Delete the pages you do not need.',opts:'<div class="f"><label class="l" for="o1">Pages to remove</label><input id="o1" placeholder="e.g. 2, 5-7"></div>',
@@ -704,7 +756,8 @@ function pick(k){curK=k;Array.prototype.forEach.call($('#tc').children,function(
  $('#p-studio').classList.toggle('hide',k!=='studio');$('#p-other').classList.toggle('hide',k==='studio');
  if(k!=='studio'){var t=OTHER.filter(function(x){return x.k===k})[0],m=META.filter(function(x){return x.k===k})[0];ofiles=[];
   $('#oTitle').textContent=t.n;$('#toolDesc').textContent=t.d;$('#oStep2').textContent=STEP2[k];$('#oIco').className='ico '+(m.c||'');$('#oIco').innerHTML='<svg class="ic"><use href="#i-'+m.i+'"/></svg>';
-  $('#opts').innerHTML=t.opts||'';$('#fileIn').value='';$('#err').classList.add('hide');$('#out').classList.add('hide');$('#bar').classList.add('hide');drawO()}
+  $('#opts').innerHTML=t.opts||'';$('#fileIn').value='';$('#err').classList.add('hide');$('#out').classList.add('hide');$('#bar').classList.add('hide');drawO();
+  if(k==='split'){var sm=$('#splitMode'),ow=$('#o1wrap');sm.addEventListener('change',function(){ow.classList.toggle('hide',(document.querySelector('input[name=splitMode]:checked')||{}).value!=='ranges')})}}
  try{history.replaceState(null,'','?t='+k)}catch(e){}}
 $('#tc').addEventListener('click',function(e){var b=e.target.closest('.tc');if(b)pick(b.getAttribute('data-k'))});
 function oCur(){return OTHER.filter(function(t){return t.k===curK})[0]}
@@ -720,8 +773,15 @@ $('#run').addEventListener('click',function(){if(busy)return;var t=oCur();$('#er
  busy=true;var b=$('#run');b.setAttribute('aria-busy','true');b.disabled=true;$('#runT').textContent='Working...';bar(.03);
  var work;try{work=t.run(ofiles.slice())}catch(e){work=Promise.reject(e)}
  work.then(function(res){bar(1);showOut(res)}).catch(function(e){var m=e&&e.message||'Something went wrong.';if(/encrypt|password/i.test(m))m='This PDF is password protected. Remove the password first.';showErr(m);$('#bar').classList.add('hide')}).then(function(){busy=false;b.setAttribute('aria-busy','false');b.disabled=false;$('#runT').textContent='Start'})});
+function zipAll(res,btn){if(!window.KXZIP)return;btn.setAttribute('aria-busy','true');btn.disabled=true;
+ Promise.all(res.map(function(r){return r.blob.arrayBuffer().then(function(b){return{name:r.name,data:b}})})).then(function(entries){
+  var seen={};entries.forEach(function(e){var key=e.name.toLowerCase();if(seen[key]){seen[key]++;var base=e.name.replace(/\.[^.]+$/,''),ext=e.name.slice(base.length);e.name=base+'-'+seen[key]+ext}else{seen[key]=1}});
+  var z=KXZIP.make(entries),u=URL.createObjectURL(z),a=document.createElement('a');a.href=u;a.download='kinetix-files.zip';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},4000);
+  btn.setAttribute('aria-busy','false');btn.disabled=false})}
 function showOut(res){urls.forEach(function(u){URL.revokeObjectURL(u)});urls=[];
- $('#outList').innerHTML=res.map(function(r){var u=URL.createObjectURL(r.blob);urls.push(u);return '<div class="row sp" style="padding:8px 0;border-bottom:1px solid var(--line)">'+(r.img?'<img alt="" src="'+u+'" style="height:56px;width:auto;border-radius:6px;border:1px solid var(--line)" loading="lazy" decoding="async">':KX.icon('file'))+'<span style="flex:1;overflow-wrap:anywhere">'+esc(r.name)+' <span class="muted small">'+mb(r.blob.size)+'</span>'+(r.note?'<div class="small muted">'+esc(r.note)+'</div>':'')+'</span><a class="btn sm pri" href="'+u+'" download="'+esc(r.name)+'">'+KX.icon('down')+'Download</a></div>'}).join('');
+ var zipBtn=res.length>1?'<div class="row" style="margin-bottom:10px"><button type="button" class="btn pri sm" id="zipAllBtn"><svg class="ic"><use href="#i-zip"/></svg>Download all as ZIP ('+res.length+' files)<span class="spin" aria-hidden="true"></span></button></div>':'';
+ $('#outList').innerHTML=zipBtn+res.map(function(r){var u=URL.createObjectURL(r.blob);urls.push(u);return '<div class="row sp" style="padding:8px 0;border-bottom:1px solid var(--line)">'+(r.img?'<img alt="" src="'+u+'" style="height:56px;width:auto;border-radius:6px;border:1px solid var(--line)" loading="lazy" decoding="async">':KX.icon('file'))+'<span style="flex:1;overflow-wrap:anywhere">'+esc(r.name)+' <span class="muted small">'+mb(r.blob.size)+'</span>'+(r.note?'<div class="small muted">'+esc(r.note)+'</div>':'')+'</span><a class="btn sm pri" href="'+u+'" download="'+esc(r.name)+'">'+KX.icon('down')+'Download</a></div>'}).join('');
+ if(res.length>1)$('#zipAllBtn').onclick=function(){zipAll(res,$('#zipAllBtn'))};
  $('#out').classList.remove('hide');$('#out').scrollIntoView({block:'nearest'})}
 
 /* ================= STUDIO: merge and arrange ================= */

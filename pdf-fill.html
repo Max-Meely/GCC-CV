@@ -99,6 +99,12 @@ table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:11px 12p
 .rate{display:flex;align-items:center;gap:14px;justify-content:space-between;padding:14px 4px;border-bottom:1px solid var(--line)}.rate:last-child{border:0}.rate b{display:block}.rate .pr{font-weight:800;font-size:1.15rem;white-space:nowrap;font-variant-numeric:tabular-nums}
 /* dialog + toast */
 dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24px}dialog::backdrop{background:rgba(8,14,30,.5);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+#sitemenu{max-width:min(720px,94vw);width:100%;padding:22px}
+.smgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px 20px}
+.smgrid h3{font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:10px}
+.smgrid>div{display:flex;flex-direction:column;gap:2px}
+.smgrid a{color:var(--ink);text-decoration:none;padding:7px 8px;margin:0 -8px;border-radius:10px;font-size:.94rem;font-weight:600}
+.smgrid a:hover{background:var(--soft);color:var(--acc)}
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:12px;font-size:.92rem;display:none;z-index:90;max-width:90vw;box-shadow:0 10px 30px rgba(0,0,0,.3)}
 .drop{display:block;border:2px dashed var(--line);border-radius:16px;padding:20px;text-align:center;background:var(--soft);cursor:pointer;transition:border-color .15s,background .15s}.drop:hover,.drop.over{border-color:var(--acc);background:rgba(29,78,216,.1)}
 .files{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:10px;margin-top:12px}.file{border:1px solid var(--bd);border-radius:14px;padding:7px;font-size:.78rem;background:var(--card2);position:relative}.file img,.file canvas{width:100%;height:104px;object-fit:cover;border-radius:9px;display:block;background:var(--soft)}.file .th{height:104px;display:grid;place-items:center;background:var(--soft);border-radius:9px;color:var(--muted)}.file .nm{margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.file .x{position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;border:0;background:rgba(10,20,40,.78);color:#fff;cursor:pointer;line-height:1}.file .mv{display:flex;gap:4px;margin-top:5px}.file .mv button{flex:1;min-height:28px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}.file .no{position:absolute;top:4px;left:4px;background:var(--accg);color:#fff;border-radius:999px;padding:0 8px;font-weight:700;font-size:.74rem;line-height:22px}
@@ -237,6 +243,12 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 </style></head><body><svg xmlns="http://www.w3.org/2000/svg" style="display:none"><defs>
 <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
 <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+<symbol id="i-vol" viewBox="0 0 24 24"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></symbol>
+<symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M16 9l5 5M21 9l-5 5"/></symbol>
+<symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
 <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
 <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
 <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></symbol>
@@ -295,14 +307,25 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14h6M9 17h4"/></symbol>
 </defs></svg>
 
-<header class="top"><div class="wrap"><a class="brand" href="index.html" aria-label="KINETIX home"><img class="bm" src="kinetix-logo.png" alt="" width="45" height="34"><span class="wm" aria-hidden="true"><img src="kinetix-k.png" alt="" width="25" height="22">INETIX</span></a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html" aria-current="page">PDF tools</a><a href="order-status.html">Track order</a></nav><div class="tools"><button class="tt kxapp" type="button" data-install aria-label="Install the KINETIX app"><svg class="ic"><use href="#i-down"/></svg><span>App</span></button><span class="curwrap"><svg class="ic"><use href="#i-globe"/></svg><select class="curs" id="cur" aria-label="Currency"><option>AED</option></select></span><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></div></header>
+<header class="top"><div class="wrap"><a class="brand" href="index.html" aria-label="KINETIX home"><img class="bm" src="kinetix-logo.png" alt="" width="45" height="34"><span class="wm" aria-hidden="true"><img src="kinetix-k.png" alt="" width="25" height="22">INETIX</span></a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html" aria-current="page">PDF tools</a><a href="order-status.html">Track order</a></nav><div class="tools"><button class="tt" id="menubtn" type="button" aria-haspopup="dialog" aria-label="Browse all pages"><svg class="ic"><use href="#i-menu"/></svg></button><button class="tt kxapp" type="button" data-install aria-label="Install the KINETIX app"><svg class="ic"><use href="#i-down"/></svg><span>App</span></button><span class="curwrap"><svg class="ic"><use href="#i-globe"/></svg><select class="curs" id="cur" aria-label="Currency"><option>AED</option></select></span><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></div></header>
+<dialog id="sitemenu" aria-label="Browse KINETIX">
+<div class="row sp" style="margin-bottom:6px"><b style="font-size:1.1rem">Browse KINETIX</b><button type="button" class="tt" id="menux" aria-label="Close menu"><svg class="ic"><use href="#i-x"/></svg></button></div>
+<div class="smgrid">
+<div><h3>Get started</h3><a href="index.html">Home</a><a href="how-it-works.html">How it works</a><a href="intake.html">Order a CV</a><a href="other-services.html">Other services</a><a href="samples.html">Sample CVs</a></div>
+<div><h3>Free PDF tools</h3><a href="pdf-tools.html">All free PDF tools</a><a href="pdf-fill.html">Fill and sign PDF</a><a href="signature-tool.html">Signature maker</a><a href="pdf-unlock.html">PDF password remover</a><a href="pdf-help.html">Free help ticket</a><a href="tutorials.html">Video tutorials</a></div>
+<div><h3>Company</h3><a href="about.html">What we do</a><a href="blog.html">Blog</a><a href="contact.html">Contact us</a><a href="order-status.html">Track your order</a></div>
+<div><h3>Legal</h3><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a><a href="legal-notice.html">Legal Notice</a><a href="copyright.html">Copyright Notice</a></div>
+</div></dialog>
 
 <style>
-.fl{max-width:1020px}.tbar{position:sticky;top:64px;z-index:30;display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:10px;border-radius:18px;background:var(--card);border:1px solid var(--bd);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);box-shadow:var(--sh);margin:14px 0}
+.fl{max-width:1020px}.tbar{z-index:30;display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:10px;background:var(--card);border:1px solid var(--bd);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);box-shadow:var(--sh)}
 .tbar .tl{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:58px;padding:8px 8px 6px;border-radius:14px;border:1px solid transparent;background:transparent;color:inherit;font:inherit;font-size:.74rem;font-weight:650;cursor:pointer}
 .tbar .tl:hover{background:var(--soft)}.tbar .tl[aria-pressed=true]{background:var(--accg);color:#fff}.tbar .tl:disabled{opacity:.4;cursor:default}
 .tbar .sep{width:1px;align-self:stretch;background:var(--bd);margin:0 2px}.tbar .sw2{display:flex;gap:6px}.tbar .sw2 button{width:26px;height:26px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px var(--bd);cursor:pointer}.tbar .sw2 button[aria-pressed=true]{box-shadow:0 0 0 3px var(--acc)}
-@media(max-width:700px){.tbar{top:58px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.tbar::-webkit-scrollbar{display:none}.tbar>*{flex:none}}
+.tbarwrap{position:sticky;top:64px;z-index:30;margin:14px 0}.tbarwrap .tbar{border-radius:0 0 18px 18px}
+.tbtop{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:18px 18px 0 0;background:var(--card);border:1px solid var(--bd);border-bottom:none}
+.tbtop .btn{padding:8px 16px}
+@media(max-width:700px){.tbarwrap{top:58px}.tbar{border-radius:0 0 18px 18px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.tbar::-webkit-scrollbar{display:none}.tbar>*{flex:none}}
 #pages{--z:1;display:flex;flex-direction:column;align-items:center;gap:18px;padding:6px 0 30px}
 .pg{position:relative;width:calc(var(--pw)*var(--z)*1px);height:calc(var(--ph)*var(--z)*1px);background:#fff;box-shadow:0 18px 50px -16px rgba(8,20,60,.55);border-radius:4px;flex:none}
 .pg canvas{position:absolute;inset:0;width:100%;height:100%;border-radius:4px}
@@ -317,9 +340,14 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 .it .mv{left:-15px;top:-15px;width:22px;height:22px;border-radius:50%;background:#2563eb;color:#fff;cursor:move;display:none;place-items:center;font-size:12px;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35)}.it.sel .mv{display:grid}
 .it .rs{right:-10px;bottom:-10px;width:20px;height:20px;border-radius:5px;background:#2563eb;border:2px solid #fff;cursor:nwse-resize;box-shadow:0 2px 6px rgba(0,0,0,.35)}
 .it .rm{right:-14px;top:-15px;width:24px;height:24px;border-radius:50%;background:#dc2626;color:#fff;border:2px solid #fff;cursor:pointer;font:700 15px/20px Arial;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.it .rot{left:-15px;bottom:-15px;width:24px;height:24px;border-radius:50%;background:#16a34a;color:#fff;border:2px solid #fff;cursor:pointer;display:none;place-items:center;font:700 14px/20px Arial;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.35)}.it.sel .rot{display:grid}
+.ocrhit{position:absolute;left:calc(var(--x)*var(--z)*1px);top:calc(var(--y)*var(--z)*1px);width:calc(var(--w)*var(--z)*1px);height:calc(var(--h)*var(--z)*1px);background:rgba(250,204,21,.32);border:1.5px dashed #ca8a04;border-radius:3px;cursor:pointer;animation:ocrp 1.6s ease-in-out infinite}
+.ocrhit:hover{background:rgba(250,204,21,.55)}
+@keyframes ocrp{0%,100%{background:rgba(250,204,21,.22)}50%{background:rgba(250,204,21,.5)}}
+.phprev{background-color:#fff;background-image:linear-gradient(45deg,#d9dee7 25%,transparent 25%,transparent 75%,#d9dee7 75%),linear-gradient(45deg,#d9dee7 25%,transparent 25%,transparent 75%,#d9dee7 75%);background-size:20px 20px;background-position:0 0,10px 10px;border-radius:16px;border:1px solid var(--bd);display:grid;place-items:center;min-height:150px;padding:12px;overflow:hidden}.phprev img{max-width:100%;max-height:260px;display:block}
 .ffl{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}.ffl label{font-size:.8rem;font-weight:650;display:block;margin-bottom:3px;word-break:break-word}
 .sgl{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 12px}.sgl button{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:6px 10px;cursor:pointer}.sgl img{height:44px;display:block}
-dialog#sgd{border:1px solid var(--bd);border-radius:24px;padding:20px;width:min(640px,94vw);background:var(--bg,#fff);color:var(--ink,inherit);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}dialog#sgd::backdrop{background:rgba(4,10,24,.6)}
+dialog#sgd,dialog#phd{border:1px solid var(--bd);border-radius:24px;padding:20px;width:min(640px,94vw);background:var(--bg,#fff);color:var(--ink,inherit);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}dialog#sgd::backdrop,dialog#phd::backdrop{background:rgba(4,10,24,.6)}
 </style>
 <main><div class="wrap fl">
 <div class="phero" style="--bg:url(blog-img/cv-closeup.jpg);--pos:50% 36%;margin-bottom:18px"><a href="pdf-tools.html" class="row" style="gap:6px;text-decoration:none;font-size:.9rem;margin-bottom:10px"><svg class="ic"><use href="#i-back"/></svg>PDF tools</a>
@@ -328,13 +356,23 @@ dialog#sgd{border:1px solid var(--bd);border-radius:24px;padding:20px;width:min(
 <div id="start" class="card"><label class="drop" id="drop" for="fin"><svg class="ic"><use href="#i-up"/></svg> Choose a PDF to fill, or drop it here<div class="muted small">Forms, contracts, offer letters, visa and bank forms. Fillable forms are detected automatically.</div></label><input id="fin" type="file" accept="application/pdf,.pdf" class="sr">
 <div id="err" class="note err hide" style="margin-top:12px" role="alert"></div></div>
 <div id="ed" hidden>
+ <div class="tbarwrap">
+ <div class="tbtop">
+  <b style="font-size:.86rem">Editing</b>
+  <span style="flex:1"></span>
+  <button class="tl" type="button" id="undo" aria-label="Undo"><svg class="ic"><use href="#i-undo"/></svg>Undo</button>
+  <button class="tl" type="button" id="del" aria-label="Delete"><svg class="ic"><use href="#i-trash"/></svg>Delete</button>
+  <button class="btn pri" type="button" id="dl"><svg class="ic"><use href="#i-down"/></svg><span>Download PDF</span></button>
+ </div>
  <div class="tbar" id="tb">
   <button class="tl" type="button" data-tool="text"><svg class="ic"><use href="#i-type"/></svg>Text</button>
   <button class="tl" type="button" data-tool="date"><svg class="ic"><use href="#i-clock"/></svg>Date</button>
   <button class="tl" type="button" data-tool="tick"><svg class="ic"><use href="#i-check"/></svg>Tick</button>
   <button class="tl" type="button" data-tool="cross"><svg class="ic"><use href="#i-x"/></svg>Cross</button>
   <button class="tl" type="button" id="tsig"><svg class="ic"><use href="#i-sign"/></svg>Signature</button>
+  <button class="tl" type="button" id="tphoto"><svg class="ic"><use href="#i-image"/></svg>Photo</button>
   <button class="tl" type="button" data-tool="white"><svg class="ic"><use href="#i-box"/></svg>Cover</button>
+  <button class="tl" type="button" id="tocr"><svg class="ic"><use href="#i-search"/></svg><span id="ocrlbl">Detect text</span></button>
   <span class="sep"></span>
   <button class="tl" type="button" id="szm" aria-label="Smaller"><svg class="ic"><use href="#i-minus"/></svg>Smaller</button>
   <button class="tl" type="button" id="szp" aria-label="Bigger"><svg class="ic"><use href="#i-plus"/></svg>Bigger</button>
@@ -342,18 +380,35 @@ dialog#sgd{border:1px solid var(--bd);border-radius:24px;padding:20px;width:min(
   <span class="sep"></span>
   <button class="tl" type="button" id="zm" aria-label="Zoom out"><svg class="ic"><use href="#i-minus"/></svg>Zoom</button>
   <button class="tl" type="button" id="zp" aria-label="Zoom in"><svg class="ic"><use href="#i-plus"/></svg>Zoom</button>
-  <button class="tl" type="button" id="undo"><svg class="ic"><use href="#i-undo"/></svg>Undo</button>
-  <button class="tl" type="button" id="del"><svg class="ic"><use href="#i-trash"/></svg>Delete</button>
-  <span style="flex:1"></span>
-  <button class="btn pri" type="button" id="dl"><svg class="ic"><use href="#i-down"/></svg><span>Download PDF</span></button>
  </div>
- <div class="muted small" id="hint" style="margin:-4px 0 8px">Pick a tool, then tap the page where it should go. Tap an item to move, resize or delete it.</div>
+ </div>
+ <div class="muted small" id="hint" style="margin:6px 0 8px">Pick a tool, then tap the page where it should go. Tap an item to move, resize or delete it.</div>
+ <div class="row" id="rotbar" hidden style="gap:10px;align-items:center;margin:-2px 0 10px;flex-wrap:wrap">
+  <b style="font-size:.8rem">Rotate</b>
+  <input type="range" min="0" max="359" value="0" id="rotrange" style="flex:1;min-width:140px" aria-label="Rotate (drag)">
+  <span class="row" style="gap:4px"><input type="number" min="0" max="359" value="0" id="rotnum" style="width:66px" aria-label="Rotate (degrees)">&deg;</span>
+  <button type="button" class="btn sm ghost" id="rotreset">Reset</button>
+ </div>
  <div id="forms" class="card" hidden><div class="row sp"><b id="fct">Fillable form fields</b><label class="opt" style="margin:0;padding:6px 12px"><input type="checkbox" id="flat" checked><div><b>Make permanent</b></div></label></div><p class="muted small" style="margin:6px 0 10px">This PDF has fillable fields. Fill them here. They appear in the downloaded file (the preview below shows the blank form).</p><div class="ffl" id="ffl"></div></div>
  <div id="pages"></div>
  <div id="after" class="note ok hide" style="margin-bottom:12px"><b>Your PDF is ready.</b> If it did not download, <a href="#" id="again">tap here</a>. Need us to do it for you? <a href="pdf-help.html"><b>Get a free help ticket</b></a>.</div>
 </div>
 <div class="note" style="margin-top:14px">Stuck or short on time? <a href="pdf-help.html"><b>Get a free help ticket</b></a>. Send us the document and we will fill it, then email it back to you.</div>
 <dialog id="sgd"><div class="row sp" style="margin-bottom:10px"><h2 style="margin:0">Your signature</h2><button class="btn sm ghost" type="button" id="sgx">Close</button></div><div id="sgsaved" hidden><div class="muted small">Saved on this device</div><div class="sgl" id="sgl"></div></div><div id="sgp"></div><div class="row" style="margin-top:14px"><button class="btn pri" type="button" id="sgok" disabled><svg class="ic"><use href="#i-check"/></svg>Place signature</button></div></dialog>
+<dialog id="phd"><div class="row sp" style="margin-bottom:10px"><h2 style="margin:0">Add a photo</h2><button class="btn sm ghost" type="button" id="phx">Close</button></div>
+<div id="phstart"><label class="drop" id="phdrop" for="phf" style="min-height:120px"><svg class="ic"><use href="#i-up"/></svg> Choose a photo, or drop it here<div class="muted small">A passport photo, ID, stamp, or any picture to place on the page.</div></label><input id="phf" type="file" accept="image/*" class="sr"></div>
+<div id="phwork" hidden>
+ <div class="phprev" id="phprev"></div>
+ <div class="row" style="gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0">
+  <label class="opt" style="margin:0;padding:6px 10px"><input type="checkbox" id="phauto"><div><b>Auto-fix lighting</b></div></label>
+  <label class="opt" style="margin:0;padding:6px 10px"><input type="checkbox" id="phbg"><div><b>Remove background</b></div></label>
+  <span id="phtolwrap" hidden class="row" style="gap:8px;font-size:.85rem"><span>Tolerance</span><input type="range" min="10" max="90" value="38" id="phtol" style="width:120px"></span>
+  <button type="button" class="btn sm" id="phcrop">Crop</button>
+  <button type="button" class="btn sm ghost" id="phredo">Start over</button>
+ </div>
+ <p class="muted small" id="phmsg">Background removal works best when the area behind the photo is one plain, even colour - it will struggle with a busy background.</p>
+</div>
+<div class="row" style="margin-top:14px"><button class="btn pri" type="button" id="phok" disabled><svg class="ic"><use href="#i-check"/></svg>Add to page</button></div></dialog>
 </div></main>
 
 <footer><div class="wrap" style="display:block"><div class="row" style="gap:6px 18px;margin-bottom:12px"><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a><a href="legal-notice.html">Legal Notice</a><a href="copyright.html">Copyright Notice</a><a href="blog.html">Blog</a><a href="samples.html">Sample CVs</a><a href="contact.html">Contact Us</a><a href="#" data-install>Install app</a></div><div class="row sp"><span>&copy; <span data-year></span> KINETIX GCC CV. All rights reserved.</span><span class="row" style="gap:8px 18px"><a class="row" style="gap:7px" data-c="wa-ae" data-keep href="#"><svg class="ic" style="color:#22a559"><use href="#i-wa"/></svg>WhatsApp us</a><a class="row" style="gap:7px" data-c="mail" data-keep href="#"><svg class="ic" style="color:#8b5cf6"><use href="#i-proton"/></svg><span data-email></span></a></span></div></div></footer>
@@ -493,6 +548,14 @@ dialog#sgd{border:1px solid var(--bd);border-radius:24px;padding:20px;width:min(
     t.onclick = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); }; document.body.appendChild(t);
     window.addEventListener('scroll', function () { t.classList.toggle('on', window.scrollY > 500); }, { passive: true });
   })();
+  /* site menu: browse every page */
+  (function () {
+    var btn = document.getElementById('menubtn'), dlg = document.getElementById('sitemenu'), xb = document.getElementById('menux');
+    if (!btn || !dlg) return;
+    btn.addEventListener('click', function () { try { dlg.showModal(); } catch (e) { dlg.setAttribute('open', ''); } });
+    if (xb) xb.onclick = function () { dlg.close(); };
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  })();
   /* PWA: register the service worker and offer "Install app" */
   (function () {
     window.addEventListener('load', function () { kxOffline(); });
@@ -624,6 +687,22 @@ function loadImg(src){return new Promise(function(res,rej){var i=new Image();i.o
 function fileToImg(file){return new Promise(function(res,rej){var r=new FileReader();r.onload=function(){loadImg(r.result).then(res,rej)};r.onerror=function(){rej(new Error('Could not read the file.'))};r.readAsDataURL(file)})}
 function otsu(h,n){var sum=0,i;for(i=0;i<256;i++)sum+=i*h[i];var sB=0,wB=0,max=-1,t=0;for(i=0;i<256;i++){wB+=h[i];if(!wB)continue;var wF=n-wB;if(!wF)break;sB+=i*h[i];var mB=sB/wB,mF=(sum-sB)/wF,v=wB*wF*(mB-mF)*(mB-mF);if(v>max){max=v;t=i}}return t/255}
 function hex(c){c=c.replace('#','');return[parseInt(c.substr(0,2),16),parseInt(c.substr(2,2),16),parseInt(c.substr(4,2),16)]}
+/* autoLevels: stretch each channel's histogram so the darkest/lightest ~0.5% clip to black/white. Deterministic, no AI. */
+function autoLevels(img){var iw=img.naturalWidth||img.width,ih=img.naturalHeight||img.height,c=document.createElement('canvas');c.width=iw;c.height=ih;var x=c.getContext('2d',{willReadFrequently:true});x.drawImage(img,0,0,iw,ih);
+ var d=x.getImageData(0,0,iw,ih),p=d.data,N=iw*ih;
+ ['r','g','b'].forEach(function(ch,off){var h=new Uint32Array(256),i;for(i=0;i<N;i++)h[p[i*4+off]]++;
+  var lo=0,hi=255,cum=0,cut=N*.005;for(i=0;i<256;i++){cum+=h[i];if(cum>=cut){lo=i;break}}cum=0;for(i=255;i>=0;i--){cum+=h[i];if(cum>=cut){hi=i;break}}
+  if(hi<=lo){return}var scale=255/(hi-lo);for(i=0;i<N;i++){var v=(p[i*4+off]-lo)*scale;p[i*4+off]=v<0?0:v>255?255:v}});
+ x.putImageData(d,0,0);return c}
+/* chromaKey: best-effort background removal for a roughly plain/even background. Samples the four corners,
+   and makes pixels close to that colour transparent, fading near the edge of the tolerance. Not ML - will
+   struggle with busy or multi-colour backgrounds. */
+function chromaKey(img,o){o=o||{};var tol=o.tol==null?38:o.tol,iw=img.naturalWidth||img.width,ih=img.naturalHeight||img.height,c=document.createElement('canvas');c.width=iw;c.height=ih;var x=c.getContext('2d',{willReadFrequently:true});x.drawImage(img,0,0,iw,ih);
+ var d=x.getImageData(0,0,iw,ih),p=d.data,N=iw*ih;
+ var pts=[[2,2],[iw-3,2],[2,ih-3],[iw-3,ih-3]],cr=0,cg=0,cb=0;pts.forEach(function(pt){var k=(pt[1]*iw+pt[0])*4;cr+=p[k];cg+=p[k+1];cb+=p[k+2]});cr/=4;cg/=4;cb/=4;
+ for(var i=0;i<N;i++){var dr=p[i*4]-cr,dg=p[i*4+1]-cg,db=p[i*4+2]-cb,dist=Math.sqrt(dr*dr+dg*dg+db*db);
+  if(dist<tol){var a=dist/tol;p[i*4+3]=Math.round(p[i*4+3]*(a*a))}}
+ x.putImageData(d,0,0);return c}
 /* extract: img (Image or Canvas) -> canvas with transparent background, cropped to the ink */
 function extract(img,o){o=o||{};var sens=o.sens==null?50:o.sens,color=o.color||'#0b1b3a',maxW=o.maxW||1400;
  var iw=img.naturalWidth||img.width,ih=img.naturalHeight||img.height,sc=Math.min(1,maxW/Math.max(iw,ih)),w=Math.max(1,Math.round(iw*sc)),h=Math.max(1,Math.round(ih*sc));
@@ -665,12 +744,12 @@ function panel(host,opt){opt=opt||{};if(!document.getElementById('sg-css')){var 
  host.innerHTML='<div class="tabs"><button type="button" data-t="photo" aria-pressed="true">Photo of my signature</button><button type="button" data-t="draw" aria-pressed="false">Draw it</button></div>'
  +'<div data-p="photo"><label class="drop2" for="sgf"><b>Take or choose a photo</b><span class="hint">Sign on plain white paper in good light, then photograph just the signature. We remove the paper and keep the ink.</span></label><input id="sgf" type="file" accept="image/*" style="position:absolute;left:-9999px"></div>'
  +'<div data-p="draw" hidden><canvas class="pad" id="sgpad"></canvas><div class="hint">Draw with your finger or mouse.</div></div>'
- +'<div class="ctl" id="sgctl" hidden><label data-for="photo">Sensitivity <input type="range" min="0" max="100" value="50" id="sgs"></label><span class="sw" id="sgsw" aria-label="Ink colour"></span><button type="button" class="btn sm" id="sgclr">Clear</button></div>'
+ +'<div class="ctl" id="sgctl" hidden><label data-for="photo">Sensitivity <input type="range" min="0" max="100" value="50" id="sgs"></label><span class="sw" id="sgsw" aria-label="Ink colour"></span><button type="button" class="btn sm" id="sgcrop">Crop</button><button type="button" class="btn sm" id="sgclr">Clear</button></div>'
  +'<div class="cb" id="sgprev" hidden></div><div class="hint" id="sgmsg"></div>';
  var pad=$(host,'#sgpad'),pc=pad.getContext('2d'),drawing=false,last=null;
  [['#0b1b3a','Navy'],['#111111','Black'],['#1d3fbf','Blue'],['original','Original']].forEach(function(c){var b=document.createElement('button');b.type='button';b.title=c[1];b.setAttribute('aria-label',c[1]);b.setAttribute('aria-pressed',c[0]===state.color);b.dataset.ink=c[0];b.style.background=c[0]==='original'?'linear-gradient(135deg,#222,#2563eb)':c[0];$(host,'#sgsw').appendChild(b)});
  function emit(u){state.url=u;if(opt.onChange)opt.onChange(u)}
- function show(cv){var pv=$(host,'#sgprev');if(!cv){pv.hidden=true;emit(null);return}pv.hidden=false;var url=cv.toDataURL('image/png');pv.innerHTML='<img alt="Your transparent signature" src="'+url+'" loading="lazy" decoding="async">';emit(url)}
+ function show(cv){state.outCv=cv||null;var pv=$(host,'#sgprev');if(!cv){pv.hidden=true;emit(null);return}pv.hidden=false;var url=cv.toDataURL('image/png');pv.innerHTML='<img alt="Your transparent signature" src="'+url+'" loading="lazy" decoding="async">';emit(url)}
  function run(){if(!state.img)return;var cv=extract(state.img,{sens:state.sens,color:state.color});if(!cv){$(host,'#sgmsg').textContent='We could not find a signature in that picture. Use plain white paper, dark ink and good light, or raise the sensitivity.';show(null);return}$(host,'#sgmsg').textContent='Done. The background is now transparent.';show(cv)}
  function setTab(t){state.tab=t;host.querySelectorAll('.tabs button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.t===t)});host.querySelectorAll('[data-p]').forEach(function(e){e.hidden=e.dataset.p!==t});$(host,'#sgctl').hidden=false;host.querySelectorAll('[data-for=photo]').forEach(function(e){e.style.display=t==='photo'?'':'none'});
   if(t==='draw')sizePad();if(t==='photo'){if(state.img)run();else{$(host,'#sgprev').hidden=true;emit(null)}}else{drawOut()}}
@@ -680,21 +759,85 @@ function panel(host,opt){opt=opt||{};if(!document.getElementById('sg-css')){var 
  pad.addEventListener('pointerdown',function(e){e.preventDefault();sizePad();drawing=true;last=pos(e);pad.setPointerCapture(e.pointerId);pc.strokeStyle=ink();pc.fillStyle=ink();pc.lineWidth=Math.max(2.5,pad.width/260);pc.beginPath();pc.arc(last.x,last.y,pc.lineWidth/2,0,6.3);pc.fill();state.canvasDrawn=true});
  pad.addEventListener('pointermove',function(e){if(!drawing)return;var p=pos(e),m={x:(last.x+p.x)/2,y:(last.y+p.y)/2};pc.strokeStyle=ink();pc.beginPath();pc.moveTo(last.x,last.y);pc.quadraticCurveTo(last.x,last.y,m.x,m.y);pc.lineTo(p.x,p.y);pc.stroke();last=p});
  function end(){if(!drawing)return;drawing=false;drawOut()}pad.addEventListener('pointerup',end);pad.addEventListener('pointercancel',end);
- function drawOut(){if(state.tab!=='draw')return;if(!state.canvasDrawn){emit(null);$(host,'#sgprev').hidden=true;return}var t=trim(pad);if(t){var u=t.toDataURL('image/png');$(host,'#sgprev').hidden=false;$(host,'#sgprev').innerHTML='<img alt="Your drawn signature" src="'+u+'" loading="lazy" decoding="async">';emit(u)}}
+ function drawOut(){if(state.tab!=='draw')return;if(!state.canvasDrawn){state.outCv=null;emit(null);$(host,'#sgprev').hidden=true;return}var t=trim(pad);if(t){state.outCv=t;var u=t.toDataURL('image/png');$(host,'#sgprev').hidden=false;$(host,'#sgprev').innerHTML='<img alt="Your drawn signature" src="'+u+'" loading="lazy" decoding="async">';emit(u)}}
  $(host,'#sgclr').onclick=function(){if(state.tab==='draw'){pc.clearRect(0,0,pad.width,pad.height);state.canvasDrawn=false;drawOut()}else{state.img=null;$(host,'#sgf').value='';show(null);$(host,'#sgmsg').textContent=''}};
+ $(host,'#sgcrop').onclick=function(){if(!state.outCv||!window.KXCROP){$(host,'#sgmsg').textContent='Make a signature first, then crop it.';return}
+  KXCROP.open(state.outCv,{transparent:true,title:'Crop your signature'}).then(function(cv){if(!cv)return;show(cv);$(host,'#sgmsg').textContent='Cropped. Changing the sensitivity or colour afterwards will redo the automatic cut, so crop last.'})};
  host.querySelector('.tabs').addEventListener('click',function(e){var b=e.target.closest('button[data-t]');if(b)setTab(b.dataset.t)});
  $(host,'#sgsw').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;state.color=b.dataset.ink;$(host,'#sgsw').querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});if(state.tab==='photo')run()});
  var tm;$(host,'#sgs').addEventListener('input',function(e){state.sens=+e.target.value;clearTimeout(tm);tm=setTimeout(run,60)});
  $(host,'#sgf').addEventListener('change',function(e){var f=e.target.files[0];if(!f)return;$(host,'#sgmsg').textContent='Working on it...';$(host,'#sgctl').hidden=false;fileToImg(f).then(function(i){state.img=i;setTimeout(run,20)}).catch(function(er){$(host,'#sgmsg').textContent=er.message})});
  $(host,'#sgctl').hidden=true;
  $(host,'.drop2').addEventListener('click',function(){$(host,'#sgctl').hidden=false});
- return{getUrl:function(){return state.url},reset:function(){state.img=null;state.canvasDrawn=false;$(host,'#sgprev').hidden=true;$(host,'#sgmsg').textContent='';emit(null)}}}
-window.KXSIG={extract:extract,trim:trim,panel:panel,loadImg:loadImg,fileToImg:fileToImg};
+ return{getUrl:function(){return state.url},reset:function(){state.img=null;state.canvasDrawn=false;state.outCv=null;$(host,'#sgprev').hidden=true;$(host,'#sgmsg').textContent='';emit(null)}}}
+window.KXSIG={extract:extract,trim:trim,panel:panel,loadImg:loadImg,fileToImg:fileToImg,autoLevels:autoLevels,chromaKey:chromaKey};
+})();
+</script>
+<script>/* KXCROP: a small crop + rotate dialog. Opens over any image/canvas, lets the person drag a
+   crop box and rotate in 90 degree steps, and resolves to the cropped canvas (or null if cancelled).
+   transparent:true keeps alpha (for signatures); otherwise a white backing is shown/used. */
+(function(){
+var css = '.kxcrop{border:1px solid var(--bd,#ddd);border-radius:22px;padding:18px;width:min(680px,94vw);background:var(--bg,#fff);color:var(--ink,inherit);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}'
++'.kxcrop::backdrop{background:rgba(4,10,24,.6)}'
++'.kxcrop-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:10px}'
++'.kxcrop-stage{display:flex;justify-content:center;padding:8px;background:repeating-conic-gradient(#e3e7ee 0% 25%,#fff 0% 50%) 0 0/20px 20px;border-radius:14px;overflow:hidden;touch-action:none}'
++'.kxcrop-frame{position:relative;max-width:100%}'
++'.kxcrop-frame canvas{display:block;max-width:100%}'
++'.kxcrop-box{position:absolute;border:2px dashed #2563eb;box-shadow:0 0 0 2000px rgba(10,15,30,.4);touch-action:none;cursor:move}'
++'.kxcrop-box i{position:absolute;width:22px;height:22px;background:#2563eb;border:2px solid #fff;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,.4);touch-action:none}'
++'.kxcrop-box i[data-h=nw]{left:-11px;top:-11px;cursor:nwse-resize}.kxcrop-box i[data-h=ne]{right:-11px;top:-11px;cursor:nesw-resize}'
++'.kxcrop-box i[data-h=sw]{left:-11px;bottom:-11px;cursor:nesw-resize}.kxcrop-box i[data-h=se]{right:-11px;bottom:-11px;cursor:nwse-resize}'
++'.kxcrop-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px}'
++'.kxcrop-hint{font-size:.8rem;color:var(--muted,#777);margin-top:8px}';
+function $(h,s){return h.querySelector(s)}
+function toCanvas(src){if(src&&src.tagName==='CANVAS')return src;var c=document.createElement('canvas');c.width=src.naturalWidth||src.width;c.height=src.naturalHeight||src.height;c.getContext('2d').drawImage(src,0,0);return c}
+function rot90(cv,dir){var w=cv.width,h=cv.height,o=document.createElement('canvas');o.width=h;o.height=w;var x=o.getContext('2d');
+ if(dir>0){x.translate(h,0);x.rotate(Math.PI/2)}else{x.translate(0,w);x.rotate(-Math.PI/2)}
+ x.drawImage(cv,0,0);return o}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+function open(src,opts){opts=opts||{};
+ return new Promise(function(resolve){
+  if(!document.getElementById('kxcrop-css')){var st=document.createElement('style');st.id='kxcrop-css';st.textContent=css;document.head.appendChild(st)}
+  var cur=toCanvas(src),done=false;
+  var dlg=document.createElement('dialog');dlg.className='kxcrop';
+  dlg.innerHTML='<div class="kxcrop-top"><b>'+(opts.title||'Crop and straighten')+'</b><button type="button" class="btn sm ghost" data-x>Cancel</button></div>'
+   +'<div class="kxcrop-stage"><div class="kxcrop-frame"><canvas class="kxcrop-cv"></canvas><div class="kxcrop-box"><i data-h="nw"></i><i data-h="ne"></i><i data-h="sw"></i><i data-h="se"></i></div></div></div>'
+   +'<div class="kxcrop-hint">Drag the corners to cut away anything you do not want. Drag inside the box to move it.</div>'
+   +'<div class="kxcrop-bar"><button type="button" class="btn sm" data-rl>&#8634; Rotate left</button><button type="button" class="btn sm" data-rr>&#8635; Rotate right</button><span style="flex:1"></span><button type="button" class="btn sm" data-reset>Reset</button><button type="button" class="btn sm pri" data-ok>Use this crop</button></div>';
+  document.body.appendChild(dlg);
+  var cv=$(dlg,'.kxcrop-cv'),frame=$(dlg,'.kxcrop-frame'),box=$(dlg,'.kxcrop-box');
+  var rect={x:.02,y:.02,w:.96,h:.96};
+  function draw(){var maxW=Math.min(620,innerWidth-70),maxH=Math.min(440,innerHeight-240),sc=Math.min(maxW/cur.width,maxH/cur.height,1),dw=Math.max(40,Math.round(cur.width*sc)),dh=Math.max(40,Math.round(cur.height*sc));
+   cv.width=dw;cv.height=dh;frame.style.width=dw+'px';frame.style.height=dh+'px';var x=cv.getContext('2d');x.clearRect(0,0,dw,dh);if(!opts.transparent){x.fillStyle='#fff';x.fillRect(0,0,dw,dh)}x.drawImage(cur,0,0,dw,dh);layout()}
+  function layout(){var dw=cv.width,dh=cv.height;box.style.left=(rect.x*dw)+'px';box.style.top=(rect.y*dh)+'px';box.style.width=(rect.w*dw)+'px';box.style.height=(rect.h*dh)+'px'}
+  draw();
+  var drag=null;
+  box.addEventListener('pointerdown',function(e){var h=e.target.getAttribute&&e.target.getAttribute('data-h');drag={mode:h||'move',sx:e.clientX,sy:e.clientY,r:{x:rect.x,y:rect.y,w:rect.w,h:rect.h},dw:cv.width,dh:cv.height};try{box.setPointerCapture(e.pointerId)}catch(er){}e.preventDefault()});
+  box.addEventListener('pointermove',function(e){if(!drag)return;var dx=(e.clientX-drag.sx)/drag.dw,dy=(e.clientY-drag.sy)/drag.dh,r={x:drag.r.x,y:drag.r.y,w:drag.r.w,h:drag.r.h};
+   if(drag.mode==='move'){r.x=clamp(drag.r.x+dx,0,1-drag.r.w);r.y=clamp(drag.r.y+dy,0,1-drag.r.h)}
+   else{if(drag.mode.indexOf('w')>-1){var nx=clamp(drag.r.x+dx,0,drag.r.x+drag.r.w-.04);r.w=drag.r.x+drag.r.w-nx;r.x=nx}
+    if(drag.mode.indexOf('e')>-1){r.w=clamp(drag.r.w+dx,.04,1-drag.r.x)}
+    if(drag.mode.indexOf('n')>-1){var ny=clamp(drag.r.y+dy,0,drag.r.y+drag.r.h-.04);r.h=drag.r.y+drag.r.h-ny;r.y=ny}
+    if(drag.mode.indexOf('s')>-1){r.h=clamp(drag.r.h+dy,.04,1-drag.r.y)}}
+   rect=r;layout()});
+  function endDrag(){drag=null}box.addEventListener('pointerup',endDrag);box.addEventListener('pointercancel',endDrag);
+  $(dlg,'[data-rl]').onclick=function(){cur=rot90(cur,-1);rect={x:.02,y:.02,w:.96,h:.96};draw()};
+  $(dlg,'[data-rr]').onclick=function(){cur=rot90(cur,1);rect={x:.02,y:.02,w:.96,h:.96};draw()};
+  $(dlg,'[data-reset]').onclick=function(){rect={x:.02,y:.02,w:.96,h:.96};layout()};
+  function finish(v){if(done)return;done=true;try{dlg.close()}catch(e){}dlg.remove();resolve(v)}
+  $(dlg,'[data-x]').onclick=function(){finish(null)};
+  dlg.addEventListener('cancel',function(e){e.preventDefault();finish(null)});
+  $(dlg,'[data-ok]').onclick=function(){var sx=Math.round(rect.x*cur.width),sy=Math.round(rect.y*cur.height),sw=Math.max(1,Math.round(rect.w*cur.width)),sh=Math.max(1,Math.round(rect.h*cur.height));
+   var out=document.createElement('canvas');out.width=sw;out.height=sh;var x=out.getContext('2d');if(!opts.transparent){x.fillStyle='#fff';x.fillRect(0,0,sw,sh)}x.drawImage(cur,sx,sy,sw,sh,0,0,sw,sh);finish(out)};
+  function onResize(){draw()}window.addEventListener('resize',onResize);
+  try{dlg.showModal()}catch(e){dlg.setAttribute('open','')}
+ })}
+window.KXCROP={open:open,rot90:rot90};
 })();
 </script>
 <script>
 (function(){
-var $=KX.$,doc=null,bytes=null,fname='document',pdfjs=null,pdoc=null,P=[],tool=null,sel=null,col='#111111',defSize=14,zmul=1,sigUrl=null,hist=[],uid=0,curSigUrl=null,fields=[],libP,pjsP;
+var $=KX.$,doc=null,bytes=null,fname='document',pdfjs=null,pdoc=null,P=[],tool=null,sel=null,col='#111111',defSize=14,zmul=1,sigUrl=null,hist=[],uid=0,curSigUrl=null,fields=[],libP,pjsP,ocrP,ocrBoxes=[],ocrBusy=false;
 function pdfLib(){if(window.PDFLib)return Promise.resolve(window.PDFLib);if(!libP)libP=new Promise(function(res,rej){var s=document.createElement('script');s.src='pdf-lib.min.js';s.onload=function(){res(window.PDFLib)};s.onerror=function(){libP=null;rej(new Error('Could not load the PDF engine. Check your connection and try again.'))};document.head.appendChild(s)});return libP}
 function pdfJs(){if(!pjsP)pjsP=import('./pdf.min.mjs').then(function(m){m.GlobalWorkerOptions.workerSrc='pdf.worker.min.mjs';return m}).catch(function(){pjsP=null;throw new Error('Could not load the PDF viewer. Open this page from the website and try again.')});return pjsP}
 function err(m){var e=$('#err');e.textContent=m;e.classList.remove('hide')}
@@ -710,7 +853,7 @@ var dz=$('#drop');['dragover','dragenter'].forEach(function(n){dz.addEventListen
 function zoomBase(){var w=Math.max.apply(null,P.map(function(p){return p.w}));var av=Math.min(pages.parentElement.clientWidth||900,980);return Math.max(.3,Math.min(1.6,(av-4)/w))}
 function applyZoom(){pages.style.setProperty('--z',(zoomBase()*zmul).toFixed(4))}
 function z(){return parseFloat(pages.style.getPropertyValue('--z'))||1}
-function build(){pages.innerHTML='';P=[];var n=pdoc.numPages,chain=Promise.resolve();
+function build(){pages.innerHTML='';P=[];ocrBoxes=[];var n=pdoc.numPages,chain=Promise.resolve();
  for(var i=1;i<=n;i++)(function(i){chain=chain.then(function(){return pdoc.getPage(i)}).then(function(pg){var v=pg.getViewport({scale:1});P.push({n:i,pg:pg,w:v.width,h:v.height})})})(i);
  return chain.then(function(){
   P.forEach(function(p){var d=document.createElement('div');d.className='pg';d.style.setProperty('--pw',p.w);d.style.setProperty('--ph',p.h);d.dataset.i=p.n-1;d.innerHTML='<canvas></canvas><div class="pn">Page '+p.n+' of '+n+'</div><div class="ov"></div>';pages.appendChild(d);p.el=d;p.ov=d.querySelector('.ov')});
@@ -735,20 +878,32 @@ function mk(p,type,x,y,extra){var e=document.createElement('div'),id=++uid;e.cla
  var o=Object.assign({x:x,y:y,s:defSize,w:60,h:24,c:col},extra||{});e.dataset.s=o.s;e.dataset.c=o.c;
  e.style.setProperty('--x',o.x);e.style.setProperty('--y',o.y);e.style.setProperty('--s',o.s);e.style.setProperty('--c',o.c);
  if(type==='text'||type==='date'){e.innerHTML='<div class="tx" contenteditable="true" spellcheck="false"></div><i class="h mv" title="Move">&#10021;</i><b class="h rm" title="Delete">&times;</b>';e.querySelector('.tx').textContent=o.text||''}
- else{e.dataset.w=o.w;e.dataset.h=o.h;e.style.setProperty('--w',o.w);e.style.setProperty('--h',o.h);
-  var inner=type==='tick'?'<svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M12 55 L38 82 L88 18" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>':type==='cross'?'<svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M16 16 L84 84 M84 16 L16 84" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/></svg>':type==='sig'?'<img alt="Signature" src="'+o.img+'" loading="lazy" decoding="async">':'';
-  if(type==='sig')e.dataset.img=o.img;e.innerHTML=inner+'<b class="h rm" title="Delete">&times;</b><i class="h rs" title="Resize"></i>'}
+ else{e.dataset.w=o.w;e.dataset.h=o.h;e.style.setProperty('--w',o.w);e.style.setProperty('--h',o.h);var isImg=type==='sig'||type==='img';
+  var inner=type==='tick'?'<svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M12 55 L38 82 L88 18" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>':type==='cross'?'<svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M16 16 L84 84 M84 16 L16 84" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/></svg>':isImg?'<img alt="'+(type==='sig'?'Signature':'Photo')+'" src="'+o.img+'" loading="lazy" decoding="async">':'';
+  if(isImg)e.dataset.img=o.img;e.innerHTML=inner+'<b class="h rm" title="Delete">&times;</b><i class="h rs" title="Resize"></i>'+(isImg?'<i class="h rot" title="Rotate">&#8635;</i>':'')}
  p.ov.appendChild(e);hist.push({a:'add',el:e,ov:p.ov});return e}
-function select(e){if(sel&&sel!==e)sel.classList.remove('sel');sel=e;if(e){e.classList.add('sel');defSizeFrom(e)}}
+function select(e){if(sel&&sel!==e)sel.classList.remove('sel');sel=e;if(e){e.classList.add('sel');defSizeFrom(e)}
+ var isRot=e&&(e.dataset.type==='sig'||e.dataset.type==='img');$('#rotbar').hidden=!isRot;
+ if(isRot){var r=((+e.dataset.rot||0)%360+360)%360;$('#rotrange').value=r;$('#rotnum').value=r}}
 function defSizeFrom(e){}
+function setRot(deg){if(!sel)return;deg=((deg%360)+360)%360;sel.dataset.rot=deg;sel.style.transform='rotate('+deg+'deg)';$('#rotrange').value=Math.round(deg);$('#rotnum').value=Math.round(deg)}
+$('#rotrange').addEventListener('input',function(){setRot(+this.value)});
+$('#rotnum').addEventListener('input',function(){var v=parseFloat(this.value);if(!isNaN(v))setRot(v)});
+$('#rotreset').onclick=function(){setRot(0)};
 function remove(e){if(!e)return;hist.push({a:'del',el:e,ov:e.parentNode});e.remove();if(sel===e)sel=null}
 function pt(ov,ev){var r=ov.getBoundingClientRect(),k=z();return{x:(ev.clientX-r.left)/k,y:(ev.clientY-r.top)/k}}
 pages.addEventListener('pointerdown',function(ev){var ov=ev.target.closest('.ov');if(!ov)return;var it=ev.target.closest('.it'),p=P[+ov.parentNode.dataset.i];
+ var ohit=ev.target.closest('.ocrhit');if(ohit){ev.preventDefault();placeOcrHit(p,ohit);return}
+ if(ocrBoxes.length)clearOcr();
  if(it){select(it);
   if(ev.target.closest('.rm')){remove(it);return}
+  if(ev.target.closest('.rot')){var rc=it.getBoundingClientRect(),ccx=rc.left+rc.width/2,ccy=rc.top+rc.height/2,startAng=Math.atan2(ev.clientY-ccy,ev.clientX-ccx)*180/Math.PI,startRot=+it.dataset.rot||0;ev.preventDefault();it.setPointerCapture(ev.pointerId);
+   function rmv(e){var ang=Math.atan2(e.clientY-ccy,e.clientX-ccx)*180/Math.PI;setRot(startRot+(ang-startAng))}
+   function rup(){it.removeEventListener('pointermove',rmv);it.removeEventListener('pointerup',rup);it.removeEventListener('pointercancel',rup)}
+   it.addEventListener('pointermove',rmv);it.addEventListener('pointerup',rup);it.addEventListener('pointercancel',rup);return}
   if(ev.target.closest('.tx')&&!ev.target.closest('.mv'))return;
   var rs=ev.target.closest('.rs'),st=pt(ov,ev),x0=+it.style.getPropertyValue('--x'),y0=+it.style.getPropertyValue('--y'),w0=+it.dataset.w,h0=+it.dataset.h;ev.preventDefault();it.setPointerCapture(ev.pointerId);
-  function mv(e){var c=pt(ov,e),dx=c.x-st.x,dy=c.y-st.y;if(rs){var w=Math.max(10,w0+dx),h=it.dataset.type==='sig'?w*h0/w0:Math.max(8,h0+dy);it.dataset.w=w;it.dataset.h=h;it.style.setProperty('--w',w);it.style.setProperty('--h',h)}else{it.style.setProperty('--x',Math.max(-5,x0+dx));it.style.setProperty('--y',Math.max(-5,y0+dy))}}
+  function mv(e){var c=pt(ov,e),dx=c.x-st.x,dy=c.y-st.y;if(rs){var w=Math.max(10,w0+dx),h=(it.dataset.type==='sig'||it.dataset.type==='img')?w*h0/w0:Math.max(8,h0+dy);it.dataset.w=w;it.dataset.h=h;it.style.setProperty('--w',w);it.style.setProperty('--h',h)}else{it.style.setProperty('--x',Math.max(-5,x0+dx));it.style.setProperty('--y',Math.max(-5,y0+dy))}}
   function up(){it.removeEventListener('pointermove',mv);it.removeEventListener('pointerup',up);it.removeEventListener('pointercancel',up)}
   it.addEventListener('pointermove',mv);it.addEventListener('pointerup',up);it.addEventListener('pointercancel',up);return}
  if(!tool){select(null);return}
@@ -762,7 +917,7 @@ document.addEventListener('keydown',function(e){if(!$('#ed')||$('#ed').hidden)re
 function setTool(t){tool=t;document.querySelectorAll('#tb [data-tool]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.tool===t)});document.querySelectorAll('.ov').forEach(function(o){o.classList.toggle('arm',!!t)});
  $('#hint').textContent=t==='text'?'Tap on the page where you want to type.':t==='date'?'Tap where the date should go.':t==='tick'||t==='cross'?'Tap where the mark should go.':t==='white'?'Drag a box over what you want to cover, or tap once.':'Pick a tool, then tap the page where it should go. Tap an item to move, resize or delete it.'}
 $('#tb').addEventListener('click',function(e){var b=e.target.closest('[data-tool]');if(b){setTool(tool===b.dataset.tool?null:b.dataset.tool);return}
- var c=e.target.closest('[data-col]');if(c){col=c.dataset.col;document.querySelectorAll('#cols button').forEach(function(x){x.setAttribute('aria-pressed',x===c)});if(sel&&sel.dataset.type!=='white'&&sel.dataset.type!=='sig'){sel.dataset.c=col;sel.style.setProperty('--c',col)}}});
+ var c=e.target.closest('[data-col]');if(c){col=c.dataset.col;document.querySelectorAll('#cols button').forEach(function(x){x.setAttribute('aria-pressed',x===c)});if(sel&&sel.dataset.type!=='white'&&sel.dataset.type!=='sig'&&sel.dataset.type!=='img'){sel.dataset.c=col;sel.style.setProperty('--c',col)}}});
 function size(d){if(sel&&(sel.dataset.type==='text'||sel.dataset.type==='date')){var s=Math.max(6,Math.min(72,+sel.dataset.s+d));sel.dataset.s=s;sel.style.setProperty('--s',s);defSize=s}else if(sel&&sel.classList.contains('box')){var f=d>0?1.15:.87,w=+sel.dataset.w*f,h=+sel.dataset.h*f;sel.dataset.w=w;sel.dataset.h=h;sel.style.setProperty('--w',w);sel.style.setProperty('--h',h)}else{defSize=Math.max(6,Math.min(72,defSize+d))}}
 $('#szm').onclick=function(){size(-2)};$('#szp').onclick=function(){size(2)};
 $('#zm').onclick=function(){zmul=Math.max(.5,zmul-.2);applyZoom()};$('#zp').onclick=function(){zmul=Math.min(2.2,zmul+.2);applyZoom()};
@@ -778,7 +933,52 @@ $('#sgx').onclick=function(){$('#sgd').close()};
 $('#sgl').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;useSig(saved[+b.dataset.i])});
 $('#sgok').onclick=function(){if(curSigUrl){saveSig(curSigUrl);useSig(curSigUrl)}};
 function useSig(u){$('#sgd').close();sigUrl=u;var p=visiblePage(),r=p.el.getBoundingClientRect(),k=z(),vt=Math.max(r.top,120),vb=Math.min(r.bottom,innerHeight),cy=((vt+vb)/2-r.top)/k;placeSig(p,p.w/2,cy)}
-function placeSig(p,cx,cy){KXSIG.loadImg(sigUrl).then(function(im){var w=Math.min(170,p.w*.4),h=w*im.height/im.width,e=mk(p,'sig',Math.max(0,cx-w/2),Math.max(0,cy-h/2),{w:w,h:h,img:sigUrl});select(e);KX.toast('Drag it into place. Use the corner to resize.')})}
+function placeSig(p,cx,cy){KXSIG.loadImg(sigUrl).then(function(im){var w=Math.min(170,p.w*.4),h=w*im.height/im.width,e=mk(p,'sig',Math.max(0,cx-w/2),Math.max(0,cy-h/2),{w:w,h:h,img:sigUrl});select(e);KX.toast('Drag it into place. Use the corner to resize, or the green handle to rotate.')})}
+/* ---------- photo insert ---------- */
+var phBase=null,phCv=null;
+function phRecompute(){if(!phBase)return;var base=document.createElement('canvas');base.width=phBase.naturalWidth||phBase.width;base.height=phBase.naturalHeight||phBase.height;base.getContext('2d').drawImage(phBase,0,0);var cur=base;
+ if($('#phauto').checked)cur=KXSIG.autoLevels(cur);
+ if($('#phbg').checked)cur=KXSIG.chromaKey(cur,{tol:+$('#phtol').value});
+ phCv=cur;phShow()}
+function phShow(){var pv=$('#phprev');if(!phCv){pv.innerHTML='';$('#phok').disabled=true;return}var img=document.createElement('img');img.alt='Your photo';img.src=phCv.toDataURL('image/png');pv.innerHTML='';pv.appendChild(img);$('#phok').disabled=false}
+$('#tphoto').onclick=function(){var d=$('#phd');try{d.showModal()}catch(e){d.setAttribute('open','')}};
+$('#phx').onclick=function(){$('#phd').close()};
+function phOpenFile(f){if(!f)return;$('#phmsg').textContent='Working on it...';KXSIG.fileToImg(f).then(function(im){phBase=im;$('#phstart').hidden=true;$('#phwork').hidden=false;$('#phauto').checked=false;$('#phbg').checked=false;$('#phtolwrap').hidden=true;$('#phmsg').textContent='Background removal works best when the area behind the photo is one plain, even colour - it will struggle with a busy background.';phRecompute()}).catch(function(er){$('#phmsg').textContent=er.message})}
+$('#phf').addEventListener('change',function(e){phOpenFile(e.target.files[0]);e.target.value=''});
+var phdz=$('#phdrop');['dragover','dragenter'].forEach(function(n){phdz.addEventListener(n,function(e){e.preventDefault();phdz.classList.add('over')})});['dragleave','drop'].forEach(function(n){phdz.addEventListener(n,function(e){e.preventDefault();phdz.classList.remove('over')})});phdz.addEventListener('drop',function(e){phOpenFile(e.dataTransfer.files[0])});
+$('#phauto').addEventListener('change',phRecompute);
+$('#phbg').addEventListener('change',function(){$('#phtolwrap').hidden=!this.checked;phRecompute()});
+var ptm;$('#phtol').addEventListener('input',function(){clearTimeout(ptm);ptm=setTimeout(phRecompute,80)});
+$('#phcrop').onclick=function(){if(!phCv||!window.KXCROP)return;KXCROP.open(phCv,{transparent:true,title:'Crop your photo'}).then(function(cv){if(!cv)return;phCv=cv;phShow();KX.toast('Cropped. Changing the lighting or background options afterwards will undo the crop, so crop last.')})};
+$('#phredo').onclick=function(){phBase=null;phCv=null;$('#phf').value='';$('#phstart').hidden=false;$('#phwork').hidden=true;$('#phok').disabled=true};
+$('#phok').onclick=function(){if(!phCv)return;var url=phCv.toDataURL('image/png');$('#phd').close();placePhoto(url)};
+function placePhoto(url){KXSIG.loadImg(url).then(function(im){var p=visiblePage(),r=p.el.getBoundingClientRect(),k=z(),vt=Math.max(r.top,120),vb=Math.min(r.bottom,innerHeight),cy=((vt+vb)/2-r.top)/k;
+ var w=Math.min(220,p.w*.5),h=w*im.height/im.width,e=mk(p,'img',Math.max(0,p.w/2-w/2),Math.max(0,cy-h/2),{w:w,h:h,img:url});select(e);KX.toast('Drag it into place. Use the corner to resize, or the green handle to rotate.')})}
+/* ---------- detect text (beta, client-side OCR) ---------- */
+function ocrLib(){if(window.Tesseract)return Promise.resolve(window.Tesseract);if(!ocrP)ocrP=new Promise(function(res,rej){var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';s.onload=function(){res(window.Tesseract)};s.onerror=function(){ocrP=null;rej(new Error('Could not load the text-detection engine. Check your connection and try again.'))};document.head.appendChild(s)});return ocrP}
+function clearOcr(){ocrBoxes.forEach(function(b){if(b.parentNode)b.remove()});ocrBoxes=[]}
+function placeOcrHit(p,hit){var x=+hit.style.getPropertyValue('--x'),y=+hit.style.getPropertyValue('--y'),w=+hit.style.getPropertyValue('--w'),h=+hit.style.getPropertyValue('--h'),text=hit.dataset.text||'';
+ mk(p,'white',Math.max(0,x-2),Math.max(0,y-2),{w:w+4,h:h+4,c:'#ffffff'});
+ var sz=Math.max(8,Math.min(28,Math.round(h*.72)));
+ var e=mk(p,'text',x,y+(h-sz)/2,{text:text,s:sz});select(e);
+ ocrBoxes=ocrBoxes.filter(function(b){return b!==hit});hit.remove();
+ KX.toast('Covered it and added an editable copy of the text on top. Move, retype or delete either piece.')}
+$('#tocr').onclick=function(){if(ocrBusy)return;clearOcr();setTool(null);select(null);
+ var p=visiblePage(),cv=p.el.querySelector('canvas');
+ if(!cv||!cv.width){KX.toast('Give the page a moment to finish loading, then try again.');return}
+ ocrBusy=true;var btn=$('#tocr'),lbl=$('#ocrlbl');btn.disabled=true;lbl.textContent='Scanning… 0%';
+ ocrLib().then(function(T){
+   return T.recognize(cv,'eng',{logger:function(m){if(m.status==='recognizing text')lbl.textContent='Scanning… '+Math.round(m.progress*100)+'%'}});
+ }).then(function(res){
+  var sx=p.w/cv.width,sy=p.h/cv.height;
+  var words=(res.data.words||[]).filter(function(w){return w.text&&w.text.trim()&&w.confidence>=35});
+  if(!words.length){KX.toast('No text was detected on this page.');return}
+  ocrBoxes=words.map(function(w){var b=w.bbox,x=b.x0*sx,y=b.y0*sy,ww=Math.max((b.x1-b.x0)*sx,10),hh=Math.max((b.y1-b.y0)*sy,10),el=document.createElement('div');
+   el.className='ocrhit';el.style.setProperty('--x',x);el.style.setProperty('--y',y);el.style.setProperty('--w',ww);el.style.setProperty('--h',hh);el.title=w.text+' — tap to cover and edit';el.dataset.text=w.text;p.ov.appendChild(el);return el});
+  KX.toast('Found '+words.length+' word(s) on this page (beta - best effort, check the results). Tap one to cover and edit it.');
+ }).catch(function(e){
+  KX.toast((e&&e.message)||'Text detection failed. Check your connection and try again.');
+ }).then(function(){ocrBusy=false;btn.disabled=false;lbl.textContent='Detect text'})};
 /* ---------- export ---------- */
 function userMap(R,cb){var W=cb.width,H=cb.height;return function(xd,yd){var x,y;if(R===90){x=yd;y=xd}else if(R===180){x=W-xd;y=yd}else if(R===270){x=W-yd;y=H-xd}else{x=xd;y=H-yd}return{x:x+cb.x,y:y+cb.y}}}
 function hexRgb(L,h){h=h.replace('#','');return L.rgb(parseInt(h.substr(0,2),16)/255,parseInt(h.substr(2,2),16)/255,parseInt(h.substr(4,2),16)/255)}
@@ -798,7 +998,8 @@ $('#dl').onclick=function(){var btn=this;btn.disabled=true;btn.firstElementChild
     else{var w=+it.dataset.w,h=+it.dataset.h;
      if(t==='white'){var a=map(x,y+h);page.drawRectangle({x:a.x,y:a.y,width:w,height:h,color:L.rgb(1,1,1),rotate:L.degrees(R)})}
      else if(t==='tick'||t==='cross'){var th=Math.max(1,Math.min(w,h)*.12),segs=t==='tick'?[[.12,.55,.38,.82],[.38,.82,.88,.18]]:[[.16,.16,.84,.84],[.84,.16,.16,.84]];segs.forEach(function(g){var a=map(x+g[0]*w,y+g[1]*h),b=map(x+g[2]*w,y+g[3]*h);page.drawLine({start:a,end:b,thickness:th,color:c,lineCap:L.LineCapStyle?L.LineCapStyle.Round:undefined})})}
-     else if(t==='sig'){var img=it.dataset.img;chain=chain.then(function(){return d.embedPng(dataBytes(img))}).then(function(im){var a=map(x,y+h);page.drawImage(im,{x:a.x,y:a.y,width:w,height:h,rotate:L.degrees(R)})})}}})});
+     else if(t==='sig'||t==='img'){var img=it.dataset.img,rotDeg=+it.dataset.rot||0,aTot=R-rotDeg,rad=aTot*Math.PI/180,cC=map(x+w/2,y+h/2),cos=Math.cos(rad),sin=Math.sin(rad),ax=cC.x-(w/2*cos-h/2*sin),ay=cC.y-(w/2*sin+h/2*cos);
+      chain=chain.then(function(){return d.embedPng(dataBytes(img))}).then(function(im){page.drawImage(im,{x:ax,y:ay,width:w,height:h,rotate:L.degrees(aTot)})})}}})});
   return chain.then(function(){return d.save()})}).then(function(out){var blob=new Blob([out],{type:'application/pdf'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=fname+'-filled.pdf';document.body.appendChild(a);a.click();a.remove();$('#after').classList.remove('hide');$('#again').onclick=function(ev){ev.preventDefault();var b=document.createElement('a');b.href=u;b.download=fname+'-filled.pdf';document.body.appendChild(b);b.click();b.remove()};window.__lastPdf=out;KX.toast('Downloaded')}).catch(function(e){KX.toast(e&&e.message||'Could not save the PDF')}).then(function(){btn.disabled=false;btn.firstElementChild.nextSibling.textContent='Download PDF'})};
 window.__kx={openFile:openFile};
 })();

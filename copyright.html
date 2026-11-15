@@ -99,6 +99,12 @@ table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:11px 12p
 .rate{display:flex;align-items:center;gap:14px;justify-content:space-between;padding:14px 4px;border-bottom:1px solid var(--line)}.rate:last-child{border:0}.rate b{display:block}.rate .pr{font-weight:800;font-size:1.15rem;white-space:nowrap;font-variant-numeric:tabular-nums}
 /* dialog + toast */
 dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24px}dialog::backdrop{background:rgba(8,14,30,.5);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+#sitemenu{max-width:min(720px,94vw);width:100%;padding:22px}
+.smgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px 20px}
+.smgrid h3{font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:10px}
+.smgrid>div{display:flex;flex-direction:column;gap:2px}
+.smgrid a{color:var(--ink);text-decoration:none;padding:7px 8px;margin:0 -8px;border-radius:10px;font-size:.94rem;font-weight:600}
+.smgrid a:hover{background:var(--soft);color:var(--acc)}
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:12px;font-size:.92rem;display:none;z-index:90;max-width:90vw;box-shadow:0 10px 30px rgba(0,0,0,.3)}
 .drop{display:block;border:2px dashed var(--line);border-radius:16px;padding:20px;text-align:center;background:var(--soft);cursor:pointer;transition:border-color .15s,background .15s}.drop:hover,.drop.over{border-color:var(--acc);background:rgba(29,78,216,.1)}
 .files{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:10px;margin-top:12px}.file{border:1px solid var(--bd);border-radius:14px;padding:7px;font-size:.78rem;background:var(--card2);position:relative}.file img,.file canvas{width:100%;height:104px;object-fit:cover;border-radius:9px;display:block;background:var(--soft)}.file .th{height:104px;display:grid;place-items:center;background:var(--soft);border-radius:9px;color:var(--muted)}.file .nm{margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.file .x{position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;border:0;background:rgba(10,20,40,.78);color:#fff;cursor:pointer;line-height:1}.file .mv{display:flex;gap:4px;margin-top:5px}.file .mv button{flex:1;min-height:28px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}.file .no{position:absolute;top:4px;left:4px;background:var(--accg);color:#fff;border-radius:999px;padding:0 8px;font-weight:700;font-size:.74rem;line-height:22px}
@@ -237,6 +243,12 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 </style></head><body><svg xmlns="http://www.w3.org/2000/svg" style="display:none"><defs>
 <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
 <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+<symbol id="i-vol" viewBox="0 0 24 24"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></symbol>
+<symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M16 9l5 5M21 9l-5 5"/></symbol>
+<symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
 <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
 <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
 <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></symbol>
@@ -295,7 +307,15 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14h6M9 17h4"/></symbol>
 </defs></svg>
 
-<header class="top"><div class="wrap"><a class="brand" href="index.html" aria-label="KINETIX home"><img class="bm" src="kinetix-logo.png" alt="" width="45" height="34"><span class="wm" aria-hidden="true"><img src="kinetix-k.png" alt="" width="25" height="22">INETIX</span></a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html">PDF tools</a><a href="order-status.html">Track order</a></nav><div class="tools"><button class="tt kxapp" type="button" data-install aria-label="Install the KINETIX app"><svg class="ic"><use href="#i-down"/></svg><span>App</span></button><span class="curwrap"><svg class="ic"><use href="#i-globe"/></svg><select class="curs" id="cur" aria-label="Currency"><option>AED</option></select></span><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></div></header>
+<header class="top"><div class="wrap"><a class="brand" href="index.html" aria-label="KINETIX home"><img class="bm" src="kinetix-logo.png" alt="" width="45" height="34"><span class="wm" aria-hidden="true"><img src="kinetix-k.png" alt="" width="25" height="22">INETIX</span></a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html">PDF tools</a><a href="order-status.html">Track order</a></nav><div class="tools"><button class="tt" id="menubtn" type="button" aria-haspopup="dialog" aria-label="Browse all pages"><svg class="ic"><use href="#i-menu"/></svg></button><button class="tt kxapp" type="button" data-install aria-label="Install the KINETIX app"><svg class="ic"><use href="#i-down"/></svg><span>App</span></button><span class="curwrap"><svg class="ic"><use href="#i-globe"/></svg><select class="curs" id="cur" aria-label="Currency"><option>AED</option></select></span><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></div></header>
+<dialog id="sitemenu" aria-label="Browse KINETIX">
+<div class="row sp" style="margin-bottom:6px"><b style="font-size:1.1rem">Browse KINETIX</b><button type="button" class="tt" id="menux" aria-label="Close menu"><svg class="ic"><use href="#i-x"/></svg></button></div>
+<div class="smgrid">
+<div><h3>Get started</h3><a href="index.html">Home</a><a href="how-it-works.html">How it works</a><a href="intake.html">Order a CV</a><a href="other-services.html">Other services</a><a href="samples.html">Sample CVs</a></div>
+<div><h3>Free PDF tools</h3><a href="pdf-tools.html">All free PDF tools</a><a href="pdf-fill.html">Fill and sign PDF</a><a href="signature-tool.html">Signature maker</a><a href="pdf-unlock.html">PDF password remover</a><a href="pdf-help.html">Free help ticket</a><a href="tutorials.html">Video tutorials</a></div>
+<div><h3>Company</h3><a href="about.html">What we do</a><a href="blog.html">Blog</a><a href="contact.html">Contact us</a><a href="order-status.html">Track your order</a></div>
+<div><h3>Legal</h3><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a><a href="legal-notice.html">Legal Notice</a><a href="copyright.html">Copyright Notice</a></div>
+</div></dialog>
 <main><div class="wrap" style="max-width:760px"><h1>Copyright Notice</h1><p class="muted small">Last updated: 13 November 2026</p><div class="card prose">
 <p>&copy; <span data-year></span> KINETIX GCC CV. All rights reserved.</p>
 <p>The design, text, layouts and code of this website, and our CV templates, are protected by copyright. You may not copy, resell or republish them without our written permission.</p>
@@ -438,6 +458,14 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
     var t = document.createElement('button'); t.id = 'kxtop'; t.type = 'button'; t.setAttribute('aria-label', 'Back to top'); t.innerHTML = '<svg class="ic" style="transform:rotate(180deg)"><use href="#i-down"/></svg>';
     t.onclick = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); }; document.body.appendChild(t);
     window.addEventListener('scroll', function () { t.classList.toggle('on', window.scrollY > 500); }, { passive: true });
+  })();
+  /* site menu: browse every page */
+  (function () {
+    var btn = document.getElementById('menubtn'), dlg = document.getElementById('sitemenu'), xb = document.getElementById('menux');
+    if (!btn || !dlg) return;
+    btn.addEventListener('click', function () { try { dlg.showModal(); } catch (e) { dlg.setAttribute('open', ''); } });
+    if (xb) xb.onclick = function () { dlg.close(); };
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
   })();
   /* PWA: register the service worker and offer "Install app" */
   (function () {
