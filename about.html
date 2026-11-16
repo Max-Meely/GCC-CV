@@ -35,8 +35,8 @@ p{margin:0 0 1em}.muted{color:var(--muted)}.small{font-size:.875rem}.sr{position
 /* layout */
 main{padding:30px 0 70px}.hero{padding:34px 0 8px}.hero p.lead{max-width:58ch;font-size:1.12rem;color:var(--muted)}
 .card{border-radius:var(--r);padding:22px}
-.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
-@media(max-width:760px){.g2,.g3{grid-template-columns:1fr}}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:760px){.g2,.g3,.g4{grid-template-columns:1fr}}
 .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.sp{justify-content:space-between}
 hr{border:0;border-top:1px solid var(--line);margin:20px 0}
 footer{border-top:1px solid var(--bd);padding:26px 0 90px;color:var(--muted);font-size:.9rem;background:var(--card);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}footer .wrap{display:flex;gap:18px;flex-wrap:wrap;justify-content:space-between}footer a{text-decoration:none}footer a:hover{text-decoration:underline}
@@ -48,6 +48,7 @@ footer{border-top:1px solid var(--bd);padding:26px 0 90px;color:var(--muted);fon
 .ico.am{background:linear-gradient(135deg,#d97706,#f59e0b);box-shadow:0 8px 20px rgba(217,119,6,.32)}
 .ico.gr{background:linear-gradient(135deg,#0d9488,#14b8a6);box-shadow:0 8px 20px rgba(13,148,136,.32)}
 .ico.pk{background:linear-gradient(135deg,#be185d,#ec4899);box-shadow:0 8px 20px rgba(190,24,93,.3)}
+.ico.rd{background:linear-gradient(135deg,#b91c1c,#ef4444);box-shadow:0 8px 20px rgba(185,28,28,.32)}
 .sec{margin-top:54px}.sec>h2{display:flex;align-items:center;gap:12px;margin-bottom:16px}
 .pill{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;background:var(--card);border:1px solid var(--bd);font-size:.85rem;font-weight:650;-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
 .pill .ic{color:var(--acc)}
@@ -282,6 +283,7 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 <symbol id="i-cash" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v.01M18 14.5v.01"/></symbol>
 <symbol id="i-card" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19M6 15h4"/></symbol>
 <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 7.5v9M10 7.5h3.2a2.2 2.2 0 0 1 0 4.4H10m0 0h3.6a2.3 2.3 0 0 1 0 4.6H10"/></symbol>
+<symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.4"/><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="19" r="2.4"/><path d="M8.1 10.8l7.8-4.5M8.1 13.2l7.8 4.5"/></symbol>
 <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 3.9 5.7 3.9 9s-1.3 6.3-3.9 9c-2.6-2.7-3.9-5.7-3.9-9S9.4 5.7 12 3z"/></symbol>
 <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="m8.5 14 -1.5 7 5-3 5 3-1.5-7"/></symbol>
 <symbol id="i-brief" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
@@ -307,7 +309,7 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14h6M9 17h4"/></symbol>
 </defs></svg>
 
-<header class="top"><div class="wrap"><a class="brand" href="index.html" aria-label="KINETIX home"><img class="bm" src="kinetix-logo.png" alt="" width="45" height="34"><span class="wm" aria-hidden="true"><img src="kinetix-k.png" alt="" width="25" height="22">INETIX</span></a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html">PDF tools</a><a href="order-status.html">Track order</a></nav><div class="tools"><button class="tt" id="menubtn" type="button" aria-haspopup="dialog" aria-label="Browse all pages"><svg class="ic"><use href="#i-menu"/></svg></button><button class="tt kxapp" type="button" data-install aria-label="Install the KINETIX app"><svg class="ic"><use href="#i-down"/></svg><span>App</span></button><span class="curwrap"><svg class="ic"><use href="#i-globe"/></svg><select class="curs" id="cur" aria-label="Currency"><option>AED</option></select></span><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></div></header>
+<header class="top"><div class="wrap"><a class="brand" href="index.html" aria-label="KINETIX home"><img class="bm" src="kinetix-logo.png" alt="" width="45" height="34"><span class="wm" aria-hidden="true"><img src="kinetix-k.png" alt="" width="25" height="22">INETIX</span></a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html">PDF tools</a><a href="order-status.html">Track order</a></nav><div class="tools"><button class="tt" id="menubtn" type="button" aria-haspopup="dialog" aria-label="Browse all pages"><svg class="ic"><use href="#i-menu"/></svg></button><button class="tt" type="button" data-share aria-label="Share KINETIX"><svg class="ic"><use href="#i-share"/></svg></button><button class="tt kxapp" type="button" data-install aria-label="Install the KINETIX app"><svg class="ic"><use href="#i-down"/></svg><span>App</span></button><span class="curwrap"><svg class="ic"><use href="#i-globe"/></svg><select class="curs" id="cur" aria-label="Currency"><option>AED</option></select></span><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></div></header>
 <dialog id="sitemenu" aria-label="Browse KINETIX">
 <div class="row sp" style="margin-bottom:6px"><b style="font-size:1.1rem">Browse KINETIX</b><button type="button" class="tt" id="menux" aria-label="Close menu"><svg class="ic"><use href="#i-x"/></svg></button></div>
 <div class="smgrid">
@@ -522,6 +524,21 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
     btn.addEventListener('click', function () { try { dlg.showModal(); } catch (e) { dlg.setAttribute('open', ''); } });
     if (xb) xb.onclick = function () { dlg.close(); };
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  })();
+  /* share the site itself (not an order) - native share sheet, or copy the link */
+  (function () {
+    var bs = [].slice.call(document.querySelectorAll('[data-share]'));
+    if (!bs.length) return;
+    bs.forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.preventDefault();
+        var url = location.origin + '/', title = 'KINETIX - CVs and documents for the UAE and GCC';
+        if (navigator.share) { navigator.share({ title: title, url: url }).catch(function () {}); return; }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(function () { KX.toast('Link copied - share it with a friend'); }, function () { KX.toast(url); });
+        } else KX.toast(url);
+      });
+    });
   })();
   /* PWA: register the service worker and offer "Install app" */
   (function () {

@@ -35,8 +35,8 @@ p{margin:0 0 1em}.muted{color:var(--muted)}.small{font-size:.875rem}.sr{position
 /* layout */
 main{padding:30px 0 70px}.hero{padding:34px 0 8px}.hero p.lead{max-width:58ch;font-size:1.12rem;color:var(--muted)}
 .card{border-radius:var(--r);padding:22px}
-.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
-@media(max-width:760px){.g2,.g3{grid-template-columns:1fr}}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:760px){.g2,.g3,.g4{grid-template-columns:1fr}}
 .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.sp{justify-content:space-between}
 hr{border:0;border-top:1px solid var(--line);margin:20px 0}
 footer{border-top:1px solid var(--bd);padding:26px 0 90px;color:var(--muted);font-size:.9rem;background:var(--card);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}footer .wrap{display:flex;gap:18px;flex-wrap:wrap;justify-content:space-between}footer a{text-decoration:none}footer a:hover{text-decoration:underline}
@@ -48,6 +48,7 @@ footer{border-top:1px solid var(--bd);padding:26px 0 90px;color:var(--muted);fon
 .ico.am{background:linear-gradient(135deg,#d97706,#f59e0b);box-shadow:0 8px 20px rgba(217,119,6,.32)}
 .ico.gr{background:linear-gradient(135deg,#0d9488,#14b8a6);box-shadow:0 8px 20px rgba(13,148,136,.32)}
 .ico.pk{background:linear-gradient(135deg,#be185d,#ec4899);box-shadow:0 8px 20px rgba(190,24,93,.3)}
+.ico.rd{background:linear-gradient(135deg,#b91c1c,#ef4444);box-shadow:0 8px 20px rgba(185,28,28,.32)}
 .sec{margin-top:54px}.sec>h2{display:flex;align-items:center;gap:12px;margin-bottom:16px}
 .pill{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;background:var(--card);border:1px solid var(--bd);font-size:.85rem;font-weight:650;-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
 .pill .ic{color:var(--acc)}
@@ -282,6 +283,7 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 <symbol id="i-cash" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v.01M18 14.5v.01"/></symbol>
 <symbol id="i-card" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19M6 15h4"/></symbol>
 <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 7.5v9M10 7.5h3.2a2.2 2.2 0 0 1 0 4.4H10m0 0h3.6a2.3 2.3 0 0 1 0 4.6H10"/></symbol>
+<symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.4"/><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="19" r="2.4"/><path d="M8.1 10.8l7.8-4.5M8.1 13.2l7.8 4.5"/></symbol>
 <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 3.9 5.7 3.9 9s-1.3 6.3-3.9 9c-2.6-2.7-3.9-5.7-3.9-9S9.4 5.7 12 3z"/></symbol>
 <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="m8.5 14 -1.5 7 5-3 5 3-1.5-7"/></symbol>
 <symbol id="i-brief" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
@@ -318,13 +320,16 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 .sbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
 .sbar input,.sbar select{flex:1;min-width:150px}
 #rows tr:hover{background:var(--card2)}
+.wa-rem{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:rgba(34,165,89,.14);vertical-align:middle;margin-left:6px}
+.wa-rem svg{width:14px;height:14px;color:#22a559}
+.wa-rem:hover{background:rgba(34,165,89,.26)}
 @media(max-width:720px){
  #stats{grid-template-columns:repeat(3,1fr)!important;gap:8px!important}.stat{flex-direction:column;align-items:flex-start;padding:12px!important;gap:8px}.stat .v{font-size:1.15rem}.stat .muted{font-size:.7rem}
  .tw table,.tw thead,.tw tbody,.tw tr,.tw td{display:block}.tw thead{display:none}
  #rows tr{padding:12px 14px;border-bottom:1px solid var(--bd);display:grid;grid-template-columns:1fr auto;gap:4px 10px}
  #rows td{padding:0;border:0}#rows td:nth-child(1){grid-column:1}#rows td:nth-child(4){grid-column:2;text-align:right}
  #rows td:nth-child(2){grid-column:1/-1}#rows td:nth-child(3){grid-column:1/-1;color:var(--muted)}
- #rows td:nth-child(5){grid-column:1}#rows td:nth-child(6){grid-column:2;text-align:right}#rows td:nth-child(7){display:none}
+ #rows td:nth-child(5){grid-column:1}#rows td:nth-child(6){grid-column:2;text-align:right}#rows td:nth-child(7){grid-column:1/-1;text-align:right}
 }
 </style>
 <main><div class="wrap">
@@ -336,8 +341,8 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
   <button class="btn pri" id="lgo" type="button"><span id="lgoT">Open dashboard</span><span class="spin" aria-hidden="true"></span></button>
 </section>
 <section id="dash" class="hide">
-  <div class="grid g3" id="stats" style="margin-bottom:14px"></div>
-  <div class="row" style="margin-bottom:12px"><input id="q" placeholder="Search name, reference, email" style="max-width:320px"><select id="fs" style="max-width:180px"><option value="">All statuses</option><option value="received">Received</option><option value="in_progress">In progress</option><option value="review">Final check</option><option value="delivered">Delivered</option><option value="on_hold">On hold</option></select><select id="fp" style="max-width:160px"><option value="">Paid or not</option><option value="paid">Paid</option><option value="unpaid">Unpaid</option></select><button class="btn sm" id="refresh" type="button">Refresh</button><button class="btn sm ghost" id="out" type="button">Sign out</button></div>
+  <div class="grid g4" id="stats" style="margin-bottom:14px"></div>
+  <div class="row" style="margin-bottom:12px"><input id="q" placeholder="Search name, reference, email" style="max-width:320px"><select id="fs" style="max-width:180px"><option value="">All statuses</option><option value="received">Received</option><option value="in_progress">In progress</option><option value="review">Final check</option><option value="delivered">Delivered</option><option value="on_hold">On hold</option></select><select id="fp" style="max-width:160px"><option value="">Paid or not</option><option value="paid">Paid</option><option value="unpaid">Unpaid</option></select><button class="btn sm" id="refresh" type="button">Refresh</button><button class="btn sm" id="xcsv" type="button"><svg class="ic"><use href="#i-down"/></svg>Export CSV</button><button class="btn sm ghost" id="out" type="button">Sign out</button></div>
   <div class="card" style="padding:0"><div class="tw"><table><thead><tr><th>Ref</th><th>Client</th><th>Service</th><th class="num">AED</th><th>Paid</th><th>Status</th><th>Due</th></tr></thead><tbody id="rows"></tbody></table></div></div>
   <p class="muted small" id="cnt" style="margin-top:8px"></p>
 </section>
@@ -489,6 +494,21 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
     if (xb) xb.onclick = function () { dlg.close(); };
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
   })();
+  /* share the site itself (not an order) - native share sheet, or copy the link */
+  (function () {
+    var bs = [].slice.call(document.querySelectorAll('[data-share]'));
+    if (!bs.length) return;
+    bs.forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.preventDefault();
+        var url = location.origin + '/', title = 'KINETIX - CVs and documents for the UAE and GCC';
+        if (navigator.share) { navigator.share({ title: title, url: url }).catch(function () {}); return; }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(function () { KX.toast('Link copied - share it with a friend'); }, function () { KX.toast(url); });
+        } else KX.toast(url);
+      });
+    });
+  })();
   /* PWA: register the service worker and offer "Install app" */
   (function () {
     window.addEventListener('load', function () { kxOffline(); });
@@ -614,40 +634,84 @@ function call(a,p){return KX.api(a,Object.assign({key:KEY},p||{}),{timeout:90000
 function fmt(s){if(!s)return '-';var d=new Date(s);return isNaN(d)?s:d.toLocaleDateString(undefined,{day:'numeric',month:'short'})}
 var SL={received:'Received',in_progress:'In progress',review:'Final check',delivered:'Delivered',on_hold:'On hold',completed:'Completed'};
 function load(){return call('admin_list').then(function(j){rows=j.orders||[];$('#login').classList.add('hide');$('#dash').classList.remove('hide');draw()})}
+function isOverdue(r){return r.due&&r.status!=='delivered'&&r.status!=='completed'&&new Date(r.due)<new Date()}
+function waRemindHref(r){var ph=String(r.phone||'').replace(/[^0-9]/g,''),first=String(r.name||'').split(' ')[0],
+  msg='Hello '+first+', this is KINETIX about your order '+r.ref+'. It\'s running a little behind schedule - we\'re on it and wanted to give you an update. ';
+ return 'https://wa.me/'+ph+'?text='+encodeURIComponent(msg)}
+var statFilter='',lastList=[];
 function draw(){var q=$('#q').value.toLowerCase(),fs=$('#fs').value,fp=$('#fp').value;
- var l=rows.filter(function(r){return(!q||(r.ref+' '+r.name+' '+r.email+' '+r.phone).toLowerCase().indexOf(q)>-1)&&(!fs||r.status===fs)&&(!fp||(fp==='paid')===(r.paid==='paid'))});
- var open=rows.filter(function(r){return r.status!=='delivered'&&r.status!=='completed'}).length,paid=rows.filter(function(r){return r.paid==='paid'}).reduce(function(a,r){return a+(+r.total||0)},0),due=rows.filter(function(r){return r.paid!=='paid'}).reduce(function(a,r){return a+(+r.total||0)},0);
- $('#stats').innerHTML=[['Open orders',open,'','clock'],['Paid (AED)',paid,'gr','check-c'],['Awaiting payment (AED)',due,'am','wallet']].map(function(s){return '<div class="card stat"><span class="ico '+s[2]+'"><svg class="ic"><use href="#i-'+s[3]+'"/></svg></span><div><div class="muted small">'+s[0]+'</div><div class="v">'+s[1]+'</div></div></div>'}).join('');
- $('#rows').innerHTML=l.map(function(r){return '<tr data-ref="'+esc(r.ref)+'" style="cursor:pointer"><td><b>'+esc(r.ref)+'</b>'+(r.rush?' <span class="tag warn">Express</span>':'')+(r.help?' <span class="tag ok">Free help</span>':'')+'</td><td>'+esc(r.name)+'<div class="muted small">'+esc(r.phone)+'</div></td><td>'+esc(r.service)+'</td><td class="num">'+esc(r.total)+'</td><td><span class="tag '+(r.paid==='paid'?'ok':'warn')+'">'+(r.paid==='paid'?'Paid':'Unpaid')+'</span></td><td>'+esc(SL[r.status]||r.status)+'</td><td>'+fmt(r.due)+'</td></tr>'}).join('')||'<tr><td colspan="7" class="muted">No orders.</td></tr>';
- $('#cnt').textContent=l.length+' of '+rows.length+' orders'}
+ var l=rows.filter(function(r){return(!q||(r.ref+' '+r.name+' '+r.email+' '+r.phone).toLowerCase().indexOf(q)>-1)&&(!fs||r.status===fs)&&(!fp||(fp==='paid')===(r.paid==='paid'))&&(!statFilter||isOverdue(r))});
+ var open=rows.filter(function(r){return r.status!=='delivered'&&r.status!=='completed'}).length,paid=rows.filter(function(r){return r.paid==='paid'}).reduce(function(a,r){return a+(+r.total||0)},0),due=rows.filter(function(r){return r.paid!=='paid'}).reduce(function(a,r){return a+(+r.total||0)},0),overdue=rows.filter(isOverdue).length;
+ $('#stats').innerHTML=[['Open orders',open,'','clock',''],['Paid (AED)',paid,'gr','check-c',''],['Awaiting payment (AED)',due,'am','wallet',''],['Overdue',overdue,'rd','shield','overdue']].map(function(s){return '<div class="card stat" data-stat="'+s[4]+'" style="'+(s[4]?'cursor:pointer':'')+(statFilter&&statFilter===s[4]?';outline:2px solid var(--acc)':'')+'"><span class="ico '+s[2]+'"><svg class="ic"><use href="#i-'+s[3]+'"/></svg></span><div><div class="muted small">'+s[0]+'</div><div class="v">'+s[1]+'</div></div></div>'}).join('');
+ $('#rows').innerHTML=l.map(function(r){var od=isOverdue(r);return '<tr data-ref="'+esc(r.ref)+'" style="cursor:pointer"><td><b>'+esc(r.ref)+'</b>'+(r.rush?' <span class="tag warn">Express</span>':'')+(r.help?' <span class="tag ok">Free help</span>':'')+'</td><td>'+esc(r.name)+'<div class="muted small">'+esc(r.phone)+'</div></td><td>'+esc(r.service)+'</td><td class="num">'+esc(r.total)+'</td><td><span class="tag '+(r.paid==='paid'?'ok':'warn')+'">'+(r.paid==='paid'?'Paid':'Unpaid')+'</span></td><td>'+esc(SL[r.status]||r.status)+'</td><td'+(od?' style="color:var(--err)"':'')+'>'+fmt(r.due)+(od?' <span class="tag err">Overdue</span> <a class="wa-rem" href="'+waRemindHref(r)+'" target="_blank" rel="noopener" title="Send a WhatsApp reminder"><svg class="ic"><use href="#i-wa"/></svg></a>':'')+'</td></tr>'}).join('')||'<tr><td colspan="7" class="muted">No orders.</td></tr>';
+ $('#cnt').textContent=l.length+' of '+rows.length+' orders'+(statFilter?' (overdue only - click again to clear)':'');
+ lastList=l}
+function csvCell(v){v=v==null?'':String(v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}
+function exportCsv(){
+ if(!lastList.length){KX.toast('Nothing to export - clear or change your filters first');return}
+ var head=['Ref','Name','Email','Phone','Service','Total (AED)','Paid','Status','Created','Due','Overdue','Express'];
+ var body=lastList.map(function(r){return[r.ref,r.name,r.email,r.phone,r.service,r.total,r.paid==='paid'?'Paid':'Unpaid',SL[r.status]||r.status,r.created||'',r.due||'',isOverdue(r)?'Yes':'No',r.rush?'Yes':'No'].map(csvCell).join(',')});
+ var csv='﻿'+head.join(',')+'\r\n'+body.join('\r\n');
+ var blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download='kinetix-orders-'+new Date().toISOString().slice(0,10)+'.csv';document.body.appendChild(a);a.click();a.remove();
+ setTimeout(function(){URL.revokeObjectURL(url)},2000);
+ KX.toast(lastList.length+' order(s) exported')}
+$('#xcsv').addEventListener('click',exportCsv);
 ['q','fs','fp'].forEach(function(i){$('#'+i).addEventListener('input',draw)});
+$('#stats').addEventListener('click',function(e){var c=e.target.closest('[data-stat]');if(!c)return;var k=c.getAttribute('data-stat');if(!k)return;statFilter=statFilter===k?'':k;draw()});
 $('#refresh').onclick=function(){load().then(function(){KX.toast('Updated')}).catch(function(e){KX.toast(e.message)})};
 $('#out').onclick=function(){ss('kx-k',null);KEY='';location.reload()};
 function go(){KEY=$('#key').value.trim();if(!KEY)return;var b=$('#lgo');b.setAttribute('aria-busy','true');b.disabled=true;
  load().then(function(){ss('kx-k',KEY)}).catch(function(e){var m=$('#lerr');m.textContent=e.message;m.classList.remove('hide')}).then(function(){b.setAttribute('aria-busy','false');b.disabled=false})}
 $('#lgo').onclick=go;$('#key').addEventListener('keydown',function(e){if(e.key==='Enter')go()});
-$('#rows').addEventListener('click',function(e){var t=e.target.closest('tr[data-ref]');if(!t)return;
+$('#rows').addEventListener('click',function(e){if(e.target.closest('.wa-rem'))return;var t=e.target.closest('tr[data-ref]');if(!t)return;
  call('admin_get',{ref:t.getAttribute('data-ref')}).then(function(j){detail(j.order)}).catch(function(x){KX.toast(x.message)})});
 function opt(a,v){return a.map(function(o){return '<option value="'+o[0]+'"'+(o[0]===v?' selected':'')+'>'+o[1]+'</option>'}).join('')}
 function detail(o){var b=$('#dBody');
  b.innerHTML='<div class="row sp"><h2 style="margin:0">'+esc(o.ref)+'</h2><button class="btn sm ghost" type="button" id="dc">Close</button></div><p class="muted small">'+esc(o.service)+' &middot; '+esc(o.created)+'</p>'
+ +(o.matchSample?'<div class="note warn" style="margin-bottom:12px"><b>Wants their own sample style matched.</b> Build the CV from their uploaded sample in the Drive folder (file named "_SAMPLE_TO_MATCH_"), not from our usual style - the auto-generated CV in the folder is just a content reference.'+(o.matchNote?' Their note: '+esc(o.matchNote):'')+'</div>':'')
  +'<div class="tw"><table><tr><th>Client</th><td>'+esc(o.name)+'</td></tr><tr><th>Email</th><td>'+esc(o.email)+'</td></tr><tr><th>Phone</th><td>'+esc(o.phone)+'</td></tr><tr><th>Target</th><td>'+esc(o.target||'-')+'</td></tr><tr><th>Payment</th><td>'+esc(o.pay||'-')+' &middot; AED '+esc(o.total)+'</td></tr><tr><th>Notes</th><td>'+esc(o.notes||'-')+'</td></tr><tr><th>Files</th><td>'+(o.folder?'<a href="'+esc(o.folder)+'" target="_blank" rel="noopener">Open Drive folder</a>':'-')+'</td></tr>'+(o.revisions?'<tr><th>Revisions</th><td>'+esc(o.revisions)+'</td></tr>':'')+'</table></div>'
  +'<div class="grid g2" style="margin-top:14px"><div class="f"><label class="l" for="ds">Status</label><select id="ds">'+opt([['received','Received'],['in_progress','In progress'],['review','Final check'],['delivered','Delivered'],['on_hold','On hold']],o.status)+'</select></div><div class="f"><label class="l" for="dp">Payment</label><select id="dp">'+opt([['unpaid','Unpaid'],['paid','Paid']],o.paid)+'</select></div></div>'
  +'<div class="f"><label class="l" for="dn">Message shown to client (optional)</label><textarea id="dn">'+esc(o.note||'')+'</textarea></div>'
- +'<label class="opt" style="margin-bottom:12px"><input type="checkbox" id="dm"><div><b>Email the finished files to the client</b><span>Sends the PDF and Word copies from the order folder when saved.</span></div></label>'
+ +'<label class="opt" style="margin-bottom:6px"><input type="checkbox" id="dm"><div><b>Email the finished files to the client</b><span>Sends the PDF from the order folder when saved. Clients get the PDF only, by default.</span></div></label>'
+ +'<label class="opt" style="margin:0 0 12px 28px"><input type="checkbox" id="doffice"><div><b>Also include the editable Word file</b><span>Off by default - the Office/Word copy only goes to the client when you tick this. You always have both in the Drive folder either way.</span></div></label>'
+ +'<label class="opt" style="margin-bottom:12px"><input type="checkbox" id="dv"'+(o.verify?' checked':'')+'><div><b>Public certificate verification</b><span>Off by default. When on, anyone with the link below can see this client\'s name, target role and certificate list - nothing else (no contact details). Useful to put on the CV as a link or QR code for employers to check certs.</span></div></label>'
+ +'<div class="muted small" id="dvl" style="margin:-6px 0 12px;word-break:break-all"></div>'
  +'<div class="row" style="margin-bottom:12px"><a class="btn sm" id="dwa" target="_blank" rel="noopener" href="#">WhatsApp client</a><button class="btn sm" type="button" id="dpr">Copy AI prompt</button><button class="btn sm" type="button" id="djs">Copy JSON</button></div>'
+ +'<div class="card" style="padding:14px;margin-bottom:12px"><b>Check against a job posting</b><div class="muted small" style="margin:4px 0 10px">Paste the job ad (or just the requirements). Compares years of experience and certificates already on file for this order - nothing is sent anywhere.</div><textarea id="dqt" placeholder="Paste job posting text here"></textarea><div class="row" style="margin-top:8px"><button class="btn sm" type="button" id="dqgo"><span>Check</span><span class="spin"></span></button><button class="btn sm ghost" type="button" id="degg"><span>Draft application email</span><span class="spin"></span></button></div><div id="dqr" style="margin-top:10px"></div><div id="degr" style="margin-top:10px"></div></div>'
+ +'<div class="card" style="padding:14px;margin-bottom:12px"><b>Build a references document</b><div class="muted small" style="margin:4px 0 10px">One line per reference: Name | Role | Phone or email. Saved into this order\'s Drive folder, not shown to the client automatically.</div><textarea id="drt" placeholder="Jane Doe | HR Manager, ABC Co | +971 50 123 4567"></textarea><button class="btn sm" type="button" id="drgo" style="margin-top:8px"><span>Build references doc</span><span class="spin"></span></button><div id="drr" style="margin-top:10px"></div></div>'
  +'<div class="card" style="padding:14px;margin-bottom:12px"><b>Send finished files to client</b><div class="muted small" style="margin:4px 0 10px">Tap Send to email the CV and cover letter already in the order folder. Or choose your own file(s) first and those are sent instead. The ticket is marked delivered. Email: '+esc(o.email)+'</div><input type="file" id="dfi" multiple style="margin-bottom:10px"><div class="f"><textarea id="dfm" placeholder="Optional message to the client"></textarea></div><button class="btn pri" type="button" id="dfs"><span>Send to client</span><span class="spin"></span></button></div>'
  +'<div class="row"><button class="btn pri" type="button" id="dsv"><span>Save</span><span class="spin"></span></button></div>';
  var dlg=$('#dlg');try{dlg.showModal()}catch(e){dlg.setAttribute('open','')}
  $('#dc').onclick=function(){dlg.close()};
  var ph=String(o.phone||'').replace(/[^0-9]/g,''),first=String(o.name||'').split(' ')[0];
  $('#dwa').href='https://wa.me/'+ph+'?text='+encodeURIComponent('Hello '+first+', this is KINETIX about your order '+o.ref+'. ');
+ var vurl=location.origin+location.pathname.replace(/admin\.html$/,'verify.html')+'?ref='+encodeURIComponent(o.ref);
+ $('#dvl').innerHTML='Link: <a href="'+esc(vurl)+'" target="_blank" rel="noopener">'+esc(vurl)+'</a>';
  function cp(t,btn){if(!t){KX.toast('Nothing saved for this order');return}var done=function(){KX.toast('Copied')};
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){KX.toast('Copy failed')})}
   else{var x=document.createElement('textarea');x.value=t;document.body.appendChild(x);x.select();try{document.execCommand('copy');done()}catch(e){KX.toast('Copy failed')}x.remove()}}
  $('#dpr').onclick=function(){cp(o.prompt)};$('#djs').onclick=function(){cp(o.json)};
 
- $('#dfs').onclick=function(){var x=this,fl=$('#dfi').files;if(!fl.length){x.setAttribute('aria-busy','true');x.disabled=true;KX.api('admin_update',{key:KEY,ref:o.ref,status:'delivered',paid:$('#dp').value,note:$('#dn').value,sendFiles:true},{timeout:240000}).then(function(j){KX.toast(j.message||'Sent');dlg.close();return load()}).catch(function(e){x.setAttribute('aria-busy','false');x.disabled=false;KX.toast(e.message||'Failed')});return}
+ $('#dqgo').onclick=function(){var x=this,t=$('#dqt').value;if(t.trim().length<20){KX.toast('Paste more of the job posting first');return}
+  x.setAttribute('aria-busy','true');x.disabled=true;
+  call('admin_qualify',{ref:o.ref,jobText:t}).then(function(j){var r=j.result,verdict=r.requiredYears==null?'':(r.meetsOnRole?'<span class="tag ok">Meets it on role-specific years</span>':(r.meetsOnTotal?'<span class="tag warn">Only meets it counting total years</span>':'<span class="tag err">Under the stated minimum either way</span>'));
+   var yearsLine=r.requiredYears==null?'No "years of experience" figure found in that text.':('Posting asks for <b>'+esc(String(r.requiredYears))+'+ years</b>. On file: <b>'+esc(String(r.roleYears))+'</b> years in a matching title, <b>'+esc(String(r.totalYears))+'</b> years total. '+verdict);
+   var certsLine='Certificates on file: '+(r.certsOnFile.length?esc(r.certsOnFile.join(', ')):'none listed')+'.'+(r.certsMentionedInPosting.length?' Also named in the posting: '+esc(r.certsMentionedInPosting.join(', ')):'');
+   $('#dqr').innerHTML='<p style="margin:0 0 6px">'+yearsLine+'</p><p class="muted small" style="margin:0">'+certsLine+'</p>'}).catch(function(e){KX.toast(e.message)}).then(function(){x.setAttribute('aria-busy','false');x.disabled=false})};
+
+ $('#degg').onclick=function(){var x=this,t=$('#dqt').value;if(t.trim().length<20){KX.toast('Paste more of the job posting first');return}
+  x.setAttribute('aria-busy','true');x.disabled=true;
+  call('admin_draft_email',{ref:o.ref,jobText:t}).then(function(j){
+   $('#degr').innerHTML='<p class="muted small" style="margin:0 0 6px">A starting point, not a final draft - read it over and personalize it before sending.</p><div class="f"><label class="l">Subject</label><input id="degs" readonly value="'+esc(j.subject)+'"></div><div class="f"><label class="l">Body</label><textarea id="degb" readonly style="min-height:220px">'+esc(j.body)+'</textarea></div><button class="btn sm" type="button" id="degc">Copy email</button>';
+   $('#degc').onclick=function(){cp($('#degs').value+'\\n\\n'+$('#degb').value)}
+  }).catch(function(e){KX.toast(e.message)}).then(function(){x.setAttribute('aria-busy','false');x.disabled=false})};
+
+ $('#drgo').onclick=function(){var x=this,t=$('#drt').value;if(!t.trim()){KX.toast('Add at least one reference');return}
+  x.setAttribute('aria-busy','true');x.disabled=true;
+  call('admin_build_refs',{ref:o.ref,refsText:t}).then(function(j){KX.toast(j.message||'Saved');$('#drr').innerHTML=(j.files||[]).map(function(f){return '<a href="'+esc(f.url)+'" target="_blank" rel="noopener">'+esc(f.name)+'</a>'}).join('<br>')}).catch(function(e){KX.toast(e.message)}).then(function(){x.setAttribute('aria-busy','false');x.disabled=false})};
+
+ $('#dfs').onclick=function(){var x=this,fl=$('#dfi').files;if(!fl.length){x.setAttribute('aria-busy','true');x.disabled=true;KX.api('admin_update',{key:KEY,ref:o.ref,status:'delivered',paid:$('#dp').value,note:$('#dn').value,sendFiles:true,office:$('#doffice').checked},{timeout:240000}).then(function(j){KX.toast(j.message||'Sent');dlg.close();return load()}).catch(function(e){x.setAttribute('aria-busy','false');x.disabled=false;KX.toast(e.message||'Failed')});return}
   var tot=0;Array.prototype.forEach.call(fl,function(f){tot+=f.size});if(tot>17*1048576){KX.toast('Files too big (max about 17 MB total)');return}
   x.setAttribute('aria-busy','true');x.disabled=true;
   Promise.all(Array.prototype.map.call(fl,function(f){return new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res({name:f.name,type:f.type||'application/octet-stream',data:String(r.result).split(',')[1]})};r.onerror=rej;r.readAsDataURL(f)})}))
@@ -655,7 +719,7 @@ function detail(o){var b=$('#dBody');
   .then(function(j){KX.toast(j.message||'Sent to client');dlg.close();return load()})
   .catch(function(e){x.setAttribute('aria-busy','false');x.disabled=false;KX.toast(e.message||'Failed')})};
  $('#dsv').onclick=function(){var x=this;x.setAttribute('aria-busy','true');x.disabled=true;
-  call('admin_update',{ref:o.ref,status:$('#ds').value,paid:$('#dp').value,note:$('#dn').value,sendFiles:$('#dm').checked}).then(function(j){KX.toast(j.message||'Saved');dlg.close();return load()}).catch(function(e){KX.toast(e.message)}).then(function(){x.setAttribute('aria-busy','false');x.disabled=false})}}
+  call('admin_update',{ref:o.ref,status:$('#ds').value,paid:$('#dp').value,note:$('#dn').value,sendFiles:$('#dm').checked,office:$('#doffice').checked,verify:$('#dv').checked?'yes':'no'}).then(function(j){KX.toast(j.message||'Saved');dlg.close();return load()}).catch(function(e){KX.toast(e.message)}).then(function(){x.setAttribute('aria-busy','false');x.disabled=false})}}
 var k=ss('kx-k');if(k){KEY=k;load().catch(function(){ss('kx-k',null);KEY=''})}
 })();
 </script>

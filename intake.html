@@ -35,8 +35,8 @@ p{margin:0 0 1em}.muted{color:var(--muted)}.small{font-size:.875rem}.sr{position
 /* layout */
 main{padding:30px 0 70px}.hero{padding:34px 0 8px}.hero p.lead{max-width:58ch;font-size:1.12rem;color:var(--muted)}
 .card{border-radius:var(--r);padding:22px}
-.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
-@media(max-width:760px){.g2,.g3{grid-template-columns:1fr}}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:760px){.g2,.g3,.g4{grid-template-columns:1fr}}
 .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.sp{justify-content:space-between}
 hr{border:0;border-top:1px solid var(--line);margin:20px 0}
 footer{border-top:1px solid var(--bd);padding:26px 0 90px;color:var(--muted);font-size:.9rem;background:var(--card);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}footer .wrap{display:flex;gap:18px;flex-wrap:wrap;justify-content:space-between}footer a{text-decoration:none}footer a:hover{text-decoration:underline}
@@ -48,6 +48,7 @@ footer{border-top:1px solid var(--bd);padding:26px 0 90px;color:var(--muted);fon
 .ico.am{background:linear-gradient(135deg,#d97706,#f59e0b);box-shadow:0 8px 20px rgba(217,119,6,.32)}
 .ico.gr{background:linear-gradient(135deg,#0d9488,#14b8a6);box-shadow:0 8px 20px rgba(13,148,136,.32)}
 .ico.pk{background:linear-gradient(135deg,#be185d,#ec4899);box-shadow:0 8px 20px rgba(190,24,93,.3)}
+.ico.rd{background:linear-gradient(135deg,#b91c1c,#ef4444);box-shadow:0 8px 20px rgba(185,28,28,.32)}
 .sec{margin-top:54px}.sec>h2{display:flex;align-items:center;gap:12px;margin-bottom:16px}
 .pill{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;background:var(--card);border:1px solid var(--bd);font-size:.85rem;font-weight:650;-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
 .pill .ic{color:var(--acc)}
@@ -282,6 +283,7 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 <symbol id="i-cash" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v.01M18 14.5v.01"/></symbol>
 <symbol id="i-card" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19M6 15h4"/></symbol>
 <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 7.5v9M10 7.5h3.2a2.2 2.2 0 0 1 0 4.4H10m0 0h3.6a2.3 2.3 0 0 1 0 4.6H10"/></symbol>
+<symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.4"/><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="19" r="2.4"/><path d="M8.1 10.8l7.8-4.5M8.1 13.2l7.8 4.5"/></symbol>
 <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 3.9 5.7 3.9 9s-1.3 6.3-3.9 9c-2.6-2.7-3.9-5.7-3.9-9S9.4 5.7 12 3z"/></symbol>
 <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="m8.5 14 -1.5 7 5-3 5 3-1.5-7"/></symbol>
 <symbol id="i-brief" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
@@ -307,7 +309,7 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14h6M9 17h4"/></symbol>
 </defs></svg>
 
-<header class="top"><div class="wrap"><a class="brand" href="index.html" aria-label="KINETIX home"><img class="bm" src="kinetix-logo.png" alt="" width="45" height="34"><span class="wm" aria-hidden="true"><img src="kinetix-k.png" alt="" width="25" height="22">INETIX</span></a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html" aria-current="page">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html">PDF tools</a><a href="order-status.html">Track order</a></nav><div class="tools"><button class="tt" id="menubtn" type="button" aria-haspopup="dialog" aria-label="Browse all pages"><svg class="ic"><use href="#i-menu"/></svg></button><button class="tt kxapp" type="button" data-install aria-label="Install the KINETIX app"><svg class="ic"><use href="#i-down"/></svg><span>App</span></button><span class="curwrap"><svg class="ic"><use href="#i-globe"/></svg><select class="curs" id="cur" aria-label="Currency"><option>AED</option></select></span><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></div></header>
+<header class="top"><div class="wrap"><a class="brand" href="index.html" aria-label="KINETIX home"><img class="bm" src="kinetix-logo.png" alt="" width="45" height="34"><span class="wm" aria-hidden="true"><img src="kinetix-k.png" alt="" width="25" height="22">INETIX</span></a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html" aria-current="page">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html">PDF tools</a><a href="order-status.html">Track order</a></nav><div class="tools"><button class="tt" id="menubtn" type="button" aria-haspopup="dialog" aria-label="Browse all pages"><svg class="ic"><use href="#i-menu"/></svg></button><button class="tt" type="button" data-share aria-label="Share KINETIX"><svg class="ic"><use href="#i-share"/></svg></button><button class="tt kxapp" type="button" data-install aria-label="Install the KINETIX app"><svg class="ic"><use href="#i-down"/></svg><span>App</span></button><span class="curwrap"><svg class="ic"><use href="#i-globe"/></svg><select class="curs" id="cur" aria-label="Currency"><option>AED</option></select></span><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></div></header>
 <dialog id="sitemenu" aria-label="Browse KINETIX">
 <div class="row sp" style="margin-bottom:6px"><b style="font-size:1.1rem">Browse KINETIX</b><button type="button" class="tt" id="menux" aria-label="Close menu"><svg class="ic"><use href="#i-x"/></svg></button></div>
 <div class="smgrid">
@@ -317,8 +319,9 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 <div><h3>Legal</h3><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a><a href="legal-notice.html">Legal Notice</a><a href="copyright.html">Copyright Notice</a></div>
 </div></dialog>
 <main><div class="wrap" style="max-width:760px">
-<h1>Order your CV</h1>
-<p class="muted">Takes about five minutes. You only need to tell us who you are and the job you want. We write the duties and skills for your role. Anything marked optional can be skipped. <a href="samples.html">See sample CVs</a> or <a href="how-it-works.html">watch the 1-minute guide</a>.</p>
+<h1 data-i18n="Order your CV">Order your CV</h1>
+<p class="muted"><span data-i18n="Takes about five minutes. You only need to tell us who you are and the job you want. We write the duties and skills for your role. Anything marked optional can be skipped.">Takes about five minutes. You only need to tell us who you are and the job you want. We write the duties and skills for your role. Anything marked optional can be skipped.</span> <a href="samples.html" data-i18n="See sample CVs">See sample CVs</a> <span data-i18n="or">or</span> <a href="how-it-works.html" data-i18n="watch the 1-minute guide">watch the 1-minute guide</a>.</p>
+<div class="row" style="margin:2px 0 14px;gap:8px;align-items:center;flex-wrap:wrap"><span class="curwrap"><svg class="ic"><use href="#i-globe"/></svg><select class="curs" id="formLang" aria-label="Form language"></select></span><span class="muted small" data-i18n="Your CV is always written in English, whichever language you pick here.">Your CV is always written in English, whichever language you pick here.</span></div>
 <div id="notready" class="note warn hide" style="margin-bottom:14px">This form is not connected to the server yet. Add the Apps Script URL to <b>config.js</b>.</div>
 <ol class="steps" id="steps" aria-hidden="true"></ol>
 <div class="stepname" id="stepname" aria-live="polite"></div>
@@ -326,122 +329,144 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 <form id="f" novalidate autocomplete="on">
 <!-- 1 -->
 <section data-step="Package and style" class="card">
-  <h2>Choose your package</h2>
+  <h2 data-i18n="Choose your package">Choose your package</h2>
   <div class="opts" id="svcs" role="radiogroup" aria-label="Package"></div>
   <hr>
-  <fieldset class="fs"><legend>Add-ons</legend>
-    <label class="opt"><input type="checkbox" name="cover"><div><b>Matching cover letter</b><span id="coverTxt">Same design as your CV, written for your target role.</span></div></label>
+  <fieldset class="fs"><legend data-i18n="Add-ons">Add-ons</legend>
+    <label class="opt"><input type="checkbox" name="cover"><div><b data-i18n="Matching cover letter">Matching cover letter</b><span id="coverTxt" data-i18n="Same design as your CV, written for your target role.">Same design as your CV, written for your target role.</span></div></label>
   </fieldset>
   <hr>
-  <fieldset class="fs"><legend>CV style</legend><div class="opts" id="styles" role="radiogroup" aria-label="CV style"></div>
-  <p class="h muted small" style="margin-top:8px">ATS styles are plain on purpose so recruitment software can read them. Other styles are for sending directly to people.</p></fieldset>
+  <fieldset class="fs"><legend data-i18n="CV style">CV style</legend><div class="opts" id="styles" role="radiogroup" aria-label="CV style"></div>
+  <p class="h muted small" style="margin-top:8px" data-i18n="ATS styles are plain on purpose so recruitment software can read them. Other styles are for sending directly to people.">ATS styles are plain on purpose so recruitment software can read them. Other styles are for sending directly to people.</p></fieldset>
+  <hr>
+  <fieldset class="fs">
+    <label class="opt"><input type="checkbox" name="matchSample" id="matchSample"><div><b data-i18n="Match my own sample">Match my own sample</b><span data-i18n="I have my own CV and want you to match its style">I have my own CV and want you to match its style</span></div></label>
+    <div id="matchBox" class="hide" style="margin-top:10px">
+      <p class="h muted small" data-i18n="Upload it below and the style radios above are ignored - we copy its layout, not ours.">Upload it below and the style radios above are ignored - we copy its layout, not ours.</p>
+      <div class="f" id="sampleF"><label class="l" for="sampleIn" data-i18n="Your sample CV">Your sample CV</label><input id="sampleIn" type="file" accept="image/*,application/pdf"><div class="h" id="sampleNote"></div><div class="e" data-i18n="Please upload your sample CV, or uncheck this option.">Please upload your sample CV, or uncheck this option.</div></div>
+      <div class="f"><label class="l" for="matchNote"><span data-i18n="What should we keep or change?">What should we keep or change?</span> <span class="opt-t" data-i18n="(optional)">(optional)</span></label><textarea id="matchNote" name="matchNote" rows="2" placeholder="e.g. keep the layout and colors, just update my details and add my new job" data-i18n-ph="e.g. keep the layout and colors, just update my details and add my new job"></textarea></div>
+    </div>
+  </fieldset>
 </section>
 
 <!-- 2 -->
 <section data-step="About you" class="card hide">
-  <h2>About you</h2>
-  <div class="grid g2">
-    <div class="f"><label class="l" for="fullName">Full name</label><input id="fullName" name="fullName" data-req autocomplete="name" placeholder="As on your passport"><div class="e">Enter your full name.</div></div>
-    <div class="f"><label class="l" for="email">Email</label><input id="email" name="email" type="email" data-req autocomplete="email" inputmode="email"><div class="e">Enter a valid email address.</div></div>
-    <div class="f"><label class="l" for="phone">Phone / WhatsApp</label><input id="phone" name="phone" type="tel" data-req autocomplete="tel" inputmode="tel" placeholder="+971 5x xxx xxxx"><div class="e">Enter your phone number with country code.</div></div>
-    <div class="f"><label class="l" for="nationality">Nationality</label><select id="nationality" name="nationality" data-req></select><div class="e">Select your nationality.</div></div>
-    <div class="f"><label class="l" for="country">Where are you now?</label><select id="country" name="country" data-req></select><div class="e">Select your current country.</div></div>
-    <div class="f"><label class="l" for="city">City / area</label><select id="city" name="city"></select><input id="cityOther" name="cityOther" class="hide" placeholder="Type your city" style="margin-top:8px"></div>
-    <div class="f"><label class="l" for="dob">Date of birth <span class="opt-t">(optional)</span></label><input id="dob" name="dob" type="date"></div>
-    <div class="f"><label class="l" for="marital">Marital status <span class="opt-t">(optional)</span></label><select id="marital" name="marital"></select></div>
+  <h2 data-i18n="About you">About you</h2>
+  <div class="card" style="padding:14px;margin-bottom:16px" id="mrzCard">
+    <b data-i18n="Scan your ID or passport">Scan your ID or passport</b>
+    <div class="muted small" style="margin-top:4px" data-i18n="Optional. We try to read your name, nationality and date of birth from a photo of the printed strip at the bottom of your passport, or the back of your Emirates ID - so you can check it instead of typing it. You can still type everything yourself below.">Optional. We try to read your name, nationality and date of birth from a photo of the printed strip at the bottom of your passport, or the back of your Emirates ID - so you can check it instead of typing it. You can still type everything yourself below.</div>
+    <input type="file" id="mrzIn" accept="image/*" capture="environment" style="margin-top:10px">
+    <div id="mrzStatus" class="muted small" style="margin-top:8px"></div>
+    <div id="mrzReview" class="hide" style="margin-top:12px">
+      <div class="tw"><table id="mrzTable"></table></div>
+      <div class="row" style="margin-top:10px">
+        <button class="btn sm pri" type="button" id="mrzUse"><span data-i18n="Use these">Use these</span></button>
+        <button class="btn sm ghost" type="button" id="mrzRetry"><span data-i18n="Try a different photo">Try a different photo</span></button>
+      </div>
+    </div>
   </div>
-  <fieldset class="fs"><legend>Languages</legend><div id="langs"></div><button class="btn sm ghost" type="button" data-add="lang"><svg class="ic"><use href="#i-plus"/></svg>Add language</button></fieldset>
   <div class="grid g2">
-    <div class="f"><label class="l" for="licence">Driving licence <span class="opt-t">(optional)</span></label><select id="licence" name="licence"></select></div>
-    <div class="f"><label class="l" for="photoIn">Photo <span class="opt-t">(optional, for non-ATS styles)</span></label><input id="photoIn" type="file" accept="image/*"><div class="h" id="photoNote">Plain background, head and shoulders.</div></div>
+    <div class="f"><label class="l" for="fullName" data-i18n="Full name">Full name</label><input id="fullName" name="fullName" data-req autocomplete="name" placeholder="As on your passport" data-i18n-ph="As on your passport"><div class="e" data-i18n="Enter your full name.">Enter your full name.</div></div>
+    <div class="f"><label class="l" for="email" data-i18n="Email">Email</label><input id="email" name="email" type="email" data-req autocomplete="email" inputmode="email"><div class="e" data-i18n="Enter a valid email address.">Enter a valid email address.</div></div>
+    <div class="f"><label class="l" for="phone" data-i18n="Phone / WhatsApp">Phone / WhatsApp</label><input id="phone" name="phone" type="tel" data-req autocomplete="tel" inputmode="tel" placeholder="+971 5x xxx xxxx"><div class="e" data-i18n="Enter your phone number with country code.">Enter your phone number with country code.</div></div>
+    <div class="f"><label class="l" for="nationality" data-i18n="Nationality">Nationality</label><select id="nationality" name="nationality" data-req></select><div class="e" data-i18n="Select your nationality.">Select your nationality.</div></div>
+    <div class="f"><label class="l" for="country" data-i18n="Where are you now?">Where are you now?</label><select id="country" name="country" data-req></select><div class="e" data-i18n="Select your current country.">Select your current country.</div></div>
+    <div class="f"><label class="l" for="city" data-i18n="City / area">City / area</label><select id="city" name="city"></select><input id="cityOther" name="cityOther" class="hide" placeholder="Type your city" data-i18n-ph="Type your city" style="margin-top:8px"></div>
+    <div class="f" id="dobF"><label class="l" for="dob"><span data-i18n="Date of birth">Date of birth</span> <span class="opt-t" data-i18n="(optional)">(optional)</span></label><input id="dob" name="dob" type="date"><div class="e" data-i18n="Check this date of birth - it doesn't look right.">Check this date of birth - it doesn't look right.</div></div>
+    <div class="f"><label class="l" for="marital"><span data-i18n="Marital status">Marital status</span> <span class="opt-t" data-i18n="(optional)">(optional)</span></label><select id="marital" name="marital"></select></div>
+  </div>
+  <fieldset class="fs"><legend data-i18n="Languages">Languages</legend><div id="langs"></div><button class="btn sm ghost" type="button" data-add="lang"><svg class="ic"><use href="#i-plus"/></svg><span data-i18n="Add language">Add language</span></button></fieldset>
+  <div class="grid g2">
+    <div class="f"><label class="l" for="licence"><span data-i18n="Driving licence">Driving licence</span> <span class="opt-t" data-i18n="(optional)">(optional)</span></label><select id="licence" name="licence"></select></div>
+    <div class="f"><label class="l" for="photoIn"><span data-i18n="Photo">Photo</span> <span class="opt-t" data-i18n="(optional, for non-ATS styles)">(optional, for non-ATS styles)</span></label><input id="photoIn" type="file" accept="image/*"><div class="h" id="photoNote" data-i18n="Plain background, head and shoulders.">Plain background, head and shoulders.</div></div>
   </div>
 </section>
 
 <!-- 3 -->
 <section data-step="Target job" class="card hide">
-  <h2>The job you want</h2>
+  <h2 data-i18n="The job you want">The job you want</h2>
   <div class="grid g2">
-    <div class="f"><label class="l" for="industry">Industry</label><select id="industry" name="industry" data-req></select><div class="e">Select an industry.</div></div>
-    <div class="f"><label class="l" for="role">Role</label><select id="role" name="role" data-req></select><div class="e">Select a role.</div></div>
-    <div class="f hide" id="roleOtherF"><label class="l" for="roleOther">Your job title</label><input id="roleOther" name="roleOther"><div class="e">Type the job title.</div></div>
-    <div class="f"><label class="l" for="level">Experience level</label><select id="level" name="level" data-req></select><div class="e">Select your level.</div></div>
-    <div class="f"><label class="l" for="years">Total years of experience</label><input id="years" name="years" type="number" min="0" max="50" inputmode="numeric" data-req><div class="e">Enter a number from 0 to 50.</div></div>
-    <div class="f"><label class="l" for="visa">Visa status</label><select id="visa" name="visa" data-req></select><div class="e">Select your visa status.</div></div>
-    <div class="f hide" id="visaExpF"><label class="l" for="visaExp">Visa expiry / grace period ends <span class="opt-t">(optional)</span></label><input id="visaExp" name="visaExp" type="date"></div>
-    <div class="f"><label class="l" for="avail">Availability</label><select id="avail" name="avail" data-req></select><div class="e">Select when you can start.</div></div>
+    <div class="f"><label class="l" for="industry" data-i18n="Industry">Industry</label><select id="industry" name="industry" data-req></select><div class="e" data-i18n="Select an industry.">Select an industry.</div></div>
+    <div class="f"><label class="l" for="role" data-i18n="Role">Role</label><select id="role" name="role" data-req></select><div class="e" data-i18n="Select a role.">Select a role.</div></div>
+    <div class="f hide" id="roleOtherF"><label class="l" for="roleOther" data-i18n="Your job title">Your job title</label><input id="roleOther" name="roleOther"><div class="e" data-i18n="Type the job title.">Type the job title.</div></div>
+    <div class="f"><label class="l" for="level" data-i18n="Experience level">Experience level</label><select id="level" name="level" data-req></select><div class="e" data-i18n="Select your level.">Select your level.</div></div>
+    <div class="f"><label class="l" for="years" data-i18n="Total years of experience">Total years of experience</label><input id="years" name="years" type="number" min="0" max="50" inputmode="numeric" data-req><div class="e" data-i18n="Enter a number from 0 to 50.">Enter a number from 0 to 50.</div></div>
+    <div class="f"><label class="l" for="visa" data-i18n="Visa status">Visa status</label><select id="visa" name="visa" data-req></select><div class="e" data-i18n="Select your visa status.">Select your visa status.</div></div>
+    <div class="f hide" id="visaExpF"><label class="l" for="visaExp"><span data-i18n="Visa expiry / grace period ends">Visa expiry / grace period ends</span> <span class="opt-t" data-i18n="(optional)">(optional)</span></label><input id="visaExp" name="visaExp" type="date"></div>
+    <div class="f"><label class="l" for="avail" data-i18n="Availability">Availability</label><select id="avail" name="avail" data-req></select><div class="e" data-i18n="Select when you can start.">Select when you can start.</div></div>
   </div>
-  <div class="note" id="skillNote" style="margin-bottom:14px"><b>Skills and duties are on us.</b> Pick your role and we write a professional summary, core competencies, key skills, professional skills and at least 10 duties for every job. Your CV ends with "References available upon request". You receive both PDF and Word files. <span id="skillPrev"></span></div>
-  <div class="f"><label class="l" for="extraSkills">Extra skills or software you want included <span class="opt-t">(optional)</span></label><textarea id="extraSkills" name="extraSkills" placeholder="e.g. SAP, 6G welding, Arabic typing, NEBOSH IGC"></textarea></div>
-  <fieldset class="fs"><legend>Where do you want to work? <span class="opt-t" style="font-weight:400">(optional)</span></legend><div class="opts" id="prefLoc"></div></fieldset>
+  <div class="note" id="skillNote" style="margin-bottom:14px"><b data-i18n="Skills and duties are on us.">Skills and duties are on us.</b> <span data-i18n='Pick your role and we write a professional summary, core competencies, key skills, professional skills and at least 10 duties for every job. Your CV ends with "References available upon request". You receive both PDF and Word files.'>Pick your role and we write a professional summary, core competencies, key skills, professional skills and at least 10 duties for every job. Your CV ends with "References available upon request". You receive both PDF and Word files.</span> <span id="skillPrev"></span></div>
+  <div class="f"><label class="l" for="extraSkills"><span data-i18n="Extra skills or software you want included">Extra skills or software you want included</span> <span class="opt-t" data-i18n="(optional)">(optional)</span></label><textarea id="extraSkills" name="extraSkills" placeholder="e.g. SAP, 6G welding, Arabic typing, NEBOSH IGC" data-i18n-ph="e.g. SAP, 6G welding, Arabic typing, NEBOSH IGC"></textarea></div>
+  <fieldset class="fs"><legend><span data-i18n="Where do you want to work?">Where do you want to work?</span> <span class="opt-t" style="font-weight:400" data-i18n="(optional)">(optional)</span></legend><div class="opts" id="prefLoc"></div></fieldset>
 </section>
 
 <!-- 4 -->
 <section data-step="Work history" class="card hide">
-  <h2>Work history</h2>
-  <p class="muted small">Most recent first. Leave the duties box empty and we will write them for the job title. If you are a fresher, skip this step.</p>
-  <div id="exps"></div><button class="btn sm ghost" type="button" data-add="exp"><svg class="ic"><use href="#i-plus"/></svg>Add job</button>
+  <h2 data-i18n="Work history">Work history</h2>
+  <p class="muted small" data-i18n="Most recent first. Leave the duties box empty and we will write them for the job title. If you are a fresher, skip this step.">Most recent first. Leave the duties box empty and we will write them for the job title. If you are a fresher, skip this step.</p>
+  <div id="exps"></div><button class="btn sm ghost" type="button" data-add="exp"><svg class="ic"><use href="#i-plus"/></svg><span data-i18n="Add job">Add job</span></button>
 </section>
 
 <!-- 5 -->
 <section data-step="Education and certificates" class="card hide">
-  <h2>Education</h2>
-  <div id="edus"></div><button class="btn sm ghost" type="button" data-add="edu"><svg class="ic"><use href="#i-plus"/></svg>Add education</button>
+  <h2 data-i18n="Education">Education</h2>
+  <div id="edus"></div><button class="btn sm ghost" type="button" data-add="edu"><svg class="ic"><use href="#i-plus"/></svg><span data-i18n="Add education">Add education</span></button>
   <hr>
-  <h2>Certificates and licences</h2>
-  <p class="muted small">List each certificate (for example Safety, Welding, Forklift, Driving, Medical). Add scans or photos if you want us to keep them with your order.</p>
-  <div id="certs"></div><button class="btn sm ghost" type="button" data-add="cert"><svg class="ic"><use href="#i-plus"/></svg>Add certificate</button>
-  <fieldset class="fs" style="margin-top:16px"><legend>Order of certificates on your CV</legend>
+  <h2 data-i18n="Certificates and licences">Certificates and licences</h2>
+  <p class="muted small" data-i18n="List each certificate (for example Safety, Welding, Forklift, Driving, Medical). Add scans or photos if you want us to keep them with your order.">List each certificate (for example Safety, Welding, Forklift, Driving, Medical). Add scans or photos if you want us to keep them with your order.</p>
+  <div id="certs"></div><button class="btn sm ghost" type="button" data-add="cert"><svg class="ic"><use href="#i-plus"/></svg><span data-i18n="Add certificate">Add certificate</span></button>
+  <fieldset class="fs" style="margin-top:16px"><legend data-i18n="Order of certificates on your CV">Order of certificates on your CV</legend>
     <div class="opts">
-      <label class="opt"><input type="radio" name="certOrder" value="relevance" checked><div><b>Most relevant first</b><span>Matches the job you chose</span></div></label>
-      <label class="opt"><input type="radio" name="certOrder" value="newest"><div><b>Newest first</b><span>By year</span></div></label>
-      <label class="opt"><input type="radio" name="certOrder" value="listed"><div><b>As I listed them</b><span>Exactly my order</span></div></label>
+      <label class="opt"><input type="radio" name="certOrder" value="relevance" checked><div><b data-i18n="Most relevant first">Most relevant first</b><span data-i18n="Matches the job you chose">Matches the job you chose</span></div></label>
+      <label class="opt"><input type="radio" name="certOrder" value="newest"><div><b data-i18n="Newest first">Newest first</b><span data-i18n="By year">By year</span></div></label>
+      <label class="opt"><input type="radio" name="certOrder" value="listed"><div><b data-i18n="As I listed them">As I listed them</b><span data-i18n="Exactly my order">Exactly my order</span></div></label>
     </div></fieldset>
-  <div class="f"><div class="l">Certificate scans or photos <span class="opt-t">(optional)</span></div>
-    <label class="drop" id="drop" for="fileIn"><svg class="ic"><use href="#i-up"/></svg> Tap to add files, or drop them here<div class="h muted small">JPG, PNG or PDF. Pick as many as you need. Photos are shrunk on your phone before sending.</div></label>
+  <div class="f"><div class="l"><span data-i18n="Certificate scans or photos">Certificate scans or photos</span> <span class="opt-t" data-i18n="(optional)">(optional)</span></div>
+    <label class="drop" id="drop" for="fileIn"><svg class="ic"><use href="#i-up"/></svg> <span data-i18n="Tap to add files, or drop them here">Tap to add files, or drop them here</span><div class="h muted small" data-i18n="JPG, PNG or PDF. Pick as many as you need. Photos are shrunk on your phone before sending.">JPG, PNG or PDF. Pick as many as you need. Photos are shrunk on your phone before sending.</div></label>
     <input id="fileIn" type="file" multiple accept="image/*,application/pdf" class="sr"><div class="files" id="files"></div><div class="h" id="fileNote"></div></div>
 </section>
 
 <!-- 6 -->
 <section data-step="Review and payment" class="card hide">
-  <h2>Review</h2>
+  <h2 data-i18n="Review">Review</h2>
   <div id="review"></div>
   <hr>
-  <h2>How will you pay?</h2>
-  <p class="muted small">Payment is 100% upfront. Pick how you plan to pay and we will confirm on WhatsApp. No extra charges are added to any method.</p>
+  <h2 data-i18n="How will you pay?">How will you pay?</h2>
+  <p class="muted small" data-i18n="Payment is 100% upfront. Pick how you plan to pay and we will confirm on WhatsApp. No extra charges are added to any method.">Payment is 100% upfront. Pick how you plan to pay and we will confirm on WhatsApp. No extra charges are added to any method.</p>
   <div class="opts" id="pays" role="radiogroup" aria-label="Payment method"></div>
-  <div class="f" style="margin-top:14px"><label class="l" for="notes">Anything else we should know? <span class="opt-t">(optional)</span></label><textarea id="notes" name="notes" placeholder="Job advert link, company name, countries you are applying to..."></textarea></div>
-  <label class="opt"><input type="checkbox" name="consent" data-req><div><b>I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms of Service</a> and <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a></b><span>I confirm my details are correct. 24-48 hour turnaround, one free minor revision within 3 days, extra revisions AED 15.</span></div></label>
-  <div class="f bad" id="consentE" style="display:none"><div class="e" style="display:block">Please agree to the Terms of Service and Privacy Policy to continue.</div></div>
-  <div class="note" style="margin-top:14px"><div class="row sp"><b>Total</b><b id="total">AED 0</b></div><div class="small muted" id="totalDetail"></div></div>
+  <div class="f" style="margin-top:14px"><label class="l" for="notes"><span data-i18n="Anything else we should know?">Anything else we should know?</span> <span class="opt-t" data-i18n="(optional)">(optional)</span></label><textarea id="notes" name="notes" placeholder="Job advert link, company name, countries you are applying to..." data-i18n-ph="Job advert link, company name, countries you are applying to..."></textarea></div>
+  <label class="opt"><input type="checkbox" name="consent" data-req><div><b><span data-i18n="I agree to the">I agree to the</span> <a href="terms.html" target="_blank" rel="noopener" data-i18n="Terms of Service">Terms of Service</a> <span data-i18n="and">and</span> <a href="privacy.html" target="_blank" rel="noopener" data-i18n="Privacy Policy">Privacy Policy</a></b><span data-i18n="I confirm my details are correct. 24-48 hour turnaround, one free minor revision within 3 days, extra revisions AED 15.">I confirm my details are correct. 24-48 hour turnaround, one free minor revision within 3 days, extra revisions AED 15.</span></div></label>
+  <div class="f bad" id="consentE" style="display:none"><div class="e" style="display:block" data-i18n="Please agree to the Terms of Service and Privacy Policy to continue.">Please agree to the Terms of Service and Privacy Policy to continue.</div></div>
+  <div class="note" style="margin-top:14px"><div class="row sp"><b data-i18n="Total">Total</b><b id="total">AED 0</b></div><div class="small muted" id="totalDetail"></div></div>
 </section>
 
 <div class="row sp" style="margin-top:16px">
-  <button class="btn" type="button" id="back"><svg class="ic"><use href="#i-back"/></svg>Back</button>
-  <button class="btn pri" type="button" id="next"><span id="nextTxt">Continue</span><span class="spin" aria-hidden="true"></span><svg class="ic" id="nextIc"><use href="#i-arrow"/></svg></button>
+  <button class="btn" type="button" id="back"><svg class="ic"><use href="#i-back"/></svg><span data-i18n="Back">Back</span></button>
+  <button class="btn pri" type="button" id="next"><span id="nextTxt" data-i18n="Continue">Continue</span><span class="spin" aria-hidden="true"></span><svg class="ic" id="nextIc"><use href="#i-arrow"/></svg></button>
 </div>
 <div id="err" class="note err hide" role="alert" style="margin-top:14px"></div>
 </form>
 
 <!-- progress dialog -->
 <dialog id="prog" aria-labelledby="progT">
-  <h2 id="progT">Sending your order</h2>
+  <h2 id="progT" data-i18n="Sending your order">Sending your order</h2>
   <ol id="stages" style="list-style:none;padding:0;margin:0 0 14px"></ol>
   <div class="bar" aria-hidden="true"><i id="barI"></i></div>
-  <p class="small muted" id="progNote" style="margin-top:12px">Please keep this page open.</p>
+  <p class="small muted" id="progNote" style="margin-top:12px" data-i18n="Please keep this page open.">Please keep this page open.</p>
 </dialog>
 
 <!-- success -->
 <section id="done" class="card hide" tabindex="-1">
-  <div class="note ok" style="margin-bottom:16px"><b>Thank you, <span id="dName"></span>. Your order is in.</b></div>
-  <p class="muted small" style="margin-bottom:4px">Your reference number</p>
-  <div class="row"><div style="font-size:1.9rem;font-weight:700;letter-spacing:.02em" id="dRef"></div><button class="btn sm" type="button" id="copyRef"><svg class="ic"><use href="#i-copy"/></svg>Copy</button></div>
-  <p class="muted small">Save it. You can track progress or request a revision with this number.</p>
+  <div class="note ok" style="margin-bottom:16px"><b><span data-i18n="Thank you,">Thank you,</span> <span id="dName"></span>. <span data-i18n="Your order is in.">Your order is in.</span></b></div>
+  <p class="muted small" style="margin-bottom:4px" data-i18n="Your reference number">Your reference number</p>
+  <div class="row"><div style="font-size:1.9rem;font-weight:700;letter-spacing:.02em" id="dRef"></div><button class="btn sm" type="button" id="copyRef"><svg class="ic"><use href="#i-copy"/></svg><span data-i18n="Copy">Copy</span></button></div>
+  <p class="muted small" data-i18n="Save it. You can track progress or request a revision with this number.">Save it. You can track progress or request a revision with this number.</p>
   <div id="dWarn" class="note warn hide" style="margin-bottom:12px"></div>
   <hr>
-  <h3>What happens next</h3>
-  <ol style="padding-left:20px;margin:0 0 14px"><li>Pay the total below and send the confirmation on WhatsApp.</li><li>We write and design your documents, usually within 24 to 48 hours.</li><li>You get a copy by email (check your spam folder too) and in your order page. One minor revision is free for 3 days.</li></ol>
-  <div class="card" style="background:var(--soft);box-shadow:none"><div class="row sp"><b id="dTotalL">Amount due</b><b id="dTotal"></b></div><div id="dPay" class="small" style="margin-top:8px"></div></div>
-  <div class="row" style="margin-top:16px"><a class="btn pri" id="dWa" href="#" target="_blank" rel="noopener"><svg class="ic"><use href="#i-msg"/></svg>Send payment proof on WhatsApp</a><a class="btn" id="dTrack" href="order-status.html">Track order</a></div>
+  <h3 data-i18n="What happens next">What happens next</h3>
+  <ol style="padding-left:20px;margin:0 0 14px"><li data-i18n="Pay the total below and send the confirmation on WhatsApp.">Pay the total below and send the confirmation on WhatsApp.</li><li data-i18n="We write and design your documents, usually within 24 to 48 hours.">We write and design your documents, usually within 24 to 48 hours.</li><li data-i18n='You get a copy by email (check your spam folder too) and in your order page. One minor revision is free for 3 days.'>You get a copy by email (check your spam folder too) and in your order page. One minor revision is free for 3 days.</li></ol>
+  <div class="card" style="background:var(--soft);box-shadow:none"><div class="row sp"><b id="dTotalL" data-i18n="Amount due">Amount due</b><b id="dTotal"></b></div><div id="dPay" class="small" style="margin-top:8px"></div></div>
+  <div class="row" style="margin-top:16px"><a class="btn pri" id="dWa" href="#" target="_blank" rel="noopener"><svg class="ic"><use href="#i-msg"/></svg><span data-i18n="Send payment proof on WhatsApp">Send payment proof on WhatsApp</span></a><a class="btn" id="dTrack" href="order-status.html"><span data-i18n="Track order">Track order</span></a></div>
 </section>
 </div></main>
 
@@ -590,6 +615,21 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
     btn.addEventListener('click', function () { try { dlg.showModal(); } catch (e) { dlg.setAttribute('open', ''); } });
     if (xb) xb.onclick = function () { dlg.close(); };
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  })();
+  /* share the site itself (not an order) - native share sheet, or copy the link */
+  (function () {
+    var bs = [].slice.call(document.querySelectorAll('[data-share]'));
+    if (!bs.length) return;
+    bs.forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.preventDefault();
+        var url = location.origin + '/', title = 'KINETIX - CVs and documents for the UAE and GCC';
+        if (navigator.share) { navigator.share({ title: title, url: url }).catch(function () {}); return; }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(function () { KX.toast('Link copied - share it with a friend'); }, function () { KX.toast(url); });
+        } else KX.toast(url);
+      });
+    });
   })();
   /* PWA: register the service worker and offer "Install app" */
   (function () {
@@ -779,24 +819,1091 @@ function kxOffline() {
   };
 })();
 </script>
+<script>(function () {
+  var KX = window.KX;
+  /* Language chrome for the intake form only - CV output itself is always written in English,
+   * regardless of which language the client picks here to fill in the form. */
+  KX.LANGS = [
+    { code: 'en', label: 'English' },
+    { code: 'sw', label: 'Kiswahili' },
+    { code: 'hi', label: 'हिन्दी' },
+    { code: 'ar', label: 'العربية' },
+    { code: 'ne', label: 'नेपाली' }
+  ];
+  KX.I18N = {
+"sw": {
+"Order your CV": "Agiza CV yako",
+"Takes about five minutes. You only need to tell us who you are and the job you want. We write the duties and skills for your role. Anything marked optional can be skipped.": "Inachukua kama dakika tano. Unahitaji tu kutuambia wewe ni nani na kazi unayotaka. Sisi tunaandika majukumu na ujuzi kwa ajili ya nafasi yako. Chochote kilichoandikwa 'hiari' unaweza kukiacha.",
+"See sample CVs": "Tazama mifano ya CV",
+"or": "au",
+"watch the 1-minute guide": "tazama mwongozo wa dakika 1",
+"Your CV is always written in English, whichever language you pick here.": "CV yako huandikwa kwa Kiingereza kila wakati, hata ukichagua lugha yoyote hapa.",
+"Choose your package": "Chagua kifurushi chako",
+"Add-ons": "Vitu vya ziada",
+"Matching cover letter": "Barua ya maombi inayolingana",
+"Same design as your CV, written for your target role.": "Muundo sawa na CV yako, iliyoandikwa kwa nafasi unayolenga.",
+"Same design as your CV, written for your target role": "Muundo sawa na CV yako, iliyoandikwa kwa nafasi unayolenga",
+"CV style": "Mtindo wa CV",
+"ATS styles are plain on purpose so recruitment software can read them. Other styles are for sending directly to people.": "Mitindo ya ATS ni rahisi makusudi ili programu za kuajiri ziweze kuisoma. Mitindo mingine ni kwa ajili ya kutuma moja kwa moja kwa watu.",
+"About you": "Kukuhusu wewe",
+"Full name": "Jina kamili",
+"As on your passport": "Kama lilivyo kwenye pasipoti yako",
+"Enter your full name.": "Weka jina lako kamili.",
+"Email": "Barua pepe",
+"Enter a valid email address.": "Weka anwani sahihi ya barua pepe.",
+"Phone / WhatsApp": "Simu / WhatsApp",
+"Enter your phone number with country code.": "Weka namba yako ya simu pamoja na msimbo wa nchi.",
+"Nationality": "Uraia",
+"Select your nationality.": "Chagua uraia wako.",
+"Where are you now?": "Uko wapi sasa?",
+"Select your current country.": "Chagua nchi unayoishi kwa sasa.",
+"City / area": "Mji / eneo",
+"Type your city": "Andika mji wako",
+"Date of birth": "Tarehe ya kuzaliwa",
+"(optional)": "(si lazima)",
+"Marital status": "Hali ya ndoa",
+"Languages": "Lugha",
+"Add language": "Ongeza lugha",
+"Driving licence": "Leseni ya kuendesha gari",
+"Photo": "Picha",
+"(optional, for non-ATS styles)": "(si lazima, kwa mitindo isiyo ya ATS)",
+"Plain background, head and shoulders.": "Mandhari tulivu, kichwa na mabega.",
+"The job you want": "Kazi unayotaka",
+"Industry": "Sekta",
+"Select an industry.": "Chagua sekta.",
+"Role": "Nafasi",
+"Select a role.": "Chagua nafasi.",
+"Your job title": "Jina la kazi yako",
+"Type the job title.": "Andika jina la kazi.",
+"Experience level": "Kiwango cha uzoefu",
+"Select your level.": "Chagua kiwango chako.",
+"Total years of experience": "Jumla ya miaka ya uzoefu",
+"Enter a number from 0 to 50.": "Weka namba kati ya 0 na 50.",
+"Visa status": "Hali ya visa",
+"Select your visa status.": "Chagua hali yako ya visa.",
+"Visa expiry / grace period ends": "Tarehe ya mwisho ya visa / muda wa neema",
+"Availability": "Upatikanaji",
+"Select when you can start.": "Chagua wakati unaweza kuanza kazi.",
+"Skills and duties are on us.": "Ujuzi na majukumu tunayaandika sisi.",
+"Pick your role and we write a professional summary, core competencies, key skills, professional skills and at least 10 duties for every job. Your CV ends with \"References available upon request\". You receive both PDF and Word files.": "Chagua nafasi yako nasi tutaandika muhtasari wa kitaaluma, ujuzi muhimu, ujuzi wa kazi na majukumu angalau 10 kwa kila kazi. CV yako itamalizika na \"Marejeo yanapatikana ukiyahitaji\". Utapokea faili za PDF na Word.",
+"Extra skills or software you want included": "Ujuzi wa ziada au programu unayotaka ziwepo",
+"e.g. SAP, 6G welding, Arabic typing, NEBOSH IGC": "mfano: SAP, kulehemu 6G, kuandika kwa Kiarabu, NEBOSH IGC",
+"Where do you want to work?": "Unataka kufanya kazi wapi?",
+"Work history": "Historia ya kazi",
+"Most recent first. Leave the duties box empty and we will write them for the job title. If you are a fresher, skip this step.": "Anza na kazi ya karibuni zaidi. Acha sehemu ya majukumu wazi na tutayaandika kwa jina la kazi hiyo. Kama wewe ni mwanzilishi (fresher), ruka hatua hii.",
+"Add job": "Ongeza kazi",
+"Education": "Elimu",
+"Add education": "Ongeza elimu",
+"Certificates and licences": "Vyeti na leseni",
+"List each certificate (for example Safety, Welding, Forklift, Driving, Medical). Add scans or photos if you want us to keep them with your order.": "Orodhesha kila cheti (kwa mfano Usalama, Kulehemu, Forklift, Kuendesha gari, Matibabu). Ongeza picha au nakala kama unataka tuzihifadhi na agizo lako.",
+"Add certificate": "Ongeza cheti",
+"Order of certificates on your CV": "Mpangilio wa vyeti kwenye CV yako",
+"Most relevant first": "Muhimu zaidi kwanza",
+"Matches the job you chose": "Inalingana na kazi uliyochagua",
+"Newest first": "Mpya zaidi kwanza",
+"By year": "Kwa mwaka",
+"As I listed them": "Kama nilivyoorodhesha",
+"Exactly my order": "Hasa mpangilio wangu",
+"Certificate scans or photos": "Nakala au picha za vyeti",
+"Tap to add files, or drop them here": "Bonyeza ili kuongeza faili, au ziweke hapa",
+"JPG, PNG or PDF. Pick as many as you need. Photos are shrunk on your phone before sending.": "JPG, PNG au PDF. Chagua kadri unavyohitaji. Picha hupunguzwa kwenye simu yako kabla ya kutumwa.",
+"Review": "Kagua",
+"How will you pay?": "Utalipaje?",
+"Payment is 100% upfront. Pick how you plan to pay and we will confirm on WhatsApp. No extra charges are added to any method.": "Malipo ni asilimia 100 kabla. Chagua njia unayopanga kulipa na tutathibitisha kwa WhatsApp. Hakuna gharama za ziada kwa njia yoyote.",
+"Anything else we should know?": "Kuna jambo lingine tunalopaswa kujua?",
+"Job advert link, company name, countries you are applying to...": "Kiungo cha tangazo la kazi, jina la kampuni, nchi unazoomba...",
+"I agree to the": "Nakubali",
+"Terms of Service": "Masharti ya Huduma",
+"and": "na",
+"Privacy Policy": "Sera ya Faragha",
+"I confirm my details are correct. 24-48 hour turnaround, one free minor revision within 3 days, extra revisions AED 15.": "Nathibitisha maelezo yangu ni sahihi. Muda wa kukamilisha ni masaa 24-48, marekebisho madogo mara moja bure ndani ya siku 3, marekebisho ya ziada AED 15.",
+"Please agree to the Terms of Service and Privacy Policy to continue.": "Tafadhali kubali Masharti ya Huduma na Sera ya Faragha ili kuendelea.",
+"Total": "Jumla",
+"Back": "Rudi",
+"Continue": "Endelea",
+"Sending your order": "Tunatuma agizo lako",
+"Please keep this page open.": "Tafadhali acha ukurasa huu wazi.",
+"Thank you,": "Asante,",
+"Your order is in.": "Agizo lako limepokelewa.",
+"Your reference number": "Namba yako ya marejeo",
+"Copy": "Nakili",
+"Save it. You can track progress or request a revision with this number.": "Hifadhi namba hii. Unaweza kufuatilia maendeleo au kuomba marekebisho ukitumia namba hii.",
+"What happens next": "Kinachofuata",
+"Pay the total below and send the confirmation on WhatsApp.": "Lipa jumla iliyo chini na tuma uthibitisho kwa WhatsApp.",
+"We write and design your documents, usually within 24 to 48 hours.": "Tunaandika na kupanga nyaraka zako, kwa kawaida ndani ya masaa 24 hadi 48.",
+"You get a copy by email (check your spam folder too) and in your order page. One minor revision is free for 3 days.": "Utapata nakala kwa barua pepe (angalia pia folder ya spam) na kwenye ukurasa wa agizo lako. Marekebisho madogo mara moja ni bure ndani ya siku 3.",
+"Amount due": "Kiasi cha kulipa",
+"Send payment proof on WhatsApp": "Tuma uthibitisho wa malipo kwa WhatsApp",
+"Track order": "Fuatilia agizo",
+"Remove language": "Ondoa lugha",
+"Job title": "Jina la kazi",
+"e.g. Civil Job Performer": "mfano: Civil Job Performer",
+"Company": "Kampuni",
+"Project": "Mradi",
+"e.g. Hail and Ghasha": "mfano: Hail and Ghasha",
+"Country": "Nchi",
+"City": "Mji",
+"From": "Kuanzia",
+"To": "Hadi",
+"I still work here": "Bado nafanya kazi hapa",
+"Your duties": "Majukumu yako",
+"(optional - we write them if empty)": "(si lazima - tutayaandika kama imeachwa wazi)",
+"One duty per line": "Jukumu moja kwa mstari",
+"About the company": "Kuhusu kampuni",
+"e.g. Leading contractor on a petrochemical expansion": "mfano: Mkandarasi mkuu katika upanuzi wa kiwanda cha petrokemikali",
+"Remove job": "Ondoa kazi",
+"Level": "Kiwango",
+"Course / field": "Kozi / fani",
+"e.g. Mechanical Engineering": "mfano: Uhandisi wa Mitambo",
+"School / institution": "Shule / taasisi",
+"Year completed": "Mwaka wa kumaliza",
+"Remove": "Ondoa",
+"Certificate name": "Jina la cheti",
+"e.g. H2S Awareness, ADNOC WMS, NEBOSH IGC": "mfano: H2S Awareness, ADNOC WMS, NEBOSH IGC",
+"Issued by": "Kilitolewa na",
+"Year": "Mwaka",
+"Type": "Aina",
+"Select nationality": "Chagua uraia",
+"Select country": "Chagua nchi",
+"Outside the GCC": "Nje ya nchi za GCC",
+"Prefer not to say": "Sipendi kusema",
+"Not specified": "Haijabainishwa",
+"Select visa status": "Chagua hali ya visa",
+"Select availability": "Chagua upatikanaji",
+"Select industry": "Chagua sekta",
+"Select level": "Chagua kiwango",
+"Included in this package.": "Imejumuishwa katika kifurushi hiki.",
+"No extra charge.": "Hakuna malipo ya ziada.",
+"Select city": "Chagua mji",
+"Other": "Nyingine",
+"Anywhere in the UAE": "Mahali popote UAE",
+"Open to relocate": "Niko tayari kuhama",
+"Select industry first": "Chagua sekta kwanza",
+"Select role": "Chagua nafasi",
+"Example skills we will include:": "Mfano wa ujuzi tutakaojumuisha:",
+"{n} file(s), about {mb} MB. Drag the cards, or use the arrows, to put them in the order you want.": "Faili {n}, takriban MB {mb}. Vuta kadi, au tumia vishale, kuzipanga kwa mpangilio unaotaka.",
+"Maximum {n} files": "Kiwango cha juu faili {n}",
+"{name} is too large (15 MB max)": "{name} ni kubwa mno (upeo MB 15)",
+"Step {n} of {total} - {name}": "Hatua ya {n} kati ya {total} - {name}",
+"Package and style": "Kifurushi na mtindo",
+"Target job": "Kazi inayolengwa",
+"Education and certificates": "Elimu na vyeti",
+"Review and payment": "Ukaguzi na malipo",
+"Submit order": "Tuma agizo",
+"We restored your unfinished order.": "Tumerejesha agizo lako lililokuwa halijakamilika.",
+"Start over": "Anza upya",
+"Package": "Kifurushi",
+"Style": "Mtindo",
+"Cover letter": "Barua ya maombi",
+"Yes": "Ndiyo",
+"No": "Hapana",
+"Name": "Jina",
+"Contact": "Mawasiliano",
+"Location": "Mahali",
+"Target": "Lengo",
+"{n} years": "miaka {n}",
+"Visa": "Visa",
+"Jobs / education / certificates": "Kazi / elimu / vyeti",
+"Files": "Faili",
+"+ photo": "+ picha",
+"Preparing your details": "Tunaandaa maelezo yako",
+"Uploading": "Tunapakia",
+"Writing your documents": "Tunaandika nyaraka zako",
+"Finishing": "Tunakamilisha",
+"Your documents are being written. This can take up to a minute.": "Nyaraka zako zinaandikwa. Hii inaweza kuchukua hadi dakika moja.",
+"This form is not connected to the server yet. Please message us on WhatsApp.": "Fomu hii haijaunganishwa na seva bado. Tafadhali tutumie ujumbe kwa WhatsApp.",
+"Your files are too large. Remove some and try again.": "Faili zako ni kubwa mno. Ondoa baadhi na ujaribu tena.",
+"Please complete the highlighted fields": "Tafadhali jaza sehemu zilizoangaziwa",
+"Your order was received. Some automatic extras did not complete, so we will follow up personally.": "Agizo lako limepokelewa. Baadhi ya hatua za kiotomatiki hazikukamilika, kwa hiyo tutawasiliana nawe binafsi.",
+"Use {ref} as the payment reference where possible.": "Tumia {ref} kama kumbukumbu ya malipo inapowezekana.",
+"Reference copied": "Namba ya marejeo imenakiliwa",
+"Form language": "Lugha ya fomu",
+"Match my own sample": "Lingana na mfano wangu",
+"I have my own CV and want you to match its style": "Nina CV yangu na nataka mtindo wake ufanane",
+"Upload it below and the style radios above are ignored - we copy its layout, not ours.": "Pakia hapa chini na chaguo za mtindo hapo juu hazitazingatiwa - tutanakili mpangilio wako, si wetu.",
+"Your sample CV": "Mfano wako wa CV",
+"What should we keep or change?": "Ni nini tunapaswa kubakiza au kubadilisha?",
+"e.g. keep the layout and colors, just update my details and add my new job": "mfano: bakiza mpangilio na rangi, ongeza tu maelezo yangu mapya na kazi yangu mpya",
+"Please upload your sample CV, or uncheck this option.": "Tafadhali pakia CV yako ya mfano, au ondoa tiki kwenye chaguo hili.",
+"Your own sample": "Mfano wako wewe mwenyewe",
+"+ your sample": "+ mfano wako",
+"Scan your ID or passport": "Changanua kitambulisho chako au pasipoti",
+"Optional. We try to read your name, nationality and date of birth from a photo of the printed strip at the bottom of your passport, or the back of your Emirates ID - so you can check it instead of typing it. You can still type everything yourself below.": "Hiari. Tunajaribu kusoma jina lako, uraia na tarehe ya kuzaliwa kutoka picha ya ukanda ulioandikwa chini ya ukurasa wa pasipoti, au nyuma ya Kitambulisho cha Emirates - ili uweze kuangalia badala ya kuandika. Bado unaweza kuandika kila kitu wewe mwenyewe hapa chini.",
+"Use these": "Tumia hizi",
+"Try a different photo": "Jaribu picha nyingine",
+"double-check this": "angalia hii tena",
+"not in our list, please pick it yourself": "haipo kwenye orodha yetu, tafadhali chagua mwenyewe",
+"Not read": "Haikusomwa",
+"This did not read very clearly. Please check each field carefully before using it, or try a clearer, well-lit photo.": "Hii haikusomwa vizuri sana. Tafadhali angalia kila sehemu kwa makini kabla ya kuitumia, au jaribu picha iliyo wazi zaidi na yenye mwanga mzuri.",
+"Please check this looks right before using it.": "Tafadhali angalia kama hii ni sahihi kabla ya kuitumia.",
+"Reading...": "Inasoma...",
+"Reading... {pct}%": "Inasoma... {pct}%",
+"We couldn't find the printed strip in that photo. Try the bottom of the passport page, or the back of the ID card, filling the frame in good light - or just type your details below.": "Hatukuweza kupata ukanda ulioandikwa kwenye picha hiyo. Jaribu chini ya ukurasa wa pasipoti, au nyuma ya kitambulisho, ikijaza fremu nzima na katika mwanga mzuri - au andika maelezo yako hapa chini.",
+"Could not read that photo. Check your connection and try again, or just type your details below.": "Haikuweza kusoma picha hiyo. Angalia mtandao wako na ujaribu tena, au andika maelezo yako hapa chini.",
+"Filled in - please double check everything below.": "Imejazwa - tafadhali angalia kila kitu hapa chini kwa makini.",
+"Check this date of birth - it doesn't look right.": "Angalia tarehe hii ya kuzaliwa - haionekani sahihi."
+},
+"hi": {
+"Order your CV": "अपनी CV ऑर्डर करें",
+"Takes about five minutes. You only need to tell us who you are and the job you want. We write the duties and skills for your role. Anything marked optional can be skipped.": "इसमें लगभग पांच मिनट लगते हैं। आपको सिर्फ़ यह बताना है कि आप कौन हैं और आपको कौन सी नौकरी चाहिए। हम आपकी भूमिका के लिए कर्तव्य और कौशल लिखते हैं। 'वैकल्पिक' लिखे किसी भी हिस्से को आप छोड़ सकते हैं।",
+"See sample CVs": "नमूना CV देखें",
+"or": "या",
+"watch the 1-minute guide": "1-मिनट गाइड देखें",
+"Your CV is always written in English, whichever language you pick here.": "आपकी CV हमेशा अंग्रेज़ी में लिखी जाती है, भले ही आप यहाँ कोई भी भाषा चुनें।",
+"Choose your package": "अपना पैकेज चुनें",
+"Add-ons": "अतिरिक्त सुविधाएं",
+"Matching cover letter": "मिलती-जुलती कवर लेटर",
+"Same design as your CV, written for your target role.": "आपकी CV जैसा ही डिज़ाइन, आपकी लक्षित भूमिका के लिए लिखा गया।",
+"Same design as your CV, written for your target role": "आपकी CV जैसा ही डिज़ाइन, आपकी लक्षित भूमिका के लिए लिखा गया",
+"CV style": "CV शैली",
+"ATS styles are plain on purpose so recruitment software can read them. Other styles are for sending directly to people.": "ATS शैलियाँ जानबूझकर सादी रखी जाती हैं ताकि भर्ती सॉफ़्टवेयर उन्हें पढ़ सके। अन्य शैलियाँ सीधे लोगों को भेजने के लिए हैं।",
+"About you": "आपके बारे में",
+"Full name": "पूरा नाम",
+"As on your passport": "जैसा आपके पासपोर्ट पर है",
+"Enter your full name.": "अपना पूरा नाम दर्ज करें।",
+"Email": "ईमेल",
+"Enter a valid email address.": "एक मान्य ईमेल पता दर्ज करें।",
+"Phone / WhatsApp": "फ़ोन / WhatsApp",
+"Enter your phone number with country code.": "देश कोड के साथ अपना फ़ोन नंबर दर्ज करें।",
+"Nationality": "राष्ट्रीयता",
+"Select your nationality.": "अपनी राष्ट्रीयता चुनें।",
+"Where are you now?": "आप अभी कहाँ हैं?",
+"Select your current country.": "अपना वर्तमान देश चुनें।",
+"City / area": "शहर / क्षेत्र",
+"Type your city": "अपना शहर लिखें",
+"Date of birth": "जन्म तिथि",
+"(optional)": "(वैकल्पिक)",
+"Marital status": "वैवाहिक स्थिति",
+"Languages": "भाषाएं",
+"Add language": "भाषा जोड़ें",
+"Driving licence": "ड्राइविंग लाइसेंस",
+"Photo": "फोटो",
+"(optional, for non-ATS styles)": "(वैकल्पिक, गैर-ATS शैलियों के लिए)",
+"Plain background, head and shoulders.": "सादा पृष्ठभूमि, सिर और कंधे।",
+"The job you want": "जो नौकरी आप चाहते हैं",
+"Industry": "उद्योग",
+"Select an industry.": "एक उद्योग चुनें।",
+"Role": "भूमिका",
+"Select a role.": "एक भूमिका चुनें।",
+"Your job title": "आपका पद नाम",
+"Type the job title.": "पद नाम लिखें।",
+"Experience level": "अनुभव स्तर",
+"Select your level.": "अपना स्तर चुनें।",
+"Total years of experience": "कुल अनुभव के वर्ष",
+"Enter a number from 0 to 50.": "0 से 50 के बीच एक संख्या दर्ज करें।",
+"Visa status": "वीज़ा स्थिति",
+"Select your visa status.": "अपनी वीज़ा स्थिति चुनें।",
+"Visa expiry / grace period ends": "वीज़ा समाप्ति / छूट अवधि समाप्त होने की तारीख",
+"Availability": "उपलब्धता",
+"Select when you can start.": "आप कब शुरू कर सकते हैं चुनें।",
+"Skills and duties are on us.": "कौशल और कर्तव्य हमारी ज़िम्मेदारी हैं।",
+"Pick your role and we write a professional summary, core competencies, key skills, professional skills and at least 10 duties for every job. Your CV ends with \"References available upon request\". You receive both PDF and Word files.": "अपनी भूमिका चुनें और हम एक पेशेवर सारांश, मुख्य योग्यताएं, मुख्य कौशल, व्यावसायिक कौशल और हर नौकरी के लिए कम से कम 10 कर्तव्य लिखेंगे। आपकी CV \"संदर्भ मांगे जाने पर उपलब्ध हैं\" के साथ समाप्त होती है। आपको PDF और Word दोनों फ़ाइलें मिलेंगी।",
+"Extra skills or software you want included": "अतिरिक्त कौशल या सॉफ़्टवेयर जो आप शामिल करना चाहते हैं",
+"e.g. SAP, 6G welding, Arabic typing, NEBOSH IGC": "उदाहरण: SAP, 6G वेल्डिंग, अरबी टाइपिंग, NEBOSH IGC",
+"Where do you want to work?": "आप कहाँ काम करना चाहते हैं?",
+"Work history": "कार्य अनुभव",
+"Most recent first. Leave the duties box empty and we will write them for the job title. If you are a fresher, skip this step.": "सबसे हाल की नौकरी पहले। कर्तव्यों का बॉक्स खाली छोड़ दें, हम पद के नाम के आधार पर उन्हें लिख देंगे। यदि आप फ्रेशर हैं, तो यह चरण छोड़ दें।",
+"Add job": "नौकरी जोड़ें",
+"Education": "शिक्षा",
+"Add education": "शिक्षा जोड़ें",
+"Certificates and licences": "प्रमाणपत्र और लाइसेंस",
+"List each certificate (for example Safety, Welding, Forklift, Driving, Medical). Add scans or photos if you want us to keep them with your order.": "हर प्रमाणपत्र सूचीबद्ध करें (उदाहरण: सुरक्षा, वेल्डिंग, फोर्कलिफ्ट, ड्राइविंग, मेडिकल)। यदि आप चाहें कि हम उन्हें आपके ऑर्डर के साथ रखें, तो स्कैन या फोटो जोड़ें।",
+"Add certificate": "प्रमाणपत्र जोड़ें",
+"Order of certificates on your CV": "आपकी CV पर प्रमाणपत्रों का क्रम",
+"Most relevant first": "सबसे ज़रूरी पहले",
+"Matches the job you chose": "आपके द्वारा चुनी गई नौकरी से मेल खाता है",
+"Newest first": "सबसे नया पहले",
+"By year": "वर्ष के अनुसार",
+"As I listed them": "जैसा मैंने सूचीबद्ध किया",
+"Exactly my order": "ठीक मेरे क्रम में",
+"Certificate scans or photos": "प्रमाणपत्रों के स्कैन या फोटो",
+"Tap to add files, or drop them here": "फ़ाइलें जोड़ने के लिए टैप करें, या उन्हें यहां छोड़ें",
+"JPG, PNG or PDF. Pick as many as you need. Photos are shrunk on your phone before sending.": "JPG, PNG या PDF। जितनी ज़रूरत हो चुनें। भेजने से पहले फोटो आपके फ़ोन पर छोटी कर दी जाती हैं।",
+"Review": "समीक्षा",
+"How will you pay?": "आप भुगतान कैसे करेंगे?",
+"Payment is 100% upfront. Pick how you plan to pay and we will confirm on WhatsApp. No extra charges are added to any method.": "भुगतान 100% अग्रिम है। आप जिस तरीके से भुगतान करने की योजना बना रहे हैं उसे चुनें, हम WhatsApp पर पुष्टि करेंगे। किसी भी तरीके पर कोई अतिरिक्त शुल्क नहीं जोड़ा जाता।",
+"Anything else we should know?": "क्या हमें कुछ और बताना चाहिए?",
+"Job advert link, company name, countries you are applying to...": "नौकरी विज्ञापन लिंक, कंपनी का नाम, जिन देशों में आवेदन कर रहे हैं...",
+"I agree to the": "मैं सहमत हूं",
+"Terms of Service": "सेवा की शर्तें",
+"and": "और",
+"Privacy Policy": "गोपनीयता नीति",
+"I confirm my details are correct. 24-48 hour turnaround, one free minor revision within 3 days, extra revisions AED 15.": "मैं पुष्टि करता/करती हूं कि मेरी जानकारी सही है। 24-48 घंटे की अवधि, 3 दिनों के भीतर एक छोटा संशोधन मुफ़्त, अतिरिक्त संशोधन AED 15।",
+"Please agree to the Terms of Service and Privacy Policy to continue.": "कृपया जारी रखने के लिए सेवा की शर्तें और गोपनीयता नीति से सहमत हों।",
+"Total": "कुल",
+"Back": "वापस",
+"Continue": "जारी रखें",
+"Sending your order": "आपका ऑर्डर भेजा जा रहा है",
+"Please keep this page open.": "कृपया यह पेज खुला रखें।",
+"Thank you,": "धन्यवाद,",
+"Your order is in.": "आपका ऑर्डर मिल गया है।",
+"Your reference number": "आपका संदर्भ नंबर",
+"Copy": "कॉपी करें",
+"Save it. You can track progress or request a revision with this number.": "इसे सुरक्षित रखें। आप इस नंबर से प्रगति ट्रैक कर सकते हैं या संशोधन का अनुरोध कर सकते हैं।",
+"What happens next": "आगे क्या होगा",
+"Pay the total below and send the confirmation on WhatsApp.": "नीचे दी गई राशि का भुगतान करें और WhatsApp पर पुष्टि भेजें।",
+"We write and design your documents, usually within 24 to 48 hours.": "हम आपके दस्तावेज़ लिखते और डिज़ाइन करते हैं, सामान्यतः 24 से 48 घंटों के भीतर।",
+"You get a copy by email (check your spam folder too) and in your order page. One minor revision is free for 3 days.": "आपको ईमेल से एक कॉपी मिलेगी (स्पैम फ़ोल्डर भी देखें) और आपके ऑर्डर पेज पर भी। एक छोटा संशोधन 3 दिनों तक मुफ़्त है।",
+"Amount due": "देय राशि",
+"Send payment proof on WhatsApp": "WhatsApp पर भुगतान प्रमाण भेजें",
+"Track order": "ऑर्डर ट्रैक करें",
+"Remove language": "भाषा हटाएं",
+"Job title": "पद का नाम",
+"e.g. Civil Job Performer": "उदाहरण: Civil Job Performer",
+"Company": "कंपनी",
+"Project": "प्रोजेक्ट",
+"e.g. Hail and Ghasha": "उदाहरण: Hail and Ghasha",
+"Country": "देश",
+"City": "शहर",
+"From": "से",
+"To": "तक",
+"I still work here": "मैं अभी भी यहां काम करता/करती हूं",
+"Your duties": "आपके कर्तव्य",
+"(optional - we write them if empty)": "(वैकल्पिक - खाली छोड़ने पर हम लिख देंगे)",
+"One duty per line": "हर पंक्ति में एक कर्तव्य",
+"About the company": "कंपनी के बारे में",
+"e.g. Leading contractor on a petrochemical expansion": "उदाहरण: पेट्रोकेमिकल विस्तार परियोजना पर प्रमुख ठेकेदार",
+"Remove job": "नौकरी हटाएं",
+"Level": "स्तर",
+"Course / field": "कोर्स / क्षेत्र",
+"e.g. Mechanical Engineering": "उदाहरण: मैकेनिकल इंजीनियरिंग",
+"School / institution": "स्कूल / संस्थान",
+"Year completed": "पूर्ण होने का वर्ष",
+"Remove": "हटाएं",
+"Certificate name": "प्रमाणपत्र का नाम",
+"e.g. H2S Awareness, ADNOC WMS, NEBOSH IGC": "उदाहरण: H2S Awareness, ADNOC WMS, NEBOSH IGC",
+"Issued by": "जारीकर्ता",
+"Year": "वर्ष",
+"Type": "प्रकार",
+"Select nationality": "राष्ट्रीयता चुनें",
+"Select country": "देश चुनें",
+"Outside the GCC": "GCC के बाहर",
+"Prefer not to say": "बताना नहीं चाहते",
+"Not specified": "निर्दिष्ट नहीं",
+"Select visa status": "वीज़ा स्थिति चुनें",
+"Select availability": "उपलब्धता चुनें",
+"Select industry": "उद्योग चुनें",
+"Select level": "स्तर चुनें",
+"Included in this package.": "यह इस पैकेज में शामिल है।",
+"No extra charge.": "कोई अतिरिक्त शुल्क नहीं।",
+"Select city": "शहर चुनें",
+"Other": "अन्य",
+"Anywhere in the UAE": "UAE में कहीं भी",
+"Open to relocate": "स्थानांतरित होने के लिए तैयार",
+"Select industry first": "पहले उद्योग चुनें",
+"Select role": "भूमिका चुनें",
+"Example skills we will include:": "हम जो कौशल शामिल करेंगे, उसका उदाहरण:",
+"{n} file(s), about {mb} MB. Drag the cards, or use the arrows, to put them in the order you want.": "{n} फ़ाइल(ें), लगभग {mb} MB। कार्ड को खींचें, या तीरों का उपयोग करें, उन्हें अपने चाहे क्रम में रखने के लिए।",
+"Maximum {n} files": "अधिकतम {n} फ़ाइलें",
+"{name} is too large (15 MB max)": "{name} बहुत बड़ी है (अधिकतम 15 MB)",
+"Step {n} of {total} - {name}": "चरण {n} / {total} - {name}",
+"Package and style": "पैकेज और शैली",
+"Target job": "लक्षित नौकरी",
+"Education and certificates": "शिक्षा और प्रमाणपत्र",
+"Review and payment": "समीक्षा और भुगतान",
+"Submit order": "ऑर्डर जमा करें",
+"We restored your unfinished order.": "हमने आपका अधूरा ऑर्डर पुनर्स्थापित कर दिया है।",
+"Start over": "फिर से शुरू करें",
+"Package": "पैकेज",
+"Style": "शैली",
+"Cover letter": "कवर लेटर",
+"Yes": "हां",
+"No": "नहीं",
+"Name": "नाम",
+"Contact": "संपर्क",
+"Location": "स्थान",
+"Target": "लक्ष्य",
+"{n} years": "{n} वर्ष",
+"Visa": "वीज़ा",
+"Jobs / education / certificates": "नौकरियां / शिक्षा / प्रमाणपत्र",
+"Files": "फ़ाइलें",
+"+ photo": "+ फोटो",
+"Preparing your details": "आपका विवरण तैयार किया जा रहा है",
+"Uploading": "अपलोड हो रहा है",
+"Writing your documents": "आपके दस्तावेज़ लिखे जा रहे हैं",
+"Finishing": "समाप्त हो रहा है",
+"Your documents are being written. This can take up to a minute.": "आपके दस्तावेज़ लिखे जा रहे हैं। इसमें एक मिनट तक लग सकता है।",
+"This form is not connected to the server yet. Please message us on WhatsApp.": "यह फ़ॉर्म अभी सर्वर से जुड़ा नहीं है। कृपया हमें WhatsApp पर संदेश भेजें।",
+"Your files are too large. Remove some and try again.": "आपकी फ़ाइलें बहुत बड़ी हैं। कुछ हटाएं और फिर से प्रयास करें।",
+"Please complete the highlighted fields": "कृपया हाइलाइट किए गए फ़ील्ड पूरे करें",
+"Your order was received. Some automatic extras did not complete, so we will follow up personally.": "आपका ऑर्डर प्राप्त हो गया है। कुछ स्वचालित अतिरिक्त कार्य पूरे नहीं हुए, इसलिए हम आपसे व्यक्तिगत रूप से संपर्क करेंगे।",
+"Use {ref} as the payment reference where possible.": "जहां संभव हो, भुगतान संदर्भ के रूप में {ref} का उपयोग करें।",
+"Reference copied": "संदर्भ कॉपी हो गया",
+"Form language": "फॉर्म की भाषा",
+"Match my own sample": "मेरा खुद का नमूना मिलाएं",
+"I have my own CV and want you to match its style": "मेरी अपनी CV है और मैं चाहता/चाहती हूं कि आप इसकी शैली मिलाएं",
+"Upload it below and the style radios above are ignored - we copy its layout, not ours.": "नीचे अपलोड करें और ऊपर दी गई शैली के विकल्पों को अनदेखा किया जाएगा - हम आपका लेआउट कॉपी करेंगे, अपना नहीं।",
+"Your sample CV": "आपकी नमूना CV",
+"What should we keep or change?": "हमें क्या रखना या बदलना चाहिए?",
+"e.g. keep the layout and colors, just update my details and add my new job": "उदाहरण: लेआउट और रंग वही रखें, सिर्फ मेरी जानकारी और नई नौकरी जोड़ें",
+"Please upload your sample CV, or uncheck this option.": "कृपया अपनी नमूना CV अपलोड करें, या इस विकल्प को अनचेक करें।",
+"Your own sample": "आपका अपना नमूना",
+"+ your sample": "+ आपका नमूना",
+"Scan your ID or passport": "अपना आईडी या पासपोर्ट स्कैन करें",
+"Optional. We try to read your name, nationality and date of birth from a photo of the printed strip at the bottom of your passport, or the back of your Emirates ID - so you can check it instead of typing it. You can still type everything yourself below.": "वैकल्पिक। हम आपके पासपोर्ट के नीचे की छपी पट्टी, या एमिरेट्स आईडी के पीछे की तस्वीर से आपका नाम, राष्ट्रीयता और जन्म तिथि पढ़ने की कोशिश करते हैं - ताकि आप टाइप करने के बजाय जांच सकें। आप नीचे सब कुछ खुद भी टाइप कर सकते हैं।",
+"Use these": "इन्हें उपयोग करें",
+"Try a different photo": "अलग तस्वीर आज़माएं",
+"double-check this": "इसे दोबारा जांचें",
+"not in our list, please pick it yourself": "हमारी सूची में नहीं है, कृपया इसे स्वयं चुनें",
+"Not read": "नहीं पढ़ा गया",
+"This did not read very clearly. Please check each field carefully before using it, or try a clearer, well-lit photo.": "यह बहुत स्पष्ट रूप से नहीं पढ़ा गया। कृपया उपयोग करने से पहले हर फ़ील्ड ध्यान से जांचें, या अधिक स्पष्ट, अच्छी रोशनी वाली तस्वीर आज़माएं।",
+"Please check this looks right before using it.": "उपयोग करने से पहले कृपया जांचें कि यह सही दिखता है।",
+"Reading...": "पढ़ रहे हैं...",
+"Reading... {pct}%": "पढ़ रहे हैं... {pct}%",
+"We couldn't find the printed strip in that photo. Try the bottom of the passport page, or the back of the ID card, filling the frame in good light - or just type your details below.": "हमें उस तस्वीर में छपी पट्टी नहीं मिली। पासपोर्ट पेज के नीचे, या आईडी कार्ड के पीछे की कोशिश करें, पूरे फ्रेम में और अच्छी रोशनी में - या नीचे अपना विवरण स्वयं टाइप करें।",
+"Could not read that photo. Check your connection and try again, or just type your details below.": "उस तस्वीर को पढ़ा नहीं जा सका। अपना कनेक्शन जांचें और फिर कोशिश करें, या नीचे अपना विवरण स्वयं टाइप करें।",
+"Filled in - please double check everything below.": "भर दिया गया - कृपया नीचे सब कुछ दोबारा जांचें।",
+"Check this date of birth - it doesn't look right.": "यह जन्म तिथि जांचें - यह सही नहीं लग रही।"
+},
+"ar": {
+"Order your CV": "اطلب سيرتك الذاتية",
+"Takes about five minutes. You only need to tell us who you are and the job you want. We write the duties and skills for your role. Anything marked optional can be skipped.": "يستغرق الأمر حوالي خمس دقائق. كل ما تحتاج إخبارنا به هو من أنت والوظيفة التي تريدها. نحن نكتب المهام والمهارات لدورك. أي شيء مكتوب عليه «اختياري» يمكنك تخطيه.",
+"See sample CVs": "شاهد نماذج السير الذاتية",
+"or": "أو",
+"watch the 1-minute guide": "شاهد الدليل المدته دقيقة واحدة",
+"Your CV is always written in English, whichever language you pick here.": "تُكتب سيرتك الذاتية دائمًا بالإنجليزية، بغض النظر عن اللغة التي تختارها هنا.",
+"Choose your package": "اختر باقتك",
+"Add-ons": "إضافات",
+"Matching cover letter": "خطاب تغطية مطابق",
+"Same design as your CV, written for your target role.": "نفس تصميم سيرتك الذاتية، مكتوب لدورك المستهدف.",
+"Same design as your CV, written for your target role": "نفس تصميم سيرتك الذاتية، مكتوب لدورك المستهدف",
+"CV style": "نمط السيرة الذاتية",
+"ATS styles are plain on purpose so recruitment software can read them. Other styles are for sending directly to people.": "أنماط ATS بسيطة عن قصد حتى تستطيع برامج التوظيف قراءتها. الأنماط الأخرى مخصصة للإرسال المباشر للأشخاص.",
+"About you": "عنك",
+"Full name": "الاسم الكامل",
+"As on your passport": "كما هو في جواز سفرك",
+"Enter your full name.": "أدخل اسمك الكامل.",
+"Email": "البريد الإلكتروني",
+"Enter a valid email address.": "أدخل عنوان بريد إلكتروني صحيح.",
+"Phone / WhatsApp": "الهاتف / واتساب",
+"Enter your phone number with country code.": "أدخل رقم هاتفك مع رمز الدولة.",
+"Nationality": "الجنسية",
+"Select your nationality.": "اختر جنسيتك.",
+"Where are you now?": "أين أنت الآن؟",
+"Select your current country.": "اختر بلدك الحالي.",
+"City / area": "المدينة / المنطقة",
+"Type your city": "اكتب مدينتك",
+"Date of birth": "تاريخ الميلاد",
+"(optional)": "(اختياري)",
+"Marital status": "الحالة الاجتماعية",
+"Languages": "اللغات",
+"Add language": "إضافة لغة",
+"Driving licence": "رخصة القيادة",
+"Photo": "صورة",
+"(optional, for non-ATS styles)": "(اختياري، للأنماط غير ATS)",
+"Plain background, head and shoulders.": "خلفية بسيطة، الرأس والكتفين.",
+"The job you want": "الوظيفة التي تريدها",
+"Industry": "الصناعة",
+"Select an industry.": "اختر صناعة.",
+"Role": "الدور",
+"Select a role.": "اختر دورًا.",
+"Your job title": "لقبك الوظيفي",
+"Type the job title.": "اكتب اللقب الوظيفي.",
+"Experience level": "مستوى الخبرة",
+"Select your level.": "اختر مستواك.",
+"Total years of experience": "إجمالي سنوات الخبرة",
+"Enter a number from 0 to 50.": "أدخل رقمًا من 0 إلى 50.",
+"Visa status": "حالة التأشيرة",
+"Select your visa status.": "اختر حالة تأشيرتك.",
+"Visa expiry / grace period ends": "انتهاء التأشيرة / نهاية فترة السماح",
+"Availability": "التوفر",
+"Select when you can start.": "اختر وقت إمكانية البدء.",
+"Skills and duties are on us.": "المهارات والمهام من مسؤوليتنا.",
+"Pick your role and we write a professional summary, core competencies, key skills, professional skills and at least 10 duties for every job. Your CV ends with \"References available upon request\". You receive both PDF and Word files.": "اختر دورك ونحن سنكتب ملخصًا مهنيًا، وكفاءات أساسية، ومهارات رئيسية، ومهارات مهنية، وعلى الأقل 10 مهام لكل وظيفة. تنتهي سيرتك الذاتية بعبارة «المراجع متوفرة عند الطلب». ستحصل على ملفي PDF و Word.",
+"Extra skills or software you want included": "مهارات أو برامج إضافية تريد تضمينها",
+"e.g. SAP, 6G welding, Arabic typing, NEBOSH IGC": "مثال: SAP، لحام 6G، الكتابة بالعربية، NEBOSH IGC",
+"Where do you want to work?": "أين تريد العمل؟",
+"Work history": "تاريخ العمل",
+"Most recent first. Leave the duties box empty and we will write them for the job title. If you are a fresher, skip this step.": "الأحدث أولاً. اترك مربع المهام فارغًا وسنكتبها حسب اللقب الوظيفي. إذا كنت حديث التخرج، تخطَّ هذه الخطوة.",
+"Add job": "إضافة وظيفة",
+"Education": "التعليم",
+"Add education": "إضافة تعليم",
+"Certificates and licences": "الشهادات والتراخيص",
+"List each certificate (for example Safety, Welding, Forklift, Driving, Medical). Add scans or photos if you want us to keep them with your order.": "اذكر كل شهادة (مثل السلامة، اللحام، الرافعة الشوكية، القيادة، الطبية). أضف صورًا أو نسخًا ممسوحة إذا أردت أن نحفظها مع طلبك.",
+"Add certificate": "إضافة شهادة",
+"Order of certificates on your CV": "ترتيب الشهادات في سيرتك الذاتية",
+"Most relevant first": "الأكثر صلة أولًا",
+"Matches the job you chose": "يطابق الوظيفة التي اخترتها",
+"Newest first": "الأحدث أولًا",
+"By year": "بحسب السنة",
+"As I listed them": "كما أدرجتها",
+"Exactly my order": "بالترتيب الذي حددته تمامًا",
+"Certificate scans or photos": "صور أو نسخ ممسوحة من الشهادات",
+"Tap to add files, or drop them here": "اضغط لإضافة ملفات، أو أسقطها هنا",
+"JPG, PNG or PDF. Pick as many as you need. Photos are shrunk on your phone before sending.": "JPG أو PNG أو PDF. اختر بقدر ما تحتاج. يتم تصغير الصور على هاتفك قبل الإرسال.",
+"Review": "مراجعة",
+"How will you pay?": "كيف ستدفع؟",
+"Payment is 100% upfront. Pick how you plan to pay and we will confirm on WhatsApp. No extra charges are added to any method.": "الدفع 100% مقدمًا. اختر طريقة الدفع التي تخطط لها وسنؤكد ذلك عبر واتساب. لا توجد رسوم إضافية على أي طريقة.",
+"Anything else we should know?": "هل هناك أي شيء آخر يجب أن نعرفه؟",
+"Job advert link, company name, countries you are applying to...": "رابط إعلان الوظيفة، اسم الشركة، البلدان التي تتقدم إليها...",
+"I agree to the": "أوافق على",
+"Terms of Service": "شروط الخدمة",
+"and": "و",
+"Privacy Policy": "سياسة الخصوصية",
+"I confirm my details are correct. 24-48 hour turnaround, one free minor revision within 3 days, extra revisions AED 15.": "أؤكد أن بياناتي صحيحة. مدة التسليم 24-48 ساعة، تعديل طفيف واحد مجاني خلال 3 أيام، التعديلات الإضافية بسعر 15 درهم.",
+"Please agree to the Terms of Service and Privacy Policy to continue.": "يرجى الموافقة على شروط الخدمة وسياسة الخصوصية للمتابعة.",
+"Total": "الإجمالي",
+"Back": "رجوع",
+"Continue": "استمرار",
+"Sending your order": "جاري إرسال طلبك",
+"Please keep this page open.": "يرجى ترك هذه الصفحة مفتوحة.",
+"Thank you,": "شكرًا لك،",
+"Your order is in.": "تم استلام طلبك.",
+"Your reference number": "رقم مرجعك",
+"Copy": "نسخ",
+"Save it. You can track progress or request a revision with this number.": "احفظه. يمكنك تتبع التقدم أو طلب تعديل باستخدام هذا الرقم.",
+"What happens next": "ما يحدث بعد ذلك",
+"Pay the total below and send the confirmation on WhatsApp.": "ادفع المبلغ الإجمالي أدناه وأرسل تأكيد الدفع عبر واتساب.",
+"We write and design your documents, usually within 24 to 48 hours.": "نكتب ونصمم وثائقك، عادةً في غضون 24 إلى 48 ساعة.",
+"You get a copy by email (check your spam folder too) and in your order page. One minor revision is free for 3 days.": "ستحصل على نسخة عبر البريد الإلكتروني (تحقق من مجلد الرسائل غير المرغوب فيها أيضًا) وفي صفحة طلبك. تعديل طفيف واحد مجاني لمدة 3 أيام.",
+"Amount due": "المبلغ المستحق",
+"Send payment proof on WhatsApp": "إرسال إثبات الدفع عبر واتساب",
+"Track order": "تتبع الطلب",
+"Remove language": "إزالة اللغة",
+"Job title": "اللقب الوظيفي",
+"e.g. Civil Job Performer": "مثال: Civil Job Performer",
+"Company": "الشركة",
+"Project": "المشروع",
+"e.g. Hail and Ghasha": "مثال: Hail and Ghasha",
+"Country": "البلد",
+"City": "المدينة",
+"From": "من",
+"To": "إلى",
+"I still work here": "ما زلت أعمل هنا",
+"Your duties": "مهامك",
+"(optional - we write them if empty)": "(اختياري - سنكتبها إذا تُرك فارغًا)",
+"One duty per line": "مهمة واحدة في كل سطر",
+"About the company": "عن الشركة",
+"e.g. Leading contractor on a petrochemical expansion": "مثال: مقاول رئيسي في مشروع توسعة بتروكيماوي",
+"Remove job": "إزالة الوظيفة",
+"Level": "المستوى",
+"Course / field": "الدورة / المجال",
+"e.g. Mechanical Engineering": "مثال: الهندسة الميكانيكية",
+"School / institution": "المدرسة / المؤسسة",
+"Year completed": "سنة التخرج",
+"Remove": "إزالة",
+"Certificate name": "اسم الشهادة",
+"e.g. H2S Awareness, ADNOC WMS, NEBOSH IGC": "مثال: H2S Awareness، ADNOC WMS، NEBOSH IGC",
+"Issued by": "جهة الإصدار",
+"Year": "السنة",
+"Type": "النوع",
+"Select nationality": "اختر الجنسية",
+"Select country": "اختر البلد",
+"Outside the GCC": "خارج دول مجلس التعاون الخليجي",
+"Prefer not to say": "أفضل عدم القول",
+"Not specified": "غير محدد",
+"Select visa status": "اختر حالة التأشيرة",
+"Select availability": "اختر التوفر",
+"Select industry": "اختر الصناعة",
+"Select level": "اختر المستوى",
+"Included in this package.": "مشمول في هذه الباقة.",
+"No extra charge.": "لا رسوم إضافية.",
+"Select city": "اختر المدينة",
+"Other": "أخرى",
+"Anywhere in the UAE": "في أي مكان بالإمارات",
+"Open to relocate": "مستعد للانتقال",
+"Select industry first": "اختر الصناعة أولاً",
+"Select role": "اختر الدور",
+"Example skills we will include:": "مثال على المهارات التي سنضمّنها:",
+"{n} file(s), about {mb} MB. Drag the cards, or use the arrows, to put them in the order you want.": "{n} ملف/ملفات، حوالي {mb} ميجابايت. اسحب البطاقات، أو استخدم الأسهم، لترتيبها كما تريد.",
+"Maximum {n} files": "الحد الأقصى {n} ملفات",
+"{name} is too large (15 MB max)": "{name} كبير جدًا (الحد الأقصى 15 ميجابايت)",
+"Step {n} of {total} - {name}": "الخطوة {n} من {total} - {name}",
+"Package and style": "الباقة والنمط",
+"Target job": "الوظيفة المستهدفة",
+"Education and certificates": "التعليم والشهادات",
+"Review and payment": "المراجعة والدفع",
+"Submit order": "إرسال الطلب",
+"We restored your unfinished order.": "لقد استعدنا طلبك غير المكتمل.",
+"Start over": "البدء من جديد",
+"Package": "الباقة",
+"Style": "النمط",
+"Cover letter": "خطاب التغطية",
+"Yes": "نعم",
+"No": "لا",
+"Name": "الاسم",
+"Contact": "التواصل",
+"Location": "الموقع",
+"Target": "الهدف",
+"{n} years": "{n} سنوات",
+"Visa": "التأشيرة",
+"Jobs / education / certificates": "الوظائف / التعليم / الشهادات",
+"Files": "الملفات",
+"+ photo": "+ صورة",
+"Preparing your details": "جاري تحضير بياناتك",
+"Uploading": "جاري الرفع",
+"Writing your documents": "جاري كتابة وثائقك",
+"Finishing": "جاري الإنهاء",
+"Your documents are being written. This can take up to a minute.": "يتم كتابة وثائقك الآن. قد يستغرق هذا دقيقة واحدة.",
+"This form is not connected to the server yet. Please message us on WhatsApp.": "هذا النموذج غير متصل بالخادم بعد. يرجى مراسلتنا عبر واتساب.",
+"Your files are too large. Remove some and try again.": "ملفاتك كبيرة جدًا. أزل بعضها وحاول مرة أخرى.",
+"Please complete the highlighted fields": "يرجى إكمال الحقول المظللة",
+"Your order was received. Some automatic extras did not complete, so we will follow up personally.": "تم استلام طلبك. لم تكتمل بعض الإضافات التلقائية، لذلك سنتابع معك شخصيًا.",
+"Use {ref} as the payment reference where possible.": "استخدم {ref} كمرجع للدفع حيثما أمكن.",
+"Reference copied": "تم نسخ المرجع",
+"Form language": "لغة النموذج",
+"Match my own sample": "مطابقة نموذجي الخاص",
+"I have my own CV and want you to match its style": "لدي سيرتي الذاتية الخاصة وأريد أن تطابقوا نمطها",
+"Upload it below and the style radios above are ignored - we copy its layout, not ours.": "قم بالتحميل أدناه وسيتم تجاهل خيارات النمط أعلاه - سننسخ تخطيطك، لا تخطيطنا.",
+"Your sample CV": "نموذج سيرتك الذاتية",
+"What should we keep or change?": "ما الذي يجب أن نحتفظ به أو نغيره؟",
+"e.g. keep the layout and colors, just update my details and add my new job": "مثال: احتفظ بالتخطيط والألوان، فقط حدّث بياناتي وأضف وظيفتي الجديدة",
+"Please upload your sample CV, or uncheck this option.": "يرجى تحميل سيرتك الذاتية النموذجية، أو إلغاء تحديد هذا الخيار.",
+"Your own sample": "نموذجك الخاص",
+"+ your sample": "+ نموذجك",
+"Scan your ID or passport": "مسح هويتك أو جواز سفرك",
+"Optional. We try to read your name, nationality and date of birth from a photo of the printed strip at the bottom of your passport, or the back of your Emirates ID - so you can check it instead of typing it. You can still type everything yourself below.": "اختياري. نحاول قراءة اسمك وجنسيتك وتاريخ ميلادك من صورة للشريط المطبوع في أسفل صفحة جواز السفر، أو خلف بطاقة الهوية الإماراتية - حتى تتمكن من التحقق منها بدلاً من كتابتها. لا يزال بإمكانك كتابة كل شيء بنفسك أدناه.",
+"Use these": "استخدم هذه",
+"Try a different photo": "جرّب صورة مختلفة",
+"double-check this": "تحقق من هذا مرة أخرى",
+"not in our list, please pick it yourself": "غير موجود في قائمتنا، يرجى اختياره بنفسك",
+"Not read": "لم تُقرأ",
+"This did not read very clearly. Please check each field carefully before using it, or try a clearer, well-lit photo.": "لم تُقرأ هذه بوضوح كافٍ. يرجى التحقق من كل حقل بعناية قبل استخدامه، أو جرّب صورة أوضح وبإضاءة جيدة.",
+"Please check this looks right before using it.": "يرجى التحقق من أن هذا يبدو صحيحًا قبل استخدامه.",
+"Reading...": "جارٍ القراءة...",
+"Reading... {pct}%": "جارٍ القراءة... {pct}%",
+"We couldn't find the printed strip in that photo. Try the bottom of the passport page, or the back of the ID card, filling the frame in good light - or just type your details below.": "لم نتمكن من العثور على الشريط المطبوع في تلك الصورة. جرّب أسفل صفحة جواز السفر، أو خلف بطاقة الهوية، مع ملء الإطار بالكامل وفي إضاءة جيدة - أو اكتب بياناتك أدناه بنفسك.",
+"Could not read that photo. Check your connection and try again, or just type your details below.": "تعذّرت قراءة تلك الصورة. تحقق من اتصالك وحاول مرة أخرى، أو اكتب بياناتك أدناه بنفسك.",
+"Filled in - please double check everything below.": "تم التعبئة - يرجى التحقق من كل شيء أدناه مرة أخرى.",
+"Check this date of birth - it doesn't look right.": "تحقق من تاريخ الميلاد هذا - لا يبدو صحيحًا."
+},
+"ne": {
+"Order your CV": "आफ्नो CV अर्डर गर्नुहोस्",
+"Takes about five minutes. You only need to tell us who you are and the job you want. We write the duties and skills for your role. Anything marked optional can be skipped.": "यसमा लगभग पाँच मिनेट लाग्छ। तपाईं को हो र तपाईंलाई कस्तो जागिर चाहिन्छ भनेर बताउनु मात्र पर्छ। हामी तपाईंको भूमिकाका लागि कर्तव्य र सीपहरू लेख्छौं। 'वैकल्पिक' भनिएको कुनै पनि कुरा तपाईं छोड्न सक्नुहुन्छ।",
+"See sample CVs": "नमूना CV हेर्नुहोस्",
+"or": "वा",
+"watch the 1-minute guide": "१-मिनेटको गाइड हेर्नुहोस्",
+"Your CV is always written in English, whichever language you pick here.": "तपाईंको CV सधैं अंग्रेजीमा लेखिन्छ, तपाईंले यहाँ जुनसुकै भाषा छान्नुभए पनि।",
+"Choose your package": "आफ्नो प्याकेज छान्नुहोस्",
+"Add-ons": "थप सुविधाहरू",
+"Matching cover letter": "मिल्दो कभर लेटर",
+"Same design as your CV, written for your target role.": "तपाईंको CV जस्तै डिजाइन, तपाईंको लक्षित भूमिकाका लागि लेखिएको।",
+"Same design as your CV, written for your target role": "तपाईंको CV जस्तै डिजाइन, तपाईंको लक्षित भूमिकाका लागि लेखिएको",
+"CV style": "CV शैली",
+"ATS styles are plain on purpose so recruitment software can read them. Other styles are for sending directly to people.": "ATS शैलीहरू जानाजानी सादा राखिएका छन् ताकि भर्ती सफ्टवेयरले तिनलाई पढ्न सकोस्। अन्य शैलीहरू मानिसहरूलाई सिधै पठाउनका लागि हुन्।",
+"About you": "तपाईंको बारेमा",
+"Full name": "पूरा नाम",
+"As on your passport": "तपाईंको राहदानीमा जस्तै",
+"Enter your full name.": "आफ्नो पूरा नाम लेख्नुहोस्।",
+"Email": "इमेल",
+"Enter a valid email address.": "मान्य इमेल ठेगाना लेख्नुहोस्।",
+"Phone / WhatsApp": "फोन / WhatsApp",
+"Enter your phone number with country code.": "देश कोड सहित आफ्नो फोन नम्बर लेख्नुहोस्।",
+"Nationality": "राष्ट्रियता",
+"Select your nationality.": "आफ्नो राष्ट्रियता छान्नुहोस्।",
+"Where are you now?": "तपाईं अहिले कहाँ हुनुहुन्छ?",
+"Select your current country.": "आफ्नो हालको देश छान्नुहोस्।",
+"City / area": "शहर / क्षेत्र",
+"Type your city": "आफ्नो शहर लेख्नुहोस्",
+"Date of birth": "जन्म मिति",
+"(optional)": "(वैकल्पिक)",
+"Marital status": "वैवाहिक स्थिति",
+"Languages": "भाषाहरू",
+"Add language": "भाषा थप्नुहोस्",
+"Driving licence": "ड्राइविङ लाइसेन्स",
+"Photo": "फोटो",
+"(optional, for non-ATS styles)": "(वैकल्पिक, ATS बाहेकका शैलीहरूका लागि)",
+"Plain background, head and shoulders.": "सादा पृष्ठभूमि, टाउको र काँध।",
+"The job you want": "तपाईंले चाहनुभएको जागिर",
+"Industry": "उद्योग",
+"Select an industry.": "एक उद्योग छान्नुहोस्।",
+"Role": "भूमिका",
+"Select a role.": "एक भूमिका छान्नुहोस्।",
+"Your job title": "तपाईंको पद शीर्षक",
+"Type the job title.": "पद शीर्षक लेख्नुहोस्।",
+"Experience level": "अनुभव स्तर",
+"Select your level.": "आफ्नो स्तर छान्नुहोस्।",
+"Total years of experience": "कुल अनुभवका वर्षहरू",
+"Enter a number from 0 to 50.": "0 देखि 50 सम्मको संख्या लेख्नुहोस्।",
+"Visa status": "भिसा स्थिति",
+"Select your visa status.": "आफ्नो भिसा स्थिति छान्नुहोस्।",
+"Visa expiry / grace period ends": "भिसा समाप्ति / मिहेनत अवधि समाप्त हुने मिति",
+"Availability": "उपलब्धता",
+"Select when you can start.": "तपाईं कहिले सुरु गर्न सक्नुहुन्छ छान्नुहोस्।",
+"Skills and duties are on us.": "सीप र कर्तव्यहरू हाम्रो जिम्मा हो।",
+"Pick your role and we write a professional summary, core competencies, key skills, professional skills and at least 10 duties for every job. Your CV ends with \"References available upon request\". You receive both PDF and Word files.": "आफ्नो भूमिका छान्नुहोस् र हामी व्यावसायिक सारांश, मुख्य योग्यताहरू, मुख्य सीपहरू, व्यावसायिक सीपहरू, र हरेक जागिरका लागि कम्तिमा 10 कर्तव्यहरू लेख्छौं। तपाईंको CV \"अनुरोधमा सन्दर्भहरू उपलब्ध छन्\" भनेर समाप्त हुन्छ। तपाईंले PDF र Word दुवै फाइलहरू पाउनुहुनेछ।",
+"Extra skills or software you want included": "तपाईं समावेश गर्न चाहनुभएका थप सीप वा सफ्टवेयर",
+"e.g. SAP, 6G welding, Arabic typing, NEBOSH IGC": "उदाहरण: SAP, 6G वेल्डिङ, अरबी टाइपिङ, NEBOSH IGC",
+"Where do you want to work?": "तपाईं कहाँ काम गर्न चाहनुहुन्छ?",
+"Work history": "काम अनुभव",
+"Most recent first. Leave the duties box empty and we will write them for the job title. If you are a fresher, skip this step.": "सबैभन्दा हालसालैको पहिले। कर्तव्यहरूको बक्स खाली छोड्नुहोस् र हामी पद शीर्षकका लागि तिनीहरू लेख्नेछौं। यदि तपाईं फ्रेशर हुनुहुन्छ भने, यो चरण छोड्नुहोस्।",
+"Add job": "जागिर थप्नुहोस्",
+"Education": "शिक्षा",
+"Add education": "शिक्षा थप्नुहोस्",
+"Certificates and licences": "प्रमाणपत्र र लाइसेन्सहरू",
+"List each certificate (for example Safety, Welding, Forklift, Driving, Medical). Add scans or photos if you want us to keep them with your order.": "हरेक प्रमाणपत्र सूचीबद्ध गर्नुहोस् (उदाहरणका लागि सुरक्षा, वेल्डिङ, फोर्कलिफ्ट, ड्राइविङ, मेडिकल)। यदि तपाईं चाहनुहुन्छ भने स्क्यान वा फोटोहरू थप्नुहोस् ताकि हामी तिनलाई तपाईंको अर्डरसँगै राखौं।",
+"Add certificate": "प्रमाणपत्र थप्नुहोस्",
+"Order of certificates on your CV": "तपाईंको CV मा प्रमाणपत्रहरूको क्रम",
+"Most relevant first": "सबैभन्दा सान्दर्भिक पहिले",
+"Matches the job you chose": "तपाईंले छानेको जागिरसँग मिल्छ",
+"Newest first": "सबैभन्दा नयाँ पहिले",
+"By year": "वर्षअनुसार",
+"As I listed them": "मैले सूचीबद्ध गरेझैं",
+"Exactly my order": "ठ्याक्कै मेरो क्रममा",
+"Certificate scans or photos": "प्रमाणपत्रहरूका स्क्यान वा फोटो",
+"Tap to add files, or drop them here": "फाइलहरू थप्न ट्याप गर्नुहोस्, वा यहाँ छोड्नुहोस्",
+"JPG, PNG or PDF. Pick as many as you need. Photos are shrunk on your phone before sending.": "JPG, PNG वा PDF। तपाईंलाई जति चाहिन्छ छान्नुहोस्। पठाउनुअघि फोटोहरू तपाईंको फोनमा सानो बनाइन्छ।",
+"Review": "समीक्षा",
+"How will you pay?": "तपाईं कसरी भुक्तानी गर्नुहुन्छ?",
+"Payment is 100% upfront. Pick how you plan to pay and we will confirm on WhatsApp. No extra charges are added to any method.": "भुक्तानी 100% अग्रिम हो। तपाईंले भुक्तानी गर्ने योजना बनाउनुभएको तरिका छान्नुहोस् र हामी WhatsApp मा पुष्टि गर्नेछौं। कुनै पनि तरिकामा थप शुल्क थपिँदैन।",
+"Anything else we should know?": "हामीले अरू केही जान्नुपर्छ?",
+"Job advert link, company name, countries you are applying to...": "जागिर विज्ञापन लिंक, कम्पनीको नाम, तपाईं आवेदन दिइरहेका देशहरू...",
+"I agree to the": "म सहमत छु",
+"Terms of Service": "सेवाका सर्तहरू",
+"and": "र",
+"Privacy Policy": "गोपनीयता नीति",
+"I confirm my details are correct. 24-48 hour turnaround, one free minor revision within 3 days, extra revisions AED 15.": "म पुष्टि गर्छु कि मेरा विवरणहरू सही छन्। 24-48 घण्टाको समय, 3 दिनभित्र एक सानो संशोधन निःशुल्क, थप संशोधनहरू AED 15।",
+"Please agree to the Terms of Service and Privacy Policy to continue.": "जारी राख्न कृपया सेवाका सर्तहरू र गोपनीयता नीति स्वीकार गर्नुहोस्।",
+"Total": "जम्मा",
+"Back": "पछाडि",
+"Continue": "जारी राख्नुहोस्",
+"Sending your order": "तपाईंको अर्डर पठाइँदैछ",
+"Please keep this page open.": "कृपया यो पृष्ठ खुला राख्नुहोस्।",
+"Thank you,": "धन्यवाद,",
+"Your order is in.": "तपाईंको अर्डर प्राप्त भयो।",
+"Your reference number": "तपाईंको सन्दर्भ नम्बर",
+"Copy": "कपी गर्नुहोस्",
+"Save it. You can track progress or request a revision with this number.": "यो सुरक्षित राख्नुहोस्। तपाईं यो नम्बरले प्रगति ट्रयाक गर्न वा संशोधन अनुरोध गर्न सक्नुहुन्छ।",
+"What happens next": "अब के हुन्छ",
+"Pay the total below and send the confirmation on WhatsApp.": "तल दिइएको जम्मा रकम तिर्नुहोस् र WhatsApp मा पुष्टि पठाउनुहोस्।",
+"We write and design your documents, usually within 24 to 48 hours.": "हामी तपाईंका कागजातहरू लेख्छौं र डिजाइन गर्छौं, सामान्यतया 24 देखि 48 घण्टाभित्र।",
+"You get a copy by email (check your spam folder too) and in your order page. One minor revision is free for 3 days.": "तपाईंले इमेलबाट एक कपी पाउनुहुनेछ (स्पाम फोल्डर पनि जाँच गर्नुहोस्) र तपाईंको अर्डर पृष्ठमा पनि। एक सानो संशोधन 3 दिनसम्म निःशुल्क छ।",
+"Amount due": "तिर्नुपर्ने रकम",
+"Send payment proof on WhatsApp": "WhatsApp मा भुक्तानी प्रमाण पठाउनुहोस्",
+"Track order": "अर्डर ट्रयाक गर्नुहोस्",
+"Remove language": "भाषा हटाउनुहोस्",
+"Job title": "पद शीर्षक",
+"e.g. Civil Job Performer": "उदाहरण: Civil Job Performer",
+"Company": "कम्पनी",
+"Project": "परियोजना",
+"e.g. Hail and Ghasha": "उदाहरण: Hail and Ghasha",
+"Country": "देश",
+"City": "शहर",
+"From": "देखि",
+"To": "सम्म",
+"I still work here": "म अझै यहाँ काम गर्छु",
+"Your duties": "तपाईंका कर्तव्यहरू",
+"(optional - we write them if empty)": "(वैकल्पिक - खाली छोडेमा हामी लेख्नेछौं)",
+"One duty per line": "प्रत्येक लाइनमा एक कर्तव्य",
+"About the company": "कम्पनीको बारेमा",
+"e.g. Leading contractor on a petrochemical expansion": "उदाहरण: पेट्रोकेमिकल विस्तार परियोजनामा प्रमुख ठेकेदार",
+"Remove job": "जागिर हटाउनुहोस्",
+"Level": "स्तर",
+"Course / field": "कोर्स / क्षेत्र",
+"e.g. Mechanical Engineering": "उदाहरण: मेकानिकल इन्जिनियरिङ",
+"School / institution": "स्कूल / संस्था",
+"Year completed": "सम्पन्न वर्ष",
+"Remove": "हटाउनुहोस्",
+"Certificate name": "प्रमाणपत्रको नाम",
+"e.g. H2S Awareness, ADNOC WMS, NEBOSH IGC": "उदाहरण: H2S Awareness, ADNOC WMS, NEBOSH IGC",
+"Issued by": "जारीकर्ता",
+"Year": "वर्ष",
+"Type": "प्रकार",
+"Select nationality": "राष्ट्रियता छान्नुहोस्",
+"Select country": "देश छान्नुहोस्",
+"Outside the GCC": "GCC बाहिर",
+"Prefer not to say": "भन्न चाहन्न",
+"Not specified": "उल्लेख नगरिएको",
+"Select visa status": "भिसा स्थिति छान्नुहोस्",
+"Select availability": "उपलब्धता छान्नुहोस्",
+"Select industry": "उद्योग छान्नुहोस्",
+"Select level": "स्तर छान्नुहोस्",
+"Included in this package.": "यो प्याकेजमा समावेश छ।",
+"No extra charge.": "कुनै थप शुल्क छैन।",
+"Select city": "शहर छान्नुहोस्",
+"Other": "अन्य",
+"Anywhere in the UAE": "UAE मा जहाँ पनि",
+"Open to relocate": "सर्न तयार",
+"Select industry first": "पहिले उद्योग छान्नुहोस्",
+"Select role": "भूमिका छान्नुहोस्",
+"Example skills we will include:": "हामीले समावेश गर्ने सीपहरूको उदाहरण:",
+"{n} file(s), about {mb} MB. Drag the cards, or use the arrows, to put them in the order you want.": "{n} फाइल(हरू), लगभग {mb} MB। कार्डहरू तान्नुहोस्, वा तीरहरू प्रयोग गर्नुहोस्, तिनलाई तपाईंले चाहेको क्रममा राख्न।",
+"Maximum {n} files": "अधिकतम {n} फाइलहरू",
+"{name} is too large (15 MB max)": "{name} धेरै ठूलो छ (अधिकतम 15 MB)",
+"Step {n} of {total} - {name}": "चरण {n} / {total} - {name}",
+"Package and style": "प्याकेज र शैली",
+"Target job": "लक्षित जागिर",
+"Education and certificates": "शिक्षा र प्रमाणपत्रहरू",
+"Review and payment": "समीक्षा र भुक्तानी",
+"Submit order": "अर्डर पेश गर्नुहोस्",
+"We restored your unfinished order.": "हामीले तपाईंको अपूरा अर्डर पुनर्स्थापना गरेका छौं।",
+"Start over": "फेरि सुरु गर्नुहोस्",
+"Package": "प्याकेज",
+"Style": "शैली",
+"Cover letter": "कभर लेटर",
+"Yes": "हो",
+"No": "होइन",
+"Name": "नाम",
+"Contact": "सम्पर्क",
+"Location": "स्थान",
+"Target": "लक्ष्य",
+"{n} years": "{n} वर्ष",
+"Visa": "भिसा",
+"Jobs / education / certificates": "जागिरहरू / शिक्षा / प्रमाणपत्रहरू",
+"Files": "फाइलहरू",
+"+ photo": "+ फोटो",
+"Preparing your details": "तपाईंको विवरण तयार गरिँदैछ",
+"Uploading": "अपलोड हुँदैछ",
+"Writing your documents": "तपाईंका कागजातहरू लेखिँदैछन्",
+"Finishing": "समाप्त गरिँदैछ",
+"Your documents are being written. This can take up to a minute.": "तपाईंका कागजातहरू लेखिँदैछन्। यसमा एक मिनेटसम्म लाग्न सक्छ।",
+"This form is not connected to the server yet. Please message us on WhatsApp.": "यो फारम अझै सर्भरसँग जोडिएको छैन। कृपया हामीलाई WhatsApp मा सन्देश पठाउनुहोस्।",
+"Your files are too large. Remove some and try again.": "तपाईंका फाइलहरू धेरै ठूला छन्। केही हटाउनुहोस् र फेरि प्रयास गर्नुहोस्।",
+"Please complete the highlighted fields": "कृपया हाइलाइट गरिएका फिल्डहरू पूरा गर्नुहोस्",
+"Your order was received. Some automatic extras did not complete, so we will follow up personally.": "तपाईंको अर्डर प्राप्त भएको छ। केही स्वचालित थप कामहरू पूरा भएनन्, त्यसैले हामी तपाईंलाई व्यक्तिगत रूपमा सम्पर्क गर्नेछौं।",
+"Use {ref} as the payment reference where possible.": "सम्भव भएसम्म {ref} लाई भुक्तानी सन्दर्भको रूपमा प्रयोग गर्नुहोस्।",
+"Reference copied": "सन्दर्भ कपी भयो",
+"Form language": "फारमको भाषा",
+"Match my own sample": "मेरो आफ्नै नमूना मिलाउनुहोस्",
+"I have my own CV and want you to match its style": "मसँग मेरो आफ्नै CV छ र म चाहन्छु तपाईंले यसको शैली मिलाउनुहोस्",
+"Upload it below and the style radios above are ignored - we copy its layout, not ours.": "तल अपलोड गर्नुहोस् र माथिका शैली विकल्पहरू बेवास्ता गरिनेछ - हामी तपाईंको लेआउट प्रतिलिपि गर्छौं, हाम्रो होइन।",
+"Your sample CV": "तपाईंको नमूना CV",
+"What should we keep or change?": "हामीले के राख्ने वा परिवर्तन गर्ने?",
+"e.g. keep the layout and colors, just update my details and add my new job": "उदाहरण: लेआउट र रङ उस्तै राख्नुहोस्, मेरो विवरण र नयाँ जागिर मात्र थप्नुहोस्",
+"Please upload your sample CV, or uncheck this option.": "कृपया आफ्नो नमूना CV अपलोड गर्नुहोस्, वा यो विकल्प अनचेक गर्नुहोस्।",
+"Your own sample": "तपाईंको आफ्नै नमूना",
+"+ your sample": "+ तपाईंको नमूना",
+"Scan your ID or passport": "तपाईंको आईडी वा राहदानी स्क्यान गर्नुहोस्",
+"Optional. We try to read your name, nationality and date of birth from a photo of the printed strip at the bottom of your passport, or the back of your Emirates ID - so you can check it instead of typing it. You can still type everything yourself below.": "वैकल्पिक। हामी तपाईंको राहदानीको तलको छापिएको पट्टी, वा इमिरेट्स आईडीको पछाडिको फोटोबाट तपाईंको नाम, राष्ट्रियता र जन्म मिति पढ्ने प्रयास गर्छौं - ताकि तपाईं टाइप गर्नुको सट्टा जाँच गर्न सक्नुहुन्छ। तपाईं तल सबै कुरा आफैं पनि टाइप गर्न सक्नुहुन्छ।",
+"Use these": "यिनीहरू प्रयोग गर्नुहोस्",
+"Try a different photo": "फरक फोटो प्रयास गर्नुहोस्",
+"double-check this": "यो फेरि जाँच गर्नुहोस्",
+"not in our list, please pick it yourself": "हाम्रो सूचीमा छैन, कृपया आफैं छान्नुहोस्",
+"Not read": "पढिएन",
+"This did not read very clearly. Please check each field carefully before using it, or try a clearer, well-lit photo.": "यो स्पष्ट रूपमा पढिएन। प्रयोग गर्नु अघि कृपया प्रत्येक फिल्ड ध्यानपूर्वक जाँच गर्नुहोस्, वा स्पष्ट, राम्रो उज्यालो फोटो प्रयास गर्नुहोस्।",
+"Please check this looks right before using it.": "प्रयोग गर्नु अघि कृपया यो सही देखिन्छ कि जाँच गर्नुहोस्।",
+"Reading...": "पढ्दै...",
+"Reading... {pct}%": "पढ्दै... {pct}%",
+"We couldn't find the printed strip in that photo. Try the bottom of the passport page, or the back of the ID card, filling the frame in good light - or just type your details below.": "त्यो फोटोमा छापिएको पट्टी भेटिएन। राहदानी पृष्ठको तल, वा आईडी कार्डको पछाडि प्रयास गर्नुहोस्, फ्रेम भरिकन र राम्रो उज्यालोमा - वा तल आफ्नो विवरण आफैं टाइप गर्नुहोस्।",
+"Could not read that photo. Check your connection and try again, or just type your details below.": "त्यो फोटो पढ्न सकिएन। आफ्नो इन्टरनेट जाँच गर्नुहोस् र फेरि प्रयास गर्नुहोस्, वा तल आफ्नो विवरण आफैं टाइप गर्नुहोस्।",
+"Filled in - please double check everything below.": "भरियो - कृपया तल सबै कुरा फेरि जाँच गर्नुहोस्।",
+"Check this date of birth - it doesn't look right.": "यो जन्म मिति जाँच गर्नुहोस् - यो सही देखिँदैन।"
+}
+};
+  KX.lang = function () { var l = KX.store.get('kx-lang'); return (l && KX.I18N[l]) ? l : 'en'; };
+  KX.t = function (s) { var l = KX.lang(); if (l === 'en') return s; var d = KX.I18N[l]; return (d && Object.prototype.hasOwnProperty.call(d, s)) ? d[s] : s; };
+  KX.setLang = function (code) { KX.store.set('kx-lang', code); document.dispatchEvent(new CustomEvent('kx-lang')); };
+  KX.applyI18n = function (root) {
+    root = root || document;
+    KX.$$('[data-i18n]', root).forEach(function (e) { e.textContent = KX.t(e.getAttribute('data-i18n')); });
+    KX.$$('[data-i18n-ph]', root).forEach(function (e) { e.placeholder = KX.t(e.getAttribute('data-i18n-ph')); });
+  };
+})();
+</script>
+<script>/* MRZ (Machine Readable Zone) reader for passports (TD3, 2 lines x 44) and ID cards
+   (TD1, 3 lines x 30, e.g. the back of an Emirates ID). Pure parsing + ICAO 9303 check-digit
+   validation - no OCR here. KX.ocrText() (below) does the actual image-to-text step, lazily. */
+(function () {
+  var KX = window.KX;
+  KX.MRZ = {};
+
+  /* ICAO alpha-3 country code -> the exact nationality strings used by KX_DATA.nationalities.
+     Covers every country currently in that list; an unmapped code falls back to null (caller
+     shows "Other" / lets the client pick manually rather than guessing). */
+  var CODES = {
+    DZA: 'Algeria', AGO: 'Angola', BEN: 'Benin', BWA: 'Botswana', BFA: 'Burkina Faso', BDI: 'Burundi',
+    CMR: 'Cameroon', CPV: 'Cape Verde', CAF: 'Central African Republic', TCD: 'Chad', COM: 'Comoros',
+    COG: 'Congo (Brazzaville)', COD: 'DR Congo', CIV: "Cote d'Ivoire", DJI: 'Djibouti', EGY: 'Egypt',
+    GNQ: 'Equatorial Guinea', ERI: 'Eritrea', SWZ: 'Eswatini', ETH: 'Ethiopia', GAB: 'Gabon', GMB: 'Gambia',
+    GHA: 'Ghana', GIN: 'Guinea', GNB: 'Guinea-Bissau', KEN: 'Kenya', LSO: 'Lesotho', LBR: 'Liberia',
+    LBY: 'Libya', MDG: 'Madagascar', MWI: 'Malawi', MLI: 'Mali', MRT: 'Mauritania', MUS: 'Mauritius',
+    MAR: 'Morocco', MOZ: 'Mozambique', NAM: 'Namibia', NER: 'Niger', NGA: 'Nigeria', RWA: 'Rwanda',
+    STP: 'Sao Tome and Principe', SEN: 'Senegal', SYC: 'Seychelles', SLE: 'Sierra Leone', SOM: 'Somalia',
+    ZAF: 'South Africa', SSD: 'South Sudan', SDN: 'Sudan', TZA: 'Tanzania', TGO: 'Togo', TUN: 'Tunisia',
+    UGA: 'Uganda', ZMB: 'Zambia', ZWE: 'Zimbabwe',
+    BGD: 'Bangladesh', IND: 'India', NPL: 'Nepal', PAK: 'Pakistan', LKA: 'Sri Lanka', PHL: 'Philippines',
+    IDN: 'Indonesia', AFG: 'Afghanistan', MMR: 'Myanmar',
+    ARE: 'United Arab Emirates', SAU: 'Saudi Arabia', QAT: 'Qatar', KWT: 'Kuwait', BHR: 'Bahrain', OMN: 'Oman',
+    JOR: 'Jordan', LBN: 'Lebanon', SYR: 'Syria', IRQ: 'Iraq', YEM: 'Yemen', PSE: 'Palestine', TUR: 'Turkey', IRN: 'Iran'
+  };
+  KX.MRZ.countryName = function (code) { return CODES[String(code || '').toUpperCase()] || null; };
+
+  function cval(ch) {
+    if (ch >= '0' && ch <= '9') return ch.charCodeAt(0) - 48;
+    if (ch >= 'A' && ch <= 'Z') return ch.charCodeAt(0) - 55; // A=10 ... Z=35
+    return 0; // '<' and anything unexpected
+  }
+  function checkDigit(s) {
+    var w = [7, 3, 1], sum = 0;
+    for (var i = 0; i < s.length; i++) sum += cval(s[i]) * w[i % 3];
+    return sum % 10;
+  }
+  function matchesCheck(field, checkCh) {
+    if (!/^[0-9]$/.test(checkCh)) return false; // OCR noise or a non-digit where a digit must be
+    return checkDigit(field) === +checkCh;
+  }
+  function names(field) {
+    var parts = field.split('<<');
+    var surname = (parts[0] || '').replace(/</g, ' ').trim();
+    var given = (parts[1] || '').replace(/</g, ' ').trim();
+    function cap(s) { return s.toLowerCase().replace(/\b[a-z]/g, function (c) { return c.toUpperCase(); }); }
+    var full = [given, surname].filter(Boolean).map(cap).join(' ').replace(/\s+/g, ' ').trim();
+    return { surname: cap(surname), given: cap(given), full: full };
+  }
+  /* yy: 2-digit year; isExpiry hints which century is more likely when ambiguous. */
+  function fullYear(yy, isExpiry) {
+    var now = new Date().getFullYear() % 100;
+    if (isExpiry) return (yy < now + 1 ? 2000 : 1900) + yy; // expiry dates are never far in the past
+    return (yy > now ? 1900 : 2000) + yy; // DOB: assume not yet born in the "future" 2-digit wrap
+  }
+  function isoDate(yymmdd, isExpiry) {
+    if (!/^\d{6}$/.test(yymmdd)) return null;
+    var yy = +yymmdd.slice(0, 2), mm = +yymmdd.slice(2, 4), dd = +yymmdd.slice(4, 6);
+    if (mm < 1 || mm > 12 || dd < 1 || dd > 31) return null;
+    var y = fullYear(yy, isExpiry);
+    return y + '-' + ('0' + mm).slice(-2) + '-' + ('0' + dd).slice(-2);
+  }
+
+  function cleanLine(l, len) {
+    l = String(l || '').toUpperCase().replace(/[^A-Z0-9<]/g, '');
+    if (l.length < len) l = l + Array(len - l.length + 1).join('<');
+    return l.slice(0, len);
+  }
+
+  function parseTD3(rawLines) {
+    var l1 = cleanLine(rawLines[0], 44), l2 = cleanLine(rawLines[1], 44);
+    var docType = l1.slice(0, 1), issuing = l1.slice(2, 5);
+    var nm = names(l1.slice(5));
+    var docNumber = l2.slice(0, 9).replace(/</g, '');
+    var docNumberCheck = l2.slice(9, 10);
+    var nationality = l2.slice(10, 13);
+    var dobRaw = l2.slice(13, 19), dobCheck = l2.slice(19, 20);
+    var sex = l2.slice(20, 21);
+    var expRaw = l2.slice(21, 27), expCheck = l2.slice(27, 28);
+    var checks = {
+      docNumber: matchesCheck(l2.slice(0, 9), docNumberCheck),
+      dob: matchesCheck(dobRaw, dobCheck),
+      expiry: matchesCheck(expRaw, expCheck)
+    };
+    var passed = 0, total = 0;
+    Object.keys(checks).forEach(function (k) { total++; if (checks[k]) passed++; });
+    return {
+      format: 'TD3', docType: docType,
+      fullName: nm.full, surname: nm.surname, given: nm.given,
+      countryCode: nationality, nationalityCode: nationality, issuingCountryCode: issuing,
+      nationality: KX.MRZ.countryName(nationality),
+      dob: isoDate(dobRaw, false), expiry: isoDate(expRaw, true), sex: sex === 'M' || sex === 'F' ? sex : null,
+      docNumber: docNumber, checks: checks, confidence: total ? passed / total : 0
+    };
+  }
+
+  function parseTD1(rawLines) {
+    var l1 = cleanLine(rawLines[0], 30), l2 = cleanLine(rawLines[1], 30), l3 = cleanLine(rawLines[2], 30);
+    var docType = l1.slice(0, 2), issuing = l1.slice(2, 5);
+    var docNumber = l1.slice(5, 14).replace(/</g, '');
+    var docNumberCheck = l1.slice(14, 15);
+    var dobRaw = l2.slice(0, 6), dobCheck = l2.slice(6, 7);
+    var sex = l2.slice(7, 8);
+    var expRaw = l2.slice(8, 14), expCheck = l2.slice(14, 15);
+    var nationality = l2.slice(15, 18);
+    var nm = names(l3);
+    var checks = {
+      docNumber: matchesCheck(l1.slice(5, 14), docNumberCheck),
+      dob: matchesCheck(dobRaw, dobCheck),
+      expiry: matchesCheck(expRaw, expCheck)
+    };
+    var passed = 0, total = 0;
+    Object.keys(checks).forEach(function (k) { total++; if (checks[k]) passed++; });
+    return {
+      format: 'TD1', docType: docType,
+      fullName: nm.full, surname: nm.surname, given: nm.given,
+      countryCode: nationality, nationalityCode: nationality, issuingCountryCode: issuing,
+      nationality: KX.MRZ.countryName(nationality),
+      dob: isoDate(dobRaw, false), expiry: isoDate(expRaw, true), sex: sex === 'M' || sex === 'F' ? sex : null,
+      docNumber: docNumber, checks: checks, confidence: total ? passed / total : 0
+    };
+  }
+
+  /* Takes raw OCR text (any junk/line breaks), finds the MRZ block itself, and parses it.
+     Returns null if nothing MRZ-shaped was found. */
+  KX.MRZ.parse = function (text) {
+    var lines = String(text || '').split('\n').map(function (l) {
+      return l.toUpperCase().replace(/[^A-Z0-9<]/g, '');
+    }).filter(function (l) { return l.length >= 20; });
+    // TD3: look for a line starting with P< (or any letter + '<') of ~44 chars, followed by a 44-char line
+    for (var i = 0; i < lines.length - 1; i++) {
+      if (/^[A-Z]</.test(lines[i]) && lines[i].length >= 40 && lines[i + 1].length >= 40) {
+        return parseTD3([lines[i], lines[i + 1]]);
+      }
+    }
+    // TD1: three lines around 30 chars each
+    for (var j = 0; j < lines.length - 2; j++) {
+      if (lines[j].length >= 25 && lines[j].length <= 32 && lines[j + 1].length >= 25 && lines[j + 1].length <= 32 && lines[j + 2].length >= 20) {
+        return parseTD1([lines[j], lines[j + 1], lines[j + 2]]);
+      }
+    }
+    return null;
+  };
+})();
+</script>
+<script>/* Lazy OCR: Tesseract.js is only fetched from CDN the first time KX.ocrText() is actually
+   called (e.g. when the client taps "Scan ID / passport"), so pages that never use it pay
+   nothing extra on load. The worker is created once and reused for later scans. */
+(function () {
+  var KX = window.KX;
+  var workerPromise = null;
+
+  function loadScript(src) {
+    return new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.onload = function () { resolve(); };
+      s.onerror = function () { reject(new Error('load-failed')); };
+      document.head.appendChild(s);
+    });
+  }
+
+  function getWorker(onProgress) {
+    if (workerPromise) return workerPromise;
+    workerPromise = loadScript('https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js')
+      .then(function () {
+        if (!window.Tesseract) throw new Error('load-failed');
+        return window.Tesseract.createWorker('eng', undefined, {
+          logger: function (m) { if (onProgress && m.status === 'recognizing text') onProgress(m.progress); }
+        });
+      })
+      .then(function (worker) {
+        return worker.setParameters({ tessedit_char_whitelist: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<' }).then(function () { return worker; });
+      })
+      .catch(function (e) { workerPromise = null; throw e; }); // let a failed load be retried next time
+    return workerPromise;
+  }
+
+  /* file: a File/Blob (e.g. from <input type=file>). onProgress(0..1) is optional. */
+  KX.ocrText = function (file, onProgress) {
+    return getWorker(onProgress).then(function (worker) {
+      return worker.recognize(file).then(function (r) { return r.data.text; });
+    });
+  };
+})();
+</script>
 <script>
 (function(){
 var $=KX.$,$$=KX.$$,esc=KX.esc,C=KX.cfg,D=KX_DATA,CAT=KX_CATALOG;
-var F=$('#f'),steps=$$('section[data-step]',F),cur=0,state={photo:null,files:[]},sending=false;
+var F=$('#f'),steps=$$('section[data-step]',F),cur=0,state={photo:null,files:[],sample:null},sending=false;
 var DRAFT='kx-draft-v2';
 var icCheck=KX.icon('check');
 if(!KX.ready())$('#notready').classList.remove('hide');
 
+/* ---------- language switcher ---------- */
+var DIRELS=['steps','stepname','f','done'];
+function applyDir(){var rtl=KX.lang()==='ar';DIRELS.forEach(function(id){var e=document.getElementById(id);if(e){e.setAttribute('dir',rtl?'rtl':'ltr');e.setAttribute('lang',KX.lang())}})}
+(function(){var s=$('#formLang');s.innerHTML=KX.LANGS.map(function(l){return '<option value="'+l.code+'">'+esc(l.label)+'</option>'}).join('');s.value=KX.lang();s.addEventListener('change',function(){KX.setLang(s.value);applyFormLang()})})();
+applyDir();KX.applyI18n();
+
 /* ---------- fill static lists ---------- */
-KX.fill($('#nationality'),D.nationalities,'Select nationality');
-var ctry=[];D.locations.forEach(function(l){ctry.push(l.c)});ctry.push('Outside the GCC');
-KX.fill($('#country'),ctry,'Select country');
-KX.fill($('#marital'),D.marital,'Prefer not to say');
-KX.fill($('#licence'),D.licenceCountries,'Not specified');
-KX.fill($('#visa'),D.visa,'Select visa status');
-KX.fill($('#avail'),D.availability,'Select availability');
-KX.fill($('#industry'),CAT.industries.map(function(i){return{k:i.key,l:i.label}}),'Select industry');
-KX.fill($('#level'),CAT.levels.map(function(l){return{k:l.key,l:l.label}}),'Select level');
+function fillStatics(){
+  KX.fill($('#nationality'),D.nationalities,KX.t('Select nationality'));
+  var ctry=[];D.locations.forEach(function(l){ctry.push(l.c)});ctry.push(KX.t('Outside the GCC'));
+  KX.fill($('#country'),ctry,KX.t('Select country'));
+  KX.fill($('#marital'),D.marital,KX.t('Prefer not to say'));
+  KX.fill($('#licence'),D.licenceCountries,KX.t('Not specified'));
+  KX.fill($('#visa'),D.visa,KX.t('Select visa status'));
+  KX.fill($('#avail'),D.availability,KX.t('Select availability'));
+  KX.fill($('#industry'),CAT.industries.map(function(i){return{k:i.key,l:i.label}}),KX.t('Select industry'));
+  KX.fill($('#level'),CAT.levels.map(function(l){return{k:l.key,l:l.label}}),KX.t('Select level'));
+}
+fillStatics();
 
 /* ---------- packages, styles, payments ---------- */
 var intakeSvcs=(C.services||[]).filter(function(s){return s.cat==='cv'||s.cat==='bundle'});
@@ -813,42 +1920,47 @@ function price(){var s=svc()||{price:0},t=s.price,d=[s.name+' '+KX.money(s.price
   return{total:t,detail:d.join(' + ')}}
 function refreshPrice(){
   var s=svc()||{},cp=(C.coverLetter&&C.coverLetter.price)||0;
-  if(includes('cover')){F.elements.cover.checked=true;F.elements.cover.disabled=true;$('#coverTxt').textContent='Included in this package.'}
-  else{F.elements.cover.disabled=false;$('#coverTxt').textContent='Same design as your CV, written for your target role'+(cp?' (+'+KX.money(cp)+').':'. No extra charge.')}
+  if(includes('cover')){F.elements.cover.checked=true;F.elements.cover.disabled=true;$('#coverTxt').textContent=KX.t('Included in this package.')}
+  else{F.elements.cover.disabled=false;$('#coverTxt').textContent=KX.t('Same design as your CV, written for your target role')+(cp?' (+'+KX.money(cp)+').':'. '+KX.t('No extra charge.'))}
   var p=price();$('#total').textContent=KX.money(p.total);$('#totalDetail').textContent=p.detail;}
 $('#svcs').addEventListener('change',function(){var s=svc();if(s&&s.k==='cv_ats'){var a=F.querySelector('input[name=style][value=ats_classic]');if(a)a.checked=true}refreshPrice()});
 F.elements.cover.addEventListener('change',refreshPrice);document.addEventListener('kx-currency',function(){refreshPrice();KX.renderPrices()});
 
 /* ---------- location cascade ---------- */
 function cities(){var c=val('country'),sel=$('#city'),l=D.locations.filter(function(x){return x.c===c})[0];
-  if(l){KX.fill(sel,l.cities,'Select city');sel.classList.remove('hide');}
-  else{sel.innerHTML='<option value="Other">Other</option>';sel.classList.add('hide');}
+  if(l){KX.fill(sel,l.cities,KX.t('Select city'));sel.classList.remove('hide');}
+  else{sel.innerHTML='<option value="Other">'+esc(KX.t('Other'))+'</option>';sel.classList.add('hide');}
   $('#cityOther').classList.toggle('hide',!(c&&!l));}
 $('#country').addEventListener('change',cities);
 $('#city').addEventListener('change',function(){$('#cityOther').classList.toggle('hide',val('city')!=='Other')});
-(function(){var h='<label class="opt"><input type="checkbox" name="pref" value="Any UAE location"><div><b>Anywhere in the UAE</b></div></label>';
+function rebuildPrefLoc(){
+  var checked=$$('input[name=pref]:checked').map(function(e){return e.value});
+  var h='<label class="opt"><input type="checkbox" name="pref" value="Any UAE location"><div><b>'+esc(KX.t('Anywhere in the UAE'))+'</b></div></label>';
   h+=D.locations[0].cities.slice(0,8).map(function(c){return '<label class="opt"><input type="checkbox" name="pref" value="'+esc(c)+'"><div><b>'+esc(c)+'</b></div></label>'}).join('');
   h+=D.locations.slice(1).map(function(l){return '<label class="opt"><input type="checkbox" name="pref" value="'+esc(l.c)+'"><div><b>'+esc(l.c)+'</b></div></label>'}).join('');
-  h+='<label class="opt"><input type="checkbox" name="pref" value="Open to relocate"><div><b>Open to relocate</b></div></label>';
-  $('#prefLoc').innerHTML=h})();
+  h+='<label class="opt"><input type="checkbox" name="pref" value="Open to relocate"><div><b>'+esc(KX.t('Open to relocate'))+'</b></div></label>';
+  $('#prefLoc').innerHTML=h;
+  checked.forEach(function(v){var e=F.querySelector('input[name=pref][value="'+v.replace(/"/g,'&quot;')+'"]');if(e)e.checked=true});
+}
+rebuildPrefLoc();
 
 /* ---------- cascade industry > role ---------- */
 function roles(){var i=CAT.industries.filter(function(x){return x.key===val('industry')})[0],sel=$('#role');
-  if(!i){sel.innerHTML='<option value="">Select industry first</option>';skillPrev();return}
-  KX.fill(sel,i.roles.map(function(r){return r.label}).concat(['Other (type your own)']),'Select role');skillPrev();}
+  if(!i){sel.innerHTML='<option value="">'+esc(KX.t('Select industry first'))+'</option>';skillPrev();return}
+  KX.fill(sel,i.roles.map(function(r){return r.label}).concat(['Other (type your own)']),KX.t('Select role'));skillPrev();}
 function skillPrev(){var i=CAT.industries.filter(function(x){return x.key===val('industry')})[0],r=i&&i.roles.filter(function(x){return x.label===val('role')})[0],p=$('#skillPrev');
   $('#roleOtherF').classList.toggle('hide',val('role').indexOf('Other')!==0);
-  p.innerHTML=r?'<br><span class="small muted">Example skills we will include:</span><div class="chips" style="margin-top:6px">'+r.skills.slice(0,8).map(function(s){return '<span class="chip">'+esc(s)+'</span>'}).join('')+'</div>':''}
+  p.innerHTML=r?'<br><span class="small muted">'+esc(KX.t('Example skills we will include:'))+'</span><div class="chips" style="margin-top:6px">'+r.skills.slice(0,8).map(function(s){return '<span class="chip">'+esc(s)+'</span>'}).join('')+'</div>':''}
 $('#industry').addEventListener('change',roles);$('#role').addEventListener('change',skillPrev);
 $('#level').addEventListener('change',function(){var m={fresher:0,junior:1,experienced:3,senior:7,expert:12}[val('level')];if(m!=null&&!val('years'))F.elements.years.value=m});
 $('#visa').addEventListener('change',function(){$('#visaExpF').classList.toggle('hide',['employment','visit','cancelled','golden','freelance'].indexOf(val('visa'))<0)});
 
 /* ---------- repeaters ---------- */
 var T={
- lang:function(){return '<div class="row rrow" style="margin-bottom:8px"><select data-k="lang" style="flex:2;min-width:140px">'+D.languages.map(function(l){return '<option>'+l+'</option>'}).join('')+'</select><select data-k="lvl" style="flex:1;min-width:110px">'+D.langLevels.map(function(l){return '<option>'+l+'</option>'}).join('')+'</select><button class="btn sm ghost" type="button" data-rm aria-label="Remove language">'+KX.icon('x')+'</button></div>'},
- exp:function(){return '<div class="card rrow" style="margin-bottom:12px;box-shadow:none"><div class="grid g2"><div class="f"><label class="l">Job title</label><input data-k="title" list="dlJobs" placeholder="e.g. Civil Job Performer" autocomplete="off"></div><div class="f"><label class="l">Company</label><input data-k="company" autocomplete="off"></div><div class="f"><label class="l">Project <span class="opt-t">(optional)</span></label><input data-k="project" placeholder="e.g. Hail and Ghasha" maxlength="120" autocomplete="off"></div><div class="f"><label class="l">Country</label><input data-k="country" placeholder="e.g. UAE, Kenya"></div><div class="f"><label class="l">City <span class="opt-t">(optional)</span></label><input data-k="city"></div><div class="f"><label class="l">From</label><input data-k="from" type="month"></div><div class="f"><label class="l">To</label><input data-k="to" type="month"><label class="row small" style="margin-top:6px;gap:6px"><input type="checkbox" data-k="current"> I still work here</label></div></div><div class="f"><label class="l">Your duties <span class="opt-t">(optional - we write them if empty)</span></label><textarea data-k="duties" placeholder="One duty per line"></textarea></div><div class="f"><label class="l">About the company <span class="opt-t">(optional)</span></label><input data-k="about" placeholder="e.g. Leading contractor on a petrochemical expansion" maxlength="220"></div><button class="btn sm ghost" type="button" data-rm>'+KX.icon('x')+'Remove job</button></div>'},
- edu:function(){return '<div class="card rrow" style="margin-bottom:12px;box-shadow:none"><div class="grid g2"><div class="f"><label class="l">Level</label><select data-k="level">'+D.education.map(function(e){return '<option value="'+e.k+'">'+e.l+'</option>'}).join('')+'</select></div><div class="f"><label class="l">Course / field</label><input data-k="field" placeholder="e.g. Mechanical Engineering"></div><div class="f"><label class="l">School / institution</label><input data-k="school"></div><div class="f"><label class="l">Country</label><input data-k="country"></div><div class="f"><label class="l">Year completed</label><input data-k="year" inputmode="numeric" maxlength="4" placeholder="2019"></div></div><button class="btn sm ghost" type="button" data-rm>'+KX.icon('x')+'Remove</button></div>'},
- cert:function(){return '<div class="card rrow" style="margin-bottom:12px;box-shadow:none"><div class="grid g2"><div class="f"><label class="l">Certificate name</label><input data-k="name" list="dlCerts" placeholder="e.g. H2S Awareness, ADNOC WMS, NEBOSH IGC" autocomplete="off"></div><div class="f"><label class="l">Issued by</label><input data-k="issuer"></div><div class="f"><label class="l">Year</label><input data-k="year" inputmode="numeric" maxlength="4"></div><div class="f"><label class="l">Type</label><select data-k="kind">'+D.certKinds.map(function(k){return '<option>'+k+'</option>'}).join('')+'</select></div></div><button class="btn sm ghost" type="button" data-rm>'+KX.icon('x')+'Remove</button></div>'}
+ lang:function(){return '<div class="row rrow" style="margin-bottom:8px"><select data-k="lang" style="flex:2;min-width:140px">'+D.languages.map(function(l){return '<option>'+l+'</option>'}).join('')+'</select><select data-k="lvl" style="flex:1;min-width:110px">'+D.langLevels.map(function(l){return '<option>'+l+'</option>'}).join('')+'</select><button class="btn sm ghost" type="button" data-rm aria-label="'+esc(KX.t('Remove language'))+'">'+KX.icon('x')+'</button></div>'},
+ exp:function(){return '<div class="card rrow" style="margin-bottom:12px;box-shadow:none"><div class="grid g2"><div class="f"><label class="l">'+esc(KX.t('Job title'))+'</label><input data-k="title" list="dlJobs" placeholder="'+esc(KX.t('e.g. Civil Job Performer'))+'" autocomplete="off"></div><div class="f"><label class="l">'+esc(KX.t('Company'))+'</label><input data-k="company" autocomplete="off"></div><div class="f"><label class="l">'+esc(KX.t('Project'))+' <span class="opt-t">'+esc(KX.t('(optional)'))+'</span></label><input data-k="project" placeholder="'+esc(KX.t('e.g. Hail and Ghasha'))+'" maxlength="120" autocomplete="off"></div><div class="f"><label class="l">'+esc(KX.t('Country'))+'</label><input data-k="country" placeholder="e.g. UAE, Kenya"></div><div class="f"><label class="l">'+esc(KX.t('City'))+' <span class="opt-t">'+esc(KX.t('(optional)'))+'</span></label><input data-k="city"></div><div class="f"><label class="l">'+esc(KX.t('From'))+'</label><input data-k="from" type="month"></div><div class="f"><label class="l">'+esc(KX.t('To'))+'</label><input data-k="to" type="month"><label class="row small" style="margin-top:6px;gap:6px"><input type="checkbox" data-k="current"> '+esc(KX.t('I still work here'))+'</label></div></div><div class="f"><label class="l">'+esc(KX.t('Your duties'))+' <span class="opt-t">'+esc(KX.t('(optional - we write them if empty)'))+'</span></label><textarea data-k="duties" placeholder="'+esc(KX.t('One duty per line'))+'"></textarea></div><div class="f"><label class="l">'+esc(KX.t('About the company'))+' <span class="opt-t">'+esc(KX.t('(optional)'))+'</span></label><input data-k="about" placeholder="'+esc(KX.t('e.g. Leading contractor on a petrochemical expansion'))+'" maxlength="220"></div><button class="btn sm ghost" type="button" data-rm>'+KX.icon('x')+esc(KX.t('Remove job'))+'</button></div>'},
+ edu:function(){return '<div class="card rrow" style="margin-bottom:12px;box-shadow:none"><div class="grid g2"><div class="f"><label class="l">'+esc(KX.t('Level'))+'</label><select data-k="level">'+D.education.map(function(e){return '<option value="'+e.k+'">'+e.l+'</option>'}).join('')+'</select></div><div class="f"><label class="l">'+esc(KX.t('Course / field'))+'</label><input data-k="field" placeholder="'+esc(KX.t('e.g. Mechanical Engineering'))+'"></div><div class="f"><label class="l">'+esc(KX.t('School / institution'))+'</label><input data-k="school"></div><div class="f"><label class="l">'+esc(KX.t('Country'))+'</label><input data-k="country"></div><div class="f"><label class="l">'+esc(KX.t('Year completed'))+'</label><input data-k="year" inputmode="numeric" maxlength="4" placeholder="2019"></div></div><button class="btn sm ghost" type="button" data-rm>'+KX.icon('x')+esc(KX.t('Remove'))+'</button></div>'},
+ cert:function(){return '<div class="card rrow" style="margin-bottom:12px;box-shadow:none"><div class="grid g2"><div class="f"><label class="l">'+esc(KX.t('Certificate name'))+'</label><input data-k="name" list="dlCerts" placeholder="'+esc(KX.t('e.g. H2S Awareness, ADNOC WMS, NEBOSH IGC'))+'" autocomplete="off"></div><div class="f"><label class="l">'+esc(KX.t('Issued by'))+'</label><input data-k="issuer"></div><div class="f"><label class="l">'+esc(KX.t('Year'))+'</label><input data-k="year" inputmode="numeric" maxlength="4"></div><div class="f"><label class="l">'+esc(KX.t('Type'))+'</label><select data-k="kind">'+D.certKinds.map(function(k){return '<option>'+k+'</option>'}).join('')+'</select></div></div><button class="btn sm ghost" type="button" data-rm>'+KX.icon('x')+esc(KX.t('Remove'))+'</button></div>'}
 };
 var HOST={lang:'#langs',exp:'#exps',edu:'#edus',cert:'#certs'};
 (function(){var jobs={};(CAT.industries||[]).forEach(function(i){(i.roles||[]).forEach(function(r){jobs[r.label]=1})});
@@ -865,27 +1977,60 @@ add('lang',{lang:'English',lvl:'Good'});add('exp');add('edu');
 
 /* ---------- files ---------- */
 var MAXF=12,fid=0;
-function fileNote(){var kb=state.files.reduce(function(a,f){return a+f.size},0)+(state.photo?state.photo.size:0);$('#fileNote').textContent=state.files.length?state.files.length+' file(s), about '+(kb/1048576).toFixed(1)+' MB. Drag the cards, or use the arrows, to put them in the order you want.':''}
+function fileNote(){var kb=state.files.reduce(function(a,f){return a+f.size},0)+(state.photo?state.photo.size:0)+(state.sample?state.sample.size:0);$('#fileNote').textContent=state.files.length?KX.t('{n} file(s), about {mb} MB. Drag the cards, or use the arrows, to put them in the order you want.').replace('{n}',state.files.length).replace('{mb}',(kb/1048576).toFixed(1)):''}
 var drawFiles=KX.fileGrid($('#files'),function(){return state.files},function(l){state.files=l},fileNote);
 function renderFiles(){drawFiles();fileNote()}
 function addFiles(list){var arr=Array.prototype.slice.call(list),p=Promise.resolve();
   arr.forEach(function(file){p=p.then(function(){
-    if(state.files.length>=MAXF){KX.toast('Maximum '+MAXF+' files');return}
-    if(file.size>15*1048576){KX.toast(file.name+' is too large (15 MB max)');return}
+    if(state.files.length>=MAXF){KX.toast(KX.t('Maximum {n} files').replace('{n}',MAXF));return}
+    if(file.size>15*1048576){KX.toast(KX.t('{name} is too large (15 MB max)').replace('{name}',file.name));return}
     return KX.shrink(file,1600,.78).then(function(r){var ent={id:++fid,name:file.name,type:r.type,b64:r.b64,size:r.size,thumb:/^image/.test(r.type)?'data:'+r.type+';base64,'+r.b64:null};state.files.push(ent);renderFiles();if(/pdf/.test(r.type))KX.pdfThumb(file,240).then(function(t){ent.thumb=t.thumb;ent.pages=t.pages;renderFiles()}).catch(function(){})})
   })});return p}
 $('#fileIn').addEventListener('change',function(e){addFiles(e.target.files).then(function(){e.target.value=''})});
 var dz=$('#drop');['dragover','dragenter'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.add('over')})});['dragleave','drop'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.remove('over')})});dz.addEventListener('drop',function(e){addFiles(e.dataTransfer.files)});
 $('#photoIn').addEventListener('change',function(e){var f=e.target.files[0];if(!f){state.photo=null;return}
   KX.shrink(f,700,.82).then(function(r){state.photo={b64:r.b64,type:r.type,size:r.size};$('#photoNote').textContent='Photo added ('+Math.round(r.size/1024)+' KB).'})});
+$('#matchSample').addEventListener('change',function(e){$('#matchBox').classList.toggle('hide',!e.target.checked);if(!e.target.checked){state.sample=null;$('#sampleIn').value='';$('#sampleNote').textContent='';$('#sampleF').classList.remove('bad')}});
+$('#sampleIn').addEventListener('change',function(e){var f=e.target.files[0];if(!f){state.sample=null;$('#sampleNote').textContent='';return}
+  KX.shrink(f,1600,.82).then(function(r){state.sample={b64:r.b64,type:r.type,size:r.size};$('#sampleNote').textContent='Added ('+Math.round(r.size/1024)+' KB).';$('#sampleF').classList.remove('bad')})});
+
+/* ---------- ID / passport scan (optional helper, never required) ---------- */
+var mrzResult=null;
+function mrzRow(label,v,bad){return '<tr><th style="width:38%">'+esc(KX.t(label))+'</th><td>'+esc(v||'-')+(bad?' <b style="color:var(--warn)">('+esc(KX.t('double-check this'))+')</b>':'')+'</td></tr>'}
+function mrzReset(){mrzResult=null;$('#mrzReview').classList.add('hide');$('#mrzStatus').textContent=''}
+function showMrzReview(r){
+  mrzResult=r;
+  var natTxt=r.nationality||(r.nationalityCode?r.nationalityCode+' - '+KX.t('not in our list, please pick it yourself'):KX.t('Not read'));
+  $('#mrzTable').innerHTML=mrzRow('Name',r.fullName,false)+mrzRow('Nationality',natTxt,!r.nationality)+mrzRow('Date of birth',r.dob,r.checks&&r.checks.dob===false);
+  $('#mrzReview').classList.remove('hide');
+  $('#mrzStatus').textContent=r.confidence<0.67?KX.t('This did not read very clearly. Please check each field carefully before using it, or try a clearer, well-lit photo.'):KX.t('Please check this looks right before using it.');
+}
+$('#mrzIn').addEventListener('change',function(e){
+  var f=e.target.files[0];if(!f)return;
+  mrzReset();$('#mrzStatus').textContent=KX.t('Reading...');
+  KX.ocrText(f,function(p){$('#mrzStatus').textContent=KX.t('Reading... {pct}%').replace('{pct}',Math.round(p*100))}).then(function(text){
+    var r=KX.MRZ.parse(text);
+    if(!r){$('#mrzStatus').textContent=KX.t("We couldn't find the printed strip in that photo. Try the bottom of the passport page, or the back of the ID card, filling the frame in good light - or just type your details below.");return}
+    showMrzReview(r);
+  }).catch(function(){$('#mrzStatus').textContent=KX.t('Could not read that photo. Check your connection and try again, or just type your details below.')});
+});
+$('#mrzRetry').addEventListener('click',function(){mrzReset();$('#mrzIn').value=''});
+$('#mrzUse').addEventListener('click',function(){
+  if(!mrzResult)return;var r=mrzResult;
+  if(r.fullName){$('#fullName').value=r.fullName;$('#fullName').closest('.f').classList.remove('bad')}
+  if(r.dob)$('#dob').value=r.dob;
+  if(r.nationality){var has=Array.prototype.some.call($('#nationality').options,function(o){return o.value===r.nationality});if(has){$('#nationality').value=r.nationality;$('#nationality').closest('.f').classList.remove('bad')}}
+  KX.toast(KX.t('Filled in - please double check everything below.'));
+  mrzReset();$('#mrzIn').value=''
+});
 
 /* ---------- steps ---------- */
 $('#steps').innerHTML=steps.map(function(){return '<li></li>'}).join('');
 function show(n){cur=n;steps.forEach(function(s,i){s.classList.toggle('hide',i!==n)});
   $$('#steps li').forEach(function(l,i){l.classList.toggle('on',i<=n)});
-  $('#stepname').textContent='Step '+(n+1)+' of '+steps.length+' - '+steps[n].getAttribute('data-step');
+  $('#stepname').textContent=KX.t('Step {n} of {total} - {name}').replace('{n}',n+1).replace('{total}',steps.length).replace('{name}',KX.t(steps[n].getAttribute('data-step')));
   $('#back').style.visibility=n?'visible':'hidden';
-  var last=n===steps.length-1;$('#nextTxt').textContent=last?'Submit order':'Continue';$('#nextIc').classList.toggle('hide',last);
+  var last=n===steps.length-1;$('#nextTxt').textContent=last?KX.t('Submit order'):KX.t('Continue');$('#nextIc').classList.toggle('hide',last);
   if(last)buildReview();refreshPrice();saveDraft();window.scrollTo({top:0});$('#err').classList.add('hide')}
 function validate(n){var ok=true,first=null;$$('[data-req]',steps[n]).forEach(function(e){
   var f=e.closest('.f'),bad=false;
@@ -897,10 +2042,14 @@ function validate(n){var ok=true,first=null;$$('[data-req]',steps[n]).forEach(fu
   else bad=!e.value.trim();
   if(f)f.classList.toggle('bad',bad);if(bad){ok=false;if(!first)first=e}});
   if(n===2&&val('role').indexOf('Other')===0&&!val('roleOther').trim()){$('#roleOtherF').classList.add('bad');ok=false}
+  if(n===0){var msBad=val('matchSample')&&!state.sample;$('#sampleF').classList.toggle('bad',msBad);if(msBad)ok=false}
+  if(n===1){var dobV=val('dob').trim(),dobBad=false;
+   if(dobV){var dd=new Date(dobV+'T00:00:00'),ageYrs=(Date.now()-dd.getTime())/31557600000;dobBad=isNaN(dd.getTime())||ageYrs<10||ageYrs>100}
+   $('#dobF').classList.toggle('bad',dobBad);if(dobBad)ok=false}
   if(first)first.focus();return ok}
 $('#next').addEventListener('click',function(){
   if(sending)return;
-  if(!validate(cur)){KX.toast('Please complete the highlighted fields');return}
+  if(!validate(cur)){KX.toast(KX.t('Please complete the highlighted fields'));return}
   if(cur<steps.length-1)show(cur+1);else submit()});
 $('#back').addEventListener('click',function(){if(cur>0&&!sending)show(cur-1)});
 F.addEventListener('input',function(e){var f=e.target.closest&&e.target.closest('.f');if(f)f.classList.remove('bad')});
@@ -911,6 +2060,7 @@ function collect(){
   var role=val('role').indexOf('Other')===0?val('roleOther').trim():val('role');
   var city=val('city')==='Other'||!$('#city').options.length||$('#city').value===''?val('cityOther').trim()||val('city'):val('city');
   return{v:2,service:radio('service'),cover:!!val('cover')||includes('cover'),rush:false,style:radio('style'),
+    matchSample:!!val('matchSample'),matchNote:val('matchNote').trim(),
     person:{fullName:val('fullName').trim(),email:val('email').trim(),phone:val('phone').trim(),nationality:val('nationality'),country:val('country'),city:city,dob:val('dob'),marital:val('marital'),licence:val('licence'),languages:rows('lang').filter(function(l){return l.lang})},
     target:{industry:val('industry'),industryLabel:ind?ind.label:'',role:role,level:val('level'),years:+val('years')||0,visa:val('visa'),visaExp:val('visaExp'),avail:val('avail'),extraSkills:val('extraSkills').trim(),prefLoc:$$('input[name=pref]:checked').map(function(e){return e.value})},
     experience:rows('exp').filter(function(x){return x.title||x.company}),
@@ -930,30 +2080,31 @@ function restore(){var j=KX.store.get(DRAFT);if(!j)return;try{var raw=JSON.parse
   cities();if(raw.city)$('#city').value=raw.city;roles();if(raw.role)$('#role').value=raw.role;skillPrev();$('#visa').dispatchEvent(new Event('change'));
   ['lang','exp','edu','cert'].forEach(function(k){var l=(raw._rows||{})[k]||[];if(l.length){$(HOST[k]).innerHTML='';l.forEach(function(v){add(k,v)})}});
   $('#city').classList.toggle('hide',false);
-  if(raw.fullName){$('#notready').insertAdjacentHTML('afterend','<div class="note" id="resumed" style="margin-bottom:14px">We restored your unfinished order. <button type="button" class="btn sm ghost" id="clearDraft">Start over</button></div>');$('#clearDraft').onclick=function(){KX.store.del(DRAFT);location.reload()}}
+  if(raw.fullName){$('#notready').insertAdjacentHTML('afterend','<div class="note" id="resumed" style="margin-bottom:14px">'+esc(KX.t('We restored your unfinished order.'))+' <button type="button" class="btn sm ghost" id="clearDraft">'+esc(KX.t('Start over'))+'</button></div>');$('#clearDraft').onclick=function(){KX.store.del(DRAFT);location.reload()}}
   }catch(e){}}
 
 /* ---------- review ---------- */
 function buildReview(){var d=collect(),s=svc(),st=D.styles.filter(function(x){return x.k===d.style})[0],vis=D.visa.filter(function(x){return x.k===d.target.visa})[0],av=D.availability.filter(function(x){return x.k===d.target.avail})[0];
-  function r(a,b){return '<tr><th style="width:38%">'+a+'</th><td>'+esc(b||'-')+'</td></tr>'}
-  $('#review').innerHTML='<div class="tw"><table>'+r('Package',s?s.name:'')+r('Style',st?st.l:'')+r('Cover letter',d.cover?'Yes':'No')+r('Name',d.person.fullName)+r('Contact',d.person.email+' / '+d.person.phone)+r('Nationality',d.person.nationality)+r('Location',[d.person.city,d.person.country].filter(Boolean).join(', '))+r('Target',d.target.role+' ('+d.target.industryLabel+')')+r('Experience',d.target.years+' years')+r('Visa',vis?vis.l:'')+r('Availability',av?av.l:'')+r('Jobs / education / certificates',d.experience.length+' / '+d.education.length+' / '+d.certificates.length)+r('Files',state.files.length+(state.photo?' + photo':''))+'</table></div>'}
+  function r(a,b){return '<tr><th style="width:38%">'+esc(KX.t(a))+'</th><td>'+esc(b||'-')+'</td></tr>'}
+  $('#review').innerHTML='<div class="tw"><table>'+r('Package',s?s.name:'')+r('Style',d.matchSample?KX.t('Your own sample'):(st?st.l:''))+r('Cover letter',d.cover?KX.t('Yes'):KX.t('No'))+r('Name',d.person.fullName)+r('Contact',d.person.email+' / '+d.person.phone)+r('Nationality',d.person.nationality)+r('Location',[d.person.city,d.person.country].filter(Boolean).join(', '))+r('Target',d.target.role+' ('+d.target.industryLabel+')')+r('Experience',KX.t('{n} years').replace('{n}',d.target.years))+r('Visa',vis?vis.l:'')+r('Availability',av?av.l:'')+r('Jobs / education / certificates',d.experience.length+' / '+d.education.length+' / '+d.certificates.length)+r('Files',state.files.length+(state.photo?' '+KX.t('+ photo'):'')+(state.sample?' '+KX.t('+ your sample'):''))+'</table></div>'}
 
 /* ---------- submit ---------- */
 var STAGES=['Preparing your details','Uploading','Writing your documents','Finishing'];
-function stageUI(i,note){$('#stages').innerHTML=STAGES.map(function(s,j){var st=j<i?icCheck:(j===i?'<span class="spin" style="display:inline-block;color:var(--acc)"></span>':'<span style="display:inline-block;width:16px"></span>');return '<li class="row" style="gap:10px;padding:5px 0;color:'+(j>i?'var(--muted)':'var(--ink)')+'">'+st+'<span>'+s+'</span></li>'}).join('');if(note)$('#progNote').textContent=note}
+function stageUI(i,note){$('#stages').innerHTML=STAGES.map(function(s,j){var st=j<i?icCheck:(j===i?'<span class="spin" style="display:inline-block;color:var(--acc)"></span>':'<span style="display:inline-block;width:16px"></span>');return '<li class="row" style="gap:10px;padding:5px 0;color:'+(j>i?'var(--muted)':'var(--ink)')+'">'+st+'<span>'+esc(KX.t(s))+'</span></li>'}).join('');if(note)$('#progNote').textContent=note}
 function setBar(p){$('#barI').style.width=Math.round(p*100)+'%'}
 function busy(b){sending=b;var n=$('#next');n.setAttribute('aria-busy',b?'true':'false');n.disabled=b;$('#back').disabled=b}
 function submit(){
-  var d=collect();if(!KX.ready()){showErr('This form is not connected to the server yet. Please message us on WhatsApp.');return}
+  var d=collect();if(!KX.ready()){showErr(KX.t('This form is not connected to the server yet. Please message us on WhatsApp.'));return}
   busy(true);$('#err').classList.add('hide');var dlg=$('#prog');try{dlg.showModal()}catch(e){dlg.setAttribute('open','')}
   setBar(.04);stageUI(0);
   d.photo=state.photo?{type:state.photo.type,data:state.photo.b64}:null;
+  d.sampleFile=state.sample?{type:state.sample.type,data:state.sample.b64}:null;
   d.files=state.files.map(function(f){return{name:f.name,type:f.type,data:f.b64}});
   var size=JSON.stringify(d).length;
-  if(size>30*1048576){dlg.close();busy(false);showErr('Your files are too large. Remove some and try again.');return}
+  if(size>30*1048576){dlg.close();busy(false);showErr(KX.t('Your files are too large. Remove some and try again.'));return}
   var t0=Date.now(),tick;
   setTimeout(function(){stageUI(1);setBar(.1);
-    KX.api('submit',d,{timeout:240000,onUp:function(p,done){setBar(.1+p*.5);if(done){stageUI(2,'Your documents are being written. This can take up to a minute.');
+    KX.api('submit',d,{timeout:240000,onUp:function(p,done){setBar(.1+p*.5);if(done){stageUI(2,KX.t('Your documents are being written. This can take up to a minute.'));
       var w=.6;tick=setInterval(function(){w=Math.min(.95,w+(0.95-w)*.04);setBar(w)},1000)}}})
    .then(function(r){clearInterval(tick);stageUI(4);setBar(1);setTimeout(function(){try{dlg.close()}catch(e){}busy(false);success(r,d)},350)})
    .catch(function(e){clearInterval(tick);try{dlg.close()}catch(x){}busy(false);showErr(e.message)});
@@ -964,13 +2115,31 @@ function success(r,d){KX.store.del(DRAFT);
   F.classList.add('hide');$('#steps').classList.add('hide');$('#stepname').classList.add('hide');
   var s=svc(),p=(C.payments||[]).filter(function(x){return x.k===d.pay})[0]||{name:'',lines:[]},ref=r.ref;
   $('#dName').textContent=d.person.fullName.split(' ')[0];$('#dRef').textContent=ref;$('#dTotal').textContent=KX.money(d.total);
-  $('#dPay').innerHTML='<b>'+esc(p.name)+'</b>'+KX.payLines(p)+'<div class="muted" style="margin-top:6px">Use '+esc(ref)+' as the payment reference where possible.</div>';
+  $('#dPay').innerHTML='<b>'+esc(p.name)+'</b>'+KX.payLines(p)+'<div class="muted" style="margin-top:6px">'+KX.t('Use {ref} as the payment reference where possible.').replace('{ref}',esc(ref))+'</div>';
   var msg='Hello KINETIX, I have just placed order '+ref+' ('+(s?s.name:'')+', '+KX.money(d.total)+'). Payment via '+p.name+'.';
   var w=(C.contacts&&C.contacts.whatsappKE||'').replace(/\D/g,'');$('#dWa').href='https://wa.me/'+w+'?text='+encodeURIComponent(msg);
   $('#dTrack').href='order-status.html?ref='+encodeURIComponent(ref);
-  if(r.warnings&&r.warnings.length){var w2=$('#dWarn');w2.classList.remove('hide');w2.textContent='Your order was received. Some automatic extras did not complete, so we will follow up personally.'}
-  $('#copyRef').onclick=function(){try{navigator.clipboard.writeText(ref);KX.toast('Reference copied')}catch(e){KX.toast(ref)}};
+  if(r.warnings&&r.warnings.length){var w2=$('#dWarn');w2.classList.remove('hide');w2.textContent=KX.t('Your order was received. Some automatic extras did not complete, so we will follow up personally.')}
+  $('#copyRef').onclick=function(){try{navigator.clipboard.writeText(ref);KX.toast(KX.t('Reference copied'))}catch(e){KX.toast(ref)}};
   var dn=$('#done');dn.classList.remove('hide');dn.focus();window.scrollTo({top:0})}
+
+/* ---------- re-apply everything when the form language changes ---------- */
+function applyFormLang(){
+  applyDir();KX.applyI18n();
+  var saved={nationality:val('nationality'),country:val('country'),city:val('city'),cityOther:val('cityOther'),
+    marital:val('marital'),licence:val('licence'),visa:val('visa'),avail:val('avail'),industry:val('industry'),role:val('role'),level:val('level')};
+  function restoreSel(id,v){var e=document.getElementById(id);if(!e||v==null)return;for(var i=0;i<e.options.length;i++){if(e.options[i].value===v){e.value=v;return}}}
+  fillStatics();
+  restoreSel('nationality',saved.nationality);restoreSel('country',saved.country);restoreSel('marital',saved.marital);
+  restoreSel('licence',saved.licence);restoreSel('visa',saved.visa);restoreSel('avail',saved.avail);
+  restoreSel('industry',saved.industry);restoreSel('level',saved.level);
+  cities();restoreSel('city',saved.city);if(saved.cityOther)$('#cityOther').value=saved.cityOther;
+  roles();restoreSel('role',saved.role);skillPrev();
+  $('#visa').dispatchEvent(new Event('change'));
+  rebuildPrefLoc();
+  ['lang','exp','edu','cert'].forEach(function(k){var data=rows(k);$(HOST[k]).innerHTML='';data.forEach(function(v){add(k,v)})});
+  refreshPrice();show(cur);
+}
 
 restore();cities();show(Math.min(cur,0));
 F.addEventListener('change',saveDraft);
