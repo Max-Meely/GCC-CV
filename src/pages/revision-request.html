@@ -1,0 +1,33 @@
+<!-- title:Request a revision | KINETIX|nav:order-status.html|use: -->
+<main><div class="wrap" style="max-width:640px">
+<h1>Request a revision</h1>
+<p class="muted">One minor revision is free within 3 days of delivery. After that, each revision is <span id="rev"></span>. Minor means corrections, wording and small layout changes.</p>
+<div id="notready" class="note warn hide" style="margin-bottom:14px">This page is not connected to the server yet. Add the Apps Script URL to <b>config.js</b>.</div>
+<form id="f" class="card" novalidate>
+  <div class="grid g2">
+    <div class="f"><label class="l" for="ref">Reference number</label><input id="ref" placeholder="KTX-0001" autocapitalize="characters" data-req><div class="e">Enter your reference number.</div></div>
+    <div class="f"><label class="l" for="who">Email or phone</label><input id="who" data-req><div class="e">Enter the email or phone used for the order.</div></div>
+  </div>
+  <div class="f"><label class="l" for="msg">What would you like changed?</label><textarea id="msg" data-req placeholder="Be specific: which section, what the correct text is."></textarea><div class="e">Describe the change you want.</div></div>
+  <div class="f"><div class="l">Attachments <span class="opt-t">(optional)</span></div><input id="fileIn" type="file" multiple accept="image/*,application/pdf"><div class="h" id="fileNote"></div></div>
+  <div id="err" class="note err hide" role="alert" style="margin-bottom:12px"></div>
+  <button class="btn pri" id="go" type="submit"><span id="goTxt">Send request</span><span class="spin" aria-hidden="true"></span></button>
+</form>
+<section id="ok" class="card hide" style="margin-top:16px"><div class="note ok"><b id="okT"></b></div><p class="muted small" style="margin-top:12px" id="okS"></p><a class="btn" href="order-status.html">Back to tracking</a></section>
+</div></main>
+<!--script-->
+(function(){var $=KX.$;
+$('#rev').textContent=KX.money(KX.cfg.extraRevision||15);
+if(!KX.ready())$('#notready').classList.remove('hide');
+$('#ref').value=(new URLSearchParams(location.search).get('ref')||'').toUpperCase();
+$('#f').addEventListener('input',function(e){var f=e.target.closest('.f');if(f)f.classList.remove('bad')});
+$('#f').addEventListener('submit',function(e){e.preventDefault();var bad=false;['ref','who','msg'].forEach(function(k){var el=$('#'+k),b=!el.value.trim();el.closest('.f').classList.toggle('bad',b);if(b)bad=true});if(bad)return;
+ var b=$('#go');b.setAttribute('aria-busy','true');b.disabled=true;$('#goTxt').textContent='Sending...';$('#err').classList.add('hide');
+ var fl=Array.prototype.slice.call($('#fileIn').files).slice(0,8);
+ Promise.all(fl.map(function(f){return KX.shrink(f,1800,.8).then(function(r){return{name:f.name,type:r.type,data:r.b64,size:r.size}})})).then(function(files){
+  var totalBytes=files.reduce(function(a,f){return a+(f.size||0)},0);
+  if(totalBytes>20*1048576)throw new Error('Your attachments are too large (about '+(totalBytes/1048576).toFixed(1)+' MB total). Remove one, or use smaller photos, and try again.');
+  return KX.api('revision',{ref:$('#ref').value.trim().toUpperCase(),contact:$('#who').value.trim(),message:$('#msg').value.trim(),files:files.map(function(f){return{name:f.name,type:f.type,data:f.data}})},{timeout:120000})})
+ .then(function(j){$('#f').classList.add('hide');$('#ok').classList.remove('hide');$('#okT').textContent=j.free?'Revision request received - this one is free.':'Revision request received.';$('#okS').textContent=(j.free?'We will send the updated files within 24 hours.':'This revision is outside the free window, so a fee of '+KX.money(j.fee||KX.cfg.extraRevision||15)+' applies. We will confirm with you on WhatsApp before starting.')+((j.warnings||[]).indexOf('uploads')>-1?' Your message came through, but we could not save your attachment(s) - please resend them to us on WhatsApp with your reference number.':'')})
+ .catch(function(x){var m=$('#err');m.textContent=x.message;m.classList.remove('hide');b.setAttribute('aria-busy','false');b.disabled=false;$('#goTxt').textContent='Send request'})});
+})();

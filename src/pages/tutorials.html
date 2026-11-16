@@ -1,0 +1,114 @@
+<!-- title:Video tutorials | KINETIX GCC CV|nav:|use: -->
+<!--desc:Watch short video tutorials on using KINETIX's free PDF tools - fill and sign, signatures, photos, rotation and text detection - and see exactly what's free.-->
+<style>
+.kxwrap{max-width:900px}
+.kxplayer{border-radius:22px;overflow:hidden;background:#05070f;border:1px solid var(--bd);box-shadow:var(--sh)}
+.kxp-stage{position:relative;width:100%;aspect-ratio:16/9;background:#000}
+.kxp-stage video{width:100%;height:100%;display:block;background:#000}
+.kxp-big{position:absolute;inset:0;margin:auto;width:76px;height:76px;border-radius:50%;background:rgba(10,20,40,.58);border:2px solid rgba(255,255,255,.85);color:#fff;display:grid;place-items:center;cursor:pointer;transition:transform .15s,background .15s}
+.kxp-big:hover{background:rgba(10,20,40,.78);transform:scale(1.06)}
+.kxp-big.hide{display:none}
+.kxp-big svg{width:30px;height:30px;margin-left:4px}
+.kxp-stage.playing .kxp-big:not(:hover){opacity:0;pointer-events:none}
+.kxp-bar{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#0b1326;color:#fff}
+.kxp-bar button{background:none;border:none;color:#fff;cursor:pointer;padding:6px;display:grid;place-items:center;border-radius:8px;flex:none}
+.kxp-bar button:hover{background:rgba(255,255,255,.12)}
+.kxp-bar .ic{width:20px;height:20px}
+.kxp-time{font-size:.78rem;font-variant-numeric:tabular-nums;color:#c4cde3;flex:none}
+.kxp-seek{flex:1;-webkit-appearance:none;appearance:none;height:5px;border-radius:99px;background:rgba(255,255,255,.22);outline:none;cursor:pointer}
+.kxp-seek::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:#fff;cursor:pointer}
+.kxp-seek::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#fff;border:none;cursor:pointer}
+.kxp-dl{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.12)!important;padding:6px 12px!important;border-radius:999px!important;font-size:.8rem;font-weight:700;white-space:nowrap;text-decoration:none}
+.kxp-dl:hover{background:rgba(255,255,255,.22)!important}
+.vmeta{padding:18px 2px 4px}
+.vtags{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 2px}
+.vtags span{padding:6px 12px;border-radius:999px;background:var(--soft);font-size:.8rem;font-weight:650}
+.vtags span.pd{background:rgba(148,163,184,.18);color:var(--muted)}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px}
+.vcard{border-radius:16px;overflow:hidden;border:1px solid var(--bd);background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit;padding:0}
+.vcard[aria-pressed=true]{outline:2px solid var(--acc);outline-offset:-2px}
+.vcard.soon{cursor:default;opacity:.55}
+.vcard .vth{position:relative;aspect-ratio:16/9;background:#0b1326}
+.vcard .vth img{width:100%;height:100%;object-fit:cover;display:block}
+.vcard .vth .pl{position:absolute;inset:0;margin:auto;width:40px;height:40px;border-radius:50%;background:rgba(10,20,40,.6);color:#fff;display:grid;place-items:center}
+.vcard .vth .pl svg{width:16px;height:16px;margin-left:2px}
+.vcard b{display:block;padding:10px 12px 2px;font-size:.88rem}
+.vcard .vd{padding:0 12px 12px;font-size:.76rem;color:var(--muted)}
+</style>
+<main><div class="wrap kxwrap">
+<div class="phero" style="--bg:url(blog-img/team.jpg);--pos:50% 30%;margin-bottom:20px">
+<h1>Video <span class="grad">tutorials</span></h1>
+<p class="muted" style="max-width:62ch">Short, practical walkthroughs of the free PDF tools - what each one does, and exactly what's free versus what might move to a small paid tier later. More tutorials are added as we build new tools.</p>
+</div>
+
+<div class="kxplayer" id="kxp">
+ <div class="kxp-stage" id="kxstage">
+  <video id="kxv" playsinline preload="metadata"></video>
+  <button type="button" class="kxp-big" id="kxbig" aria-label="Play video"><svg class="ic"><use href="#i-play"/></svg></button>
+ </div>
+ <div class="kxp-bar">
+  <button type="button" id="kxplay" aria-label="Play"><svg class="ic"><use href="#i-play"/></svg></button>
+  <span class="kxp-time" id="kxcur">0:00</span>
+  <input type="range" class="kxp-seek" id="kxseek" min="0" max="1000" value="0" step="1" aria-label="Seek">
+  <span class="kxp-time" id="kxdur">0:00</span>
+  <button type="button" id="kxmute" aria-label="Mute"><svg class="ic"><use href="#i-vol"/></svg></button>
+  <button type="button" id="kxfull" aria-label="Fullscreen"><svg class="ic"><use href="#i-expand"/></svg></button>
+  <a id="kxdl" class="kxp-dl" download><svg class="ic" style="width:16px;height:16px"><use href="#i-down"/></svg>Download</a>
+ </div>
+</div>
+
+<div class="vmeta">
+ <h2 id="vtitle" style="margin-bottom:4px">&nbsp;</h2>
+ <p class="muted small" id="vdesc"></p>
+ <div class="vtags" id="vtags"></div>
+</div>
+
+<h2 style="margin-top:28px">More tutorials</h2>
+<div class="vgrid" id="vgrid"></div>
+
+<div class="note" style="margin-top:22px">Prefer reading? Every free tool has its own short instructions on its page. Stuck on something a tutorial doesn't cover? <a href="pdf-help.html"><b>Get a free help ticket</b></a> and we'll do it for you.</div>
+</div></main>
+<!--script-->
+(function(){
+var $=KX.$;
+var VIDS=[
+ {id:'fill-sign',title:'Fill, sign and edit a PDF - what’s free',
+  desc:'A full walkthrough of the Fill and sign PDF tool: typing and dates, drawing or photographing a signature, inserting a photo with background removal, rotating to an exact angle, the beta text-detection tool, and downloading your finished PDF.',
+  src:'tutorials/fill-and-sign-walkthrough.mp4',poster:'tutorials/fill-and-sign-walkthrough.jpg',
+  free:['Typing, dates, ticks & crosses','Signature (draw or photo) + crop','Photo insert + background removal','Free-angle rotation','Detect text (beta)','Download — always free'],
+  paid:[]},
+ {id:'soon-1',title:'Merge, split & organise PDFs',desc:'Coming soon',soon:true},
+ {id:'soon-2',title:'Signature maker in depth',desc:'Coming soon',soon:true}
+];
+var cur=0;
+var v=$('#kxv'),stage=$('#kxstage'),big=$('#kxbig'),playBtn=$('#kxplay'),seek=$('#kxseek'),curT=$('#kxcur'),durT=$('#kxdur'),muteBtn=$('#kxmute'),fullBtn=$('#kxfull'),dl=$('#kxdl'),grid=$('#vgrid');
+function fmt(s){if(!isFinite(s))return'0:00';s=Math.max(0,Math.round(s));var m=Math.floor(s/60),r=s%60;return m+':'+(r<10?'0':'')+r}
+function setPlayIcon(sel,playing){sel.innerHTML='<svg class="ic"><use href="#'+(playing?'i-pause':'i-play')+'"/></svg>'}
+function load(i){cur=i;var d=VIDS[i];if(d.soon)return;
+ v.src=d.src;v.poster=d.poster;dl.href=d.src;dl.setAttribute('download',d.id+'.mp4');
+ $('#vtitle').textContent=d.title;$('#vdesc').textContent=d.desc;
+ $('#vtags').innerHTML=(d.free||[]).map(function(t){return '<span>'+KX.esc(t)+'</span>'}).join('')+(d.paid||[]).map(function(t){return '<span class="pd">'+KX.esc(t)+' (paid)</span>'}).join('');
+ stage.classList.remove('playing');big.classList.remove('hide');setPlayIcon(big,false);setPlayIcon(playBtn,false);
+ seek.value=0;curT.textContent='0:00';durT.textContent='0:00';
+ drawGrid()}
+function drawGrid(){grid.innerHTML=VIDS.map(function(d,i){
+ if(d.soon)return '<div class="vcard soon"><div class="vth" style="display:grid;place-items:center;color:var(--muted)"><svg class="ic" style="width:28px;height:28px"><use href="#i-clock"/></svg></div><b>'+KX.esc(d.title)+'</b><div class="vd">Coming soon</div></div>';
+ return '<button type="button" class="vcard" data-i="'+i+'" aria-pressed="'+(i===cur)+'"><div class="vth"><img src="'+d.poster+'" alt=""><span class="pl"><svg class="ic"><use href="#i-play"/></svg></span></div><b>'+KX.esc(d.title)+'</b><div class="vd">'+KX.esc((d.free||[]).length+' free tools covered')+'</div></button>'
+}).join('')}
+grid.addEventListener('click',function(e){var b=e.target.closest('[data-i]');if(!b)return;var i=+b.dataset.i;if(i===cur){play();return}load(i);play()});
+function play(){if(VIDS[cur].soon)return;v.play().catch(function(){})}
+function togglePlay(){if(v.paused)play();else v.pause()}
+big.onclick=togglePlay;playBtn.onclick=togglePlay;
+v.addEventListener('play',function(){stage.classList.add('playing');big.classList.add('hide');setPlayIcon(playBtn,true)});
+v.addEventListener('pause',function(){stage.classList.remove('playing');big.classList.remove('hide');setPlayIcon(playBtn,false)});
+v.addEventListener('ended',function(){stage.classList.remove('playing');big.classList.remove('hide');setPlayIcon(playBtn,false)});
+v.addEventListener('loadedmetadata',function(){durT.textContent=fmt(v.duration)});
+var seeking=false;
+v.addEventListener('timeupdate',function(){if(seeking||!v.duration)return;seek.value=Math.round(v.currentTime/v.duration*1000);curT.textContent=fmt(v.currentTime)});
+seek.addEventListener('input',function(){seeking=true;if(v.duration)curT.textContent=fmt(v.duration*(seek.value/1000))});
+seek.addEventListener('change',function(){if(v.duration)v.currentTime=v.duration*(seek.value/1000);seeking=false});
+muteBtn.onclick=function(){v.muted=!v.muted;muteBtn.innerHTML='<svg class="ic"><use href="#'+(v.muted?'i-mute':'i-vol')+'"/></svg>'};
+fullBtn.onclick=function(){try{if(stage.requestFullscreen)stage.requestFullscreen();else if(v.webkitEnterFullscreen)v.webkitEnterFullscreen()}catch(e){}};
+stage.addEventListener('click',function(e){if(e.target===v)togglePlay()});
+load(0);
+})();

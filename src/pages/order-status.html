@@ -1,0 +1,31 @@
+<!-- title:Track your order | KINETIX|nav:order-status.html|use: -->
+<main><div class="wrap" style="max-width:640px">
+<h1>Track your order</h1>
+<p class="muted">Enter your reference number and the email or phone number you ordered with.</p>
+<div id="notready" class="note warn hide" style="margin-bottom:14px">This page is not connected to the server yet. Add the Apps Script URL to <b>config.js</b>.</div>
+<form id="f" class="card" novalidate>
+  <div class="f"><label class="l" for="ref">Reference number</label><input id="ref" placeholder="KTX-0001" autocapitalize="characters" autocomplete="off" data-req><div class="e">Enter a reference like KTX-0001.</div></div>
+  <div class="f"><label class="l" for="who">Email or phone number</label><input id="who" autocomplete="email" data-req><div class="e">Enter the email or phone used for the order.</div></div>
+  <div id="err" class="note err hide" role="alert" style="margin-bottom:12px"></div>
+  <button class="btn pri" id="go" type="submit"><span id="goTxt">Check status</span><span class="spin" aria-hidden="true"></span></button>
+</form>
+<section id="res" class="card hide" style="margin-top:16px" aria-live="polite"></section>
+</div></main>
+<!--script-->
+(function(){var $=KX.$,esc=KX.esc;
+if(!KX.ready())$('#notready').classList.remove('hide');
+var q=new URLSearchParams(location.search);$('#ref').value=(q.get('ref')||KX.store.get('kx-last-ref')||'').toUpperCase();
+var STEPS=[['received','Received'],['in_progress','In progress'],['review','Final check'],['delivered','Delivered']];
+function fmt(s){if(!s)return '-';var d=new Date(s);return isNaN(d)?s:d.toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'})}
+function show(o){var idx=-1;STEPS.forEach(function(s,i){if(s[0]===o.status||(o.status==='completed'&&i===3))idx=i});
+ var tl=STEPS.map(function(s,i){var on=i<=idx;return '<li style="display:flex;gap:10px;align-items:center;padding:7px 0;color:'+(on?'var(--ink)':'var(--muted)')+'"><span style="width:22px;height:22px;border-radius:50%;display:grid;place-items:center;flex:none;background:'+(on?'var(--acc)':'var(--line)')+';color:var(--on)">'+(on?KX.icon('check'):'')+'</span><span>'+s[1]+(i===idx?' <span class="tag">Current</span>':'')+'</span></li>'}).join('');
+ var hold=o.status==='on_hold'?'<div class="note warn" style="margin-bottom:12px">Your order is on hold. We will contact you on WhatsApp.</div>':'';
+ $('#res').innerHTML='<div class="row sp"><h2 style="margin:0">'+esc(o.ref)+'</h2><span class="tag '+(o.paid==='paid'?'ok':'warn')+'">'+(o.paid==='paid'?'Payment received':'Awaiting payment')+'</span></div><p class="muted small" style="margin:4px 0 12px">'+esc(o.service)+(o.rush?' - express':'')+' &middot; ordered '+fmt(o.created)+(o.due?' &middot; expected by '+fmt(o.due):'')+'</p>'+hold+'<ul style="list-style:none;margin:0;padding:0">'+tl+'</ul>'+(o.note?'<div class="note" style="margin-top:12px">'+esc(o.note)+'</div>':'')+'<hr><div class="row"><a class="btn" href="revision-request.html?ref='+encodeURIComponent(o.ref)+'">Request a revision</a><a class="btn ghost" data-c="wa" data-keep href="#">Message us</a><button class="btn ghost" type="button" id="shareRef">Copy link to this order</button></div>';
+ $('#res').classList.remove('hide');KX.init();
+ var sb=$('#shareRef');if(sb)sb.onclick=function(){var link=location.origin+location.pathname+'?ref='+encodeURIComponent(o.ref);if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(link).then(function(){KX.toast('Link copied - the reference will be filled in, they still need the email or phone')},function(){KX.toast(link)})}else KX.toast(link)}}
+$('#f').addEventListener('submit',function(e){e.preventDefault();var r=$('#ref').value.trim().toUpperCase(),w=$('#who').value.trim(),bad=false;
+ ['ref','who'].forEach(function(k){var el=$('#'+k),b=!el.value.trim();el.closest('.f').classList.toggle('bad',b);if(b)bad=true});if(bad)return;
+ var b=$('#go');b.setAttribute('aria-busy','true');b.disabled=true;$('#goTxt').textContent='Checking...';$('#err').classList.add('hide');
+ KX.api('status',{ref:r,contact:w},{timeout:60000}).then(function(j){KX.store.set('kx-last-ref',r);show(j.order)}).catch(function(x){$('#res').classList.add('hide');var m=$('#err');m.textContent=x.message;m.classList.remove('hide')}).then(function(){b.setAttribute('aria-busy','false');b.disabled=false;$('#goTxt').textContent='Check status'})});
+$('#f').addEventListener('input',function(e){var f=e.target.closest('.f');if(f)f.classList.remove('bad')});
+})();

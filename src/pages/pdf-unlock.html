@@ -1,0 +1,47 @@
+<!-- title:PDF password remover | KINETIX|nav:pdf-tools.html|use: -->
+<!--desc:Free PDF password remover. Enter the password you already know and save an unlocked copy. Runs in your browser, your file is never uploaded.-->
+<main><div class="wrap" style="max-width:720px">
+<div class="phero" style="--bg:url(blog-img/handover.jpg);--pos:50% 45%;margin-bottom:18px"><a href="pdf-tools.html" class="row" style="gap:6px;text-decoration:none;font-size:.9rem;margin-bottom:10px"><svg class="ic"><use href="#i-back"/></svg>PDF tools</a>
+<h1>PDF <span class="grad">password remover</span></h1>
+<p class="muted">Got a PDF that asks for a password every time you open it? Enter the password once and save a copy that opens freely. Everything happens on your phone or computer. Your file is never uploaded.</p></div>
+<div class="note" style="margin:14px 0">This works only when you know the password. It cannot guess or crack one. Use it only on files you are allowed to open.</div>
+<section class="card" id="box">
+ <label class="drop" id="drop" for="fin"><svg class="ic"><use href="#i-up"/></svg> Tap to choose a locked PDF, or drop it here<div class="muted small">PDF files only</div></label>
+ <input id="fin" type="file" accept="application/pdf" class="sr">
+ <div id="step2" class="hide" style="margin-top:16px">
+  <div class="row" style="margin-bottom:10px"><svg class="ic"><use href="#i-pdf"/></svg><b id="fn"></b></div>
+  <div class="f"><label class="l" for="pw">PDF password</label><input id="pw" type="password" autocomplete="off"><div class="e" id="pwe">Wrong password. Try again.</div></div>
+  <div id="err" class="note err hide" role="alert" style="margin-bottom:12px"></div>
+  <div class="bar hide" id="bar" style="margin-bottom:12px"><i id="barI"></i></div>
+  <button class="btn pri" id="go" type="button"><span id="goTxt">Remove password</span><span class="spin" aria-hidden="true"></span></button>
+ </div>
+ <div id="ok" class="hide" style="margin-top:16px">
+  <div class="note ok" style="margin-bottom:12px"><b>Done.</b> <span id="okm"></span></div>
+  <div class="row"><a class="btn pri" id="dl" download href="#"><svg class="ic"><use href="#i-down"/></svg>Download unlocked PDF</a><button class="btn" id="again" type="button">Unlock another</button></div>
+ </div>
+</section>
+<p class="muted small" style="margin-top:12px">Good to know: the unlocked copy is rebuilt page by page as pictures so it opens without a password. Text in it cannot be selected or searched afterwards. Need a perfect copy or have forgotten the password? <a href="pdf-help.html">Ask for free help</a>.</p>
+</div></main>
+<!--script-->
+(function(){
+var $=KX.$,bytes=null,name='file.pdf',pj=null,lb=null,url=null;
+function pdfJs(){if(!pj)pj=import('./pdf.min.mjs').then(function(m){m.GlobalWorkerOptions.workerSrc='pdf.worker.min.mjs';return m});return pj}
+function pdfLib(){if(window.PDFLib)return Promise.resolve(window.PDFLib);if(!lb)lb=new Promise(function(res,rej){var s=document.createElement('script');s.src='pdf-lib.min.js';s.onload=function(){res(window.PDFLib)};s.onerror=function(){rej(new Error('Could not load PDF engine'))};document.head.appendChild(s)});return lb}
+function pick(f){if(!f)return;if(!/pdf$/i.test(f.type)&&!/\.pdf$/i.test(f.name)){KX.toast('Please choose a PDF file');return}
+ name=f.name.replace(/\.pdf$/i,'');var r=new FileReader();r.onload=function(){bytes=new Uint8Array(r.result);$('#fn').textContent=f.name;$('#drop').classList.add('hide');$('#step2').classList.remove('hide');$('#pw').focus()};r.readAsArrayBuffer(f)}
+$('#fin').addEventListener('change',function(e){pick(e.target.files[0])});
+var dz=$('#drop');['dragover','dragenter'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.add('over')})});['dragleave','drop'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.remove('over')})});dz.addEventListener('drop',function(e){pick(e.dataTransfer.files[0])});
+function fail(m){$('#err').textContent=m;$('#err').classList.remove('hide');busy(false)}
+function busy(b){var g=$('#go');g.disabled=b;g.setAttribute('aria-busy',b?'true':'false');$('#goTxt').textContent=b?'Working...':'Remove password';if(!b)$('#bar').classList.add('hide')}
+function run(){$('#err').classList.add('hide');$('#pw').closest('.f').classList.remove('bad');busy(true);$('#bar').classList.remove('hide');$('#barI').style.width='3%';
+ Promise.all([pdfJs(),pdfLib()]).then(function(a){var pjs=a[0],L=a[1];
+  return pjs.getDocument({data:bytes.slice(),password:$('#pw').value}).promise.then(function(doc){
+   return L.PDFDocument.create().then(function(out){var n=doc.numPages,p=Promise.resolve();
+    for(var i=1;i<=n;i++)(function(i){p=p.then(function(){return doc.getPage(i).then(function(pg){var vp=pg.getViewport({scale:1}),sc=Math.min(2.2,2600/Math.max(vp.width,vp.height)),v=pg.getViewport({scale:sc}),c=document.createElement('canvas');c.width=Math.round(v.width);c.height=Math.round(v.height);var x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);
+     return pg.render({canvasContext:x,viewport:v}).promise.then(function(){var d=c.toDataURL('image/jpeg',.9).split(',')[1],bin=atob(d),u=new Uint8Array(bin.length);for(var k=0;k<bin.length;k++)u[k]=bin.charCodeAt(k);c.width=c.height=0;
+      return out.embedJpg(u).then(function(im){var page=out.addPage([vp.width,vp.height]);page.drawImage(im,{x:0,y:0,width:vp.width,height:vp.height});$('#barI').style.width=Math.round(5+90*i/n)+'%'})})})})})(i);
+    return p.then(function(){return out.save()}).then(function(u8){if(url)URL.revokeObjectURL(url);url=URL.createObjectURL(new Blob([u8],{type:'application/pdf'}));var d=$('#dl');d.href=url;d.setAttribute('download',name+'-unlocked.pdf');$('#okm').textContent=n+' page(s) saved without a password.';$('#step2').classList.add('hide');$('#ok').classList.remove('hide');busy(false)})})})})
+ .catch(function(e){if(e&&(e.name==='PasswordException'||e.code===1||e.code===2)){$('#pw').closest('.f').classList.add('bad');$('#pwe').textContent=e.code===1&&!$('#pw').value?'This file needs a password.':'Wrong password. Try again.';busy(false);$('#pw').focus()}else fail('Could not open this PDF. It may be damaged.')})}
+$('#go').addEventListener('click',run);$('#pw').addEventListener('keydown',function(e){if(e.key==='Enter')run()});
+$('#again').addEventListener('click',function(){bytes=null;$('#pw').value='';$('#ok').classList.add('hide');$('#drop').classList.remove('hide');$('#fin').value=''});
+})();

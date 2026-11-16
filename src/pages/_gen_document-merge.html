@@ -1,0 +1,70 @@
+<!-- title:Merge documents | KINETIX|nav:other-services.html|use: -->
+<main><div class="wrap" style="max-width:720px">
+<h1>Certificate batch and merge</h1>
+<p class="muted">Send several certificates or documents and receive them arranged in the order you choose, in one consistent layout and a single file.</p>
+<div id="notready" class="note warn hide" style="margin-bottom:14px">This form is not connected to the server yet. Add the Apps Script URL to <b>config.js</b>.</div>
+<form id="f" class="card" novalidate>
+  <div class="f"><div class="l">Service</div><div class="opts" id="svcs" role="radiogroup" aria-label="Service"></div></div>
+  <div class="grid g2">
+    <div class="f"><label class="l" for="name">Full name</label><input id="name" autocomplete="name" data-req><div class="e">Enter your name.</div></div>
+    <div class="f"><label class="l" for="email">Email</label><input id="email" type="email" autocomplete="email" inputmode="email" data-req><div class="e">Enter a valid email.</div></div>
+    <div class="f"><label class="l" for="phone">Phone / WhatsApp</label><input id="phone" type="tel" autocomplete="tel" inputmode="tel" data-req><div class="e">Enter your phone number.</div></div>
+    <div class="f"><label class="l" for="pay">Payment method</label><select id="pay"></select></div>
+  </div>
+  <div class="f"><label class="l" for="details">Order and instructions</label><textarea id="details" placeholder="e.g. passport first, then certificates newest to oldest"></textarea></div>
+  <div class="f"><div class="l">Files to combine</div>
+    <label class="drop" id="drop" for="fileIn"><svg class="ic"><use href="#i-up"/></svg> Tap to add files, or drop them here<div class="muted small">JPG, PNG or PDF. Select as many as you need at once. Photos are shrunk before sending.</div></label>
+    <input id="fileIn" type="file" multiple accept="image/*,application/pdf" class="sr"><div class="files" id="files"></div><div class="h" id="fileNote"></div></div>
+  <label class="opt" style="margin-bottom:14px"><input type="checkbox" id="agree"><div><b>I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms of Service</a> and <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a></b><span>I confirm the details and files I send are my own and correct.</span></div></label>
+  <div class="note" style="margin-bottom:14px"><div class="row sp"><b>Total</b><b id="total"></b></div><div class="small muted">100% upfront. No extra fees on any payment method.</div></div>
+  <div id="err" class="note err hide" role="alert" style="margin-bottom:12px"></div>
+  <div class="bar hide" id="bar" style="margin-bottom:12px"><i id="barI"></i></div>
+  <button class="btn pri" id="go" type="submit"><span id="goTxt">Send request</span><span class="spin" aria-hidden="true"></span></button>
+</form>
+<section id="done" class="card hide" tabindex="-1">
+  <div class="note ok" style="margin-bottom:16px"><b>Thank you. Your request is in.</b></div>
+  <p class="muted small" style="margin-bottom:4px">Your reference number</p>
+  <div class="row"><div style="font-size:1.9rem;font-weight:700" id="dRef"></div><button class="btn sm" type="button" id="copyRef"><svg class="ic"><use href="#i-copy"/></svg>Copy</button></div>
+  <div id="dWarn" class="note warn hide" style="margin:12px 0"></div>
+  <hr><div class="card" style="background:var(--soft);box-shadow:none"><div class="row sp"><b>Amount due</b><b id="dTotal"></b></div><div id="dPay" class="small" style="margin-top:8px"></div></div>
+  <div class="row" style="margin-top:16px"><a class="btn pri" id="dWa" href="#" target="_blank" rel="noopener"><svg class="ic"><use href="#i-msg"/></svg>Send payment proof on WhatsApp</a><a class="btn" id="dTrack" href="order-status.html">Track order</a></div>
+</section>
+</div></main>
+<!--script-->
+(function(){
+var $=KX.$,esc=KX.esc,C=KX.cfg,P={"keys": ["cert_batch", "cert_single"], "needFiles": "Please attach the files you want arranged."};
+var F=$('#f'),files=[],fid=0,sending=false;
+if(!KX.ready())$('#notready').classList.remove('hide');
+var list=(C.services||[]).filter(function(s){return P.keys.indexOf(s.k)>-1});
+var want=new URLSearchParams(location.search).get('s');
+$('#svcs').innerHTML=list.map(function(s,i){var on=want?want===s.k:i===0;return '<label class="opt"><input type="radio" name="service" value="'+s.k+'"'+(on?' checked':'')+'><div class="ico sm"><svg class="ic"><use href="#i-'+(s.icon||'file')+'"/></svg></div><div><b>'+esc(s.name)+' - <span class="grad" data-aed="'+s.price+'"'+(s.priceTo?' data-aed2="'+s.priceTo+'"':'')+'></span></b><span>'+esc(s.note)+'</span></div></label>'}).join('');KX.renderPrices();
+$('#pay').innerHTML=(C.payments||[]).map(function(p){return '<option value="'+p.k+'">'+esc(p.name)+'</option>'}).join('');
+function svc(){var e=F.querySelector('input[name=service]:checked');return KX.svc(e&&e.value)}
+function price(){var s=svc();return s?s.price:0}
+function refresh(){var s=svc();var p=price();$('#total').textContent=KX.money(p)+(svc()&&svc().priceTo?' (final price confirmed on WhatsApp)':'')}
+F.addEventListener('change',refresh);refresh();document.addEventListener('kx-currency',function(){refresh();KX.renderPrices()});
+function note(){var kb=files.reduce(function(a,f){return a+f.size},0);$('#fileNote').textContent=files.length?files.length+' file(s), about '+(kb/1048576).toFixed(1)+' MB. Drag the cards, or use the arrows, to put them in the order you want.':''}
+var draw=KX.fileGrid($('#files'),function(){return files},function(l){files=l},note);
+function render(){draw();note()}
+function add(list){var p=Promise.resolve();Array.prototype.slice.call(list).forEach(function(file){p=p.then(function(){if(files.length>=20){KX.toast('Maximum 20 files');return}if(file.size>20*1048576){KX.toast(file.name+' is too large');return}
+ return KX.shrink(file,2000,.82).then(function(r){var ent={id:++fid,name:file.name,type:r.type,b64:r.b64,size:r.size,thumb:/^image/.test(r.type)?'data:'+r.type+';base64,'+r.b64:null};files.push(ent);render();if(/pdf/.test(r.type))KX.pdfThumb(file,240).then(function(t){ent.thumb=t.thumb;ent.pages=t.pages;render()}).catch(function(){})})})});return p}
+$('#fileIn').addEventListener('change',function(e){add(e.target.files).then(function(){e.target.value=''})});
+var dz=$('#drop');['dragover','dragenter'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.add('over')})});['dragleave','drop'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.remove('over')})});dz.addEventListener('drop',function(e){add(e.dataTransfer.files)});
+function ok(){var good=true,first=null;[['name',function(v){return v.trim().length>1}],['email',function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())}],['phone',function(v){return v.replace(/\D/g,'').length>=7}]].forEach(function(r){var e=$('#'+r[0]),b=!r[1](e.value);e.closest('.f').classList.toggle('bad',b);if(b){good=false;if(!first)first=e}});if(!$('#agree').checked){good=false;var e2=$('#err');e2.textContent='Please agree to the Terms of Service and Privacy Policy to continue.';e2.classList.remove('hide')}else $('#err').classList.add('hide');if(first)first.focus();return good}
+F.addEventListener('input',function(e){var f=e.target.closest('.f');if(f)f.classList.remove('bad')});
+F.addEventListener('submit',function(ev){ev.preventDefault();if(sending)return;if(!ok()){KX.toast('Please complete the highlighted fields');return}
+ var s=svc(),d={service:s.k,rush:false,name:$('#name').value.trim(),email:$('#email').value.trim(),phone:$('#phone').value.trim(),pay:$('#pay').value,details:$('#details').value.trim(),total:price(),files:files.map(function(f){return{name:f.name,type:f.type,data:f.b64}})};
+ if(P.needFiles&&!files.length){var e=$('#err');e.textContent=P.needFiles;e.classList.remove('hide');return}
+ sending=true;var b=$('#go');b.setAttribute('aria-busy','true');b.disabled=true;$('#goTxt').textContent='Sending...';$('#err').classList.add('hide');$('#bar').classList.remove('hide');$('#barI').style.width='4%';var w=.1,t;
+ KX.api('order',d,{timeout:240000,onUp:function(p,dn){$('#barI').style.width=Math.round((.05+p*.6)*100)+'%';if(dn){$('#goTxt').textContent='Processing...';t=setInterval(function(){w=Math.min(.96,Math.max(w,.65)+(.96-w)*.05);$('#barI').style.width=Math.round(w*100)+'%'},900)}}})
+ .then(function(r){clearInterval(t);$('#barI').style.width='100%';done(r,d,s)})
+ .catch(function(e){clearInterval(t);sending=false;b.setAttribute('aria-busy','false');b.disabled=false;$('#goTxt').textContent='Send request';$('#bar').classList.add('hide');var x=$('#err');x.textContent=e.message;x.classList.remove('hide')})});
+function done(r,d,s){F.classList.add('hide');var p=(C.payments||[]).filter(function(x){return x.k===d.pay})[0]||{name:'',lines:[]};
+ $('#dRef').textContent=r.ref;$('#dTotal').textContent=KX.money(d.total)+(s.priceTo?' (to be confirmed)':'');
+ $('#dPay').innerHTML='<b>'+esc(p.name)+'</b>'+KX.payLines(p);
+ var w=(C.contacts&&C.contacts.whatsappKE||'').replace(/\D/g,'');$('#dWa').href='https://wa.me/'+w+'?text='+encodeURIComponent('Hello KINETIX, order '+r.ref+' ('+s.name+'). Payment via '+p.name+'.');
+ $('#dTrack').href='order-status.html?ref='+encodeURIComponent(r.ref);
+ if(r.warnings&&r.warnings.length){var z=$('#dWarn');z.classList.remove('hide');z.textContent='Your request was received. Some automatic extras did not complete, so we will follow up personally.'}
+ $('#copyRef').onclick=function(){try{navigator.clipboard.writeText(r.ref);KX.toast('Reference copied')}catch(e){KX.toast(r.ref)}};
+ var dn=$('#done');dn.classList.remove('hide');dn.focus();window.scrollTo({top:0})}
+})();

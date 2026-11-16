@@ -1,0 +1,420 @@
+<!-- title:Order your CV | KINETIX|nav:intake.html|use:catalog,data,i18n,mrz -->
+<main><div class="wrap" style="max-width:760px">
+<h1 data-i18n="Order your CV">Order your CV</h1>
+<p class="muted"><span data-i18n="Takes about five minutes. You only need to tell us who you are and the job you want. We write the duties and skills for your role. Anything marked optional can be skipped.">Takes about five minutes. You only need to tell us who you are and the job you want. We write the duties and skills for your role. Anything marked optional can be skipped.</span> <a href="samples.html" data-i18n="See sample CVs">See sample CVs</a> <span data-i18n="or">or</span> <a href="how-it-works.html" data-i18n="watch the 1-minute guide">watch the 1-minute guide</a>.</p>
+<div class="row" style="margin:2px 0 14px;gap:8px;align-items:center;flex-wrap:wrap"><span class="curwrap"><svg class="ic"><use href="#i-globe"/></svg><select class="curs" id="formLang" aria-label="Form language"></select></span><span class="muted small" data-i18n="Your CV is always written in English, whichever language you pick here.">Your CV is always written in English, whichever language you pick here.</span></div>
+<div id="notready" class="note warn hide" style="margin-bottom:14px">This form is not connected to the server yet. Add the Apps Script URL to <b>config.js</b>.</div>
+<ol class="steps" id="steps" aria-hidden="true"></ol>
+<div class="stepname" id="stepname" aria-live="polite"></div>
+
+<form id="f" novalidate autocomplete="on">
+<!-- 1 -->
+<section data-step="Package and style" class="card">
+  <h2 data-i18n="Choose your package">Choose your package</h2>
+  <div class="opts" id="svcs" role="radiogroup" aria-label="Package"></div>
+  <hr>
+  <fieldset class="fs"><legend data-i18n="Add-ons">Add-ons</legend>
+    <label class="opt"><input type="checkbox" name="cover"><div><b data-i18n="Matching cover letter">Matching cover letter</b><span id="coverTxt" data-i18n="Same design as your CV, written for your target role.">Same design as your CV, written for your target role.</span></div></label>
+  </fieldset>
+  <hr>
+  <fieldset class="fs"><legend data-i18n="CV style">CV style</legend><div class="opts" id="styles" role="radiogroup" aria-label="CV style"></div>
+  <p class="h muted small" style="margin-top:8px" data-i18n="ATS styles are plain on purpose so recruitment software can read them. Other styles are for sending directly to people.">ATS styles are plain on purpose so recruitment software can read them. Other styles are for sending directly to people.</p></fieldset>
+  <hr>
+  <fieldset class="fs">
+    <label class="opt"><input type="checkbox" name="matchSample" id="matchSample"><div><b data-i18n="Match my own sample">Match my own sample</b><span data-i18n="I have my own CV and want you to match its style">I have my own CV and want you to match its style</span></div></label>
+    <div id="matchBox" class="hide" style="margin-top:10px">
+      <p class="h muted small" data-i18n="Upload it below and the style radios above are ignored - we copy its layout, not ours.">Upload it below and the style radios above are ignored - we copy its layout, not ours.</p>
+      <div class="f" id="sampleF"><label class="l" for="sampleIn" data-i18n="Your sample CV">Your sample CV</label><input id="sampleIn" type="file" accept="image/*,application/pdf"><div class="h" id="sampleNote"></div><div class="e" data-i18n="Please upload your sample CV, or uncheck this option.">Please upload your sample CV, or uncheck this option.</div></div>
+      <div class="f"><label class="l" for="matchNote"><span data-i18n="What should we keep or change?">What should we keep or change?</span> <span class="opt-t" data-i18n="(optional)">(optional)</span></label><textarea id="matchNote" name="matchNote" rows="2" placeholder="e.g. keep the layout and colors, just update my details and add my new job" data-i18n-ph="e.g. keep the layout and colors, just update my details and add my new job"></textarea></div>
+    </div>
+  </fieldset>
+</section>
+
+<!-- 2 -->
+<section data-step="About you" class="card hide">
+  <h2 data-i18n="About you">About you</h2>
+  <div class="card" style="padding:14px;margin-bottom:16px" id="mrzCard">
+    <b data-i18n="Scan your ID or passport">Scan your ID or passport</b>
+    <div class="muted small" style="margin-top:4px" data-i18n="Optional. We try to read your name, nationality and date of birth from a photo of the printed strip at the bottom of your passport, or the back of your Emirates ID - so you can check it instead of typing it. You can still type everything yourself below.">Optional. We try to read your name, nationality and date of birth from a photo of the printed strip at the bottom of your passport, or the back of your Emirates ID - so you can check it instead of typing it. You can still type everything yourself below.</div>
+    <input type="file" id="mrzIn" accept="image/*" capture="environment" style="margin-top:10px">
+    <div id="mrzStatus" class="muted small" style="margin-top:8px"></div>
+    <div id="mrzReview" class="hide" style="margin-top:12px">
+      <div class="tw"><table id="mrzTable"></table></div>
+      <div class="row" style="margin-top:10px">
+        <button class="btn sm pri" type="button" id="mrzUse"><span data-i18n="Use these">Use these</span></button>
+        <button class="btn sm ghost" type="button" id="mrzRetry"><span data-i18n="Try a different photo">Try a different photo</span></button>
+      </div>
+    </div>
+  </div>
+  <div class="grid g2">
+    <div class="f"><label class="l" for="fullName" data-i18n="Full name">Full name</label><input id="fullName" name="fullName" data-req autocomplete="name" placeholder="As on your passport" data-i18n-ph="As on your passport"><div class="e" data-i18n="Enter your full name.">Enter your full name.</div></div>
+    <div class="f"><label class="l" for="email" data-i18n="Email">Email</label><input id="email" name="email" type="email" data-req autocomplete="email" inputmode="email"><div class="e" data-i18n="Enter a valid email address.">Enter a valid email address.</div></div>
+    <div class="f"><label class="l" for="phone" data-i18n="Phone / WhatsApp">Phone / WhatsApp</label><input id="phone" name="phone" type="tel" data-req autocomplete="tel" inputmode="tel" placeholder="+971 5x xxx xxxx"><div class="e" data-i18n="Enter your phone number with country code.">Enter your phone number with country code.</div></div>
+    <div class="f"><label class="l" for="nationality" data-i18n="Nationality">Nationality</label><select id="nationality" name="nationality" data-req></select><div class="e" data-i18n="Select your nationality.">Select your nationality.</div></div>
+    <div class="f"><label class="l" for="country" data-i18n="Where are you now?">Where are you now?</label><select id="country" name="country" data-req></select><div class="e" data-i18n="Select your current country.">Select your current country.</div></div>
+    <div class="f"><label class="l" for="city" data-i18n="City / area">City / area</label><select id="city" name="city"></select><input id="cityOther" name="cityOther" class="hide" placeholder="Type your city" data-i18n-ph="Type your city" style="margin-top:8px"></div>
+    <div class="f" id="dobF"><label class="l" for="dob"><span data-i18n="Date of birth">Date of birth</span> <span class="opt-t" data-i18n="(optional)">(optional)</span></label><input id="dob" name="dob" type="date"><div class="e" data-i18n="Check this date of birth - it doesn't look right.">Check this date of birth - it doesn't look right.</div></div>
+    <div class="f"><label class="l" for="marital"><span data-i18n="Marital status">Marital status</span> <span class="opt-t" data-i18n="(optional)">(optional)</span></label><select id="marital" name="marital"></select></div>
+  </div>
+  <fieldset class="fs"><legend data-i18n="Languages">Languages</legend><div id="langs"></div><button class="btn sm ghost" type="button" data-add="lang"><svg class="ic"><use href="#i-plus"/></svg><span data-i18n="Add language">Add language</span></button></fieldset>
+  <div class="grid g2">
+    <div class="f"><label class="l" for="licence"><span data-i18n="Driving licence">Driving licence</span> <span class="opt-t" data-i18n="(optional)">(optional)</span></label><select id="licence" name="licence"></select></div>
+    <div class="f"><label class="l" for="photoIn"><span data-i18n="Photo">Photo</span> <span class="opt-t" data-i18n="(optional, for non-ATS styles)">(optional, for non-ATS styles)</span></label><input id="photoIn" type="file" accept="image/*"><div class="h" id="photoNote" data-i18n="Plain background, head and shoulders.">Plain background, head and shoulders.</div></div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section data-step="Target job" class="card hide">
+  <h2 data-i18n="The job you want">The job you want</h2>
+  <div class="grid g2">
+    <div class="f"><label class="l" for="industry" data-i18n="Industry">Industry</label><select id="industry" name="industry" data-req></select><div class="e" data-i18n="Select an industry.">Select an industry.</div></div>
+    <div class="f"><label class="l" for="role" data-i18n="Role">Role</label><select id="role" name="role" data-req></select><div class="e" data-i18n="Select a role.">Select a role.</div></div>
+    <div class="f hide" id="roleOtherF"><label class="l" for="roleOther" data-i18n="Your job title">Your job title</label><input id="roleOther" name="roleOther"><div class="e" data-i18n="Type the job title.">Type the job title.</div></div>
+    <div class="f"><label class="l" for="level" data-i18n="Experience level">Experience level</label><select id="level" name="level" data-req></select><div class="e" data-i18n="Select your level.">Select your level.</div></div>
+    <div class="f"><label class="l" for="years" data-i18n="Total years of experience">Total years of experience</label><input id="years" name="years" type="number" min="0" max="50" inputmode="numeric" data-req><div class="e" data-i18n="Enter a number from 0 to 50.">Enter a number from 0 to 50.</div></div>
+    <div class="f"><label class="l" for="visa" data-i18n="Visa status">Visa status</label><select id="visa" name="visa" data-req></select><div class="e" data-i18n="Select your visa status.">Select your visa status.</div></div>
+    <div class="f hide" id="visaExpF"><label class="l" for="visaExp"><span data-i18n="Visa expiry / grace period ends">Visa expiry / grace period ends</span> <span class="opt-t" data-i18n="(optional)">(optional)</span></label><input id="visaExp" name="visaExp" type="date"></div>
+    <div class="f"><label class="l" for="avail" data-i18n="Availability">Availability</label><select id="avail" name="avail" data-req></select><div class="e" data-i18n="Select when you can start.">Select when you can start.</div></div>
+  </div>
+  <div class="note" id="skillNote" style="margin-bottom:14px"><b data-i18n="Skills and duties are on us.">Skills and duties are on us.</b> <span data-i18n='Pick your role and we write a professional summary, core competencies, key skills, professional skills and at least 10 duties for every job. Your CV ends with "References available upon request". You receive both PDF and Word files.'>Pick your role and we write a professional summary, core competencies, key skills, professional skills and at least 10 duties for every job. Your CV ends with "References available upon request". You receive both PDF and Word files.</span> <span id="skillPrev"></span></div>
+  <div class="f"><label class="l" for="extraSkills"><span data-i18n="Extra skills or software you want included">Extra skills or software you want included</span> <span class="opt-t" data-i18n="(optional)">(optional)</span></label><textarea id="extraSkills" name="extraSkills" placeholder="e.g. SAP, 6G welding, Arabic typing, NEBOSH IGC" data-i18n-ph="e.g. SAP, 6G welding, Arabic typing, NEBOSH IGC"></textarea></div>
+  <fieldset class="fs"><legend><span data-i18n="Where do you want to work?">Where do you want to work?</span> <span class="opt-t" style="font-weight:400" data-i18n="(optional)">(optional)</span></legend><div class="opts" id="prefLoc"></div></fieldset>
+</section>
+
+<!-- 4 -->
+<section data-step="Work history" class="card hide">
+  <h2 data-i18n="Work history">Work history</h2>
+  <p class="muted small" data-i18n="Most recent first. Leave the duties box empty and we will write them for the job title. If you are a fresher, skip this step.">Most recent first. Leave the duties box empty and we will write them for the job title. If you are a fresher, skip this step.</p>
+  <div id="exps"></div><button class="btn sm ghost" type="button" data-add="exp"><svg class="ic"><use href="#i-plus"/></svg><span data-i18n="Add job">Add job</span></button>
+</section>
+
+<!-- 5 -->
+<section data-step="Education and certificates" class="card hide">
+  <h2 data-i18n="Education">Education</h2>
+  <div id="edus"></div><button class="btn sm ghost" type="button" data-add="edu"><svg class="ic"><use href="#i-plus"/></svg><span data-i18n="Add education">Add education</span></button>
+  <hr>
+  <h2 data-i18n="Certificates and licences">Certificates and licences</h2>
+  <p class="muted small" data-i18n="List each certificate (for example Safety, Welding, Forklift, Driving, Medical). Add scans or photos if you want us to keep them with your order.">List each certificate (for example Safety, Welding, Forklift, Driving, Medical). Add scans or photos if you want us to keep them with your order.</p>
+  <div id="certs"></div><button class="btn sm ghost" type="button" data-add="cert"><svg class="ic"><use href="#i-plus"/></svg><span data-i18n="Add certificate">Add certificate</span></button>
+  <fieldset class="fs" style="margin-top:16px"><legend data-i18n="Order of certificates on your CV">Order of certificates on your CV</legend>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="certOrder" value="relevance" checked><div><b data-i18n="Most relevant first">Most relevant first</b><span data-i18n="Matches the job you chose">Matches the job you chose</span></div></label>
+      <label class="opt"><input type="radio" name="certOrder" value="newest"><div><b data-i18n="Newest first">Newest first</b><span data-i18n="By year">By year</span></div></label>
+      <label class="opt"><input type="radio" name="certOrder" value="listed"><div><b data-i18n="As I listed them">As I listed them</b><span data-i18n="Exactly my order">Exactly my order</span></div></label>
+    </div></fieldset>
+  <div class="f"><div class="l"><span data-i18n="Certificate scans or photos">Certificate scans or photos</span> <span class="opt-t" data-i18n="(optional)">(optional)</span></div>
+    <label class="drop" id="drop" for="fileIn"><svg class="ic"><use href="#i-up"/></svg> <span data-i18n="Tap to add files, or drop them here">Tap to add files, or drop them here</span><div class="h muted small" data-i18n="JPG, PNG or PDF. Pick as many as you need. Photos are shrunk on your phone before sending.">JPG, PNG or PDF. Pick as many as you need. Photos are shrunk on your phone before sending.</div></label>
+    <input id="fileIn" type="file" multiple accept="image/*,application/pdf" class="sr"><div class="files" id="files"></div><div class="h" id="fileNote"></div></div>
+</section>
+
+<!-- 6 -->
+<section data-step="Review and payment" class="card hide">
+  <h2 data-i18n="Review">Review</h2>
+  <div id="review"></div>
+  <hr>
+  <h2 data-i18n="How will you pay?">How will you pay?</h2>
+  <p class="muted small" data-i18n="Payment is 100% upfront. Pick how you plan to pay and we will confirm on WhatsApp. No extra charges are added to any method.">Payment is 100% upfront. Pick how you plan to pay and we will confirm on WhatsApp. No extra charges are added to any method.</p>
+  <div class="opts" id="pays" role="radiogroup" aria-label="Payment method"></div>
+  <div class="f" style="margin-top:14px"><label class="l" for="notes"><span data-i18n="Anything else we should know?">Anything else we should know?</span> <span class="opt-t" data-i18n="(optional)">(optional)</span></label><textarea id="notes" name="notes" placeholder="Job advert link, company name, countries you are applying to..." data-i18n-ph="Job advert link, company name, countries you are applying to..."></textarea></div>
+  <label class="opt"><input type="checkbox" name="consent" data-req><div><b><span data-i18n="I agree to the">I agree to the</span> <a href="terms.html" target="_blank" rel="noopener" data-i18n="Terms of Service">Terms of Service</a> <span data-i18n="and">and</span> <a href="privacy.html" target="_blank" rel="noopener" data-i18n="Privacy Policy">Privacy Policy</a></b><span data-i18n="I confirm my details are correct. 24-48 hour turnaround, one free minor revision within 3 days, extra revisions AED 15.">I confirm my details are correct. 24-48 hour turnaround, one free minor revision within 3 days, extra revisions AED 15.</span></div></label>
+  <div class="f bad" id="consentE" style="display:none"><div class="e" style="display:block" data-i18n="Please agree to the Terms of Service and Privacy Policy to continue.">Please agree to the Terms of Service and Privacy Policy to continue.</div></div>
+  <div class="note" style="margin-top:14px"><div class="row sp"><b data-i18n="Total">Total</b><b id="total">AED 0</b></div><div class="small muted" id="totalDetail"></div></div>
+</section>
+
+<div class="row sp" style="margin-top:16px">
+  <button class="btn" type="button" id="back"><svg class="ic"><use href="#i-back"/></svg><span data-i18n="Back">Back</span></button>
+  <button class="btn pri" type="button" id="next"><span id="nextTxt" data-i18n="Continue">Continue</span><span class="spin" aria-hidden="true"></span><svg class="ic" id="nextIc"><use href="#i-arrow"/></svg></button>
+</div>
+<div id="err" class="note err hide" role="alert" style="margin-top:14px"></div>
+</form>
+
+<!-- progress dialog -->
+<dialog id="prog" aria-labelledby="progT">
+  <h2 id="progT" data-i18n="Sending your order">Sending your order</h2>
+  <ol id="stages" style="list-style:none;padding:0;margin:0 0 14px"></ol>
+  <div class="bar" aria-hidden="true"><i id="barI"></i></div>
+  <p class="small muted" id="progNote" style="margin-top:12px" data-i18n="Please keep this page open.">Please keep this page open.</p>
+</dialog>
+
+<!-- success -->
+<section id="done" class="card hide" tabindex="-1">
+  <div class="note ok" style="margin-bottom:16px"><b><span data-i18n="Thank you,">Thank you,</span> <span id="dName"></span>. <span data-i18n="Your order is in.">Your order is in.</span></b></div>
+  <p class="muted small" style="margin-bottom:4px" data-i18n="Your reference number">Your reference number</p>
+  <div class="row"><div style="font-size:1.9rem;font-weight:700;letter-spacing:.02em" id="dRef"></div><button class="btn sm" type="button" id="copyRef"><svg class="ic"><use href="#i-copy"/></svg><span data-i18n="Copy">Copy</span></button></div>
+  <p class="muted small" data-i18n="Save it. You can track progress or request a revision with this number.">Save it. You can track progress or request a revision with this number.</p>
+  <div id="dWarn" class="note warn hide" style="margin-bottom:12px"></div>
+  <hr>
+  <h3 data-i18n="What happens next">What happens next</h3>
+  <ol style="padding-left:20px;margin:0 0 14px"><li data-i18n="Pay the total below and send the confirmation on WhatsApp.">Pay the total below and send the confirmation on WhatsApp.</li><li data-i18n="We write and design your documents, usually within 24 to 48 hours.">We write and design your documents, usually within 24 to 48 hours.</li><li data-i18n='You get a copy by email (check your spam folder too) and in your order page. One minor revision is free for 3 days.'>You get a copy by email (check your spam folder too) and in your order page. One minor revision is free for 3 days.</li></ol>
+  <div class="card" style="background:var(--soft);box-shadow:none"><div class="row sp"><b id="dTotalL" data-i18n="Amount due">Amount due</b><b id="dTotal"></b></div><div id="dPay" class="small" style="margin-top:8px"></div></div>
+  <div class="row" style="margin-top:16px"><a class="btn pri" id="dWa" href="#" target="_blank" rel="noopener"><svg class="ic"><use href="#i-msg"/></svg><span data-i18n="Send payment proof on WhatsApp">Send payment proof on WhatsApp</span></a><a class="btn" id="dTrack" href="order-status.html"><span data-i18n="Track order">Track order</span></a></div>
+</section>
+</div></main>
+
+<!--script-->
+(function(){
+var $=KX.$,$$=KX.$$,esc=KX.esc,C=KX.cfg,D=KX_DATA,CAT=KX_CATALOG;
+var F=$('#f'),steps=$$('section[data-step]',F),cur=0,state={photo:null,files:[],sample:null},sending=false;
+var DRAFT='kx-draft-v2';
+var icCheck=KX.icon('check');
+if(!KX.ready())$('#notready').classList.remove('hide');
+
+/* ---------- language switcher ---------- */
+var DIRELS=['steps','stepname','f','done'];
+function applyDir(){var rtl=KX.lang()==='ar';DIRELS.forEach(function(id){var e=document.getElementById(id);if(e){e.setAttribute('dir',rtl?'rtl':'ltr');e.setAttribute('lang',KX.lang())}})}
+(function(){var s=$('#formLang');s.innerHTML=KX.LANGS.map(function(l){return '<option value="'+l.code+'">'+esc(l.label)+'</option>'}).join('');s.value=KX.lang();s.addEventListener('change',function(){KX.setLang(s.value);applyFormLang()})})();
+applyDir();KX.applyI18n();
+
+/* ---------- fill static lists ---------- */
+function fillStatics(){
+  KX.fill($('#nationality'),D.nationalities,KX.t('Select nationality'));
+  var ctry=[];D.locations.forEach(function(l){ctry.push(l.c)});ctry.push(KX.t('Outside the GCC'));
+  KX.fill($('#country'),ctry,KX.t('Select country'));
+  KX.fill($('#marital'),D.marital,KX.t('Prefer not to say'));
+  KX.fill($('#licence'),D.licenceCountries,KX.t('Not specified'));
+  KX.fill($('#visa'),D.visa,KX.t('Select visa status'));
+  KX.fill($('#avail'),D.availability,KX.t('Select availability'));
+  KX.fill($('#industry'),CAT.industries.map(function(i){return{k:i.key,l:i.label}}),KX.t('Select industry'));
+  KX.fill($('#level'),CAT.levels.map(function(l){return{k:l.key,l:l.label}}),KX.t('Select level'));
+}
+fillStatics();
+
+/* ---------- packages, styles, payments ---------- */
+var intakeSvcs=(C.services||[]).filter(function(s){return s.cat==='cv'||s.cat==='bundle'});
+$('#svcs').innerHTML=intakeSvcs.map(function(s,i){return '<label class="opt"><input type="radio" name="service" value="'+s.k+'"'+(i===0?' checked':'')+'><div class="ico sm"><svg class="ic"><use href="#i-'+(s.icon||'file')+'"/></svg></div><div><b>'+esc(s.name)+' - <span class="grad" data-aed="'+s.price+'"></span></b><span>'+esc(s.note)+'</span></div></label>'}).join('');
+$('#styles').innerHTML=D.styles.map(function(s,i){return '<label class="opt"><input type="radio" name="style" value="'+s.k+'"'+(i===0?' checked':'')+'><div><b>'+esc(s.l)+(s.ats?' <span class="tag ok">ATS</span>':'')+'</b><span>'+esc(s.d)+'</span></div></label>'}).join('');
+$('#pays').innerHTML=(C.payments||[]).map(function(p,i){return '<label class="opt" style="grid-column:1/-1"><input type="radio" name="pay" value="'+p.k+'"'+(i===0?' checked':'')+'><div class="ico sm"><svg class="ic"><use href="#i-'+(p.icon||'wallet')+'"/></svg></div><div style="flex:1;min-width:0"><b>'+esc(p.name)+'</b>'+KX.payLines(p)+'</div></label>'}).join('');
+KX.renderPrices();
+function val(n){var e=F.elements[n];return e?(e.type==='checkbox'?e.checked:e.value):''}
+function radio(n){var e=F.querySelector('input[name="'+n+'"]:checked');return e?e.value:''}
+function svc(){return KX.svc(radio('service'))}
+function includes(k){var s=svc();return !!(s&&s.includes&&s.includes.indexOf(k)>-1)}
+function price(){var s=svc()||{price:0},t=s.price,d=[s.name+' '+KX.money(s.price)];
+  if(val('cover')&&!includes('cover')){var cp=(C.coverLetter&&C.coverLetter.price)||0;if(cp){t+=cp;d.push('Cover letter '+KX.money(cp))}}
+  return{total:t,detail:d.join(' + ')}}
+function refreshPrice(){
+  var s=svc()||{},cp=(C.coverLetter&&C.coverLetter.price)||0;
+  if(includes('cover')){F.elements.cover.checked=true;F.elements.cover.disabled=true;$('#coverTxt').textContent=KX.t('Included in this package.')}
+  else{F.elements.cover.disabled=false;$('#coverTxt').textContent=KX.t('Same design as your CV, written for your target role')+(cp?' (+'+KX.money(cp)+').':'. '+KX.t('No extra charge.'))}
+  var p=price();$('#total').textContent=KX.money(p.total);$('#totalDetail').textContent=p.detail;}
+$('#svcs').addEventListener('change',function(){var s=svc();if(s&&s.k==='cv_ats'){var a=F.querySelector('input[name=style][value=ats_classic]');if(a)a.checked=true}refreshPrice()});
+F.elements.cover.addEventListener('change',refreshPrice);document.addEventListener('kx-currency',function(){refreshPrice();KX.renderPrices()});
+
+/* ---------- location cascade ---------- */
+function cities(){var c=val('country'),sel=$('#city'),l=D.locations.filter(function(x){return x.c===c})[0];
+  if(l){KX.fill(sel,l.cities,KX.t('Select city'));sel.classList.remove('hide');}
+  else{sel.innerHTML='<option value="Other">'+esc(KX.t('Other'))+'</option>';sel.classList.add('hide');}
+  $('#cityOther').classList.toggle('hide',!(c&&!l));}
+$('#country').addEventListener('change',cities);
+$('#city').addEventListener('change',function(){$('#cityOther').classList.toggle('hide',val('city')!=='Other')});
+function rebuildPrefLoc(){
+  var checked=$$('input[name=pref]:checked').map(function(e){return e.value});
+  var h='<label class="opt"><input type="checkbox" name="pref" value="Any UAE location"><div><b>'+esc(KX.t('Anywhere in the UAE'))+'</b></div></label>';
+  h+=D.locations[0].cities.slice(0,8).map(function(c){return '<label class="opt"><input type="checkbox" name="pref" value="'+esc(c)+'"><div><b>'+esc(c)+'</b></div></label>'}).join('');
+  h+=D.locations.slice(1).map(function(l){return '<label class="opt"><input type="checkbox" name="pref" value="'+esc(l.c)+'"><div><b>'+esc(l.c)+'</b></div></label>'}).join('');
+  h+='<label class="opt"><input type="checkbox" name="pref" value="Open to relocate"><div><b>'+esc(KX.t('Open to relocate'))+'</b></div></label>';
+  $('#prefLoc').innerHTML=h;
+  checked.forEach(function(v){var e=F.querySelector('input[name=pref][value="'+v.replace(/"/g,'&quot;')+'"]');if(e)e.checked=true});
+}
+rebuildPrefLoc();
+
+/* ---------- cascade industry > role ---------- */
+function roles(){var i=CAT.industries.filter(function(x){return x.key===val('industry')})[0],sel=$('#role');
+  if(!i){sel.innerHTML='<option value="">'+esc(KX.t('Select industry first'))+'</option>';skillPrev();return}
+  KX.fill(sel,i.roles.map(function(r){return r.label}).concat(['Other (type your own)']),KX.t('Select role'));skillPrev();}
+function skillPrev(){var i=CAT.industries.filter(function(x){return x.key===val('industry')})[0],r=i&&i.roles.filter(function(x){return x.label===val('role')})[0],p=$('#skillPrev');
+  $('#roleOtherF').classList.toggle('hide',val('role').indexOf('Other')!==0);
+  p.innerHTML=r?'<br><span class="small muted">'+esc(KX.t('Example skills we will include:'))+'</span><div class="chips" style="margin-top:6px">'+r.skills.slice(0,8).map(function(s){return '<span class="chip">'+esc(s)+'</span>'}).join('')+'</div>':''}
+$('#industry').addEventListener('change',roles);$('#role').addEventListener('change',skillPrev);
+$('#level').addEventListener('change',function(){var m={fresher:0,junior:1,experienced:3,senior:7,expert:12}[val('level')];if(m!=null&&!val('years'))F.elements.years.value=m});
+$('#visa').addEventListener('change',function(){$('#visaExpF').classList.toggle('hide',['employment','visit','cancelled','golden','freelance'].indexOf(val('visa'))<0)});
+
+/* ---------- repeaters ---------- */
+var T={
+ lang:function(){return '<div class="row rrow" style="margin-bottom:8px"><select data-k="lang" style="flex:2;min-width:140px">'+D.languages.map(function(l){return '<option>'+l+'</option>'}).join('')+'</select><select data-k="lvl" style="flex:1;min-width:110px">'+D.langLevels.map(function(l){return '<option>'+l+'</option>'}).join('')+'</select><button class="btn sm ghost" type="button" data-rm aria-label="'+esc(KX.t('Remove language'))+'">'+KX.icon('x')+'</button></div>'},
+ exp:function(){return '<div class="card rrow" style="margin-bottom:12px;box-shadow:none"><div class="grid g2"><div class="f"><label class="l">'+esc(KX.t('Job title'))+'</label><input data-k="title" list="dlJobs" placeholder="'+esc(KX.t('e.g. Civil Job Performer'))+'" autocomplete="off"></div><div class="f"><label class="l">'+esc(KX.t('Company'))+'</label><input data-k="company" autocomplete="off"></div><div class="f"><label class="l">'+esc(KX.t('Project'))+' <span class="opt-t">'+esc(KX.t('(optional)'))+'</span></label><input data-k="project" placeholder="'+esc(KX.t('e.g. Hail and Ghasha'))+'" maxlength="120" autocomplete="off"></div><div class="f"><label class="l">'+esc(KX.t('Country'))+'</label><input data-k="country" placeholder="e.g. UAE, Kenya"></div><div class="f"><label class="l">'+esc(KX.t('City'))+' <span class="opt-t">'+esc(KX.t('(optional)'))+'</span></label><input data-k="city"></div><div class="f"><label class="l">'+esc(KX.t('From'))+'</label><input data-k="from" type="month"></div><div class="f"><label class="l">'+esc(KX.t('To'))+'</label><input data-k="to" type="month"><label class="row small" style="margin-top:6px;gap:6px"><input type="checkbox" data-k="current"> '+esc(KX.t('I still work here'))+'</label></div></div><div class="f"><label class="l">'+esc(KX.t('Your duties'))+' <span class="opt-t">'+esc(KX.t('(optional - we write them if empty)'))+'</span></label><textarea data-k="duties" placeholder="'+esc(KX.t('One duty per line'))+'"></textarea></div><div class="f"><label class="l">'+esc(KX.t('About the company'))+' <span class="opt-t">'+esc(KX.t('(optional)'))+'</span></label><input data-k="about" placeholder="'+esc(KX.t('e.g. Leading contractor on a petrochemical expansion'))+'" maxlength="220"></div><button class="btn sm ghost" type="button" data-rm>'+KX.icon('x')+esc(KX.t('Remove job'))+'</button></div>'},
+ edu:function(){return '<div class="card rrow" style="margin-bottom:12px;box-shadow:none"><div class="grid g2"><div class="f"><label class="l">'+esc(KX.t('Level'))+'</label><select data-k="level">'+D.education.map(function(e){return '<option value="'+e.k+'">'+e.l+'</option>'}).join('')+'</select></div><div class="f"><label class="l">'+esc(KX.t('Course / field'))+'</label><input data-k="field" placeholder="'+esc(KX.t('e.g. Mechanical Engineering'))+'"></div><div class="f"><label class="l">'+esc(KX.t('School / institution'))+'</label><input data-k="school"></div><div class="f"><label class="l">'+esc(KX.t('Country'))+'</label><input data-k="country"></div><div class="f"><label class="l">'+esc(KX.t('Year completed'))+'</label><input data-k="year" inputmode="numeric" maxlength="4" placeholder="2019"></div></div><button class="btn sm ghost" type="button" data-rm>'+KX.icon('x')+esc(KX.t('Remove'))+'</button></div>'},
+ cert:function(){return '<div class="card rrow" style="margin-bottom:12px;box-shadow:none"><div class="grid g2"><div class="f"><label class="l">'+esc(KX.t('Certificate name'))+'</label><input data-k="name" list="dlCerts" placeholder="'+esc(KX.t('e.g. H2S Awareness, ADNOC WMS, NEBOSH IGC'))+'" autocomplete="off"></div><div class="f"><label class="l">'+esc(KX.t('Issued by'))+'</label><input data-k="issuer"></div><div class="f"><label class="l">'+esc(KX.t('Year'))+'</label><input data-k="year" inputmode="numeric" maxlength="4"></div><div class="f"><label class="l">'+esc(KX.t('Type'))+'</label><select data-k="kind">'+D.certKinds.map(function(k){return '<option>'+k+'</option>'}).join('')+'</select></div></div><button class="btn sm ghost" type="button" data-rm>'+KX.icon('x')+esc(KX.t('Remove'))+'</button></div>'}
+};
+var HOST={lang:'#langs',exp:'#exps',edu:'#edus',cert:'#certs'};
+(function(){var jobs={};(CAT.industries||[]).forEach(function(i){(i.roles||[]).forEach(function(r){jobs[r.label]=1})});
+ var certs=['H2S Awareness','ADNOC WMS Awareness','ADNOC HSE Induction','Basic Safety Induction','Permit to Work Awareness','Confined Space Entry','Working at Height','Scaffolding Inspector','Rigger and Slinger','Banksman','Fire Warden / Fire Fighting','First Aid and CPR','Defensive Driving','Forklift Licence','Crane Operator','NEBOSH IGC','NEBOSH IDip','OSHA 30','IOSH Managing Safely','OPITO BOSIET','ISO 45001 Lead Auditor','Welding Certificate (6G)','CSCS Card','Driving Licence'];
+ function dl(id,l){var d=document.createElement('datalist');d.id=id;d.innerHTML=l.map(function(x){return '<option value="'+x.replace(/"/g,'&quot;')+'">'}).join('');document.body.appendChild(d)}
+ dl('dlJobs',Object.keys(jobs).sort());dl('dlCerts',certs)})();
+function add(k,v){var h=$(HOST[k]),d=document.createElement('div');d.innerHTML=T[k]();var r=d.firstChild;h.appendChild(r);
+  if(v)Object.keys(v).forEach(function(n){var e=r.querySelector('[data-k="'+n+'"]');if(e){if(e.type==='checkbox')e.checked=!!v[n];else e.value=v[n]}});return r}
+F.addEventListener('click',function(e){var a=e.target.closest('[data-add]'),r=e.target.closest('[data-rm]');
+  if(a){add(a.getAttribute('data-add'));return}
+  if(r){var row=r.closest('.rrow');if(row)row.parentNode.removeChild(row)}});
+function rows(k){return $$('.rrow',$(HOST[k])).map(function(r){var o={};$$('[data-k]',r).forEach(function(e){o[e.getAttribute('data-k')]=e.type==='checkbox'?e.checked:e.value.trim()});return o})}
+add('lang',{lang:'English',lvl:'Good'});add('exp');add('edu');
+
+/* ---------- files ---------- */
+var MAXF=12,fid=0;
+function fileNote(){var kb=state.files.reduce(function(a,f){return a+f.size},0)+(state.photo?state.photo.size:0)+(state.sample?state.sample.size:0);$('#fileNote').textContent=state.files.length?KX.t('{n} file(s), about {mb} MB. Drag the cards, or use the arrows, to put them in the order you want.').replace('{n}',state.files.length).replace('{mb}',(kb/1048576).toFixed(1)):''}
+var drawFiles=KX.fileGrid($('#files'),function(){return state.files},function(l){state.files=l},fileNote);
+function renderFiles(){drawFiles();fileNote()}
+function addFiles(list){var arr=Array.prototype.slice.call(list),p=Promise.resolve();
+  arr.forEach(function(file){p=p.then(function(){
+    if(state.files.length>=MAXF){KX.toast(KX.t('Maximum {n} files').replace('{n}',MAXF));return}
+    if(file.size>15*1048576){KX.toast(KX.t('{name} is too large (15 MB max)').replace('{name}',file.name));return}
+    return KX.shrink(file,1600,.78).then(function(r){var ent={id:++fid,name:file.name,type:r.type,b64:r.b64,size:r.size,thumb:/^image/.test(r.type)?'data:'+r.type+';base64,'+r.b64:null};state.files.push(ent);renderFiles();if(/pdf/.test(r.type))KX.pdfThumb(file,240).then(function(t){ent.thumb=t.thumb;ent.pages=t.pages;renderFiles()}).catch(function(){})})
+  })});return p}
+$('#fileIn').addEventListener('change',function(e){addFiles(e.target.files).then(function(){e.target.value=''})});
+var dz=$('#drop');['dragover','dragenter'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.add('over')})});['dragleave','drop'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.remove('over')})});dz.addEventListener('drop',function(e){addFiles(e.dataTransfer.files)});
+$('#photoIn').addEventListener('change',function(e){var f=e.target.files[0];if(!f){state.photo=null;return}
+  KX.shrink(f,700,.82).then(function(r){state.photo={b64:r.b64,type:r.type,size:r.size};$('#photoNote').textContent='Photo added ('+Math.round(r.size/1024)+' KB).'})});
+$('#matchSample').addEventListener('change',function(e){$('#matchBox').classList.toggle('hide',!e.target.checked);if(!e.target.checked){state.sample=null;$('#sampleIn').value='';$('#sampleNote').textContent='';$('#sampleF').classList.remove('bad')}});
+$('#sampleIn').addEventListener('change',function(e){var f=e.target.files[0];if(!f){state.sample=null;$('#sampleNote').textContent='';return}
+  KX.shrink(f,1600,.82).then(function(r){state.sample={b64:r.b64,type:r.type,size:r.size};$('#sampleNote').textContent='Added ('+Math.round(r.size/1024)+' KB).';$('#sampleF').classList.remove('bad')})});
+
+/* ---------- ID / passport scan (optional helper, never required) ---------- */
+var mrzResult=null;
+function mrzRow(label,v,bad){return '<tr><th style="width:38%">'+esc(KX.t(label))+'</th><td>'+esc(v||'-')+(bad?' <b style="color:var(--warn)">('+esc(KX.t('double-check this'))+')</b>':'')+'</td></tr>'}
+function mrzReset(){mrzResult=null;$('#mrzReview').classList.add('hide');$('#mrzStatus').textContent=''}
+function showMrzReview(r){
+  mrzResult=r;
+  var natTxt=r.nationality||(r.nationalityCode?r.nationalityCode+' - '+KX.t('not in our list, please pick it yourself'):KX.t('Not read'));
+  $('#mrzTable').innerHTML=mrzRow('Name',r.fullName,false)+mrzRow('Nationality',natTxt,!r.nationality)+mrzRow('Date of birth',r.dob,r.checks&&r.checks.dob===false);
+  $('#mrzReview').classList.remove('hide');
+  $('#mrzStatus').textContent=r.confidence<0.67?KX.t('This did not read very clearly. Please check each field carefully before using it, or try a clearer, well-lit photo.'):KX.t('Please check this looks right before using it.');
+}
+$('#mrzIn').addEventListener('change',function(e){
+  var f=e.target.files[0];if(!f)return;
+  mrzReset();$('#mrzStatus').textContent=KX.t('Reading...');
+  KX.ocrText(f,function(p){$('#mrzStatus').textContent=KX.t('Reading... {pct}%').replace('{pct}',Math.round(p*100))}).then(function(text){
+    var r=KX.MRZ.parse(text);
+    if(!r){$('#mrzStatus').textContent=KX.t("We couldn't find the printed strip in that photo. Try the bottom of the passport page, or the back of the ID card, filling the frame in good light - or just type your details below.");return}
+    showMrzReview(r);
+  }).catch(function(){$('#mrzStatus').textContent=KX.t('Could not read that photo. Check your connection and try again, or just type your details below.')});
+});
+$('#mrzRetry').addEventListener('click',function(){mrzReset();$('#mrzIn').value=''});
+$('#mrzUse').addEventListener('click',function(){
+  if(!mrzResult)return;var r=mrzResult;
+  if(r.fullName){$('#fullName').value=r.fullName;$('#fullName').closest('.f').classList.remove('bad')}
+  if(r.dob)$('#dob').value=r.dob;
+  if(r.nationality){var has=Array.prototype.some.call($('#nationality').options,function(o){return o.value===r.nationality});if(has){$('#nationality').value=r.nationality;$('#nationality').closest('.f').classList.remove('bad')}}
+  KX.toast(KX.t('Filled in - please double check everything below.'));
+  mrzReset();$('#mrzIn').value=''
+});
+
+/* ---------- steps ---------- */
+$('#steps').innerHTML=steps.map(function(){return '<li></li>'}).join('');
+function show(n){cur=n;steps.forEach(function(s,i){s.classList.toggle('hide',i!==n)});
+  $$('#steps li').forEach(function(l,i){l.classList.toggle('on',i<=n)});
+  $('#stepname').textContent=KX.t('Step {n} of {total} - {name}').replace('{n}',n+1).replace('{total}',steps.length).replace('{name}',KX.t(steps[n].getAttribute('data-step')));
+  $('#back').style.visibility=n?'visible':'hidden';
+  var last=n===steps.length-1;$('#nextTxt').textContent=last?KX.t('Submit order'):KX.t('Continue');$('#nextIc').classList.toggle('hide',last);
+  if(last)buildReview();refreshPrice();saveDraft();window.scrollTo({top:0});$('#err').classList.add('hide')}
+function validate(n){var ok=true,first=null;$$('[data-req]',steps[n]).forEach(function(e){
+  var f=e.closest('.f'),bad=false;
+  if(e.closest('.hide'))return;
+  if(e.type==='checkbox'){bad=!e.checked;var c=$('#consentE');c.style.display=bad?'block':'none';if(bad)ok=false;return}
+  if(e.type==='email')bad=!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.value.trim());
+  else if(e.type==='tel')bad=e.value.replace(/\D/g,'').length<7;
+  else if(e.type==='number')bad=e.value===''||+e.value<0||+e.value>50;
+  else bad=!e.value.trim();
+  if(f)f.classList.toggle('bad',bad);if(bad){ok=false;if(!first)first=e}});
+  if(n===2&&val('role').indexOf('Other')===0&&!val('roleOther').trim()){$('#roleOtherF').classList.add('bad');ok=false}
+  if(n===0){var msBad=val('matchSample')&&!state.sample;$('#sampleF').classList.toggle('bad',msBad);if(msBad)ok=false}
+  if(n===1){var dobV=val('dob').trim(),dobBad=false;
+   if(dobV){var dd=new Date(dobV+'T00:00:00'),ageYrs=(Date.now()-dd.getTime())/31557600000;dobBad=isNaN(dd.getTime())||ageYrs<10||ageYrs>100}
+   $('#dobF').classList.toggle('bad',dobBad);if(dobBad)ok=false}
+  if(first)first.focus();return ok}
+$('#next').addEventListener('click',function(){
+  if(sending)return;
+  if(!validate(cur)){KX.toast(KX.t('Please complete the highlighted fields'));return}
+  if(cur<steps.length-1)show(cur+1);else submit()});
+$('#back').addEventListener('click',function(){if(cur>0&&!sending)show(cur-1)});
+F.addEventListener('input',function(e){var f=e.target.closest&&e.target.closest('.f');if(f)f.classList.remove('bad')});
+
+/* ---------- collect / draft ---------- */
+function collect(){
+  var ind=CAT.industries.filter(function(x){return x.key===val('industry')})[0];
+  var role=val('role').indexOf('Other')===0?val('roleOther').trim():val('role');
+  var city=val('city')==='Other'||!$('#city').options.length||$('#city').value===''?val('cityOther').trim()||val('city'):val('city');
+  return{v:2,service:radio('service'),cover:!!val('cover')||includes('cover'),rush:false,style:radio('style'),
+    matchSample:!!val('matchSample'),matchNote:val('matchNote').trim(),
+    person:{fullName:val('fullName').trim(),email:val('email').trim(),phone:val('phone').trim(),nationality:val('nationality'),country:val('country'),city:city,dob:val('dob'),marital:val('marital'),licence:val('licence'),languages:rows('lang').filter(function(l){return l.lang})},
+    target:{industry:val('industry'),industryLabel:ind?ind.label:'',role:role,level:val('level'),years:+val('years')||0,visa:val('visa'),visaExp:val('visaExp'),avail:val('avail'),extraSkills:val('extraSkills').trim(),prefLoc:$$('input[name=pref]:checked').map(function(e){return e.value})},
+    experience:rows('exp').filter(function(x){return x.title||x.company}),
+    education:rows('edu').filter(function(x){return x.field||x.school}),
+    certificates:rows('cert').filter(function(x){return x.name}),certOrder:radio('certOrder'),
+    pay:radio('pay'),notes:val('notes').trim(),total:price().total}}
+function saveDraft(){try{var raw={};$$('input,select,textarea',F).forEach(function(e){if(e.name&&e.type!=='file'&&e.type!=='radio'&&e.type!=='checkbox')raw[e.name]=e.value});
+  raw._radio={service:radio('service'),style:radio('style'),certOrder:radio('certOrder'),pay:radio('pay')};
+  raw._chk={cover:!!val('cover'),pref:$$('input[name=pref]:checked').map(function(e){return e.value})};
+  raw._rows={lang:rows('lang'),exp:rows('exp'),edu:rows('edu'),cert:rows('cert')};raw._step=cur;
+  KX.store.set(DRAFT,JSON.stringify(raw))}catch(e){}}
+function restore(){var j=KX.store.get(DRAFT);if(!j)return;try{var raw=JSON.parse(j);
+  Object.keys(raw).forEach(function(k){if(k[0]==='_')return;var e=F.elements[k];if(e&&e.type!=='radio'&&e.type!=='checkbox'&&e.type!=='file')e.value=raw[k]});
+  Object.keys(raw._radio||{}).forEach(function(n){var e=F.querySelector('input[name="'+n+'"][value="'+raw._radio[n]+'"]');if(e)e.checked=true});
+  F.elements.cover.checked=!!(raw._chk&&raw._chk.cover);
+  ((raw._chk&&raw._chk.pref)||[]).forEach(function(v){var e=F.querySelector('input[name=pref][value="'+v+'"]');if(e)e.checked=true});
+  cities();if(raw.city)$('#city').value=raw.city;roles();if(raw.role)$('#role').value=raw.role;skillPrev();$('#visa').dispatchEvent(new Event('change'));
+  ['lang','exp','edu','cert'].forEach(function(k){var l=(raw._rows||{})[k]||[];if(l.length){$(HOST[k]).innerHTML='';l.forEach(function(v){add(k,v)})}});
+  $('#city').classList.toggle('hide',false);
+  if(raw.fullName){$('#notready').insertAdjacentHTML('afterend','<div class="note" id="resumed" style="margin-bottom:14px">'+esc(KX.t('We restored your unfinished order.'))+' <button type="button" class="btn sm ghost" id="clearDraft">'+esc(KX.t('Start over'))+'</button></div>');$('#clearDraft').onclick=function(){KX.store.del(DRAFT);location.reload()}}
+  }catch(e){}}
+
+/* ---------- review ---------- */
+function buildReview(){var d=collect(),s=svc(),st=D.styles.filter(function(x){return x.k===d.style})[0],vis=D.visa.filter(function(x){return x.k===d.target.visa})[0],av=D.availability.filter(function(x){return x.k===d.target.avail})[0];
+  function r(a,b){return '<tr><th style="width:38%">'+esc(KX.t(a))+'</th><td>'+esc(b||'-')+'</td></tr>'}
+  $('#review').innerHTML='<div class="tw"><table>'+r('Package',s?s.name:'')+r('Style',d.matchSample?KX.t('Your own sample'):(st?st.l:''))+r('Cover letter',d.cover?KX.t('Yes'):KX.t('No'))+r('Name',d.person.fullName)+r('Contact',d.person.email+' / '+d.person.phone)+r('Nationality',d.person.nationality)+r('Location',[d.person.city,d.person.country].filter(Boolean).join(', '))+r('Target',d.target.role+' ('+d.target.industryLabel+')')+r('Experience',KX.t('{n} years').replace('{n}',d.target.years))+r('Visa',vis?vis.l:'')+r('Availability',av?av.l:'')+r('Jobs / education / certificates',d.experience.length+' / '+d.education.length+' / '+d.certificates.length)+r('Files',state.files.length+(state.photo?' '+KX.t('+ photo'):'')+(state.sample?' '+KX.t('+ your sample'):''))+'</table></div>'}
+
+/* ---------- submit ---------- */
+var STAGES=['Preparing your details','Uploading','Writing your documents','Finishing'];
+function stageUI(i,note){$('#stages').innerHTML=STAGES.map(function(s,j){var st=j<i?icCheck:(j===i?'<span class="spin" style="display:inline-block;color:var(--acc)"></span>':'<span style="display:inline-block;width:16px"></span>');return '<li class="row" style="gap:10px;padding:5px 0;color:'+(j>i?'var(--muted)':'var(--ink)')+'">'+st+'<span>'+esc(KX.t(s))+'</span></li>'}).join('');if(note)$('#progNote').textContent=note}
+function setBar(p){$('#barI').style.width=Math.round(p*100)+'%'}
+function busy(b){sending=b;var n=$('#next');n.setAttribute('aria-busy',b?'true':'false');n.disabled=b;$('#back').disabled=b}
+function submit(){
+  var d=collect();if(!KX.ready()){showErr(KX.t('This form is not connected to the server yet. Please message us on WhatsApp.'));return}
+  busy(true);$('#err').classList.add('hide');var dlg=$('#prog');try{dlg.showModal()}catch(e){dlg.setAttribute('open','')}
+  setBar(.04);stageUI(0);
+  d.photo=state.photo?{type:state.photo.type,data:state.photo.b64}:null;
+  d.sampleFile=state.sample?{type:state.sample.type,data:state.sample.b64}:null;
+  d.files=state.files.map(function(f){return{name:f.name,type:f.type,data:f.b64}});
+  var size=JSON.stringify(d).length;
+  if(size>30*1048576){dlg.close();busy(false);showErr(KX.t('Your files are too large. Remove some and try again.'));return}
+  var t0=Date.now(),tick;
+  setTimeout(function(){stageUI(1);setBar(.1);
+    KX.api('submit',d,{timeout:240000,onUp:function(p,done){setBar(.1+p*.5);if(done){stageUI(2,KX.t('Your documents are being written. This can take up to a minute.'));
+      var w=.6;tick=setInterval(function(){w=Math.min(.95,w+(0.95-w)*.04);setBar(w)},1000)}}})
+   .then(function(r){clearInterval(tick);stageUI(4);setBar(1);setTimeout(function(){try{dlg.close()}catch(e){}busy(false);success(r,d)},350)})
+   .catch(function(e){clearInterval(tick);try{dlg.close()}catch(x){}busy(false);showErr(e.message)});
+  },80);
+}
+function showErr(m){var e=$('#err');e.textContent=m;e.classList.remove('hide');e.scrollIntoView({block:'center'})}
+function success(r,d){KX.store.del(DRAFT);
+  F.classList.add('hide');$('#steps').classList.add('hide');$('#stepname').classList.add('hide');
+  var s=svc(),p=(C.payments||[]).filter(function(x){return x.k===d.pay})[0]||{name:'',lines:[]},ref=r.ref;
+  $('#dName').textContent=d.person.fullName.split(' ')[0];$('#dRef').textContent=ref;$('#dTotal').textContent=KX.money(d.total);
+  $('#dPay').innerHTML='<b>'+esc(p.name)+'</b>'+KX.payLines(p)+'<div class="muted" style="margin-top:6px">'+KX.t('Use {ref} as the payment reference where possible.').replace('{ref}',esc(ref))+'</div>';
+  var msg='Hello KINETIX, I have just placed order '+ref+' ('+(s?s.name:'')+', '+KX.money(d.total)+'). Payment via '+p.name+'.';
+  var w=(C.contacts&&C.contacts.whatsappKE||'').replace(/\D/g,'');$('#dWa').href='https://wa.me/'+w+'?text='+encodeURIComponent(msg);
+  $('#dTrack').href='order-status.html?ref='+encodeURIComponent(ref);
+  if(r.warnings&&r.warnings.length){var w2=$('#dWarn');w2.classList.remove('hide');w2.textContent=KX.t('Your order was received. Some automatic extras did not complete, so we will follow up personally.')}
+  $('#copyRef').onclick=function(){try{navigator.clipboard.writeText(ref);KX.toast(KX.t('Reference copied'))}catch(e){KX.toast(ref)}};
+  var dn=$('#done');dn.classList.remove('hide');dn.focus();window.scrollTo({top:0})}
+
+/* ---------- re-apply everything when the form language changes ---------- */
+function applyFormLang(){
+  applyDir();KX.applyI18n();
+  var saved={nationality:val('nationality'),country:val('country'),city:val('city'),cityOther:val('cityOther'),
+    marital:val('marital'),licence:val('licence'),visa:val('visa'),avail:val('avail'),industry:val('industry'),role:val('role'),level:val('level')};
+  function restoreSel(id,v){var e=document.getElementById(id);if(!e||v==null)return;for(var i=0;i<e.options.length;i++){if(e.options[i].value===v){e.value=v;return}}}
+  fillStatics();
+  restoreSel('nationality',saved.nationality);restoreSel('country',saved.country);restoreSel('marital',saved.marital);
+  restoreSel('licence',saved.licence);restoreSel('visa',saved.visa);restoreSel('avail',saved.avail);
+  restoreSel('industry',saved.industry);restoreSel('level',saved.level);
+  cities();restoreSel('city',saved.city);if(saved.cityOther)$('#cityOther').value=saved.cityOther;
+  roles();restoreSel('role',saved.role);skillPrev();
+  $('#visa').dispatchEvent(new Event('change'));
+  rebuildPrefLoc();
+  ['lang','exp','edu','cert'].forEach(function(k){var data=rows(k);$(HOST[k]).innerHTML='';data.forEach(function(v){add(k,v)})});
+  refreshPrice();show(cur);
+}
+
+restore();cities();show(Math.min(cur,0));
+F.addEventListener('change',saveDraft);
+})();

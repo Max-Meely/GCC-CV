@@ -1,0 +1,19 @@
+<!-- title:Signature maker | KINETIX|nav:pdf-tools.html|use:sig -->
+<!--desc:Free signature maker. Sign on paper, take a photo and get a transparent PNG signature in seconds. Runs in your browser, nothing is uploaded.-->
+<main><div class="wrap" style="max-width:860px">
+<div class="phero" style="--bg:url(blog-img/portrait.jpg);--pos:50% 26%;margin-bottom:18px"><a href="pdf-tools.html" class="row" style="gap:6px;text-decoration:none;font-size:.9rem;margin-bottom:10px"><svg class="ic"><use href="#i-back"/></svg>PDF tools</a>
+<h1>Signature <span class="grad">maker</span></h1>
+<p class="muted">Sign on a piece of paper, take a photo, and get your signature with a transparent background. Use it in our PDF filler or download it as a PNG. Free, and your picture never leaves your device.</p></div>
+<div class="how"><div><span class="n">1</span>Sign on white paper</div><div><span class="n">2</span>Take or choose a photo</div><div><span class="n">3</span>Download or use it</div></div>
+<div class="card" style="margin-top:14px"><div id="sg"></div>
+<div class="row" style="margin-top:14px"><button class="btn pri" id="dl" type="button" disabled><svg class="ic"><use href="#i-down"/></svg>Download transparent PNG</button><a class="btn" id="use" href="pdf-fill.html"><svg class="ic"><use href="#i-edit"/></svg>Use it in Fill and Sign</a></div>
+<p class="muted small" style="margin:10px 0 0">Tip: if parts of the signature are missing, raise the sensitivity. If paper dust or shadows show up, lower it.</p></div>
+<div class="note" style="margin-top:14px">Need help with a form or a document? <a href="pdf-help.html"><b>Get a free help ticket</b></a> and we will do it for you.</div>
+<style>.how{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}@media(max-width:640px){.how{grid-template-columns:1fr}}.how div{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:14px;background:var(--soft);font-size:.9rem}.how .n{width:26px;height:26px;border-radius:50%;background:var(--accg);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.8rem;flex:none}</style>
+</div></main>
+<!--script-->
+(function(){var cur=null;
+var p=KXSIG.panel(document.getElementById('sg'),{onChange:function(u){cur=u;document.getElementById('dl').disabled=!u}});
+document.getElementById('dl').onclick=function(){if(!cur)return;var a=document.createElement('a');a.href=cur;a.download='signature-transparent.png';document.body.appendChild(a);a.click();a.remove();KX.toast('Saved')};
+document.getElementById('use').addEventListener('click',function(e){if(cur){try{var l=JSON.parse(localStorage.getItem('kx-sigs')||'[]');l=l.filter(function(x){return x!==cur});l.unshift(cur);localStorage.setItem('kx-sigs',JSON.stringify(l.slice(0,4)))}catch(x){}}});
+})();

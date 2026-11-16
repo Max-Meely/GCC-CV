@@ -1,0 +1,30 @@
+<!-- title:Verify certificates | KINETIX|nav:order-status.html|use: -->
+<main><div class="wrap" style="max-width:640px">
+<h1>Verify certificates</h1>
+<p class="muted">Check the certificates listed on a KINETIX CV. This only shows what the candidate chose to make checkable - no contact details.</p>
+<div id="notready" class="note warn hide" style="margin-bottom:14px">This page is not connected to the server yet. Add the Apps Script URL to <b>config.js</b>.</div>
+<form id="f" class="card" novalidate>
+  <div class="f"><label class="l" for="ref">Reference number</label><input id="ref" placeholder="KTX-0001" autocapitalize="characters" autocomplete="off" data-req><div class="e">Enter a reference like KTX-0001.</div></div>
+  <div id="err" class="note err hide" role="alert" style="margin-bottom:12px"></div>
+  <button class="btn pri" id="go" type="submit"><span id="goTxt">Check</span><span class="spin" aria-hidden="true"></span></button>
+</form>
+<section id="res" class="card hide" style="margin-top:16px" aria-live="polite"></section>
+</div></main>
+<!--script-->
+(function(){var $=KX.$,esc=KX.esc;
+if(!KX.ready())$('#notready').classList.remove('hide');
+var q=new URLSearchParams(location.search),qref=(q.get('ref')||'').toUpperCase();
+$('#ref').value=qref;
+function show(j){
+ var certs=(j.certs||[]).map(function(c){return '<li><b>'+esc(c.name)+'</b>'+(c.issuer?' - '+esc(c.issuer):'')+(c.year?' ('+esc(c.year)+')':'')+'</li>'}).join('')||'<li class="muted">No certificates listed.</li>';
+ $('#res').innerHTML='<div class="row sp"><h2 style="margin:0">'+esc(j.name||'Candidate')+'</h2><span class="tag ok">Verified by KINETIX</span></div>'+(j.role?'<p class="muted small" style="margin:4px 0 12px">Target role: '+esc(j.role)+'</p>':'')+'<h3 style="margin:10px 0 4px">Certificates</h3><ul style="margin:0;padding-left:20px">'+certs+'</ul><hr><p class="muted small" style="margin:0">Reference '+esc(j.ref)+'. This page only shows what the candidate\'s CV writer marked as checkable - contact KINETIX directly if you need anything confirmed further.</p>';
+ $('#res').classList.remove('hide')}
+function run(){
+ var r=$('#ref').value.trim().toUpperCase(),bad=!r;
+ $('#ref').closest('.f').classList.toggle('bad',bad);if(bad)return;
+ var b=$('#go');b.setAttribute('aria-busy','true');b.disabled=true;$('#goTxt').textContent='Checking...';$('#err').classList.add('hide');$('#res').classList.add('hide');
+ KX.api('verify',{ref:r},{timeout:60000}).then(function(j){show(j)}).catch(function(x){var m=$('#err');m.textContent=x.message;m.classList.remove('hide')}).then(function(){b.setAttribute('aria-busy','false');b.disabled=false;$('#goTxt').textContent='Check'})}
+$('#f').addEventListener('submit',function(e){e.preventDefault();run()});
+$('#f').addEventListener('input',function(e){var f=e.target.closest('.f');if(f)f.classList.remove('bad')});
+if(qref&&KX.ready())run();
+})();
