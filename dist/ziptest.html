@@ -1,0 +1,12 @@
+<!doctype html><html><body><script src="http://localhost:8911/zip.js"></script>
+<script>
+window.__makeZip = function(){
+  var enc = new TextEncoder();
+  var z = KXZIP.make([
+    {name:'hello.txt', data: enc.encode('Hello, KINETIX zip test!\n')},
+    {name:'page-1.txt', data: enc.encode('fake pdf bytes for page 1'.repeat(50))},
+    {name:'página.txt', data: enc.encode('unicode name test')}
+  ]);
+  return z.arrayBuffer();
+};
+</script></body></html>
