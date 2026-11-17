@@ -1697,6 +1697,50 @@ function kxOffline() {
   var KX = window.KX;
   KX.MRZ = {};
 
+  /* The client photographs the whole passport page or ID card back (that's what we ask for),
+     but the MRZ itself is a thin strip at the bottom - fed straight into OCR at full-frame size,
+     that strip is tiny and low-resolution even from a sharp photo, which is the main reason good
+     cameras still produce unreadable scans. Crop to roughly the bottom 42% (covers both a passport
+     page's MRZ at the very edge and an ID card's MRZ with a little margin above it), upscale so the
+     characters aren't read at native low DPI, and binarize (MRZ is always dark print on a light
+     band) so Tesseract sees crisp strokes instead of JPEG noise and background texture. Falls back
+     to the original file if canvas processing fails for any reason (e.g. very old browser). */
+  KX.MRZ.preprocessForOcr = function (file) {
+    return new Promise(function (resolve) {
+      var done = false;
+      var finish = function (v) { if (!done) { done = true; resolve(v); } };
+      try {
+        var img = new Image();
+        var url = URL.createObjectURL(file);
+        img.onload = function () {
+          try {
+            var w = img.naturalWidth, h = img.naturalHeight;
+            var cropTop = Math.round(h * 0.58), cropH = h - cropTop;
+            var scale = Math.min(3, Math.max(1, 1500 / w));
+            var outW = Math.round(w * scale), outH = Math.round(cropH * scale);
+            var cv = document.createElement('canvas');
+            cv.width = outW; cv.height = outH;
+            var ctx = cv.getContext('2d');
+            ctx.drawImage(img, 0, cropTop, w, cropH, 0, 0, outW, outH);
+            var id = ctx.getImageData(0, 0, outW, outH), d = id.data, sum = 0;
+            for (var i = 0; i < d.length; i += 4) sum += 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
+            var mean = sum / (d.length / 4), threshold = mean * 0.82;
+            for (var j = 0; j < d.length; j += 4) {
+              var g = 0.299 * d[j] + 0.587 * d[j + 1] + 0.114 * d[j + 2];
+              var v = g > threshold ? 255 : 0;
+              d[j] = d[j + 1] = d[j + 2] = v;
+            }
+            ctx.putImageData(id, 0, 0);
+            URL.revokeObjectURL(url);
+            cv.toBlob(function (blob) { finish(blob || file); }, 'image/png');
+          } catch (e) { URL.revokeObjectURL(url); finish(file); }
+        };
+        img.onerror = function () { URL.revokeObjectURL(url); finish(file); };
+        img.src = url;
+      } catch (e) { finish(file); }
+    });
+  };
+
   /* ICAO alpha-3 country code -> the exact nationality strings used by KX_DATA.nationalities.
      Covers every country currently in that list; an unmapped code falls back to null (caller
      shows "Other" / lets the client pick manually rather than guessing). */
@@ -1742,8 +1786,10 @@ function kxOffline() {
   }
   /* yy: 2-digit year; isExpiry hints which century is more likely when ambiguous. */
   function fullYear(yy, isExpiry) {
+    // Expiry dates on a document scanned today are always this century (no passport or ID expires
+    // in the 1900s) - unlike DOB, there's no century ambiguity to resolve here.
+    if (isExpiry) return 2000 + yy;
     var now = new Date().getFullYear() % 100;
-    if (isExpiry) return (yy < now + 1 ? 2000 : 1900) + yy; // expiry dates are never far in the past
     return (yy > now ? 1900 : 2000) + yy; // DOB: assume not yet born in the "future" 2-digit wrap
   }
   function isoDate(yymmdd, isExpiry) {
@@ -1842,6 +1888,9 @@ function kxOffline() {
 (function () {
   var KX = window.KX;
   var workerPromise = null;
+  var currentOnProgress = null; // the worker (and its logger) is created once and reused, but each
+                                 // call to KX.ocrText can pass its own onProgress - route to whichever
+                                 // one is current rather than freezing on the first caller's.
 
   function loadScript(src) {
     return new Promise(function (resolve, reject) {
@@ -1854,12 +1903,13 @@ function kxOffline() {
   }
 
   function getWorker(onProgress) {
+    currentOnProgress = onProgress;
     if (workerPromise) return workerPromise;
     workerPromise = loadScript('https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js')
       .then(function () {
         if (!window.Tesseract) throw new Error('load-failed');
         return window.Tesseract.createWorker('eng', undefined, {
-          logger: function (m) { if (onProgress && m.status === 'recognizing text') onProgress(m.progress); }
+          logger: function (m) { if (currentOnProgress && m.status === 'recognizing text') currentOnProgress(m.progress); }
         });
       })
       .then(function (worker) {
@@ -2008,7 +2058,9 @@ function showMrzReview(r){
 $('#mrzIn').addEventListener('change',function(e){
   var f=e.target.files[0];if(!f)return;
   mrzReset();$('#mrzStatus').textContent=KX.t('Reading...');
-  KX.ocrText(f,function(p){$('#mrzStatus').textContent=KX.t('Reading... {pct}%').replace('{pct}',Math.round(p*100))}).then(function(text){
+  KX.MRZ.preprocessForOcr(f).then(function(prepped){
+    return KX.ocrText(prepped,function(p){$('#mrzStatus').textContent=KX.t('Reading... {pct}%').replace('{pct}',Math.round(p*100))});
+  }).then(function(text){
     var r=KX.MRZ.parse(text);
     if(!r){$('#mrzStatus').textContent=KX.t("We couldn't find the printed strip in that photo. Try the bottom of the passport page, or the back of the ID card, filling the frame in good light - or just type your details below.");return}
     showMrzReview(r);
@@ -2072,16 +2124,17 @@ function saveDraft(){try{var raw={};$$('input,select,textarea',F).forEach(functi
   raw._chk={cover:!!val('cover'),pref:$$('input[name=pref]:checked').map(function(e){return e.value})};
   raw._rows={lang:rows('lang'),exp:rows('exp'),edu:rows('edu'),cert:rows('cert')};raw._step=cur;
   KX.store.set(DRAFT,JSON.stringify(raw))}catch(e){}}
-function restore(){var j=KX.store.get(DRAFT);if(!j)return;try{var raw=JSON.parse(j);
+function restore(){var j=KX.store.get(DRAFT);if(!j)return false;try{var raw=JSON.parse(j);
   Object.keys(raw).forEach(function(k){if(k[0]==='_')return;var e=F.elements[k];if(e&&e.type!=='radio'&&e.type!=='checkbox'&&e.type!=='file')e.value=raw[k]});
   Object.keys(raw._radio||{}).forEach(function(n){var e=F.querySelector('input[name="'+n+'"][value="'+raw._radio[n]+'"]');if(e)e.checked=true});
   F.elements.cover.checked=!!(raw._chk&&raw._chk.cover);
   ((raw._chk&&raw._chk.pref)||[]).forEach(function(v){var e=F.querySelector('input[name=pref][value="'+v+'"]');if(e)e.checked=true});
   cities();if(raw.city)$('#city').value=raw.city;roles();if(raw.role)$('#role').value=raw.role;skillPrev();$('#visa').dispatchEvent(new Event('change'));
   ['lang','exp','edu','cert'].forEach(function(k){var l=(raw._rows||{})[k]||[];if(l.length){$(HOST[k]).innerHTML='';l.forEach(function(v){add(k,v)})}});
-  $('#city').classList.toggle('hide',false);
+  cur=Math.min(Math.max(+raw._step||0,0),steps.length-1);
   if(raw.fullName){$('#notready').insertAdjacentHTML('afterend','<div class="note" id="resumed" style="margin-bottom:14px">'+esc(KX.t('We restored your unfinished order.'))+' <button type="button" class="btn sm ghost" id="clearDraft">'+esc(KX.t('Start over'))+'</button></div>');$('#clearDraft').onclick=function(){KX.store.del(DRAFT);location.reload()}}
-  }catch(e){}}
+  return true;
+  }catch(e){return false}}
 
 /* ---------- review ---------- */
 function buildReview(){var d=collect(),s=svc(),st=D.styles.filter(function(x){return x.k===d.style})[0],vis=D.visa.filter(function(x){return x.k===d.target.visa})[0],av=D.availability.filter(function(x){return x.k===d.target.avail})[0];
@@ -2141,7 +2194,7 @@ function applyFormLang(){
   refreshPrice();show(cur);
 }
 
-restore();cities();show(Math.min(cur,0));
+if(!restore())cities();show(cur);
 F.addEventListener('change',saveDraft);
 })();
 </script>
