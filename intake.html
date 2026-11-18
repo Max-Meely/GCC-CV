@@ -1700,12 +1700,16 @@ function kxOffline() {
   /* The client photographs the whole passport page or ID card back (that's what we ask for),
      but the MRZ itself is a thin strip at the bottom - fed straight into OCR at full-frame size,
      that strip is tiny and low-resolution even from a sharp photo, which is the main reason good
-     cameras still produce unreadable scans. Crop to roughly the bottom 42% (covers both a passport
-     page's MRZ at the very edge and an ID card's MRZ with a little margin above it), upscale so the
-     characters aren't read at native low DPI, and binarize (MRZ is always dark print on a light
-     band) so Tesseract sees crisp strokes instead of JPEG noise and background texture. Falls back
-     to the original file if canvas processing fails for any reason (e.g. very old browser). */
-  KX.MRZ.preprocessForOcr = function (file) {
+     cameras still produce unreadable scans. Crop to roughly the bottom `bottomFraction` of the
+     photo (how much of it we keep, measured from the bottom edge - the caller tries a tight
+     fraction first, matching how close to the very edge a passport's MRZ actually sits, then
+     looser ones as fallbacks for different framing or an ID card's MRZ sitting further up),
+     upscale so the characters aren't read at native low DPI, and binarize (MRZ is always dark
+     print on a light band) so Tesseract sees crisp strokes instead of JPEG noise and background
+     texture. Falls back to the original file if canvas processing fails for any reason (e.g. very
+     old browser). bottomFraction defaults to 1 (the whole photo, uncropped). */
+  KX.MRZ.preprocessForOcr = function (file, bottomFraction) {
+    var frac = (typeof bottomFraction === 'number' && bottomFraction > 0 && bottomFraction <= 1) ? bottomFraction : 1;
     return new Promise(function (resolve) {
       var done = false;
       var finish = function (v) { if (!done) { done = true; resolve(v); } };
@@ -1715,12 +1719,14 @@ function kxOffline() {
         img.onload = function () {
           try {
             var w = img.naturalWidth, h = img.naturalHeight;
-            var cropTop = Math.round(h * 0.58), cropH = h - cropTop;
-            var scale = Math.min(3, Math.max(1, 1500 / w));
+            var cropTop = Math.round(h * (1 - frac)), cropH = h - cropTop;
+            var scale = Math.min(4, Math.max(1, 1800 / w));
             var outW = Math.round(w * scale), outH = Math.round(cropH * scale);
             var cv = document.createElement('canvas');
             cv.width = outW; cv.height = outH;
             var ctx = cv.getContext('2d');
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
             ctx.drawImage(img, 0, cropTop, w, cropH, 0, 0, outW, outH);
             var id = ctx.getImageData(0, 0, outW, outH), d = id.data, sum = 0;
             for (var i = 0; i < d.length; i += 4) sum += 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
@@ -1913,7 +1919,16 @@ function kxOffline() {
         });
       })
       .then(function (worker) {
-        return worker.setParameters({ tessedit_char_whitelist: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<' }).then(function () { return worker; });
+        // PSM 6 = "assume a single uniform block of text". Tesseract's default (automatic,
+        // multi-block page segmentation) is built for ordinary documents and badly mangles a
+        // photo that mixes a photo box, labeled fields and a monospace MRZ strip - it tries to
+        // detect columns/blocks and can merge, split or reorder lines, which is why even a
+        // crisp, correctly-printed MRZ can come back unreadable. A tightly cropped MRZ-only
+        // strip is exactly the "single uniform block" case this mode is for.
+        return worker.setParameters({
+          tessedit_char_whitelist: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<',
+          tessedit_pageseg_mode: '6'
+        }).then(function () { return worker; });
       })
       .catch(function (e) { workerPromise = null; throw e; }); // let a failed load be retried next time
     return workerPromise;
@@ -2045,9 +2060,12 @@ $('#sampleIn').addEventListener('change',function(e){var f=e.target.files[0];if(
   KX.shrink(f,1600,.82).then(function(r){state.sample={b64:r.b64,type:r.type,size:r.size};$('#sampleNote').textContent='Added ('+Math.round(r.size/1024)+' KB).';$('#sampleF').classList.remove('bad')})});
 
 /* ---------- ID / passport scan (optional helper, never required) ---------- */
-var mrzResult=null;
+var mrzResult=null,mrzRun=0;
 function mrzRow(label,v,bad){return '<tr><th style="width:38%">'+esc(KX.t(label))+'</th><td>'+esc(v||'-')+(bad?' <b style="color:var(--warn)">('+esc(KX.t('double-check this'))+')</b>':'')+'</td></tr>'}
-function mrzReset(){mrzResult=null;$('#mrzReview').classList.add('hide');$('#mrzStatus').textContent=''}
+/* Bumping mrzRun retires any scan still running: a scan is several OCR passes and can take a
+   while, so a client who picks one photo and then changes their mind would otherwise get the
+   abandoned photo's details landing on screen seconds later, over the new photo's result. */
+function mrzReset(){mrzRun++;mrzResult=null;$('#mrzReview').classList.add('hide');$('#mrzStatus').textContent=''}
 function showMrzReview(r){
   mrzResult=r;
   var natTxt=r.nationality||(r.nationalityCode?r.nationalityCode+' - '+KX.t('not in our list, please pick it yourself'):KX.t('Not read'));
@@ -2057,14 +2075,31 @@ function showMrzReview(r){
 }
 $('#mrzIn').addEventListener('change',function(e){
   var f=e.target.files[0];if(!f)return;
-  mrzReset();$('#mrzStatus').textContent=KX.t('Reading...');
-  KX.MRZ.preprocessForOcr(f).then(function(prepped){
-    return KX.ocrText(prepped,function(p){$('#mrzStatus').textContent=KX.t('Reading... {pct}%').replace('{pct}',Math.round(p*100))});
-  }).then(function(text){
-    var r=KX.MRZ.parse(text);
-    if(!r){$('#mrzStatus').textContent=KX.t("We couldn't find the printed strip in that photo. Try the bottom of the passport page, or the back of the ID card, filling the frame in good light - or just type your details below.");return}
-    showMrzReview(r);
-  }).catch(function(){$('#mrzStatus').textContent=KX.t('Could not read that photo. Check your connection and try again, or just type your details below.')});
+  mrzReset();
+  var run=mrzRun,live=function(){return run===mrzRun};
+  $('#mrzStatus').textContent=KX.t('Reading...');
+  /* One photo can be framed very differently client to client: a passport's MRZ sits right at
+     the bottom edge, an ID card's a bit further up, and some people leave extra margin around
+     the whole page. Rather than guess one crop window, try a few - tightest (most accurate when
+     it hits) first - and stop at the first one whose OCR text actually parses as a valid MRZ.
+     Each pass restarts the percentage, so say "still reading" from the second one on - otherwise
+     it looks stuck in a loop. */
+  var attempts=[0.16,0.40,1];
+  var tryAttempt=function(idx){
+    if(!live())return;
+    if(idx>=attempts.length){$('#mrzStatus').textContent=KX.t("We couldn't find the printed strip in that photo. Try the bottom of the passport page, or the back of the ID card, filling the frame in good light - or just type your details below.");return}
+    var label=idx?'Still reading... {pct}%':'Reading... {pct}%';
+    KX.MRZ.preprocessForOcr(f,attempts[idx]).then(function(prepped){
+      if(!live())return null;
+      return KX.ocrText(prepped,function(p){if(live())$('#mrzStatus').textContent=KX.t(label).replace('{pct}',Math.round(p*100))});
+    }).then(function(text){
+      if(!live()||text==null)return;
+      var r=KX.MRZ.parse(text);
+      if(!r){tryAttempt(idx+1);return}
+      showMrzReview(r);
+    }).catch(function(){if(live())$('#mrzStatus').textContent=KX.t('Could not read that photo. Check your connection and try again, or just type your details below.')});
+  };
+  tryAttempt(0);
 });
 $('#mrzRetry').addEventListener('click',function(){mrzReset();$('#mrzIn').value=''});
 $('#mrzUse').addEventListener('click',function(){
@@ -2129,8 +2164,16 @@ function restore(){var j=KX.store.get(DRAFT);if(!j)return false;try{var raw=JSON
   Object.keys(raw._radio||{}).forEach(function(n){var e=F.querySelector('input[name="'+n+'"][value="'+raw._radio[n]+'"]');if(e)e.checked=true});
   F.elements.cover.checked=!!(raw._chk&&raw._chk.cover);
   ((raw._chk&&raw._chk.pref)||[]).forEach(function(v){var e=F.querySelector('input[name=pref][value="'+v+'"]');if(e)e.checked=true});
-  cities();if(raw.city)$('#city').value=raw.city;roles();if(raw.role)$('#role').value=raw.role;skillPrev();$('#visa').dispatchEvent(new Event('change'));
-  ['lang','exp','edu','cert'].forEach(function(k){var l=(raw._rows||{})[k]||[];if(l.length){$(HOST[k]).innerHTML='';l.forEach(function(v){add(k,v)})}});
+  /* Setting .value in code fires no change event, so #city's own handler never runs - without
+     this dispatch a resumed draft whose city was "Other" (Saudi, Qatar, Kuwait, Bahrain and Oman
+     all list one) comes back with the "Type your city" box hidden and the typed city invisible. */
+  cities();if(raw.city)$('#city').value=raw.city;$('#city').dispatchEvent(new Event('change'));
+  roles();if(raw.role)$('#role').value=raw.role;skillPrev();$('#visa').dispatchEvent(new Event('change'));
+  /* Clear whenever the draft recorded this list at all, empty included - otherwise a fresher who
+     deleted the blank job card finds it waiting for them again after a reload. A draft saved by
+     an older version has no _rows for the key, so its defaults are left alone. */
+  var savedRows=raw._rows||{};
+  ['lang','exp','edu','cert'].forEach(function(k){if(!savedRows[k])return;$(HOST[k]).innerHTML='';savedRows[k].forEach(function(v){add(k,v)})});
   cur=Math.min(Math.max(+raw._step||0,0),steps.length-1);
   if(raw.fullName){$('#notready').insertAdjacentHTML('afterend','<div class="note" id="resumed" style="margin-bottom:14px">'+esc(KX.t('We restored your unfinished order.'))+' <button type="button" class="btn sm ghost" id="clearDraft">'+esc(KX.t('Start over'))+'</button></div>');$('#clearDraft').onclick=function(){KX.store.del(DRAFT);location.reload()}}
   return true;
@@ -2155,12 +2198,17 @@ function submit(){
   d.files=state.files.map(function(f){return{name:f.name,type:f.type,data:f.b64}});
   var size=JSON.stringify(d).length;
   if(size>30*1048576){dlg.close();busy(false);showErr(KX.t('Your files are too large. Remove some and try again.'));return}
-  var t0=Date.now(),tick;
+  /* The upload progress is driven by a timer inside KX.api that always reports "done" at the
+     6 second mark, even when the server already answered - so ignore anything that arrives
+     after we've finished, or it restarts the creeping progress timer on a closed dialog and
+     leaves it running for the rest of the session. */
+  var tick,finished=false;
+  function stopTick(){finished=true;clearInterval(tick);tick=null}
   setTimeout(function(){stageUI(1);setBar(.1);
-    KX.api('submit',d,{timeout:240000,onUp:function(p,done){setBar(.1+p*.5);if(done){stageUI(2,KX.t('Your documents are being written. This can take up to a minute.'));
+    KX.api('submit',d,{timeout:240000,onUp:function(p,done){if(finished)return;setBar(.1+p*.5);if(done){stageUI(2,KX.t('Your documents are being written. This can take up to a minute.'));
       var w=.6;tick=setInterval(function(){w=Math.min(.95,w+(0.95-w)*.04);setBar(w)},1000)}}})
-   .then(function(r){clearInterval(tick);stageUI(4);setBar(1);setTimeout(function(){try{dlg.close()}catch(e){}busy(false);success(r,d)},350)})
-   .catch(function(e){clearInterval(tick);try{dlg.close()}catch(x){}busy(false);showErr(e.message)});
+   .then(function(r){stopTick();stageUI(4);setBar(1);setTimeout(function(){try{dlg.close()}catch(e){}busy(false);success(r,d)},350)})
+   .catch(function(e){stopTick();try{dlg.close()}catch(x){}busy(false);showErr(e.message)});
   },80);
 }
 function showErr(m){var e=$('#err');e.textContent=m;e.classList.remove('hide');e.scrollIntoView({block:'center'})}
@@ -2186,7 +2234,7 @@ function applyFormLang(){
   restoreSel('nationality',saved.nationality);restoreSel('country',saved.country);restoreSel('marital',saved.marital);
   restoreSel('licence',saved.licence);restoreSel('visa',saved.visa);restoreSel('avail',saved.avail);
   restoreSel('industry',saved.industry);restoreSel('level',saved.level);
-  cities();restoreSel('city',saved.city);if(saved.cityOther)$('#cityOther').value=saved.cityOther;
+  cities();restoreSel('city',saved.city);$('#city').dispatchEvent(new Event('change'));if(saved.cityOther)$('#cityOther').value=saved.cityOther;
   roles();restoreSel('role',saved.role);skillPrev();
   $('#visa').dispatchEvent(new Event('change'));
   rebuildPrefLoc();
