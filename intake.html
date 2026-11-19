@@ -318,6 +318,19 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 <div><h3>Company</h3><a href="about.html">What we do</a><a href="blog.html">Blog</a><a href="contact.html">Contact us</a><a href="order-status.html">Track your order</a></div>
 <div><h3>Legal</h3><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a><a href="legal-notice.html">Legal Notice</a><a href="copyright.html">Copyright Notice</a></div>
 </div></dialog>
+<style>
+/* CV style picker: a preview of each style beside its name */
+.styopt{align-items:flex-start}
+.styth{flex:0 0 auto;width:76px;height:107px;border-radius:6px;border:1px solid var(--line,#d6dce6);
+  object-fit:cover;object-position:top center;background:#fff;cursor:zoom-in;align-self:flex-start}
+.styopt input:checked~.styth{border-color:var(--pri,#2d5fa8);box-shadow:0 0 0 2px rgba(45,95,168,.25)}
+#bigDlg{border:0;background:transparent;padding:0;max-width:94vw;max-height:94vh}
+#bigDlg::backdrop{background:rgba(6,12,24,.82)}
+#bigDlg img{display:block;max-width:92vw;max-height:84vh;width:auto;height:auto;border-radius:8px;
+  box-shadow:0 18px 50px rgba(0,0,0,.5);background:#fff}
+#bigCap{color:#fff;text-align:center;margin-top:10px;font-weight:600}
+@media (max-width:420px){.styth{width:62px;height:87px}}
+</style>
 <main><div class="wrap" style="max-width:760px">
 <h1 data-i18n="Order your CV">Order your CV</h1>
 <p class="muted"><span data-i18n="Takes about five minutes. You only need to tell us who you are and the job you want. We write the duties and skills for your role. Anything marked optional can be skipped.">Takes about five minutes. You only need to tell us who you are and the job you want. We write the duties and skills for your role. Anything marked optional can be skipped.</span> <a href="samples.html" data-i18n="See sample CVs">See sample CVs</a> <span data-i18n="or">or</span> <a href="how-it-works.html" data-i18n="watch the 1-minute guide">watch the 1-minute guide</a>.</p>
@@ -337,7 +350,7 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
   </fieldset>
   <hr>
   <fieldset class="fs"><legend data-i18n="CV style">CV style</legend><div class="opts" id="styles" role="radiogroup" aria-label="CV style"></div>
-  <p class="h muted small" style="margin-top:8px" data-i18n="ATS styles are plain on purpose so recruitment software can read them. Other styles are for sending directly to people.">ATS styles are plain on purpose so recruitment software can read them. Other styles are for sending directly to people.</p></fieldset>
+  <p class="h muted small" style="margin-top:8px" data-i18n="Tap a picture to see that style full size. ATS styles are plain on purpose so recruitment software can read them. Other styles are for sending directly to people.">Tap a picture to see that style full size. ATS styles are plain on purpose so recruitment software can read them. Other styles are for sending directly to people.</p></fieldset>
   <hr>
   <fieldset class="fs">
     <label class="opt"><input type="checkbox" name="matchSample" id="matchSample"><div><b data-i18n="Match my own sample">Match my own sample</b><span data-i18n="I have my own CV and want you to match its style">I have my own CV and want you to match its style</span></div></label>
@@ -446,6 +459,12 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 </div>
 <div id="err" class="note err hide" role="alert" style="margin-top:14px"></div>
 </form>
+
+<!-- full-size CV style preview; tapping anywhere closes it -->
+<dialog id="bigDlg" aria-label="CV style preview">
+  <img id="bigImg" src="" alt="" loading="lazy" decoding="async">
+  <div id="bigCap"></div>
+</dialog>
 
 <!-- progress dialog -->
 <dialog id="prog" aria-labelledby="progT">
@@ -808,12 +827,19 @@ function kxOffline() {
     licenceCountries: ["UAE","Home country only","None"],
     marital: ["Single","Married","Divorced","Widowed"],
     styles: [
-      { k: "ats_classic", l: "Classic ATS", ats: true, d: "Single column, plain headings. Passes recruitment software." },
-      { k: "ats_compact", l: "Compact ATS", ats: true, d: "Tighter spacing to fit a long history on two pages." },
-      { k: "exec_navy", l: "Executive", ats: false, d: "Navy header band, clean sections. Corporate and office roles." },
-      { k: "side_navy", l: "Modern sidebar", ats: false, d: "Dark sidebar with contact, skills and languages." },
+      { k: "ats_classic", l: "Classic ATS", ats: true, d: "Single column, navy headings. Passes recruitment software." },
+      { k: "ats_compact", l: "Compact ATS", ats: true, d: "Same ATS-safe layout, tighter spacing for a long history." },
+      { k: "exec_navy", l: "Executive navy", ats: false, d: "Deep navy header band, clean sections. Corporate and office roles." },
+      { k: "exec_royal", l: "Executive royal", ats: false, d: "Brighter royal blue band. Stands out without shouting." },
+      { k: "exec_slate", l: "Slate blue", ats: false, d: "Slate band with a bright blue accent. Supervisors and engineers." },
+      { k: "side_navy", l: "Modern sidebar", ats: false, d: "Dark navy sidebar with contact, skills and languages." },
+      { k: "side_steel", l: "Steel sidebar", ats: false, d: "Light steel-blue sidebar. Easy to read, easy to print." },
       { k: "side_teal", l: "Fresh sidebar", ats: false, d: "Light sidebar with a teal accent." },
-      { k: "site_bold", l: "Site-ready", ats: false, d: "Bold charcoal and amber. Trades, oil and gas, site work." }
+      { k: "site_bold", l: "Site-ready", ats: false, d: "Bold charcoal and amber. Trades, oil and gas, site work." },
+      { k: "prem_ats", l: "Premium ATS", ats: true, d: "Premium typography, still single column so recruitment software reads it." },
+      { k: "prem_midnight", l: "Premium Midnight", ats: false, d: "Monogram tile, language bars, serif name. Our most exclusive layout." },
+      { k: "prem_royal", l: "Premium Royal", ats: false, d: "The premium layout in a brighter royal blue." },
+      { k: "prem_steel", l: "Premium Steel", ats: false, d: "Premium layout on a light steel panel. Prints beautifully." }
     ],
     certKinds: ["Safety","Technical / Trade","Professional","Medical","Driving / Equipment","Academic","Other"]
   };
@@ -1973,7 +1999,20 @@ fillStatics();
 /* ---------- packages, styles, payments ---------- */
 var intakeSvcs=(C.services||[]).filter(function(s){return s.cat==='cv'||s.cat==='bundle'});
 $('#svcs').innerHTML=intakeSvcs.map(function(s,i){return '<label class="opt"><input type="radio" name="service" value="'+s.k+'"'+(i===0?' checked':'')+'><div class="ico sm"><svg class="ic"><use href="#i-'+(s.icon||'file')+'"/></svg></div><div><b>'+esc(s.name)+' - <span class="grad" data-aed="'+s.price+'"></span></b><span>'+esc(s.note)+'</span></div></label>'}).join('');
-$('#styles').innerHTML=D.styles.map(function(s,i){return '<label class="opt"><input type="radio" name="style" value="'+s.k+'"'+(i===0?' checked':'')+'><div><b>'+esc(s.l)+(s.ats?' <span class="tag ok">ATS</span>':'')+'</b><span>'+esc(s.d)+'</span></div></label>'}).join('');
+/* A picture of each style beside the name - the wording alone ("Classic ATS", "Slate blue")
+   tells a client nothing about what will land in their inbox. Tapping the picture opens it
+   big; tapping the row still selects the style as before. */
+$('#styles').innerHTML=D.styles.map(function(s,i){return '<label class="opt styopt"><input type="radio" name="style" value="'+s.k+'"'+(i===0?' checked':'')+'>'+
+  '<img class="styth" src="style-img/'+s.k+'.jpg" alt="" width="76" height="107" data-big="'+s.k+'" data-l="'+esc(s.l)+'" loading="lazy" decoding="async">'+
+  '<div><b>'+esc(s.l)+(s.ats?' <span class="tag ok">ATS</span>':'')+'</b><span>'+esc(s.d)+'</span></div></label>'}).join('');
+$('#styles').addEventListener('click',function(e){
+  var im=e.target.closest('.styth');if(!im)return;
+  e.preventDefault();e.stopPropagation();
+  $('#bigImg').src='style-img/'+im.getAttribute('data-big')+'-big.jpg';
+  $('#bigCap').textContent=im.getAttribute('data-l');
+  var d=$('#bigDlg');try{d.showModal()}catch(x){d.setAttribute('open','')}
+});
+$('#bigDlg').addEventListener('click',function(){var d=$('#bigDlg');try{d.close()}catch(x){d.removeAttribute('open')}});
 $('#pays').innerHTML=(C.payments||[]).map(function(p,i){return '<label class="opt" style="grid-column:1/-1"><input type="radio" name="pay" value="'+p.k+'"'+(i===0?' checked':'')+'><div class="ico sm"><svg class="ic"><use href="#i-'+(p.icon||'wallet')+'"/></svg></div><div style="flex:1;min-width:0"><b>'+esc(p.name)+'</b>'+KX.payLines(p)+'</div></label>'}).join('');
 KX.renderPrices();
 function val(n){var e=F.elements[n];return e?(e.type==='checkbox'?e.checked:e.value):''}
@@ -1988,7 +2027,14 @@ function refreshPrice(){
   if(includes('cover')){F.elements.cover.checked=true;F.elements.cover.disabled=true;$('#coverTxt').textContent=KX.t('Included in this package.')}
   else{F.elements.cover.disabled=false;$('#coverTxt').textContent=KX.t('Same design as your CV, written for your target role')+(cp?' (+'+KX.money(cp)+').':'. '+KX.t('No extra charge.'))}
   var p=price();$('#total').textContent=KX.money(p.total);$('#totalDetail').textContent=p.detail;}
-$('#svcs').addEventListener('change',function(){var s=svc();if(s&&s.k==='cv_ats'){var a=F.querySelector('input[name=style][value=ats_classic]');if(a)a.checked=true}refreshPrice()});
+/* The ATS package has to use an ATS-safe layout, but silently un-picking the style the client
+   just chose is how people end up wondering why their CV came out looking nothing like the one
+   they selected. Only switch when the current pick isn't ATS-safe, and say so when we do. */
+$('#svcs').addEventListener('change',function(){var s=svc();
+  if(s&&s.k==='cv_ats'){var cur=radio('style'),def=D.styles.filter(function(x){return x.k===cur})[0];
+    if(def&&!def.ats){var a=F.querySelector('input[name=style][value=ats_classic]');
+      if(a){a.checked=true;KX.toast(KX.t('Switched to Classic ATS so recruitment software can read your CV.'))}}}
+  refreshPrice()});
 F.elements.cover.addEventListener('change',refreshPrice);document.addEventListener('kx-currency',function(){refreshPrice();KX.renderPrices()});
 
 /* ---------- location cascade ---------- */
@@ -2018,7 +2064,10 @@ function skillPrev(){var i=CAT.industries.filter(function(x){return x.key===val(
   p.innerHTML=r?'<br><span class="small muted">'+esc(KX.t('Example skills we will include:'))+'</span><div class="chips" style="margin-top:6px">'+r.skills.slice(0,8).map(function(s){return '<span class="chip">'+esc(s)+'</span>'}).join('')+'</div>':''}
 $('#industry').addEventListener('change',roles);$('#role').addEventListener('change',skillPrev);
 $('#level').addEventListener('change',function(){var m={fresher:0,junior:1,experienced:3,senior:7,expert:12}[val('level')];if(m!=null&&!val('years'))F.elements.years.value=m});
-$('#visa').addEventListener('change',function(){$('#visaExpF').classList.toggle('hide',['employment','visit','cancelled','golden','freelance'].indexOf(val('visa'))<0)});
+/* Clear the date when the field goes away, otherwise someone who fills an expiry for an
+   employment visa and then switches to a status that has none still submits the old date. */
+$('#visa').addEventListener('change',function(){var off=['employment','visit','cancelled','golden','freelance'].indexOf(val('visa'))<0;
+  $('#visaExpF').classList.toggle('hide',off);if(off)$('#visaExp').value=''});
 
 /* ---------- repeaters ---------- */
 var T={
@@ -2053,11 +2102,18 @@ function addFiles(list){var arr=Array.prototype.slice.call(list),p=Promise.resol
   })});return p}
 $('#fileIn').addEventListener('change',function(e){addFiles(e.target.files).then(function(){e.target.value=''})});
 var dz=$('#drop');['dragover','dragenter'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.add('over')})});['dragleave','drop'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.remove('over')})});dz.addEventListener('drop',function(e){addFiles(e.dataTransfer.files)});
+/* The main picker caps each file at 15 MB; the photo and sample had no cap at all, so an
+   oversized one sailed through and only blew up as "your files are too large" at the very end,
+   after the whole form was filled - and pointing at the wrong thing. Catch it at pick time. */
+function tooBig(f,note){if(f.size<=15*1048576)return false;
+  KX.toast(KX.t('{name} is too large (15 MB max)').replace('{name}',f.name));if(note)$(note).textContent='';return true}
 $('#photoIn').addEventListener('change',function(e){var f=e.target.files[0];if(!f){state.photo=null;return}
-  KX.shrink(f,700,.82).then(function(r){state.photo={b64:r.b64,type:r.type,size:r.size};$('#photoNote').textContent='Photo added ('+Math.round(r.size/1024)+' KB).'})});
+  if(tooBig(f,'#photoNote')){state.photo=null;e.target.value='';return}
+  KX.shrink(f,700,.82).then(function(r){state.photo={b64:r.b64,type:r.type,size:r.size};$('#photoNote').textContent=KX.t('Photo added ({kb} KB).').replace('{kb}',Math.round(r.size/1024))})});
 $('#matchSample').addEventListener('change',function(e){$('#matchBox').classList.toggle('hide',!e.target.checked);if(!e.target.checked){state.sample=null;$('#sampleIn').value='';$('#sampleNote').textContent='';$('#sampleF').classList.remove('bad')}});
 $('#sampleIn').addEventListener('change',function(e){var f=e.target.files[0];if(!f){state.sample=null;$('#sampleNote').textContent='';return}
-  KX.shrink(f,1600,.82).then(function(r){state.sample={b64:r.b64,type:r.type,size:r.size};$('#sampleNote').textContent='Added ('+Math.round(r.size/1024)+' KB).';$('#sampleF').classList.remove('bad')})});
+  if(tooBig(f,'#sampleNote')){state.sample=null;e.target.value='';return}
+  KX.shrink(f,1600,.82).then(function(r){state.sample={b64:r.b64,type:r.type,size:r.size};$('#sampleNote').textContent=KX.t('Added ({kb} KB).').replace('{kb}',Math.round(r.size/1024));$('#sampleF').classList.remove('bad')})});
 
 /* ---------- ID / passport scan (optional helper, never required) ---------- */
 var mrzResult=null,mrzRun=0;
@@ -2107,6 +2163,10 @@ $('#mrzUse').addEventListener('click',function(){
   if(r.fullName){$('#fullName').value=r.fullName;$('#fullName').closest('.f').classList.remove('bad')}
   if(r.dob)$('#dob').value=r.dob;
   if(r.nationality){var has=Array.prototype.some.call($('#nationality').options,function(o){return o.value===r.nationality});if(has){$('#nationality').value=r.nationality;$('#nationality').closest('.f').classList.remove('bad')}}
+  /* Setting .value in code fires no change event, and the draft is only written on change or
+     when the step moves - without this, a client who scans, taps Use these and then puts the
+     phone down loses the scanned name, date of birth and nationality. */
+  saveDraft();
   KX.toast(KX.t('Filled in - please double check everything below.'));
   mrzReset();$('#mrzIn').value=''
 });
@@ -2197,7 +2257,9 @@ function submit(){
   d.sampleFile=state.sample?{type:state.sample.type,data:state.sample.b64}:null;
   d.files=state.files.map(function(f){return{name:f.name,type:f.type,data:f.b64}});
   var size=JSON.stringify(d).length;
-  if(size>30*1048576){dlg.close();busy(false);showErr(KX.t('Your files are too large. Remove some and try again.'));return}
+  /* close() is guarded like the other two call sites: where <dialog> isn't supported the open
+     fell back to an attribute and close() would throw, leaving the form stuck mid-send. */
+  if(size>30*1048576){try{dlg.close()}catch(e){}busy(false);showErr(KX.t('Your files are too large. Remove some and try again.'));return}
   /* The upload progress is driven by a timer inside KX.api that always reports "done" at the
      6 second mark, even when the server already answered - so ignore anything that arrives
      after we've finished, or it restarts the creeping progress timer on a closed dialog and
@@ -2221,7 +2283,9 @@ function success(r,d){KX.store.del(DRAFT);
   var w=(C.contacts&&C.contacts.whatsappKE||'').replace(/\D/g,'');$('#dWa').href='https://wa.me/'+w+'?text='+encodeURIComponent(msg);
   $('#dTrack').href='order-status.html?ref='+encodeURIComponent(ref);
   if(r.warnings&&r.warnings.length){var w2=$('#dWarn');w2.classList.remove('hide');w2.textContent=KX.t('Your order was received. Some automatic extras did not complete, so we will follow up personally.')}
-  $('#copyRef').onclick=function(){try{navigator.clipboard.writeText(ref);KX.toast(KX.t('Reference copied'))}catch(e){KX.toast(ref)}};
+  /* writeText rejects a promise rather than throwing, so a try/catch around it would report
+     "copied" even when nothing was - show the reference itself when the copy really fails. */
+  $('#copyRef').onclick=function(){try{navigator.clipboard.writeText(ref).then(function(){KX.toast(KX.t('Reference copied'))},function(){KX.toast(ref)})}catch(e){KX.toast(ref)}};
   var dn=$('#done');dn.classList.remove('hide');dn.focus();window.scrollTo({top:0})}
 
 /* ---------- re-apply everything when the form language changes ---------- */
