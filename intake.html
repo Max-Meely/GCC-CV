@@ -827,19 +827,22 @@ function kxOffline() {
     licenceCountries: ["UAE","Home country only","None"],
     marital: ["Single","Married","Divorced","Widowed"],
     styles: [
+      /* needs:'2.1' marks a style the older backend cannot build. The order form checks what
+         the live backend reports and hides these until it can, so the site and the Apps Script
+         deployment can never get out of step in a way a client notices. */
       { k: "ats_classic", l: "Classic ATS", ats: true, d: "Single column, navy headings. Passes recruitment software." },
       { k: "ats_compact", l: "Compact ATS", ats: true, d: "Same ATS-safe layout, tighter spacing for a long history." },
       { k: "exec_navy", l: "Executive navy", ats: false, d: "Deep navy header band, clean sections. Corporate and office roles." },
-      { k: "exec_royal", l: "Executive royal", ats: false, d: "Brighter royal blue band. Stands out without shouting." },
-      { k: "exec_slate", l: "Slate blue", ats: false, d: "Slate band with a bright blue accent. Supervisors and engineers." },
+      { needs: "2.1", k: "exec_royal", l: "Executive royal", ats: false, d: "Brighter royal blue band. Stands out without shouting." },
+      { needs: "2.1", k: "exec_slate", l: "Slate blue", ats: false, d: "Slate band with a bright blue accent. Supervisors and engineers." },
       { k: "side_navy", l: "Modern sidebar", ats: false, d: "Dark navy sidebar with contact, skills and languages." },
-      { k: "side_steel", l: "Steel sidebar", ats: false, d: "Light steel-blue sidebar. Easy to read, easy to print." },
+      { needs: "2.1", k: "side_steel", l: "Steel sidebar", ats: false, d: "Light steel-blue sidebar. Easy to read, easy to print." },
       { k: "side_teal", l: "Fresh sidebar", ats: false, d: "Light sidebar with a teal accent." },
       { k: "site_bold", l: "Site-ready", ats: false, d: "Bold charcoal and amber. Trades, oil and gas, site work." },
-      { k: "prem_ats", l: "Premium ATS", ats: true, d: "Premium typography, still single column so recruitment software reads it." },
-      { k: "prem_midnight", l: "Premium Midnight", ats: false, d: "Monogram tile, language bars, serif name. Our most exclusive layout." },
-      { k: "prem_royal", l: "Premium Royal", ats: false, d: "The premium layout in a brighter royal blue." },
-      { k: "prem_steel", l: "Premium Steel", ats: false, d: "Premium layout on a light steel panel. Prints beautifully." }
+      { needs: "2.1", k: "prem_ats", l: "Premium ATS", ats: true, d: "Premium typography, still single column so recruitment software reads it." },
+      { needs: "2.1", k: "prem_midnight", l: "Premium Midnight", ats: false, d: "Monogram tile, language bars, serif name. Our most exclusive layout." },
+      { needs: "2.1", k: "prem_royal", l: "Premium Royal", ats: false, d: "The premium layout in a brighter royal blue." },
+      { needs: "2.1", k: "prem_steel", l: "Premium Steel", ats: false, d: "Premium layout on a light steel panel. Prints beautifully." }
     ],
     certKinds: ["Safety","Technical / Trade","Professional","Medical","Driving / Equipment","Academic","Other"]
   };
@@ -1999,12 +2002,30 @@ fillStatics();
 /* ---------- packages, styles, payments ---------- */
 var intakeSvcs=(C.services||[]).filter(function(s){return s.cat==='cv'||s.cat==='bundle'});
 $('#svcs').innerHTML=intakeSvcs.map(function(s,i){return '<label class="opt"><input type="radio" name="service" value="'+s.k+'"'+(i===0?' checked':'')+'><div class="ico sm"><svg class="ic"><use href="#i-'+(s.icon||'file')+'"/></svg></div><div><b>'+esc(s.name)+' - <span class="grad" data-aed="'+s.price+'"></span></b><span>'+esc(s.note)+'</span></div></label>'}).join('');
-/* A picture of each style beside the name - the wording alone ("Classic ATS", "Slate blue")
-   tells a client nothing about what will land in their inbox. Tapping the picture opens it
-   big; tapping the row still selects the style as before. */
-$('#styles').innerHTML=D.styles.map(function(s,i){return '<label class="opt styopt"><input type="radio" name="style" value="'+s.k+'"'+(i===0?' checked':'')+'>'+
+/* Only offer what the live backend can actually build. Styles tagged needs:'2.1' are hidden
+   until the Apps Script deployment reports that version, so if the site is updated before the
+   backend is, a client sees a shorter list instead of having their order refused at the last
+   step. The check is async, so start from the safe list and add the rest when the ping lands. */
+function styleHtml(list){return list.map(function(s,i){return '<label class="opt styopt"><input type="radio" name="style" value="'+s.k+'"'+(i===0?' checked':'')+'>'+
   '<img class="styth" src="style-img/'+s.k+'.jpg" alt="" width="76" height="107" data-big="'+s.k+'" data-l="'+esc(s.l)+'" loading="lazy" decoding="async">'+
-  '<div><b>'+esc(s.l)+(s.ats?' <span class="tag ok">ATS</span>':'')+'</b><span>'+esc(s.d)+'</span></div></label>'}).join('');
+  '<div><b>'+esc(s.l)+(s.ats?' <span class="tag ok">ATS</span>':'')+'</b><span>'+esc(s.d)+'</span></div></label>'}).join('')}
+function paintStyles(){
+  var keep=radio('style');
+  $('#styles').innerHTML=styleHtml(STY);
+  var r=keep&&F.querySelector('input[name=style][value="'+keep+'"]');
+  if(r)r.checked=true; else {var f=F.querySelector('input[name=style]');if(f)f.checked=true}
+  try{KX.applyI18n($('#styles'))}catch(e){}
+}
+/* Without a backend configured (local preview) show everything; with one, start on the list
+   any deployment can build and widen it only once the ping says this one is new enough. */
+var STY=(KX.ready&&KX.ready())?D.styles.filter(function(s){return !s.needs}):D.styles.slice();
+paintStyles();
+if(KX.ready&&KX.ready()&&STY.length<D.styles.length){
+  KX.api('ping',{}).then(function(r){
+    var v=String((r&&r.version)||'');
+    if(v.indexOf('2.1')===0||v.indexOf('premium')>-1){STY=D.styles.slice();paintStyles();refreshPrice()}
+  }).catch(function(){/* offline, or a backend too old to answer - the safe list stays */});
+}
 $('#styles').addEventListener('click',function(e){
   var im=e.target.closest('.styth');if(!im)return;
   e.preventDefault();e.stopPropagation();
