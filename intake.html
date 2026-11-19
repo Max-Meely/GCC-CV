@@ -827,19 +827,22 @@ function kxOffline() {
     licenceCountries: ["UAE","Home country only","None"],
     marital: ["Single","Married","Divorced","Widowed"],
     styles: [
-      /* needs:'2.1' marks a style the older backend cannot build. The order form checks what
+      /* Every style here is now built by the premium renderers: personal details in the
+         header, grey section bands, key skills explained in a line each, a serif name. The
+         difference between them is the shape and the colour, not the quality.
+         needs:'2.1' marks a style the older backend cannot build. The order form checks what
          the live backend reports and hides these until it can, so the site and the Apps Script
          deployment can never get out of step in a way a client notices. */
-      { k: "ats_classic", l: "Classic ATS", ats: true, d: "Single column, navy headings. Passes recruitment software." },
-      { k: "ats_compact", l: "Compact ATS", ats: true, d: "Same ATS-safe layout, tighter spacing for a long history." },
-      { k: "exec_navy", l: "Executive navy", ats: false, d: "Deep navy header band, clean sections. Corporate and office roles." },
-      { needs: "2.1", k: "exec_royal", l: "Executive royal", ats: false, d: "Brighter royal blue band. Stands out without shouting." },
-      { needs: "2.1", k: "exec_slate", l: "Slate blue", ats: false, d: "Slate band with a bright blue accent. Supervisors and engineers." },
-      { k: "side_navy", l: "Modern sidebar", ats: false, d: "Dark navy sidebar with contact, skills and languages." },
+      { k: "ats_classic", l: "Classic ATS", ats: true, d: "Strict single column, no tables at all. The safest choice for recruitment software." },
+      { k: "ats_compact", l: "Compact ATS", ats: true, d: "The same strict layout, tighter spacing for a long work history." },
+      { k: "exec_navy", l: "Executive navy", ats: false, d: "Deep navy header band with your details inside it. Corporate and office roles." },
+      { needs: "2.1", k: "exec_royal", l: "Executive royal", ats: false, d: "The same header band in a brighter royal blue. Stands out without shouting." },
+      { needs: "2.1", k: "exec_slate", l: "Slate blue", ats: false, d: "Slate header band with a bright blue accent. Supervisors and engineers." },
+      { k: "side_navy", l: "Modern sidebar", ats: false, d: "Dark navy sidebar with contact, details and language bars." },
       { needs: "2.1", k: "side_steel", l: "Steel sidebar", ats: false, d: "Light steel-blue sidebar. Easy to read, easy to print." },
-      { k: "side_teal", l: "Fresh sidebar", ats: false, d: "Light sidebar with a teal accent." },
-      { k: "site_bold", l: "Site-ready", ats: false, d: "Bold charcoal and amber. Trades, oil and gas, site work." },
-      { needs: "2.1", k: "prem_ats", l: "Premium ATS", ats: true, d: "Premium typography, still single column so recruitment software reads it." },
+      { k: "side_teal", l: "Fresh sidebar", ats: false, d: "Light sidebar with a teal accent. Softer than the navy one." },
+      { k: "site_bold", l: "Site-ready", ats: false, d: "Bold charcoal band with amber accents. Trades, oil and gas, site work." },
+      { needs: "2.1", k: "prem_ats", l: "Premium ATS", ats: true, d: "Full-width grey section bands, still single column so software reads it." },
       { needs: "2.1", k: "prem_midnight", l: "Premium Midnight", ats: false, d: "Monogram tile, language bars, serif name. Our most exclusive layout." },
       { needs: "2.1", k: "prem_royal", l: "Premium Royal", ats: false, d: "The premium layout in a brighter royal blue." },
       { needs: "2.1", k: "prem_steel", l: "Premium Steel", ats: false, d: "Premium layout on a light steel panel. Prints beautifully." }
@@ -2016,14 +2019,21 @@ function paintStyles(){
   if(r)r.checked=true; else {var f=F.querySelector('input[name=style]');if(f)f.checked=true}
   try{KX.applyI18n($('#styles'))}catch(e){}
 }
-/* Without a backend configured (local preview) show everything; with one, start on the list
-   any deployment can build and widen it only once the ping says this one is new enough. */
-var STY=(KX.ready&&KX.ready())?D.styles.filter(function(s){return !s.needs}):D.styles.slice();
+/* off:true styles stay defined (the backend still builds them, and old orders still refer to
+   them) but are not offered here - the catalogue on sale is the premium tier. Delete the
+   off:true on any entry in data.js to put it back on the form.
+   Without a backend configured (local preview) show everything on offer; with one, start on
+   the list any deployment can build and widen it when the ping says this one is new enough.
+   If that leaves nothing at all, show the full offer rather than an empty picker. */
+var OFFER=D.styles.filter(function(s){return !s.off});
+if(!OFFER.length)OFFER=D.styles.slice();
+var STY=(KX.ready&&KX.ready())?OFFER.filter(function(s){return !s.needs}):OFFER.slice();
+if(!STY.length)STY=OFFER.slice();
 paintStyles();
-if(KX.ready&&KX.ready()&&STY.length<D.styles.length){
+if(KX.ready&&KX.ready()&&STY.length<OFFER.length){
   KX.api('ping',{}).then(function(r){
     var v=String((r&&r.version)||'');
-    if(v.indexOf('2.1')===0||v.indexOf('premium')>-1){STY=D.styles.slice();paintStyles();refreshPrice()}
+    if(v.indexOf('2.1')===0||v.indexOf('premium')>-1){STY=OFFER.slice();paintStyles();refreshPrice()}
   }).catch(function(){/* offline, or a backend too old to answer - the safe list stays */});
 }
 $('#styles').addEventListener('click',function(e){

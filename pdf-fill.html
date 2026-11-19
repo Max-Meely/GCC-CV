@@ -841,7 +841,7 @@ function open(src,opts){opts=opts||{};
   $(dlg,'[data-rl]').onclick=function(){cur=rot90(cur,-1);rect={x:.02,y:.02,w:.96,h:.96};draw()};
   $(dlg,'[data-rr]').onclick=function(){cur=rot90(cur,1);rect={x:.02,y:.02,w:.96,h:.96};draw()};
   $(dlg,'[data-reset]').onclick=function(){rect={x:.02,y:.02,w:.96,h:.96};layout()};
-  function finish(v){if(done)return;done=true;try{dlg.close()}catch(e){}dlg.remove();resolve(v)}
+  function finish(v){if(done)return;done=true;window.removeEventListener('resize',onResize);try{dlg.close()}catch(e){}dlg.remove();resolve(v)}
   $(dlg,'[data-x]').onclick=function(){finish(null)};
   dlg.addEventListener('cancel',function(e){e.preventDefault();finish(null)});
   $(dlg,'[data-ok]').onclick=function(){var sx=Math.round(rect.x*cur.width),sy=Math.round(rect.y*cur.height),sw=Math.max(1,Math.round(rect.w*cur.width)),sh=Math.max(1,Math.round(rect.h*cur.height));

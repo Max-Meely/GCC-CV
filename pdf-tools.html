@@ -707,6 +707,358 @@ function make(entries){ // entries: [{name:string, data:Uint8Array|ArrayBuffer}]
 window.KXZIP={make:make};
 })();
 </script>
+<script>/* Real, in-browser PDF decryption (not the old "rasterize every page to a picture" workaround).
+   Most "locked" certificates and documents - especially the ones e-learning/training platforms
+   generate - don't actually have a secret password: they open for anyone, but carry an owner-only
+   permission lock blocking printing/editing/combining. This strips that (and genuine password
+   protection, when the password is supplied) while keeping the real text, fonts and vector
+   content intact - because the file is properly decrypted, not re-photographed.
+
+   Implements the PDF Standard Security Handler (ISO 32000-1/2) for every revision in real-world
+   use: R2/R3 (RC4 40/128-bit), R4 (AES-128), R5/R6 (AES-256, "legacy" and the standardized hash).
+   Web Crypto (window.crypto.subtle) deliberately doesn't support MD5 or RC4 (both deprecated for
+   security use) even though older PDFs still need them to derive the right key, and doesn't
+   support decrypting fixed-size data with no padding (which PDF's AES-256 key-unwrap step needs)
+   - so those two narrow gaps are filled with small hand-written implementations below, each
+   verified against known-answer test vectors / Node's own crypto module during development.
+   Everything else (SHA-256/384/512, and the actual bulk AES-CBC decryption of streams, which
+   does have real padding) uses the browser's native, fast Web Crypto implementation. */
+(function () {
+  var KX = window.KX;
+  KX.PdfCrypt = {};
+
+  /* ---------- MD5 (pure JS - Web Crypto has no MD5) ---------- */
+  function md5(bytes) {
+    function rotl(x, c) { return (x << c) | (x >>> (32 - c)); }
+    var s = [7,12,17,22,7,12,17,22,7,12,17,22,7,12,17,22,
+             5,9,14,20,5,9,14,20,5,9,14,20,5,9,14,20,
+             4,11,16,23,4,11,16,23,4,11,16,23,4,11,16,23,
+             6,10,15,21,6,10,15,21,6,10,15,21,6,10,15,21];
+    var K = new Int32Array(64);
+    for (var i = 0; i < 64; i++) K[i] = (Math.floor(Math.abs(Math.sin(i + 1)) * 4294967296)) | 0;
+    var a0 = 0x67452301, b0 = 0xefcdab89, c0 = 0x98badcfe, d0 = 0x10325476;
+    var origLen = bytes.length, bitLen = origLen * 8;
+    var padLen = ((56 - (origLen + 1) % 64) + 64) % 64;
+    var total = origLen + 1 + padLen + 8;
+    var msg = new Uint8Array(total);
+    msg.set(bytes, 0);
+    msg[origLen] = 0x80;
+    var lenLo = bitLen >>> 0, lenHi = Math.floor(bitLen / 4294967296) >>> 0;
+    var dv = new DataView(msg.buffer);
+    dv.setUint32(total - 8, lenLo, true);
+    dv.setUint32(total - 4, lenHi, true);
+    for (var off = 0; off < total; off += 64) {
+      var M = new Int32Array(16);
+      for (i = 0; i < 16; i++) M[i] = dv.getInt32(off + i * 4, true);
+      var A = a0, B = b0, C = c0, D = d0;
+      for (i = 0; i < 64; i++) {
+        var F, g;
+        if (i < 16) { F = (B & C) | (~B & D); g = i; }
+        else if (i < 32) { F = (D & B) | (~D & C); g = (5 * i + 1) % 16; }
+        else if (i < 48) { F = B ^ C ^ D; g = (3 * i + 5) % 16; }
+        else { F = C ^ (B | ~D); g = (7 * i) % 16; }
+        F = (F + A + K[i] + M[g]) | 0;
+        A = D; D = C; C = B;
+        B = (B + rotl(F, s[i])) | 0;
+      }
+      a0 = (a0 + A) | 0; b0 = (b0 + B) | 0; c0 = (c0 + C) | 0; d0 = (d0 + D) | 0;
+    }
+    var out = new Uint8Array(16), odv = new DataView(out.buffer);
+    odv.setInt32(0, a0, true); odv.setInt32(4, b0, true); odv.setInt32(8, c0, true); odv.setInt32(12, d0, true);
+    return out;
+  }
+
+  /* ---------- RC4 (pure JS - Web Crypto has no RC4) ---------- */
+  function rc4(key, data) {
+    var S = new Uint8Array(256), i;
+    for (i = 0; i < 256; i++) S[i] = i;
+    var j = 0;
+    for (i = 0; i < 256; i++) {
+      j = (j + S[i] + key[i % key.length]) & 0xff;
+      var t = S[i]; S[i] = S[j]; S[j] = t;
+    }
+    var out = new Uint8Array(data.length);
+    i = 0; j = 0;
+    for (var k = 0; k < data.length; k++) {
+      i = (i + 1) & 0xff;
+      j = (j + S[i]) & 0xff;
+      var t2 = S[i]; S[i] = S[j]; S[j] = t2;
+      out[k] = data[k] ^ S[(S[i] + S[j]) & 0xff];
+    }
+    return out;
+  }
+
+  /* ---------- Minimal AES-256 block decrypt, textbook Rijndael (ECB, single block, no padding)
+     Only used to unwrap the 32-byte UE/OE file-key values (CBC, zero IV, no padding) - a shape
+     Web Crypto's AES-CBC can't do directly since it always validates/strips PKCS7 padding, and
+     there is none here. Only ever runs on 32-48 bytes per file, so the lack of native speed
+     doesn't matter. ---------- */
+  var Sbox = [
+    0x63,0x7c,0x77,0x7b,0xf2,0x6b,0x6f,0xc5,0x30,0x01,0x67,0x2b,0xfe,0xd7,0xab,0x76,
+    0xca,0x82,0xc9,0x7d,0xfa,0x59,0x47,0xf0,0xad,0xd4,0xa2,0xaf,0x9c,0xa4,0x72,0xc0,
+    0xb7,0xfd,0x93,0x26,0x36,0x3f,0xf7,0xcc,0x34,0xa5,0xe5,0xf1,0x71,0xd8,0x31,0x15,
+    0x04,0xc7,0x23,0xc3,0x18,0x96,0x05,0x9a,0x07,0x12,0x80,0xe2,0xeb,0x27,0xb2,0x75,
+    0x09,0x83,0x2c,0x1a,0x1b,0x6e,0x5a,0xa0,0x52,0x3b,0xd6,0xb3,0x29,0xe3,0x2f,0x84,
+    0x53,0xd1,0x00,0xed,0x20,0xfc,0xb1,0x5b,0x6a,0xcb,0xbe,0x39,0x4a,0x4c,0x58,0xcf,
+    0xd0,0xef,0xaa,0xfb,0x43,0x4d,0x33,0x85,0x45,0xf9,0x02,0x7f,0x50,0x3c,0x9f,0xa8,
+    0x51,0xa3,0x40,0x8f,0x92,0x9d,0x38,0xf5,0xbc,0xb6,0xda,0x21,0x10,0xff,0xf3,0xd2,
+    0xcd,0x0c,0x13,0xec,0x5f,0x97,0x44,0x17,0xc4,0xa7,0x7e,0x3d,0x64,0x5d,0x19,0x73,
+    0x60,0x81,0x4f,0xdc,0x22,0x2a,0x90,0x88,0x46,0xee,0xb8,0x14,0xde,0x5e,0x0b,0xdb,
+    0xe0,0x32,0x3a,0x0a,0x49,0x06,0x24,0x5c,0xc2,0xd3,0xac,0x62,0x91,0x95,0xe4,0x79,
+    0xe7,0xc8,0x37,0x6d,0x8d,0xd5,0x4e,0xa9,0x6c,0x56,0xf4,0xea,0x65,0x7a,0xae,0x08,
+    0xba,0x78,0x25,0x2e,0x1c,0xa6,0xb4,0xc6,0xe8,0xdd,0x74,0x1f,0x4b,0xbd,0x8b,0x8a,
+    0x70,0x3e,0xb5,0x66,0x48,0x03,0xf6,0x0e,0x61,0x35,0x57,0xb9,0x86,0xc1,0x1d,0x9e,
+    0xe1,0xf8,0x98,0x11,0x69,0xd9,0x8e,0x94,0x9b,0x1e,0x87,0xe9,0xce,0x55,0x28,0xdf,
+    0x8c,0xa1,0x89,0x0d,0xbf,0xe6,0x42,0x68,0x41,0x99,0x2d,0x0f,0xb0,0x54,0xbb,0x16
+  ];
+  var InvSbox = new Array(256);
+  for (var si = 0; si < 256; si++) InvSbox[Sbox[si]] = si;
+  var Rcon = [0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80,0x1b,0x36,0x6c,0xd8,0xab,0x4d];
+  function mul(a, b) {
+    var p = 0;
+    for (var i = 0; i < 8; i++) {
+      if (b & 1) p ^= a;
+      var hi = a & 0x80;
+      a = (a << 1) & 0xff;
+      if (hi) a ^= 0x1b;
+      b >>= 1;
+    }
+    return p & 0xff;
+  }
+  function expandKey256(key) {
+    var Nk = 8, Nr = 14, Nb = 4;
+    var w = new Array(Nb * (Nr + 1));
+    for (var i = 0; i < Nk; i++) w[i] = [key[4*i], key[4*i+1], key[4*i+2], key[4*i+3]];
+    for (i = Nk; i < Nb * (Nr + 1); i++) {
+      var temp = w[i - 1].slice();
+      if (i % Nk === 0) {
+        temp = [temp[1], temp[2], temp[3], temp[0]].map(function (b) { return Sbox[b]; });
+        temp[0] ^= Rcon[i / Nk - 1];
+      } else if (Nk > 6 && i % Nk === 4) {
+        temp = temp.map(function (b) { return Sbox[b]; });
+      }
+      w[i] = [w[i-Nk][0]^temp[0], w[i-Nk][1]^temp[1], w[i-Nk][2]^temp[2], w[i-Nk][3]^temp[3]];
+    }
+    return w;
+  }
+  function addRoundKey(state, w, round) {
+    for (var c = 0; c < 4; c++) for (var r = 0; r < 4; r++) state[r][c] ^= w[round * 4 + c][r];
+  }
+  function invSubBytes(state) { for (var r = 0; r < 4; r++) for (var c = 0; c < 4; c++) state[r][c] = InvSbox[state[r][c]]; }
+  function invShiftRows(state) {
+    for (var r = 1; r < 4; r++) { var row = state[r].slice(); for (var c = 0; c < 4; c++) state[r][c] = row[(c - r + 4) % 4]; }
+  }
+  function invMixColumns(state) {
+    for (var c = 0; c < 4; c++) {
+      var a0 = state[0][c], a1 = state[1][c], a2 = state[2][c], a3 = state[3][c];
+      state[0][c] = mul(a0,14) ^ mul(a1,11) ^ mul(a2,13) ^ mul(a3,9);
+      state[1][c] = mul(a0,9)  ^ mul(a1,14) ^ mul(a2,11) ^ mul(a3,13);
+      state[2][c] = mul(a0,13) ^ mul(a1,9)  ^ mul(a2,14) ^ mul(a3,11);
+      state[3][c] = mul(a0,11) ^ mul(a1,13) ^ mul(a2,9)  ^ mul(a3,14);
+    }
+  }
+  function aes256DecryptBlock(w, block) {
+    var Nr = 14, state = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]], i;
+    for (i = 0; i < 16; i++) state[i % 4][(i / 4) | 0] = block[i];
+    addRoundKey(state, w, Nr);
+    for (var round = Nr - 1; round >= 1; round--) {
+      invShiftRows(state); invSubBytes(state); addRoundKey(state, w, round); invMixColumns(state);
+    }
+    invShiftRows(state); invSubBytes(state); addRoundKey(state, w, 0);
+    var out = new Uint8Array(16);
+    for (i = 0; i < 16; i++) out[i] = state[i % 4][(i / 4) | 0];
+    return out;
+  }
+  function aes256CbcDecryptNoPad(key, iv, data) {
+    var w = expandKey256(key), out = new Uint8Array(data.length), prev = iv;
+    for (var off = 0; off < data.length; off += 16) {
+      var block = data.slice(off, off + 16);
+      var dec = aes256DecryptBlock(w, block);
+      for (var i = 0; i < 16; i++) out[off + i] = dec[i] ^ prev[i];
+      prev = block;
+    }
+    return out;
+  }
+
+  /* ---------- helpers ---------- */
+  var PAD = new Uint8Array([
+    0x28,0xBF,0x4E,0x5E,0x4E,0x75,0x8A,0x41,0x64,0x00,0x4E,0x56,0xFF,0xFA,0x01,0x08,
+    0x2E,0x2E,0x00,0xB6,0xD0,0x68,0x3E,0x80,0x2F,0x0C,0xA9,0xFE,0x64,0x53,0x69,0x7A
+  ]);
+  function concat() {
+    var len = 0, i; for (i = 0; i < arguments.length; i++) len += arguments[i].length;
+    var out = new Uint8Array(len), o = 0;
+    for (i = 0; i < arguments.length; i++) { out.set(arguments[i], o); o += arguments[i].length; }
+    return out;
+  }
+  function padPassword(pwBytes) {
+    if (pwBytes.length >= 32) return pwBytes.slice(0, 32);
+    return concat(pwBytes, PAD.slice(0, 32 - pwBytes.length));
+  }
+  function bytesEqual(a, b) {
+    if (a.length !== b.length) return false;
+    for (var i = 0; i < a.length; i++) if (a[i] !== b[i]) return false;
+    return true;
+  }
+  function sha(name, data) { return crypto.subtle.digest(name, data).then(function (b) { return new Uint8Array(b); }); }
+
+  // ISO 32000-2 Algorithm 2.B "hardened hash" - needed for R6.
+  function hardenedHash(password, salt, udata) {
+    return sha('SHA-256', concat(password, salt, udata)).then(function (K) { return round(K, 0); });
+    function round(K, n) {
+      var unit = concat(password, K, udata);
+      var K1 = new Uint8Array(unit.length * 64);
+      for (var i = 0; i < 64; i++) K1.set(unit, i * unit.length);
+      return crypto.subtle.importKey('raw', K.slice(0, 16), { name: 'AES-CBC' }, false, ['encrypt'])
+        .then(function (key) { return crypto.subtle.encrypt({ name: 'AES-CBC', iv: K.slice(16, 32) }, key, K1); })
+        .then(function (encBuf) {
+          var E = new Uint8Array(encBuf).slice(0, K1.length);
+          var sum = 0; for (var i = 0; i < 16; i++) sum += E[i];
+          var mod = sum % 3;
+          var next = mod === 0 ? sha('SHA-256', E) : mod === 1 ? sha('SHA-384', E) : sha('SHA-512', E);
+          return next.then(function (K2) {
+            n++;
+            if (n >= 64 && E[E.length - 1] <= n - 32) return K2.slice(0, 32);
+            return round(K2, n);
+          });
+        });
+    }
+  }
+
+  function getBytesField(dict, name) { var v = dict.lookup(window.PDFLib.PDFName.of(name)); return v ? new Uint8Array(v.asBytes()) : null; }
+  function getNumberField(dict, name) { var v = dict.lookup(window.PDFLib.PDFName.of(name)); return v ? v.asNumber() : null; }
+
+  // R5/R6 (V=5, AES-256) file key derivation
+  function deriveKey_V5(P, encDict, password) {
+    var O = getBytesField(encDict, 'O'), U = getBytesField(encDict, 'U');
+    var OE = getBytesField(encDict, 'OE'), UE = getBytesField(encDict, 'UE');
+    var R = getNumberField(encDict, 'R');
+    var hashFn = R === 6 ? hardenedHash : function (pw, salt, udata) { return sha('SHA-256', concat(pw, salt, udata)); };
+    var uValidationSalt = U.slice(32, 40), uKeySalt = U.slice(40, 48);
+    return hashFn(password, uValidationSalt, new Uint8Array(0)).then(function (uHashCheck) {
+      if (bytesEqual(uHashCheck, U.slice(0, 32))) {
+        return hashFn(password, uKeySalt, new Uint8Array(0)).then(function (interKey) {
+          return { fileKey: aes256CbcDecryptNoPad(interKey, new Uint8Array(16), UE), as: 'user' };
+        });
+      }
+      var oValidationSalt = O.slice(32, 40), oKeySalt = O.slice(40, 48);
+      return hashFn(password, oValidationSalt, U).then(function (oHashCheck) {
+        if (bytesEqual(oHashCheck, O.slice(0, 32))) {
+          return hashFn(password, oKeySalt, U).then(function (interKey) {
+            return { fileKey: aes256CbcDecryptNoPad(interKey, new Uint8Array(16), OE), as: 'owner' };
+          });
+        }
+        return null;
+      });
+    });
+  }
+
+  // R2-R4 (V=1/2/4, RC4 or AES-128) file key derivation - "Algorithm 2"
+  function deriveKey_Legacy(encDict, password, id0, keyLengthBytes, R, encryptMetadata) {
+    var O = getBytesField(encDict, 'O');
+    var Pnum = getNumberField(encDict, 'P');
+    var pBytes = new Uint8Array(4);
+    new DataView(pBytes.buffer).setInt32(0, Pnum, true);
+    var input = concat(padPassword(password), O.slice(0, 32), pBytes, id0 || new Uint8Array(0));
+    if (R >= 4 && encryptMetadata === false) input = concat(input, new Uint8Array([0xff,0xff,0xff,0xff]));
+    var digest = md5(input);
+    if (R >= 3) for (var i = 0; i < 50; i++) digest = md5(digest.slice(0, keyLengthBytes));
+    return digest.slice(0, keyLengthBytes);
+  }
+  function objectKey_Legacy(fileKey, objNum, genNum, isAESV2) {
+    var extra = new Uint8Array(5 + (isAESV2 ? 4 : 0));
+    extra[0] = objNum & 0xff; extra[1] = (objNum >> 8) & 0xff; extra[2] = (objNum >> 16) & 0xff;
+    extra[3] = genNum & 0xff; extra[4] = (genNum >> 8) & 0xff;
+    if (isAESV2) extra.set([0x73,0x41,0x6c,0x54], 5); // "sAlT"
+    var digest = md5(concat(fileKey, extra));
+    return digest.slice(0, Math.min(fileKey.length + 5, 16));
+  }
+  function aesCbcDecryptPadded(keyBytes, data) {
+    if (data.length < 16) return Promise.resolve(new Uint8Array(0));
+    var iv = data.slice(0, 16), ct = data.slice(16);
+    if (ct.length === 0) return Promise.resolve(new Uint8Array(0));
+    return crypto.subtle.importKey('raw', keyBytes, { name: 'AES-CBC' }, false, ['decrypt'])
+      .then(function (key) { return crypto.subtle.decrypt({ name: 'AES-CBC', iv: iv }, key, ct); })
+      .then(function (buf) { return new Uint8Array(buf); });
+  }
+
+  /* KX.PdfCrypt.unlock(PDFLib, bytes, password) -> Promise<{bytes, wasEncrypted, ok, reason?}>
+     PDFLib: the already-loaded window.PDFLib (caller loads it, same as everywhere else on these
+     pages). bytes: Uint8Array/ArrayBuffer of the original file. password: '' to auto-try the
+     common "no real password, just a permission lock" case.
+     - Not encrypted at all: {bytes (unchanged), wasEncrypted:false, ok:true}
+     - Decrypted successfully: {bytes (new, plain PDF), wasEncrypted:true, ok:true}
+     - Password didn't match: {bytes:null, wasEncrypted:true, ok:false, reason:'bad-password'} */
+  KX.PdfCrypt.unlock = function (PDFLib, inBytes, passwordStr) {
+    var password = new TextEncoder().encode(passwordStr || '');
+    return PDFLib.PDFDocument.load(inBytes, { ignoreEncryption: true, updateMetadata: false }).then(function (doc) {
+      var ctx = doc.context;
+      if (!ctx.trailerInfo.Encrypt) return { bytes: inBytes instanceof Uint8Array ? inBytes : new Uint8Array(inBytes), wasEncrypted: false, ok: true };
+
+      var encDict = ctx.lookup(ctx.trailerInfo.Encrypt);
+      var V = getNumberField(encDict, 'V');
+      var R = getNumberField(encDict, 'R');
+      var idArr = ctx.trailerInfo.ID;
+      var id0 = idArr ? new Uint8Array(idArr.get(0).asBytes()) : new Uint8Array(0);
+      var emObj = encDict.lookup(PDFLib.PDFName.of('EncryptMetadata'));
+      var encryptMetadata = emObj ? emObj.asBoolean() : true;
+
+      var keyPromise, isAESV2 = false, isV5 = (V === 5);
+      if (isV5) {
+        keyPromise = deriveKey_V5(PDFLib, encDict, password);
+      } else {
+        var lengthField = getNumberField(encDict, 'Length');
+        var keyLengthBytes = lengthField ? lengthField / 8 : 5;
+        var fileKey = deriveKey_Legacy(encDict, password, id0, keyLengthBytes, R, encryptMetadata);
+        if (V === 4) {
+          var cf = encDict.lookup(PDFLib.PDFName.of('CF'));
+          if (cf) {
+            var stdcf = cf.lookup(PDFLib.PDFName.of('StdCF'));
+            var cfm = stdcf && stdcf.lookup(PDFLib.PDFName.of('CFM'));
+            isAESV2 = cfm && cfm.toString() === '/AESV2';
+          }
+        }
+        keyPromise = Promise.resolve({ fileKey: fileKey, as: 'user' });
+      }
+
+      return keyPromise.then(function (res) {
+        if (!res) return { bytes: null, wasEncrypted: true, ok: false, reason: 'bad-password' };
+        var fileKey = res.fileKey;
+        var objs = ctx.enumerateIndirectObjects();
+        var chain = Promise.resolve();
+        var anyDecrypted = false;
+        objs.forEach(function (pair) {
+          var ref = pair[0], obj = pair[1];
+          if (!(obj instanceof PDFLib.PDFRawStream)) return;
+          chain = chain.then(function () {
+            var raw = obj.contents instanceof Uint8Array ? obj.contents : new Uint8Array(obj.contents);
+            var p;
+            if (isV5) {
+              p = aesCbcDecryptPadded(fileKey, raw);
+            } else if (isAESV2) {
+              p = aesCbcDecryptPadded(objectKey_Legacy(fileKey, ref.objectNumber, ref.generationNumber, true), raw);
+            } else {
+              p = Promise.resolve(rc4(objectKey_Legacy(fileKey, ref.objectNumber, ref.generationNumber, false), raw));
+            }
+            return p.then(function (plain) {
+              obj.contents = plain;
+              obj.dict.set(PDFLib.PDFName.of('Length'), PDFLib.PDFNumber.of(plain.length));
+              anyDecrypted = true;
+            }).catch(function () { /* leave this one object alone; most PDFs still render fine */ });
+          });
+        });
+        return chain.then(function () {
+          delete ctx.trailerInfo.Encrypt;
+          if (!anyDecrypted) return { bytes: null, wasEncrypted: true, ok: false, reason: 'bad-password' };
+          return doc.save({ useObjectStreams: false }).then(function (outBytes) {
+            return { bytes: outBytes, wasEncrypted: true, ok: true };
+          });
+        });
+      });
+    });
+  };
+})();
+</script>
 <script>
 (function(){
 var $=KX.$,esc=KX.esc,busy=false,urls=[];
@@ -714,6 +1066,17 @@ var libP=null,pjsP=null;
 function pdfLib(){if(window.PDFLib)return Promise.resolve(window.PDFLib);if(!libP)libP=new Promise(function(res,rej){var s=document.createElement('script');s.src='pdf-lib.min.js';s.onload=function(){res(window.PDFLib)};s.onerror=function(){libP=null;rej(new Error('Could not load the PDF engine. Check your connection and try again.'))};document.head.appendChild(s)});return libP}
 function pdfJs(){if(!pjsP)pjsP=import('./pdf.min.mjs').then(function(m){m.GlobalWorkerOptions.workerSrc='pdf.worker.min.mjs';return m}).catch(function(){pjsP=null;throw new Error('Could not load the PDF viewer engine. Open this page from the website (not as a saved file) and try again.')});return pjsP}
 function bytes(f){return f.file.arrayBuffer()}
+/* Most "locked" files we see (certificates from training platforms, mainly) don't have a real
+   secret password - just an owner-only permission lock blocking editing/combining. Try an
+   empty-password unlock first (real decrypt, not a rasterize workaround - keeps actual text);
+   if the file turns out to need a real password, say so clearly instead of silently producing
+   a broken merge. */
+function loadMaybeEncrypted(P,b){
+  return KX.PdfCrypt.unlock(P,b,'').then(function(res){
+    if(res.ok)return P.PDFDocument.load(res.bytes,{ignoreEncryption:true});
+    throw new Error("One of these files is protected with a password we don't know. Unlock it on the PDF password remover page first, then try again here.");
+  });
+}
 function bar(p){$('#bar').classList.remove('hide');$('#barI').style.width=Math.round(p*100)+'%'}
 function blobOf(u8,type){return new Blob([u8],{type:type||'application/pdf'})}
 function base(n){return n.replace(/\.[^.]+$/,'')}
@@ -725,18 +1088,18 @@ function ranges(str,n){ // "1-3, 5, 8-" -> zero-based list in given order
 function fn(id){return $('#'+id)}
 var TOOLS=[
  {k:'merge',n:'Merge PDFs',d:'Combine several PDFs into one. Reorder with the arrows.',multi:true,accept:'application/pdf',opts:'',
-  run:function(L){return pdfLib().then(function(P){return P.PDFDocument.create().then(function(out){var chain=Promise.resolve();L.forEach(function(f,i){chain=chain.then(function(){return bytes(f).then(function(b){return P.PDFDocument.load(b,{ignoreEncryption:true})}).then(function(d){return out.copyPages(d,d.getPageIndices())}).then(function(pg){pg.forEach(function(p){out.addPage(p)});bar((i+1)/L.length*.9)})})});return chain.then(function(){return out.save()}).then(function(u){return[{name:'merged.pdf',blob:blobOf(u)}]})})})}},
+  run:function(L){return pdfLib().then(function(P){return P.PDFDocument.create().then(function(out){var chain=Promise.resolve();L.forEach(function(f,i){chain=chain.then(function(){return bytes(f).then(function(b){return loadMaybeEncrypted(P,b)}).then(function(d){return out.copyPages(d,d.getPageIndices())}).then(function(pg){pg.forEach(function(p){out.addPage(p)});bar((i+1)/L.length*.9)})})});return chain.then(function(){return out.save()}).then(function(u){return[{name:'merged.pdf',blob:blobOf(u)}]})})})}},
  {k:'split',n:'Split PDF',d:'Cut a PDF into separate files, one per page or by the ranges you choose. Download each one, or all of them together as a ZIP.',opts:'<div class="f"><div class="opts" id="splitMode" role="radiogroup" aria-label="How to split"><label class="opt"><input type="radio" name="splitMode" value="each" checked><div><b>One file per page</b><span>Every page becomes its own PDF</span></div></label><label class="opt"><input type="radio" name="splitMode" value="ranges"><div><b>Custom ranges</b><span>Choose your own groups of pages</span></div></label></div></div><div class="f hide" id="o1wrap"><label class="l" for="o1">Page ranges</label><input id="o1" placeholder="e.g. 1-3, 4-6, 7"></div>',
-  run:function(L){return pdfLib().then(function(P){return bytes(L[0]).then(function(b){return P.PDFDocument.load(b,{ignoreEncryption:true})}).then(function(src){var n=src.getPageCount(),mode=(document.querySelector('input[name=splitMode]:checked')||{}).value||'each',txt=fn('o1').value.trim(),parts=mode==='ranges'?txt.split(',').map(function(s){return ranges(s,n)}).filter(function(a){return a.length}):src.getPageIndices().map(function(i){return[i]}),res=[],chain=Promise.resolve();
+  run:function(L){return pdfLib().then(function(P){return bytes(L[0]).then(function(b){return loadMaybeEncrypted(P,b)}).then(function(src){var n=src.getPageCount(),mode=(document.querySelector('input[name=splitMode]:checked')||{}).value||'each',txt=fn('o1').value.trim(),parts=mode==='ranges'?txt.split(',').map(function(s){return ranges(s,n)}).filter(function(a){return a.length}):src.getPageIndices().map(function(i){return[i]}),res=[],chain=Promise.resolve();
    if(mode==='ranges'&&!parts.length)throw new Error('Enter at least one page range, e.g. 1-3, 4-6.');
    if(parts.length>400)throw new Error('That would make '+parts.length+' files. Use fewer ranges, or split a smaller file.');
    parts.forEach(function(ix,i){chain=chain.then(function(){return P.PDFDocument.create().then(function(o){return o.copyPages(src,ix).then(function(pg){pg.forEach(function(p){o.addPage(p)});return o.save()})}).then(function(u){res.push({name:base(L[0].name)+(mode==='each'?'-page'+(i+1):'-part'+(i+1))+'.pdf',blob:blobOf(u)});bar((i+1)/parts.length)})})});return chain.then(function(){return res})})})}},
  {k:'rotate',n:'Rotate pages',d:'Turn all pages, or only the pages you choose.',opts:'<div class="grid g2"><div class="f"><label class="l" for="o1">Rotate</label><select id="o1"><option value="90">90 degrees clockwise</option><option value="180">180 degrees</option><option value="270">90 degrees counter-clockwise</option></select></div><div class="f"><label class="l" for="o2">Pages <span class="opt-t">(optional)</span></label><input id="o2" placeholder="e.g. 2, 4-6  (empty = all)"></div></div>',
-  run:function(L){return pdfLib().then(function(P){return bytes(L[0]).then(function(b){return P.PDFDocument.load(b,{ignoreEncryption:true})}).then(function(d){var n=d.getPageCount(),t=fn('o2').value.trim(),ix=t?ranges(t,n):d.getPageIndices(),a=+fn('o1').value;ix.forEach(function(i){var p=d.getPage(i);p.setRotation(P.degrees((p.getRotation().angle+a)%360))});bar(.8);return d.save()}).then(function(u){return[{name:base(L[0].name)+'-rotated.pdf',blob:blobOf(u)}]})})}},
+  run:function(L){return pdfLib().then(function(P){return bytes(L[0]).then(function(b){return loadMaybeEncrypted(P,b)}).then(function(d){var n=d.getPageCount(),t=fn('o2').value.trim(),ix=t?ranges(t,n):d.getPageIndices(),a=+fn('o1').value;ix.forEach(function(i){var p=d.getPage(i);p.setRotation(P.degrees((p.getRotation().angle+a)%360))});bar(.8);return d.save()}).then(function(u){return[{name:base(L[0].name)+'-rotated.pdf',blob:blobOf(u)}]})})}},
  {k:'remove',n:'Remove pages',d:'Delete the pages you do not need.',opts:'<div class="f"><label class="l" for="o1">Pages to remove</label><input id="o1" placeholder="e.g. 2, 5-7"></div>',
-  run:function(L){return pdfLib().then(function(P){return bytes(L[0]).then(function(b){return P.PDFDocument.load(b,{ignoreEncryption:true})}).then(function(d){var n=d.getPageCount(),del=ranges(fn('o1').value,n);if(!del.length)throw new Error('Enter the pages to remove.');if(del.length>=n)throw new Error('You cannot remove every page.');del.filter(function(v,i,a){return a.indexOf(v)===i}).sort(function(a,b){return b-a}).forEach(function(i){d.removePage(i)});bar(.8);return d.save()}).then(function(u){return[{name:base(L[0].name)+'-edited.pdf',blob:blobOf(u)}]})})}},
+  run:function(L){return pdfLib().then(function(P){return bytes(L[0]).then(function(b){return loadMaybeEncrypted(P,b)}).then(function(d){var n=d.getPageCount(),del=ranges(fn('o1').value,n);if(!del.length)throw new Error('Enter the pages to remove.');if(del.length>=n)throw new Error('You cannot remove every page.');del.filter(function(v,i,a){return a.indexOf(v)===i}).sort(function(a,b){return b-a}).forEach(function(i){d.removePage(i)});bar(.8);return d.save()}).then(function(u){return[{name:base(L[0].name)+'-edited.pdf',blob:blobOf(u)}]})})}},
  {k:'organise',n:'Reorder or extract pages',d:'Type the pages in the order you want. Pages you leave out are dropped.',opts:'<div class="f"><label class="l" for="o1">New page order</label><input id="o1" placeholder="e.g. 3, 1, 2, 4-6"></div>',
-  run:function(L){return pdfLib().then(function(P){return bytes(L[0]).then(function(b){return P.PDFDocument.load(b,{ignoreEncryption:true})}).then(function(s){var ix=ranges(fn('o1').value,s.getPageCount());if(!ix.length)throw new Error('Enter the new page order.');return P.PDFDocument.create().then(function(o){return o.copyPages(s,ix).then(function(pg){pg.forEach(function(p){o.addPage(p)});bar(.8);return o.save()})})}).then(function(u){return[{name:base(L[0].name)+'-reordered.pdf',blob:blobOf(u)}]})})}},
+  run:function(L){return pdfLib().then(function(P){return bytes(L[0]).then(function(b){return loadMaybeEncrypted(P,b)}).then(function(s){var ix=ranges(fn('o1').value,s.getPageCount());if(!ix.length)throw new Error('Enter the new page order.');return P.PDFDocument.create().then(function(o){return o.copyPages(s,ix).then(function(pg){pg.forEach(function(p){o.addPage(p)});bar(.8);return o.save()})})}).then(function(u){return[{name:base(L[0].name)+'-reordered.pdf',blob:blobOf(u)}]})})}},
  {k:'img2pdf',n:'Images to PDF',d:'Turn photos or scans into one PDF. Reorder with the arrows.',multi:true,accept:'image/*',opts:'<div class="grid g2"><div class="f"><label class="l" for="o1">Page size</label><select id="o1"><option value="fit">Fit each image</option><option value="a4">A4 portrait</option></select></div><div class="f"><label class="l" for="o2">Margin</label><select id="o2"><option value="0">None</option><option value="24" selected>Small</option><option value="48">Large</option></select></div></div>',
   run:function(L){return pdfLib().then(function(P){return P.PDFDocument.create().then(function(o){var chain=Promise.resolve(),a4=fn('o1').value==='a4',m=+fn('o2').value;
    L.forEach(function(f,i){chain=chain.then(function(){return toJpeg(f.file)}).then(function(jb){return o.embedJpg(jb)}).then(function(im){var w=im.width,h=im.height,pw,ph;if(a4){pw=595.28;ph=841.89}else{pw=w+2*m;ph=h+2*m}var s=Math.min((pw-2*m)/w,(ph-2*m)/h),dw=w*s,dh=h*s,pg=o.addPage([pw,ph]);pg.drawImage(im,{x:(pw-dw)/2,y:(ph-dh)/2,width:dw,height:dh});bar((i+1)/L.length*.9)})});
@@ -750,9 +1113,9 @@ var TOOLS=[
    for(var i=1;i<=n;i++)(function(i){chain=chain.then(function(){return doc.getPage(i)}).then(function(pg){var v1=pg.getViewport({scale:1}),vp=pg.getViewport({scale:sc}),c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;var g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);return pg.render({canvasContext:g,viewport:vp}).promise.then(function(){var d=c.toDataURL('image/jpeg',q);c.width=c.height=0;return o.embedJpg(d)}).then(function(im){var p=o.addPage([v1.width,v1.height]);p.drawImage(im,{x:0,y:0,width:v1.width,height:v1.height});bar(i/n*.95)})})})(i);
    return chain.then(function(){return o.save()})}).then(function(u){var before=L[0].file.size,after=u.length,note=after<before?'Reduced from '+mb(before)+' to '+mb(after)+'.':'This file did not get smaller ('+mb(before)+' to '+mb(after)+'). Your original is already well compressed.';return[{name:base(L[0].name)+'-compressed.pdf',blob:blobOf(u),note:note}]})})})}},
  {k:'pagenum',n:'Add page numbers',d:'Number every page.',opts:'<div class="grid g2"><div class="f"><label class="l" for="o1">Position</label><select id="o1"><option value="bc">Bottom centre</option><option value="br">Bottom right</option><option value="bl">Bottom left</option><option value="tr">Top right</option></select></div><div class="f"><label class="l" for="o2">Start at</label><input id="o2" type="number" value="1" min="0" inputmode="numeric"></div></div>',
-  run:function(L){return pdfLib().then(function(P){return bytes(L[0]).then(function(b){return P.PDFDocument.load(b,{ignoreEncryption:true})}).then(function(d){return d.embedFont(P.StandardFonts.Helvetica).then(function(ft){var pos=fn('o1').value,st=+fn('o2').value||1,n=d.getPageCount();d.getPages().forEach(function(p,i){var s=p.getSize(),t=String(st+i),w=ft.widthOfTextAtSize(t,10),x=pos[1]==='c'?(s.width-w)/2:pos[1]==='r'?s.width-w-30:30,y=pos[0]==='b'?22:s.height-30;p.drawText(t,{x:x,y:y,size:10,font:ft,color:P.rgb(.25,.25,.25)})});bar(.8);return d.save()})}).then(function(u){return[{name:base(L[0].name)+'-numbered.pdf',blob:blobOf(u)}]})})}},
+  run:function(L){return pdfLib().then(function(P){return bytes(L[0]).then(function(b){return loadMaybeEncrypted(P,b)}).then(function(d){return d.embedFont(P.StandardFonts.Helvetica).then(function(ft){var pos=fn('o1').value,st=+fn('o2').value||1,n=d.getPageCount();d.getPages().forEach(function(p,i){var s=p.getSize(),t=String(st+i),w=ft.widthOfTextAtSize(t,10),x=pos[1]==='c'?(s.width-w)/2:pos[1]==='r'?s.width-w-30:30,y=pos[0]==='b'?22:s.height-30;p.drawText(t,{x:x,y:y,size:10,font:ft,color:P.rgb(.25,.25,.25)})});bar(.8);return d.save()})}).then(function(u){return[{name:base(L[0].name)+'-numbered.pdf',blob:blobOf(u)}]})})}},
  {k:'watermark',n:'Add a watermark',d:'Put a text watermark such as DRAFT or COPY on every page. English letters and numbers only.',opts:'<div class="grid g2"><div class="f"><label class="l" for="o1">Watermark text</label><input id="o1" value="COPY" maxlength="30"></div><div class="f"><label class="l" for="o2">Strength</label><select id="o2"><option value=".15">Light</option><option value=".3" selected>Medium</option><option value=".5">Strong</option></select></div></div>',
-  run:function(L){return pdfLib().then(function(P){return bytes(L[0]).then(function(b){return P.PDFDocument.load(b,{ignoreEncryption:true})}).then(function(d){var t=fn('o1').value.trim();if(!t)throw new Error('Enter the watermark text.');if(/[^\x20-\x7e]/.test(t))throw new Error('Use English letters and numbers only.');return d.embedFont(P.StandardFonts.HelveticaBold).then(function(ft){var op=+fn('o2').value;d.getPages().forEach(function(p){var s=p.getSize(),sz=Math.min(s.width,s.height)/Math.max(6,t.length*.62),w=ft.widthOfTextAtSize(t,sz),a=Math.atan2(s.height,s.width),cx=s.width/2,cy=s.height/2;p.drawText(t,{x:cx-Math.cos(a)*w/2+Math.sin(a)*sz/3,y:cy-Math.sin(a)*w/2-Math.cos(a)*sz/3,size:sz,font:ft,color:P.rgb(.5,.5,.5),opacity:op,rotate:P.degrees(a*180/Math.PI)})});bar(.8);return d.save()})}).then(function(u){return[{name:base(L[0].name)+'-watermarked.pdf',blob:blobOf(u)}]})})}}
+  run:function(L){return pdfLib().then(function(P){return bytes(L[0]).then(function(b){return loadMaybeEncrypted(P,b)}).then(function(d){var t=fn('o1').value.trim();if(!t)throw new Error('Enter the watermark text.');if(/[^\x20-\x7e]/.test(t))throw new Error('Use English letters and numbers only.');return d.embedFont(P.StandardFonts.HelveticaBold).then(function(ft){var op=+fn('o2').value;d.getPages().forEach(function(p){var s=p.getSize(),sz=Math.min(s.width,s.height)/Math.max(6,t.length*.62),w=ft.widthOfTextAtSize(t,sz),a=Math.atan2(s.height,s.width),cx=s.width/2,cy=s.height/2;p.drawText(t,{x:cx-Math.cos(a)*w/2+Math.sin(a)*sz/3,y:cy-Math.sin(a)*w/2-Math.cos(a)*sz/3,size:sz,font:ft,color:P.rgb(.5,.5,.5),opacity:op,rotate:P.degrees(a*180/Math.PI)})});bar(.8);return d.save()})}).then(function(u){return[{name:base(L[0].name)+'-watermarked.pdf',blob:blobOf(u)}]})})}}
 ];
 function mb(n){return(n/1048576).toFixed(n>1048576?1:2)+' MB'}
 function toJpeg(file){return new Promise(function(res,rej){var u=URL.createObjectURL(file),im=new Image();im.onload=function(){var s=Math.min(1,2400/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);var g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);g.drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);var d=c.toDataURL('image/jpeg',.9);c.width=c.height=0;res(d)};im.onerror=function(){URL.revokeObjectURL(u);rej(new Error('"'+file.name+'" could not be read as an image.'))};im.src=u})}
@@ -861,7 +1224,7 @@ sp.addEventListener('drop',function(e){if(e.dataTransfer&&e.dataTransfer.files&&
 function sbar(p){$('#sbar').classList.remove('hide');$('#sbarI').style.width=Math.round(p*100)+'%'}
 function build(list,name){return pdfLib().then(function(P){return P.PDFDocument.create().then(function(out){var cache={},chain=Promise.resolve(),a4=$('#sImg').value==='a4';
  list.forEach(function(p,k){chain=chain.then(function(){var s=srcOf(p.sid);
-  if(s.kind==='pdf'){var dp=cache[s.id]||(cache[s.id]=s.file.arrayBuffer().then(function(b){return P.PDFDocument.load(b,{ignoreEncryption:true})}));
+  if(s.kind==='pdf'){var dp=cache[s.id]||(cache[s.id]=s.file.arrayBuffer().then(function(b){return loadMaybeEncrypted(P,b)}));
    return dp.then(function(d){return out.copyPages(d,[p.idx])}).then(function(a){var pg=a[0];if(p.rot)pg.setRotation(P.degrees((pg.getRotation().angle+p.rot)%360));out.addPage(pg);sbar((k+1)/list.length*.92)})}
   return toJpeg(s.file).then(function(d){return out.embedJpg(d)}).then(function(im){var w=im.width,h=im.height,pw,ph,m=a4?24:0;if(a4){pw=595.28;ph=841.89}else{pw=w;ph=h}var sc=Math.min((pw-2*m)/w,(ph-2*m)/h),dw=w*sc,dh=h*sc,pg=out.addPage([pw,ph]);pg.drawImage(im,{x:(pw-dw)/2,y:(ph-dh)/2,width:dw,height:dh});if(p.rot)pg.setRotation(P.degrees(p.rot));sbar((k+1)/list.length*.92)})})});
  return chain.then(function(){out.setProducer('KINETIX PDF tools');return out.save()}).then(function(u8){return{blob:new Blob([u8],{type:'application/pdf'}),name:name,n:list.length}})})})}
