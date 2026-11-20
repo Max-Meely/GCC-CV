@@ -48,7 +48,7 @@ window.KX_CONFIG = {
     { k: "equity", name: "Equity Bank", icon: "bank", lines: [["Paybill", "247247", true], ["Account", "0758587881", true]] },
     { k: "cash", name: "Cash", icon: "cash", lines: [["Where", "Arrange on WhatsApp"]] },
     { k: "card", name: "Card", icon: "card", lines: [] },
-    { k: "binance", name: "Binance Pay", icon: "coin", logo: "binance-logo.png", qr: "binance-pay.png", lines: [["Binance Pay name", "MaxMeely", true]] }
+    { k: "binance", name: "Binance Pay", icon: "coin", logo: "binance-logo.webp", qr: "binance-pay.webp", lines: [["Binance Pay name", "MaxMeely", true]] }
   ],
 
   // Currency switcher. rate = how much of that currency 1 AED is worth. These are fallback rates;

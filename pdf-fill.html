@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Fill and sign PDF | KINETIX</title><link rel="preload" as="image" href="blog-img/cv-closeup.jpg"><meta name="description" content="Free online PDF filler and signer. Type on any PDF, tick boxes, add your date and signature, then download. Runs in your browser and your file is never uploaded.">
+<title>Fill and sign PDF | KINETIX</title><link rel="preload" as="image" href="blog-img/cv-closeup.webp"><meta name="description" content="Free online PDF filler and signer. Type on any PDF, tick boxes, add your date and signature, then download. Runs in your browser and your file is never uploaded."><meta property="og:type" content="website"><meta property="og:site_name" content="KINETIX"><meta property="og:title" content="Fill and sign PDF | KINETIX"><meta property="og:description" content="Free online PDF filler and signer. Type on any PDF, tick boxes, add your date and signature, then download. Runs in your browser and your file is never uploaded."><meta property="og:url" content="https://max-meely.github.io/GCC-CV/pdf-fill.html"><meta name="twitter:card" content="summary_large_image"><meta property="og:image" content="https://max-meely.github.io/GCC-CV/share-card.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#071633"><link rel="icon" href="favicon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="KINETIX">
 <script>try{var t=localStorage.getItem('kx-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <style>:root{--bg:#eef3fb;--card:rgba(255,255,255,.66);--card2:rgba(255,255,255,.86);--ink:#0b1730;--muted:#44526b;--line:rgba(24,48,102,.14);--soft:rgba(37,99,235,.07);--acc:#1d4ed8;--acc2:#0284c7;--accg:linear-gradient(135deg,#1d4ed8,#0284c7);--on:#fff;--ok:#157347;--okbg:rgba(21,115,71,.12);--err:#b42318;--errbg:rgba(180,35,24,.1);--warn:#8a5a00;--warnbg:rgba(224,160,20,.16);--r:18px;--sh:0 10px 34px rgba(30,55,120,.12),inset 0 1px 0 rgba(255,255,255,.8);--bd:rgba(255,255,255,.85);--blur:blur(18px) saturate(1.5);--b1:rgba(37,99,235,.30);--b2:rgba(147,80,255,.22);--b3:rgba(0,190,170,.22)}
@@ -241,6 +241,23 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 .bhero.phero::before{background:linear-gradient(180deg,rgba(4,10,24,.88),rgba(4,10,24,.72))}
 .kxapp{width:auto!important;padding:0 12px;display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.82rem;background:var(--accg,#2563eb)!important;color:#fff!important;border-color:transparent!important}.kxapp .ic{width:16px;height:16px}.kxapp[hidden]{display:none!important}
 @media(max-width:560px){.kxapp{padding:0!important;width:40px!important;justify-content:center}.kxapp span{display:none}.kxapp .ic{width:18px;height:18px}}
+
+/* Video tiles. Used on the blog index and on the tool pages, so a client meets the walkthrough
+   where they are already standing rather than hunting for it in the footer. */
+.vstrip{margin:26px 0 8px}
+.vstrip h2{font-size:1.12rem;margin:0 0 12px}
+.vrow{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:620px){.vrow{grid-template-columns:1fr 1fr}}
+.vtile{display:block;text-decoration:none;color:inherit;border:1px solid var(--bd);border-radius:16px;overflow:hidden;background:var(--card)}
+.vtile:hover .vpl{transform:translate(-50%,-50%) scale(1.08)}
+.vtile .vth{position:relative;display:block;aspect-ratio:16/9;background:#0b1326;overflow:hidden}
+.vtile .vth img{width:100%;height:100%;object-fit:cover;display:block}
+.vpl{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:rgba(10,19,38,.72);display:grid;place-items:center;transition:transform .15s}
+.vpl .ic{width:22px;height:22px;color:#fff;margin-left:2px}
+.vlen{position:absolute;right:8px;bottom:8px;background:rgba(10,19,38,.82);color:#fff;font-size:.72rem;padding:1px 7px;border-radius:99px}
+.vtile b{display:block;padding:12px 14px 2px;font-size:.96rem}
+.vtile .vsub{display:block;padding:0 14px 13px;font-size:.84rem;color:var(--mut)}
+.vone{max-width:380px}
 </style></head><body><svg xmlns="http://www.w3.org/2000/svg" style="display:none"><defs>
 <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
 <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
@@ -300,7 +317,7 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 <symbol id="i-selall" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="m8 12.5 3 3 5-6"/></symbol>
 <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h13v4"/><path d="M3 7v11a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1H5a2 2 0 0 1-2-2z"/><path d="M16 14.5h2"/></symbol>
 <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
-<symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></symbol>
+
 <symbol id="i-sign" viewBox="0 0 24 24"><path d="M3 21c3-1 5-2 7-5l8-9-3-3-9 8c-3 2-4 5-4 7z"/><path d="M14 6l4 4"/><path d="M14 21h7"/></symbol>
 <symbol id="i-type" viewBox="0 0 24 24"><path d="M5 6V4h14v2M12 4v16M9 20h6"/></symbol>
 <symbol id="i-box" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/></symbol>
@@ -309,12 +326,12 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14h6M9 17h4"/></symbol>
 </defs></svg>
 
-<header class="top"><div class="wrap"><a class="brand" href="index.html" aria-label="KINETIX home"><img class="bm" src="kinetix-logo.png" alt="" width="45" height="34"><span class="wm" aria-hidden="true"><img src="kinetix-k.png" alt="" width="25" height="22">INETIX</span></a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html" aria-current="page">PDF tools</a><a href="order-status.html">Track order</a></nav><div class="tools"><button class="tt" id="menubtn" type="button" aria-haspopup="dialog" aria-label="Browse all pages"><svg class="ic"><use href="#i-menu"/></svg></button><button class="tt" type="button" data-share aria-label="Share KINETIX"><svg class="ic"><use href="#i-share"/></svg></button><button class="tt kxapp" type="button" data-install aria-label="Install the KINETIX app"><svg class="ic"><use href="#i-down"/></svg><span>App</span></button><span class="curwrap"><svg class="ic"><use href="#i-globe"/></svg><select class="curs" id="cur" aria-label="Currency"><option>AED</option></select></span><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></div></header>
+<header class="top"><div class="wrap"><a class="brand" href="index.html" aria-label="KINETIX home"><img class="bm" src="kinetix-logo.webp" alt="" width="45" height="34"><span class="wm" aria-hidden="true"><img src="kinetix-k.webp" alt="" width="25" height="22">INETIX</span></a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html" aria-current="page">PDF tools</a><a href="order-status.html">Track order</a></nav><div class="tools"><button class="tt" id="menubtn" type="button" aria-haspopup="dialog" aria-label="Browse all pages"><svg class="ic"><use href="#i-menu"/></svg></button><button class="tt" type="button" data-share aria-label="Share KINETIX"><svg class="ic"><use href="#i-share"/></svg></button><button class="tt kxapp" type="button" data-install aria-label="Install the KINETIX app"><svg class="ic"><use href="#i-down"/></svg><span>App</span></button><span class="curwrap"><svg class="ic"><use href="#i-globe"/></svg><select class="curs" id="cur" aria-label="Currency"><option>AED</option></select></span><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></div></header>
 <dialog id="sitemenu" aria-label="Browse KINETIX">
 <div class="row sp" style="margin-bottom:6px"><b style="font-size:1.1rem">Browse KINETIX</b><button type="button" class="tt" id="menux" aria-label="Close menu"><svg class="ic"><use href="#i-x"/></svg></button></div>
 <div class="smgrid">
 <div><h3>Get started</h3><a href="index.html">Home</a><a href="how-it-works.html">How it works</a><a href="intake.html">Order a CV</a><a href="other-services.html">Other services</a><a href="samples.html">Sample CVs</a></div>
-<div><h3>Free PDF tools</h3><a href="pdf-tools.html">All free PDF tools</a><a href="pdf-fill.html">Fill and sign PDF</a><a href="signature-tool.html">Signature maker</a><a href="pdf-unlock.html">PDF password remover</a><a href="pdf-help.html">Free help ticket</a><a href="tutorials.html">Video tutorials</a></div>
+<div><h3>Free PDF tools</h3><a href="pdf-tools.html">All free PDF tools</a><a href="pdf-fill.html">Fill and sign PDF</a><a href="signature-tool.html">Signature maker</a><a href="pdf-protect.html">Add a PDF password</a><a href="pdf-unlock.html">PDF password remover</a><a href="pdf-help.html">Free help ticket</a><a href="tutorials.html">Video tutorials</a></div>
 <div><h3>Company</h3><a href="about.html">What we do</a><a href="blog.html">Blog</a><a href="contact.html">Contact us</a><a href="order-status.html">Track your order</a></div>
 <div><h3>Legal</h3><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a><a href="legal-notice.html">Legal Notice</a><a href="copyright.html">Copyright Notice</a></div>
 </div></dialog>
@@ -327,8 +344,18 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 .tbarwrap{position:sticky;top:64px;z-index:30;margin:14px 0}.tbarwrap .tbar{border-radius:0 0 18px 18px}
 .tbtop{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:18px 18px 0 0;background:var(--card);border:1px solid var(--bd);border-bottom:none}
 .tbtop .btn{padding:8px 16px}
-@media(max-width:700px){.tbarwrap{top:58px}.tbar{border-radius:0 0 18px 18px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.tbar::-webkit-scrollbar{display:none}.tbar>*{flex:none}}
-#pages{--z:1;display:flex;flex-direction:column;align-items:center;gap:18px;padding:6px 0 30px}
+/* On a phone the tool strip scrolls sideways, and with the scrollbar hidden there was
+   nothing to say so: on a 360px screen only four of the fifteen controls are in view and
+   Signature - the whole point of the tool - sits just past the edge. The fade on the right
+   edge is the hint that there is more, and it disappears once the strip is scrolled to the
+   end. Tools are also packed a little tighter below 420px so more of them land on screen. */
+@media(max-width:700px){.tbarwrap{top:58px}
+ .tbar{border-radius:0 0 18px 18px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;scroll-padding-left:10px;
+  -webkit-mask-image:linear-gradient(to right,#000 calc(100% - 34px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 34px),transparent)}
+ .tbar.atend{-webkit-mask-image:none;mask-image:none}
+ .tbar::-webkit-scrollbar{display:none}.tbar>*{flex:none}}
+@media(max-width:420px){.tbar .tl{min-width:50px;padding:8px 5px 6px;font-size:.70rem}.tbar{gap:4px}}
+#pages{--z:1;display:flex;flex-direction:column;align-items:center;gap:18px;padding:6px 0 30px;touch-action:pan-x pan-y}
 .pg{position:relative;width:calc(var(--pw)*var(--z)*1px);height:calc(var(--ph)*var(--z)*1px);background:#fff;box-shadow:0 18px 50px -16px rgba(8,20,60,.55);border-radius:4px;flex:none}
 .pg canvas{position:absolute;inset:0;width:100%;height:100%;border-radius:4px}
 .ov{position:absolute;inset:0;overflow:hidden;border-radius:4px}.ov.arm{cursor:crosshair}
@@ -337,7 +364,7 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 .it.sel{outline:1.5px dashed #2563eb;outline-offset:3px}
 .it .tx{display:block;font:calc(var(--s)*var(--z)*1px)/1.2 Helvetica,Arial,sans-serif;white-space:pre;min-width:calc(var(--s)*var(--z)*3px);min-height:calc(var(--s)*var(--z)*1.2px);outline:none;cursor:text;color:var(--c,#111)}
 .it.box{width:calc(var(--w)*var(--z)*1px);height:calc(var(--h)*var(--z)*1px);cursor:move}
-.it.box svg{width:100%;height:100%;display:block;overflow:visible}.it.box img{width:100%;height:100%;display:block;pointer-events:none;-webkit-user-drag:none}.it.wo{background:#fff}
+.it.box svg{width:100%;height:100%;display:block;overflow:visible}.it.box img{width:100%;height:100%;display:block;pointer-events:none;-webkit-user-drag:none}.it.wo{background:var(--c,#000)}
 .it .h{display:none;position:absolute;z-index:5}.it.sel .h{display:block}
 .it .mv{left:-15px;top:-15px;width:22px;height:22px;border-radius:50%;background:#2563eb;color:#fff;cursor:move;display:none;place-items:center;font-size:12px;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35)}.it.sel .mv{display:grid}
 .it .rs{right:-10px;bottom:-10px;width:20px;height:20px;border-radius:5px;background:#2563eb;border:2px solid #fff;cursor:nwse-resize;box-shadow:0 2px 6px rgba(0,0,0,.35)}
@@ -352,7 +379,7 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 dialog#sgd,dialog#phd{border:1px solid var(--bd);border-radius:24px;padding:20px;width:min(640px,94vw);background:var(--bg,#fff);color:var(--ink,inherit);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}dialog#sgd::backdrop,dialog#phd::backdrop{background:rgba(4,10,24,.6)}
 </style>
 <main><div class="wrap fl">
-<div class="phero" style="--bg:url(blog-img/cv-closeup.jpg);--pos:50% 36%;margin-bottom:18px"><a href="pdf-tools.html" class="row" style="gap:6px;text-decoration:none;font-size:.9rem;margin-bottom:10px"><svg class="ic"><use href="#i-back"/></svg>PDF tools</a>
+<div class="phero" style="--bg:url(blog-img/cv-closeup.webp);--pos:50% 36%;margin-bottom:18px"><a href="pdf-tools.html" class="row" style="gap:6px;text-decoration:none;font-size:.9rem;margin-bottom:10px"><svg class="ic"><use href="#i-back"/></svg>PDF tools</a>
 <h1>Fill and sign <span class="grad">PDF</span></h1>
 <p class="muted">Open any PDF, type on it, tick boxes, add the date and your signature, then download it. Free. Your file stays on your device and is never uploaded.</p></div>
 <div id="start" class="card"><label class="drop" id="drop" for="fin"><svg class="ic"><use href="#i-up"/></svg> Choose a PDF to fill, or drop it here<div class="muted small">Forms, contracts, offer letters, visa and bank forms. Fillable forms are detected automatically.</div></label><input id="fin" type="file" accept="application/pdf,.pdf" class="sr">
@@ -373,15 +400,15 @@ dialog#sgd,dialog#phd{border:1px solid var(--bd);border-radius:24px;padding:20px
   <button class="tl" type="button" data-tool="cross"><svg class="ic"><use href="#i-x"/></svg>Cross</button>
   <button class="tl" type="button" id="tsig"><svg class="ic"><use href="#i-sign"/></svg>Signature</button>
   <button class="tl" type="button" id="tphoto"><svg class="ic"><use href="#i-image"/></svg>Photo</button>
-  <button class="tl" type="button" data-tool="white"><svg class="ic"><use href="#i-box"/></svg>Cover</button>
+  <button class="tl" type="button" data-tool="white"><svg class="ic"><use href="#i-box"/></svg>Redact</button>
   <button class="tl" type="button" id="tocr"><svg class="ic"><use href="#i-search"/></svg><span id="ocrlbl">Detect text</span></button>
   <span class="sep"></span>
   <button class="tl" type="button" id="szm" aria-label="Smaller"><svg class="ic"><use href="#i-minus"/></svg>Smaller</button>
   <button class="tl" type="button" id="szp" aria-label="Bigger"><svg class="ic"><use href="#i-plus"/></svg>Bigger</button>
   <span class="sw2" id="cols"><button type="button" data-col="#111111" style="background:#111" aria-label="Black" aria-pressed="true"></button><button type="button" data-col="#1d3fbf" style="background:#1d3fbf" aria-label="Blue"></button><button type="button" data-col="#c62828" style="background:#c62828" aria-label="Red"></button></span>
   <span class="sep"></span>
-  <button class="tl" type="button" id="zm" aria-label="Zoom out"><svg class="ic"><use href="#i-minus"/></svg>Zoom</button>
-  <button class="tl" type="button" id="zp" aria-label="Zoom in"><svg class="ic"><use href="#i-plus"/></svg>Zoom</button>
+  <button class="tl" type="button" id="zm" aria-label="Zoom out"><svg class="ic"><use href="#i-minus"/></svg>Zoom out</button>
+  <button class="tl" type="button" id="zp" aria-label="Zoom in"><svg class="ic"><use href="#i-plus"/></svg>Zoom in</button>
  </div>
  </div>
  <div class="muted small" id="hint" style="margin:6px 0 8px">Pick a tool, then tap the page where it should go. Tap an item to move, resize or delete it.</div>
@@ -404,13 +431,14 @@ dialog#sgd,dialog#phd{border:1px solid var(--bd);border-radius:24px;padding:20px
  <div class="row" style="gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0">
   <label class="opt" style="margin:0;padding:6px 10px"><input type="checkbox" id="phauto"><div><b>Auto-fix lighting</b></div></label>
   <label class="opt" style="margin:0;padding:6px 10px"><input type="checkbox" id="phbg"><div><b>Remove background</b></div></label>
-  <span id="phtolwrap" hidden class="row" style="gap:8px;font-size:.85rem"><span>Tolerance</span><input type="range" min="10" max="90" value="38" id="phtol" style="width:120px"></span>
+  <span id="phtolwrap" hidden class="row" style="gap:8px;font-size:.85rem"><span>Tolerance</span><input type="range" aria-label="Background removal strength" min="10" max="90" value="38" id="phtol" style="width:120px"></span>
   <button type="button" class="btn sm" id="phcrop">Crop</button>
   <button type="button" class="btn sm ghost" id="phredo">Start over</button>
  </div>
  <p class="muted small" id="phmsg">Background removal works best when the area behind the photo is one plain, even colour - it will struggle with a busy background.</p>
 </div>
 <div class="row" style="margin-top:14px"><button class="btn pri" type="button" id="phok" disabled><svg class="ic"><use href="#i-check"/></svg>Add to page</button></div></dialog>
+<section class="vstrip" aria-label="Video guide"><div class="vrow vone"><a class="vtile" href="tutorials.html"><span class="vth"><img src="tutorials/fill-and-sign-walkthrough.webp" alt="" loading="lazy" width="640" height="360"><span class="vpl"><svg class="ic"><use href="#i-play"/></svg></span><span class="vlen">0:36</span></span><b>Watch the walkthrough</b><span class="vsub">See every tool in action - typing, signatures, photos, redaction.</span></a></div></section>
 </div></main>
 
 <footer><div class="wrap" style="display:block"><div class="row" style="gap:6px 18px;margin-bottom:12px"><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a><a href="legal-notice.html">Legal Notice</a><a href="copyright.html">Copyright Notice</a><a href="blog.html">Blog</a><a href="samples.html">Sample CVs</a><a href="contact.html">Contact Us</a><a href="#" data-install>Install app</a></div><div class="row sp"><span>&copy; <span data-year></span> KINETIX GCC CV. All rights reserved.</span><span class="row" style="gap:8px 18px"><a class="row" style="gap:7px" data-c="wa-ae" data-keep href="#"><svg class="ic" style="color:#22a559"><use href="#i-wa"/></svg>WhatsApp us</a><a class="row" style="gap:7px" data-c="mail" data-keep href="#"><svg class="ic" style="color:#8b5cf6"><use href="#i-proton"/></svg><span data-email></span></a></span></div></div></footer>
@@ -618,7 +646,12 @@ dialog#sgd,dialog#phd{border:1px solid var(--bd);border-radius:24px;padding:20px
   };
   /* ---------- PDF engine + thumbnails ---------- */
   var pjsP = null;
-  KX.pdfjs = function () { if (!pjsP) pjsP = import('./pdf.min.mjs').then(function (m) { m.GlobalWorkerOptions.workerSrc = 'pdf.worker.min.mjs'; return m; }).catch(function () { pjsP = null; throw new Error('Could not load the PDF viewer engine.'); }); return pjsP; };
+  /* An absolute URL, never a bare name. When the real Worker cannot start - one dropped
+     request on a phone is enough - pdf.js retries by import()ing the worker on the main
+     thread, and a bare specifier like 'pdf.worker.min.mjs' is not a thing the browser can
+     resolve. That is what produced "Failed to resolve module specifier" instead of the
+     document opening. With a real URL the fallback works: slower, but it opens. */
+  KX.pdfjs = function () { if (!pjsP) pjsP = import('./pdf.min.mjs').then(function (m) { m.GlobalWorkerOptions.workerSrc = new URL('pdf.worker.min.mjs', document.baseURI).href; return m; }).catch(function () { pjsP = null; throw new Error('Could not load the PDF viewer engine.'); }); return pjsP; };
   KX.pdfThumb = function (file, w) {
     w = w || 240;
     return KX.pdfjs().then(function (J) { return file.arrayBuffer().then(function (b) { return J.getDocument({ data: b }).promise; }); }).then(function (doc) {
@@ -852,11 +885,468 @@ function open(src,opts){opts=opts||{};
 window.KXCROP={open:open,rot90:rot90};
 })();
 </script>
+<script>/* Real redaction: the text under the box is deleted from the file, not hidden behind a
+   rectangle. Painting a white box - which is what every "cover" tool does, including this one
+   until now - leaves every character sitting in the content stream. Select over it in any
+   reader, or run one command line tool, and it all comes back. Someone covering an old salary
+   before sending a contract to a new employer has every reason to think it is gone. It isn't.
+
+   So this walks the page's content stream, works out where each glyph actually lands on the
+   page, and removes the ones inside the box - rewriting the surrounding text operators so the
+   text that stays does not shift by a hair. Images under the box are clipped out the same way.
+   An opaque rectangle still gets drawn on top, because a redaction should also look like one.
+
+   Getting glyph positions right means knowing how wide every character is. Most PDFs say so
+   (/Widths for simple fonts, /W for CID fonts). The ones that don't are using the 14 standard
+   fonts, whose metrics every browser already has - so those are measured with a canvas rather
+   than carried around as a table of numbers typed from memory. */
+(function () {
+  var KX = window.KX;
+  KX.PdfRedact = {};
+
+  /* ---------------- content stream tokenizer ----------------
+     Enough of the PDF syntax to walk operators safely: numbers, names, strings (literal and
+     hex, with nested brackets and escapes), arrays, dictionaries, and inline images, which
+     have to be skipped whole because their binary payload is not tokenizable. */
+  var WS = ' \t\r\n\f\0', DELIM = '()<>[]{}/%';
+  function isWS(c) { return WS.indexOf(c) >= 0; }
+  function isDelim(c) { return DELIM.indexOf(c) >= 0; }
+
+  function tokenize(src) {
+    var toks = [], i = 0, n = src.length;
+    while (i < n) {
+      var c = src[i];
+      if (isWS(c)) { i++; continue; }
+      if (c === '%') { while (i < n && src[i] !== '\n' && src[i] !== '\r') i++; continue; }
+      var start = i;
+      if (c === '(') {
+        var depth = 0;
+        while (i < n) {
+          if (src[i] === '\\') { i += 2; continue; }
+          if (src[i] === '(') depth++;
+          else if (src[i] === ')') { depth--; if (!depth) { i++; break; } }
+          i++;
+        }
+        toks.push({ t: 'str', raw: src.slice(start, i) });
+      } else if (c === '<' && src[i + 1] === '<') {
+        i += 2; toks.push({ t: 'op', raw: '<<' });
+      } else if (c === '>' && src[i + 1] === '>') {
+        i += 2; toks.push({ t: 'op', raw: '>>' });
+      } else if (c === '<') {
+        while (i < n && src[i] !== '>') i++;
+        i++;
+        toks.push({ t: 'str', raw: src.slice(start, i) });
+      } else if (c === '[' || c === ']' || c === '{' || c === '}') {
+        i++; toks.push({ t: 'op', raw: c });
+      } else if (c === '/') {
+        i++; while (i < n && !isWS(src[i]) && !isDelim(src[i])) i++;
+        toks.push({ t: 'name', raw: src.slice(start, i) });
+      } else {
+        while (i < n && !isWS(src[i]) && !isDelim(src[i])) i++;
+        if (i === start) i++;
+        var raw = src.slice(start, i);
+        if (/^[-+.\d]/.test(raw) && /^[-+]?(\d+\.?\d*|\.\d+)$/.test(raw)) toks.push({ t: 'num', raw: raw, v: parseFloat(raw) });
+        else if (raw === 'BI') {
+          /* An inline image runs from BI to the EI that follows its binary data. Find the
+             first EI that is preceded by whitespace and followed by a delimiter, which is
+             what every real producer emits. */
+          var j = i;
+          while (j < n) {
+            j = src.indexOf('EI', j);
+            if (j < 0) { j = n; break; }
+            if (isWS(src[j - 1]) && (j + 2 >= n || isWS(src[j + 2]) || isDelim(src[j + 2]))) { j += 2; break; }
+            j += 2;
+          }
+          toks.push({ t: 'inline', raw: src.slice(start, j) });
+          i = j;
+        } else toks.push({ t: 'op', raw: raw });
+      }
+    }
+    return toks;
+  }
+
+  /* ---------------- matrices (PDF order: [a b c d e f]) ---------------- */
+  function mul(m, n) {
+    return [m[0] * n[0] + m[1] * n[2], m[0] * n[1] + m[1] * n[3],
+            m[2] * n[0] + m[3] * n[2], m[2] * n[1] + m[3] * n[3],
+            m[4] * n[0] + m[5] * n[2] + n[4], m[4] * n[1] + m[5] * n[3] + n[5]];
+  }
+  function apply(m, x, y) { return [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]]; }
+
+  /* ---------------- string decoding ---------------- */
+  function bytesOfLiteral(raw) {
+    var out = [], s = raw.slice(1, -1), i = 0;
+    while (i < s.length) {
+      var c = s[i];
+      if (c !== '\\') { out.push(s.charCodeAt(i) & 0xff); i++; continue; }
+      var d = s[i + 1];
+      if (d === undefined) break;
+      if (d >= '0' && d <= '7') {
+        var oct = '';
+        var k = i + 1;
+        while (k < s.length && oct.length < 3 && s[k] >= '0' && s[k] <= '7') { oct += s[k]; k++; }
+        out.push(parseInt(oct, 8) & 0xff); i = k; continue;
+      }
+      var map = { n: 10, r: 13, t: 9, b: 8, f: 12 };
+      if (map[d] !== undefined) out.push(map[d]);
+      else if (d === '\n') { /* line continuation, emits nothing */ }
+      else if (d === '\r') { if (s[i + 2] === '\n') i++; }
+      else out.push(d.charCodeAt(0) & 0xff);
+      i += 2;
+    }
+    return out;
+  }
+  function bytesOfHex(raw) {
+    var h = raw.slice(1, -1).replace(/[^0-9a-fA-F]/g, '');
+    if (h.length & 1) h += '0';
+    var out = [];
+    for (var i = 0; i < h.length; i += 2) out.push(parseInt(h.substr(i, 2), 16));
+    return out;
+  }
+  function strBytes(tok) { return tok.raw[0] === '(' ? bytesOfLiteral(tok.raw) : bytesOfHex(tok.raw); }
+  function hexStr(bytes) {
+    var s = '';
+    for (var i = 0; i < bytes.length; i++) s += (bytes[i] < 16 ? '0' : '') + bytes[i].toString(16);
+    return '<' + s + '>';
+  }
+
+  /* ---------------- font metrics ----------------
+     A font that carries its own widths is believed. One that doesn't is one of the 14 standard
+     faces, and the browser has metric-compatible versions of all of them, so the advance is
+     measured instead of guessed. */
+  var canvasCtx = null, measureCache = {};
+  function cssFamilyFor(baseFont) {
+    var b = String(baseFont || '').replace(/^[A-Z]{6}\+/, '');
+    var bold = /Bold|Black|Heavy/i.test(b), ital = /Italic|Oblique/i.test(b);
+    var fam = /Times|Serif|Roman|Georgia|Garamond/i.test(b) ? 'Times New Roman, Times, serif'
+            : /Courier|Mono/i.test(b) ? 'Courier New, Courier, monospace'
+            : 'Arial, Helvetica, sans-serif';
+    return (ital ? 'italic ' : '') + (bold ? 'bold ' : '') + '1000px ' + fam;
+  }
+  function measuredWidth(cssFont, code) {
+    var key = cssFont + '|' + code;
+    if (measureCache[key] !== undefined) return measureCache[key];
+    if (!canvasCtx) { var cv = document.createElement('canvas'); cv.width = cv.height = 8; canvasCtx = cv.getContext('2d'); }
+    canvasCtx.font = cssFont;
+    var w = canvasCtx.measureText(String.fromCharCode(code)).width;   // 1000px em -> 1000-unit space
+    measureCache[key] = w;
+    return w;
+  }
+
+  function buildFontInfo(PDFLib, fontDict) {
+    var N = PDFLib.PDFName, info = { two: false, widths: null, first: 0, missing: null, css: null, cid: null, dw: 1000 };
+    if (!fontDict) { info.css = cssFamilyFor(''); return info; }
+    var sub = fontDict.get(N.of('Subtype')), base = fontDict.get(N.of('BaseFont'));
+    var baseName = base && base.asString ? base.asString().replace(/^\//, '') : '';
+    info.css = cssFamilyFor(baseName);
+    if (sub === N.of('Type0')) {
+      info.two = true;                    // Identity-H and the CMaps in real use are 2-byte
+      var desc = fontDict.lookup(N.of('DescendantFonts'));
+      var d0 = desc && desc.lookup ? desc.lookup(0) : null;
+      if (d0) {
+        var dw = d0.get(N.of('DW'));
+        if (dw && dw.asNumber) info.dw = dw.asNumber();
+        var W = d0.lookup(N.of('W'));
+        if (W && W.asArray) {
+          info.cid = {};
+          var a = W.asArray(), i = 0;
+          while (i < a.length) {
+            var c1 = a[i] && a[i].asNumber ? a[i].asNumber() : null;
+            var nxt = a[i + 1];
+            if (c1 === null || nxt === undefined) break;
+            if (nxt.asArray) {                       // c [w1 w2 ...]
+              nxt.asArray().forEach(function (w, k) { info.cid[c1 + k] = w.asNumber ? w.asNumber() : info.dw; });
+              i += 2;
+            } else {                                  // c1 c2 w
+              var c2 = nxt.asNumber ? nxt.asNumber() : c1;
+              var w = a[i + 2] && a[i + 2].asNumber ? a[i + 2].asNumber() : info.dw;
+              for (var c = c1; c <= c2 && c - c1 < 65536; c++) info.cid[c] = w;
+              i += 3;
+            }
+          }
+        }
+      }
+      return info;
+    }
+    var fc = fontDict.get(N.of('FirstChar'));
+    if (fc && fc.asNumber) info.first = fc.asNumber();
+    var ws = fontDict.lookup(N.of('Widths'));
+    if (ws && ws.asArray) info.widths = ws.asArray().map(function (w) { return w && w.asNumber ? w.asNumber() : 0; });
+    var fd = fontDict.lookup(N.of('FontDescriptor'));
+    if (fd && fd.get) { var mw = fd.get(N.of('MissingWidth')); if (mw && mw.asNumber) info.missing = mw.asNumber(); }
+    return info;
+  }
+
+  function glyphWidth(info, code) {
+    if (info.two) return (info.cid && info.cid[code] !== undefined) ? info.cid[code] : info.dw;
+    if (info.widths) {
+      var idx = code - info.first;
+      if (idx >= 0 && idx < info.widths.length && info.widths[idx]) return info.widths[idx];
+      if (info.missing !== null) return info.missing;
+    }
+    return measuredWidth(info.css, code);
+  }
+
+  /* ---------------- the redactor ----------------
+     rects are in PDF user space with a bottom-left origin, which is what the page itself uses,
+     so a box reported by the editor is converted once by the caller and never again here. */
+  function inside(rects, x0, y0, x1, y1) {
+    /* A glyph counts as redacted when its middle sits in the box. Using the whole box would
+       drop characters that merely brush the edge; using a corner would keep ones that are
+       plainly covered. The middle is what a person sees. */
+    var cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+    for (var i = 0; i < rects.length; i++) {
+      var r = rects[i];
+      if (cx >= r.x && cx <= r.x + r.w && cy >= r.y && cy <= r.y + r.h) return true;
+    }
+    return false;
+  }
+
+  function redactStream(PDFLib, src, rects, fonts, baseCTM, xobjKinds) {
+    var toks = tokenize(src), out = [], removed = 0, onImage = 0;
+    var ctm = baseCTM.slice(), stack = [];
+    var Tm = null, Tlm = null, Tf = null, Tfs = 0, Tc = 0, Tw = 0, Th = 1, Tl = 0, Ts = 0, Tr = 0;
+    var operands = [];
+
+    function emit(s) { out.push(s); }
+    function emitTok(t) { out.push(t.raw); }
+
+    /* Turn one show-text operator into a TJ array in which the glyphs that survive are kept
+       verbatim and each removed run becomes the exact numeric advance it used to take up, so
+       nothing after it moves. */
+    function filterShow(items) {
+      var info = fonts[Tf] || { css: cssFamilyFor(''), two: false };
+      var parts = [], keep = [], pendingAdj = 0, any = false;
+      function flushKeep() { if (keep.length) { parts.push(hexStr(keep)); keep = []; } }
+      function flushAdj() {
+        if (!pendingAdj) return;
+        /* TJ's number moves the pen by -(n/1000) * Tfs * Th, so the sign is inverted here. */
+        var n = -pendingAdj * 1000 / ((Tfs || 1) * (Th || 1));
+        parts.push(n.toFixed(4).replace(/\.?0+$/, '') || '0');
+        pendingAdj = 0;
+      }
+      items.forEach(function (it) {
+        if (it.adj !== undefined) {
+          flushKeep();
+          var tx = -it.adj / 1000 * Tfs * Th;
+          if (pendingAdj) { pendingAdj += tx; } else { parts.push(it.raw); }
+          if (!pendingAdj) { Tm = mul([1, 0, 0, 1, tx, 0], Tm); }
+          else Tm = mul([1, 0, 0, 1, tx, 0], Tm);
+          return;
+        }
+        var codes = [];
+        if (info.two) { for (var i = 0; i + 1 < it.bytes.length; i += 2) codes.push((it.bytes[i] << 8) | it.bytes[i + 1]); }
+        else codes = it.bytes.slice();
+        codes.forEach(function (code, ci) {
+          var w0 = glyphWidth(info, code) / 1000;
+          var isSpace = !info.two && code === 32;
+          var tx = (w0 * Tfs + Tc + (isSpace ? Tw : 0)) * Th;
+          var trm = mul(mul([Tfs * Th, 0, 0, Tfs, 0, Ts], Tm), ctm);
+          var p0 = apply(trm, 0, 0), p1 = apply(trm, w0, 0.72);     // 0.72em ~ cap height
+          var gx0 = Math.min(p0[0], p1[0]), gx1 = Math.max(p0[0], p1[0]);
+          var gy0 = Math.min(p0[1], p1[1]), gy1 = Math.max(p0[1], p1[1]);
+          if (Tr !== 3 && Tr !== 7 && inside(rects, gx0, gy0, gx1, gy1)) {
+            flushKeep(); pendingAdj += tx; removed++; any = true;
+          } else {
+            flushAdj();
+            if (info.two) { keep.push((code >> 8) & 0xff, code & 0xff); } else keep.push(code);
+          }
+          Tm = mul([1, 0, 0, 1, tx, 0], Tm);
+        });
+      });
+      flushKeep(); flushAdj();
+      return { parts: parts, changed: any };
+    }
+
+    function collectFromOperands() {
+      /* The operand list for Tj/' /" is one string; for TJ it is the bracketed array. */
+      var items = [];
+      operands.forEach(function (t) {
+        if (t.t === 'str') items.push({ bytes: strBytes(t) });
+        else if (t.t === 'num') items.push({ adj: t.v, raw: t.raw });
+      });
+      return items;
+    }
+
+    for (var i = 0; i < toks.length; i++) {
+      var t = toks[i];
+      if (t.t !== 'op' || t.raw === '<<' || t.raw === '>>' || t.raw === '[' || t.raw === ']') {
+        operands.push(t); continue;
+      }
+      if (t.t === 'inline') { operands.forEach(emitTok); operands = []; emitTok(t); continue; }
+      var op = t.raw, nums = operands.filter(function (o) { return o.t === 'num'; }).map(function (o) { return o.v; });
+
+      if (op === 'q') { stack.push(ctm.slice()); }
+      else if (op === 'Q') { if (stack.length) ctm = stack.pop(); }
+      else if (op === 'cm' && nums.length >= 6) { ctm = mul(nums.slice(-6), ctm); }
+      else if (op === 'BT') { Tm = [1, 0, 0, 1, 0, 0]; Tlm = Tm.slice(); }
+      else if (op === 'ET') { Tm = Tlm = null; }
+      else if (op === 'Tf' && nums.length) {
+        Tfs = nums[nums.length - 1];
+        var nm = operands.filter(function (o) { return o.t === 'name'; }).pop();
+        Tf = nm ? nm.raw.slice(1) : Tf;
+      }
+      else if (op === 'Tc' && nums.length) Tc = nums[nums.length - 1];
+      else if (op === 'Tw' && nums.length) Tw = nums[nums.length - 1];
+      else if (op === 'Tz' && nums.length) Th = nums[nums.length - 1] / 100;
+      else if (op === 'TL' && nums.length) Tl = nums[nums.length - 1];
+      else if (op === 'Ts' && nums.length) Ts = nums[nums.length - 1];
+      else if (op === 'Tr' && nums.length) Tr = nums[nums.length - 1];
+      else if (op === 'Td' && nums.length >= 2 && Tlm) { Tlm = mul([1, 0, 0, 1, nums[nums.length - 2], nums[nums.length - 1]], Tlm); Tm = Tlm.slice(); }
+      else if (op === 'TD' && nums.length >= 2 && Tlm) { Tl = -nums[nums.length - 1]; Tlm = mul([1, 0, 0, 1, nums[nums.length - 2], nums[nums.length - 1]], Tlm); Tm = Tlm.slice(); }
+      else if (op === 'Tm' && nums.length >= 6) { Tlm = nums.slice(-6); Tm = Tlm.slice(); }
+      else if (op === 'T*' && Tlm) { Tlm = mul([1, 0, 0, 1, 0, -Tl], Tlm); Tm = Tlm.slice(); }
+
+      if ((op === 'Tj' || op === 'TJ' || op === "'" || op === '"') && Tm) {
+        if (op === "'") { Tlm = mul([1, 0, 0, 1, 0, -Tl], Tlm); Tm = Tlm.slice(); }
+        if (op === '"') {
+          if (nums.length >= 2) { Tw = nums[0]; Tc = nums[1]; }
+          Tlm = mul([1, 0, 0, 1, 0, -Tl], Tlm); Tm = Tlm.slice();
+          emit(nums[0] + ' ' + nums[1] + ' Tw Tc');
+        }
+        var res = filterShow(collectFromOperands());
+        if (op === "'" || op === '"') emit('T*');
+        if (res.parts.length) emit('[' + res.parts.join(' ') + '] TJ');
+        operands = [];
+        continue;
+      }
+      if (op === 'Do' && xobjKinds) {
+        /* An image is painted into the unit square, so the current matrix IS its placement.
+           Knowing a box landed on a picture matters: the glyphs under it are gone, but the
+           pixels of a scanned passport are not, and a client deserves to be told that rather
+           than left assuming a black bar did the job. */
+        var nm2 = operands.filter(function (o) { return o.t === 'name'; }).pop();
+        var key = nm2 ? nm2.raw.slice(1) : null;
+        if (key && xobjKinds[key] === 'image') {
+          var cs = [apply(ctm, 0, 0), apply(ctm, 1, 0), apply(ctm, 0, 1), apply(ctm, 1, 1)];
+          var ix0 = Math.min(cs[0][0], cs[1][0], cs[2][0], cs[3][0]), ix1 = Math.max(cs[0][0], cs[1][0], cs[2][0], cs[3][0]);
+          var iy0 = Math.min(cs[0][1], cs[1][1], cs[2][1], cs[3][1]), iy1 = Math.max(cs[0][1], cs[1][1], cs[2][1], cs[3][1]);
+          for (var q = 0; q < rects.length; q++) {
+            var rq = rects[q];
+            if (rq.x < ix1 && rq.x + rq.w > ix0 && rq.y < iy1 && rq.y + rq.h > iy0) { onImage++; break; }
+          }
+        }
+      }
+      operands.forEach(emitTok); operands = [];
+      emitTok(t);
+    }
+    operands.forEach(emitTok);
+    return { text: out.join('\n'), removed: removed, onImage: onImage };
+  }
+
+  /* KX.PdfRedact.apply(PDFLib, bytes, boxesByPage) -> Promise<{bytes, removed}>
+       boxesByPage: { 0: [{x,y,w,h}, ...], 2: [...] }  in PDF points, origin bottom-left     */
+  KX.PdfRedact.apply = function (PDFLib, inBytes, boxesByPage, opts) {
+    opts = opts || {};
+    var N = PDFLib.PDFName;
+    return PDFLib.PDFDocument.load(inBytes, { ignoreEncryption: true, updateMetadata: false }).then(function (doc) {
+      var pages = doc.getPages(), totalRemoved = 0, totalOnImage = 0;
+      pages.forEach(function (page, pi) {
+        var rects = boxesByPage[pi];
+        if (!rects || !rects.length) return;
+        var node = page.node, ctx = doc.context;
+
+        /* Content can be one stream or several that only make sense concatenated. */
+        var contents = node.Contents(), chunks = [];
+        if (!contents) return;
+        /* getContents() hands back the stream exactly as stored, which for almost every real
+           PDF means Flate-compressed bytes. Decoding first is the difference between walking
+           the page's operators and walking a block of zlib. */
+        function raw(st) {
+          if (!st) return null;
+          try { return PDFLib.decodePDFRawStream(st).decode(); }
+          catch (e) { return st.getContents ? st.getContents() : null; }
+        }
+        if (contents.asArray) contents.asArray().forEach(function (ref) { var c = raw(ctx.lookup(ref)); if (c) chunks.push(c); });
+        else { var c0 = raw(contents); if (c0) chunks.push(c0); }
+        if (!chunks.length) return;
+        function toStr(u8) {
+          var s = '', CH = 8192;
+          for (var i = 0; i < u8.length; i += CH) s += String.fromCharCode.apply(null, Array.prototype.slice.call(u8.subarray(i, i + CH)));
+          return s;
+        }
+        var joined = chunks.map(toStr).join('\n');
+
+        /* Fonts named in this page's resources, with their metrics. */
+        var fonts = {}, res = node.Resources && node.Resources();
+        var fdict = res && res.lookup ? res.lookup(N.of('Font')) : null;
+        if (fdict && fdict.entries) fdict.entries().forEach(function (pair) {
+          fonts[pair[0].asString().slice(1)] = buildFontInfo(PDFLib, ctx.lookup(pair[1]));
+        });
+
+        /* A page may be cropped or rotated; the box the user drew is in the same space the
+           editor measured, so start from a matrix that undoes the MediaBox offset. */
+        var mb = page.getMediaBox();
+        var base = [1, 0, 0, 1, -(mb.x || 0), -(mb.y || 0)];
+
+        var xobjKinds = {}, xo = res && res.lookup ? res.lookup(N.of('XObject')) : null;
+        if (xo && xo.entries) xo.entries().forEach(function (pair) {
+          var st = ctx.lookup(pair[1]);
+          var sub = st && st.dict ? st.dict.get(N.of('Subtype')) : null;
+          xobjKinds[pair[0].asString().slice(1)] = (sub === N.of('Image')) ? 'image' : 'form';
+        });
+
+        var r = redactStream(PDFLib, joined, rects, fonts, base, xobjKinds);
+        totalRemoved += r.removed;
+        totalOnImage += r.onImage || 0;
+
+        var newStream = ctx.flateStream ? null : null;
+        var bytes = new Uint8Array(r.text.length);
+        for (var i = 0; i < r.text.length; i++) bytes[i] = r.text.charCodeAt(i) & 0xff;
+        var st = ctx.stream ? ctx.stream(bytes) : PDFLib.PDFRawStream.of(ctx.obj({}), bytes);
+        st.dict.set(N.of('Length'), PDFLib.PDFNumber.of(bytes.length));
+        node.set(N.of('Contents'), ctx.register(st));
+
+        /* Anything the box covers that is not text - a photo, a scanned signature, a logo -
+           is covered by an opaque rectangle. The glyphs are gone from the file either way;
+           this is what makes the result also LOOK redacted. */
+        rects.forEach(function (rc) {
+          var col = rc.color || (opts.white ? [1, 1, 1] : [0, 0, 0]);
+          page.drawRectangle({ x: rc.x, y: rc.y, width: rc.w, height: rc.h,
+            color: PDFLib.rgb(col[0], col[1], col[2]), borderWidth: 0 });
+        });
+
+        /* Free-text and other annotations sitting under the box carry their own copy of the
+           words, so they go too. */
+        var annots = node.Annots && node.Annots();
+        if (annots && annots.asArray) {
+          var keep = [];
+          annots.asArray().forEach(function (ref) {
+            var a = ctx.lookup(ref);
+            var rect = a && a.lookup ? a.lookup(N.of('Rect')) : null;
+            if (rect && rect.asArray) {
+              var v = rect.asArray().map(function (x) { return x.asNumber ? x.asNumber() : 0; });
+              var ax = (v[0] + v[2]) / 2, ay = (v[1] + v[3]) / 2;
+              for (var k = 0; k < rects.length; k++) {
+                var rr = rects[k];
+                if (ax >= rr.x && ax <= rr.x + rr.w && ay >= rr.y && ay <= rr.y + rr.h) return;   // dropped
+              }
+            }
+            keep.push(ref);
+          });
+          node.set(N.of('Annots'), ctx.obj(keep));
+        }
+      });
+      return doc.save({ useObjectStreams: false }).then(function (out) {
+        return { bytes: out, removed: totalRemoved, onImage: totalOnImage };
+      });
+    });
+  };
+})();
+</script>
 <script>
 (function(){
 var $=KX.$,doc=null,bytes=null,fname='document',pdfjs=null,pdoc=null,P=[],tool=null,sel=null,col='#111111',defSize=14,zmul=1,sigUrl=null,hist=[],uid=0,curSigUrl=null,fields=[],libP,pjsP,ocrP,ocrBoxes=[],ocrBusy=false;
 function pdfLib(){if(window.PDFLib)return Promise.resolve(window.PDFLib);if(!libP)libP=new Promise(function(res,rej){var s=document.createElement('script');s.src='pdf-lib.min.js';s.onload=function(){res(window.PDFLib)};s.onerror=function(){libP=null;rej(new Error('Could not load the PDF engine. Check your connection and try again.'))};document.head.appendChild(s)});return libP}
-function pdfJs(){if(!pjsP)pjsP=import('./pdf.min.mjs').then(function(m){m.GlobalWorkerOptions.workerSrc='pdf.worker.min.mjs';return m}).catch(function(){pjsP=null;throw new Error('Could not load the PDF viewer. Open this page from the website and try again.')});return pjsP}
+function pdfJs(){if(!pjsP)pjsP=import('./pdf.min.mjs').then(function(m){m.GlobalWorkerOptions.workerSrc=new URL('pdf.worker.min.mjs',document.baseURI).href;return m}).catch(function(){pjsP=null;throw new Error('Could not load the PDF viewer. Open this page from the website and try again.')});return pjsP}
+/* pdf.js reports its own internal failures - "Setting up fake worker failed", "Failed to
+   resolve module specifier" - and those used to go straight onto the page. They tell a client
+   nothing and they look like their file is broken when it is almost always the connection. */
+function niceErr(e){var m=(e&&e.message)||'';
+ if(e&&e.name==='PasswordException')return 'This PDF is password protected. Remove the password first on the Unlock PDF tool, then open it here.';
+ if(/worker|module specifier|dynamically imported|Failed to fetch|NetworkError|ERR_/i.test(m))return 'The PDF viewer did not finish loading - that is the connection, not your file. Choose the same file again and it will usually open.';
+ if(/InvalidPDF|Invalid PDF|structure|corrupt/i.test(m))return 'That file does not look like a working PDF. If it came from WhatsApp, send it again as a document rather than a photo.';
+ return m||'Could not open that PDF.'}
 function err(m){var e=$('#err');e.textContent=m;e.classList.remove('hide')}
 var pages=$('#pages');
 /* ---------- load ---------- */
@@ -864,7 +1354,7 @@ function openFile(f){if(!f)return;$('#err').classList.add('hide');if(f.size>40*1
  fname=f.name.replace(/\.pdf$/i,'');
  f.arrayBuffer().then(function(ab){bytes=new Uint8Array(ab);return Promise.all([pdfJs(),pdfLib()])}).then(function(r){pdfjs=r[0];
   return pdfjs.getDocument({data:bytes.slice()}).promise}).then(function(d){pdoc=d;return build()}).catch(function(e){
-  var m=e&&e.name==='PasswordException'?'This PDF is password protected. Remove the password first, then open it again.':(e&&e.message)||'Could not open that PDF.';err(m)})}
+  err(niceErr(e))})}
 $('#fin').addEventListener('change',function(e){openFile(e.target.files[0]);e.target.value=''});
 var dz=$('#drop');['dragover','dragenter'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.add('over')})});['dragleave','drop'].forEach(function(n){dz.addEventListener(n,function(e){e.preventDefault();dz.classList.remove('over')})});dz.addEventListener('drop',function(e){openFile(e.dataTransfer.files[0])});
 function zoomBase(){var w=Math.max.apply(null,P.map(function(p){return p.w}));var av=Math.min(pages.parentElement.clientWidth||900,980);return Math.max(.3,Math.min(1.6,(av-4)/w))}
@@ -874,12 +1364,22 @@ function build(){pages.innerHTML='';P=[];ocrBoxes=[];var n=pdoc.numPages,chain=P
  for(var i=1;i<=n;i++)(function(i){chain=chain.then(function(){return pdoc.getPage(i)}).then(function(pg){var v=pg.getViewport({scale:1});P.push({n:i,pg:pg,w:v.width,h:v.height})})})(i);
  return chain.then(function(){
   P.forEach(function(p){var d=document.createElement('div');d.className='pg';d.style.setProperty('--pw',p.w);d.style.setProperty('--ph',p.h);d.dataset.i=p.n-1;d.innerHTML='<canvas></canvas><div class="pn">Page '+p.n+' of '+n+'</div><div class="ov"></div>';pages.appendChild(d);p.el=d;p.ov=d.querySelector('.ov')});
-  applyZoom();$('#start').hidden=true;$('#ed').hidden=false;$('#after').classList.add('hide');window.scrollTo({top:0});
+  $('#start').hidden=true;$('#ed').hidden=false;$('#after').classList.add('hide');
+  /* The editor has to be on screen BEFORE the fit-to-width is worked out. clientWidth of a
+     hidden element is 0, so this fell back to the 900px desktop default and drew every page
+     wider than the phone - which is why a client had to scroll sideways to reach the right
+     half of their form. The second pass runs after layout has settled. */
+  applyZoom();requestAnimationFrame(applyZoom);window.scrollTo({top:0});
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var p=P[+e.target.dataset.i];if(!p.done){p.done=1;renderPage(p)}}})},{rootMargin:'900px 0px'});P.forEach(function(p){io.observe(p.el)});
   return detectFields()})}
 var rq=Promise.resolve();
 function renderPage(p){rq=rq.then(function(){var sc=Math.min(3,Math.max(1.5,z()*(window.devicePixelRatio||1)*1.3)),vp=p.pg.getViewport({scale:sc}),c=p.el.querySelector('canvas');c.width=Math.round(vp.width);c.height=Math.round(vp.height);return p.pg.render({canvasContext:c.getContext('2d'),viewport:vp}).promise}).catch(function(){})}
 var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(P.length)applyZoom()},120)});
+/* A phone turned sideways, or the on-screen keyboard opening and closing, changes the space
+   available without always firing a window resize. Re-fit when the container itself changes,
+   and only when its width really moved, so this can never chase its own tail. */
+var lastW=0;try{new ResizeObserver(function(){var w=pages.parentElement.clientWidth;
+ if(P.length&&w&&Math.abs(w-lastW)>1){lastW=w;applyZoom()}}).observe(pages.parentElement)}catch(e){}
 /* ---------- fillable fields ---------- */
 function detectFields(){var LL;return pdfLib().then(function(L){LL=L;return L.PDFDocument.load(bytes,{ignoreEncryption:true,updateMetadata:false})}).then(function(d){doc=d;var f=[];try{f=d.getForm().getFields()}catch(e){}
   fields=[];var h='';f.forEach(function(fl,i){var t=fl instanceof LL.PDFTextField?'PDFTextField':fl instanceof LL.PDFCheckBox?'PDFCheckBox':fl instanceof LL.PDFDropdown?'PDFDropdown':fl instanceof LL.PDFRadioGroup?'PDFRadioGroup':'',name=fl.getName(),o=null;
@@ -927,17 +1427,49 @@ pages.addEventListener('pointerdown',function(ev){var ov=ev.target.closest('.ov'
  var c=pt(ov,ev),t=tool;ev.preventDefault();
  if(t==='text'||t==='date'){var e=mk(p,t,c.x-2,c.y-defSize*.6,{text:t==='date'?new Date().toLocaleDateString('en-GB'):''});select(e);setTool(null);if(t==='text')setTimeout(function(){e.querySelector('.tx').focus()},30)}
  else if(t==='tick'||t==='cross'){var s=defSize*1.2;select(mk(p,t,c.x-s/2,c.y-s/2,{w:s,h:s}));setTool(null)}
- else if(t==='white'){var st2=c,e2=mk(p,'white',c.x,c.y,{w:4,h:4,c:'#ffffff'});select(e2);ev.target.setPointerCapture(ev.pointerId);var ovv=ov;function m2(e){var q=pt(ovv,e);var w=Math.max(4,q.x-st2.x),h=Math.max(4,q.y-st2.y);e2.dataset.w=w;e2.dataset.h=h;e2.style.setProperty('--w',w);e2.style.setProperty('--h',h)}function u2(){ovv.removeEventListener('pointermove',m2);ovv.removeEventListener('pointerup',u2);if(+e2.dataset.w<12&&+e2.dataset.h<12){e2.dataset.w=120;e2.dataset.h=22;e2.style.setProperty('--w',120);e2.style.setProperty('--h',22)}setTool(null)}ovv.addEventListener('pointermove',m2);ovv.addEventListener('pointerup',u2)}
+ else if(t==='white'){var st2=c,e2=mk(p,'white',c.x,c.y,{w:4,h:4,c:'#000000'});select(e2);ev.target.setPointerCapture(ev.pointerId);var ovv=ov;function m2(e){var q=pt(ovv,e);var w=Math.max(4,q.x-st2.x),h=Math.max(4,q.y-st2.y);e2.dataset.w=w;e2.dataset.h=h;e2.style.setProperty('--w',w);e2.style.setProperty('--h',h)}function u2(){ovv.removeEventListener('pointermove',m2);ovv.removeEventListener('pointerup',u2);if(+e2.dataset.w<12&&+e2.dataset.h<12){e2.dataset.w=120;e2.dataset.h=22;e2.style.setProperty('--w',120);e2.style.setProperty('--h',22)}setTool(null)}ovv.addEventListener('pointermove',m2);ovv.addEventListener('pointerup',u2)}
  else if(t==='sig'&&sigUrl){placeSig(p,c.x,c.y);setTool(null)}});
 pages.addEventListener('focusout',function(e){var tx=e.target.closest&&e.target.closest('.tx');if(tx&&!tx.textContent.trim()){var it=tx.closest('.it');if(it&&it.dataset.type==='text'){it.remove();if(sel===it)sel=null}}});
 document.addEventListener('keydown',function(e){if(!$('#ed')||$('#ed').hidden)return;if(e.key==='Escape'){setTool(null);select(null)}if((e.key==='Delete'||e.key==='Backspace')&&sel&&!(e.target.closest&&e.target.closest('.tx'))&&!/input|textarea|select/i.test(e.target.tagName)){e.preventDefault();remove(sel)}});
 function setTool(t){tool=t;document.querySelectorAll('#tb [data-tool]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.tool===t)});document.querySelectorAll('.ov').forEach(function(o){o.classList.toggle('arm',!!t)});
- $('#hint').textContent=t==='text'?'Tap on the page where you want to type.':t==='date'?'Tap where the date should go.':t==='tick'||t==='cross'?'Tap where the mark should go.':t==='white'?'Drag a box over what you want to cover, or tap once.':'Pick a tool, then tap the page where it should go. Tap an item to move, resize or delete it.'}
+ $('#hint').textContent=t==='text'?'Tap on the page where you want to type.':t==='date'?'Tap where the date should go.':t==='tick'||t==='cross'?'Tap where the mark should go.':t==='white'?'Drag a box over what to remove. The text under it is deleted from the file, not just covered.':'Pick a tool, then tap the page where it should go. Tap an item to move, resize or delete it.'}
+/* Drop the fade once there is nothing left to scroll to, so it never implies more tools
+   than there are. */
+(function(){var tb=$('#tb');function mark(){tb.classList.toggle('atend',tb.scrollLeft+tb.clientWidth>=tb.scrollWidth-2)}
+ tb.addEventListener('scroll',mark,{passive:true});window.addEventListener('resize',mark);mark();setTimeout(mark,300)})();
 $('#tb').addEventListener('click',function(e){var b=e.target.closest('[data-tool]');if(b){setTool(tool===b.dataset.tool?null:b.dataset.tool);return}
  var c=e.target.closest('[data-col]');if(c){col=c.dataset.col;document.querySelectorAll('#cols button').forEach(function(x){x.setAttribute('aria-pressed',x===c)});if(sel&&sel.dataset.type!=='white'&&sel.dataset.type!=='sig'&&sel.dataset.type!=='img'){sel.dataset.c=col;sel.style.setProperty('--c',col)}}});
 function size(d){if(sel&&(sel.dataset.type==='text'||sel.dataset.type==='date')){var s=Math.max(6,Math.min(72,+sel.dataset.s+d));sel.dataset.s=s;sel.style.setProperty('--s',s);defSize=s}else if(sel&&sel.classList.contains('box')){var f=d>0?1.15:.87,w=+sel.dataset.w*f,h=+sel.dataset.h*f;sel.dataset.w=w;sel.dataset.h=h;sel.style.setProperty('--w',w);sel.style.setProperty('--h',h)}else{defSize=Math.max(6,Math.min(72,defSize+d))}}
 $('#szm').onclick=function(){size(-2)};$('#szp').onclick=function(){size(2)};
-$('#zm').onclick=function(){zmul=Math.max(.5,zmul-.2);applyZoom()};$('#zp').onclick=function(){zmul=Math.min(2.2,zmul+.2);applyZoom()};
+function setZoom(v,fx,fy){var oldZ=z();zmul=Math.max(.5,Math.min(3.5,v));applyZoom();
+ /* Keep whatever was under the fingers (or the middle of the screen) where it was, instead of
+    throwing the client back to the top of the page every time they zoom. */
+ var k=z()/oldZ;if(!isFinite(k)||k===1)return;var r=pages.getBoundingClientRect();
+ if(fx==null){fx=innerWidth/2;fy=innerHeight/2}
+ scrollBy((fx-r.left)*(k-1),(fy-r.top)*(k-1))}
+$('#zm').onclick=function(){setZoom(zmul-0.25)};$('#zp').onclick=function(){setZoom(zmul+0.25)};
+/* Pinch the document itself. The browser's own pinch blows up the whole interface, toolbar and
+   all; what someone actually wants is the page bigger so they can read it and tap accurately.
+   One finger still scrolls - only two fingers land here. Placed items keep touch-action:none,
+   so dragging an item is never mistaken for a pinch. */
+(function(){var pts={},base=0,startMul=1;
+ function two(){var k=Object.keys(pts);return k.length===2?[pts[k[0]],pts[k[1]]]:null}
+ function gap(p){return Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y)}
+ pages.addEventListener('pointerdown',function(e){if(e.pointerType!=='touch')return;
+  pts[e.pointerId]={x:e.clientX,y:e.clientY};var p=two();if(p){base=gap(p);startMul=zmul}},{passive:true});
+ pages.addEventListener('pointermove',function(e){if(!pts[e.pointerId])return;
+  pts[e.pointerId]={x:e.clientX,y:e.clientY};var p=two();if(!p||!base)return;
+  e.preventDefault();
+  setZoom(startMul*gap(p)/base,(p[0].x+p[1].x)/2,(p[0].y+p[1].y)/2)},{passive:false});
+ function up(e){if(!pts[e.pointerId])return;delete pts[e.pointerId];if(Object.keys(pts).length<2)base=0}
+ pages.addEventListener('pointerup',up);pages.addEventListener('pointercancel',up);
+ /* A mouse wheel with ctrl held, and a trackpad pinch, are the same gesture on a laptop. */
+ pages.addEventListener('wheel',function(e){if(!e.ctrlKey)return;e.preventDefault();
+  setZoom(zmul*(e.deltaY<0?1.12:1/1.12),e.clientX,e.clientY)},{passive:false});
+ /* Double tap to switch between fitting the page and reading it close up. */
+ var lastTap=0;pages.addEventListener('pointerup',function(e){if(e.pointerType!=='touch')return;
+  if(Object.keys(pts).length)return;var t=Date.now();
+  if(t-lastTap<300){e.preventDefault();setZoom(zmul>1.05?1:2,e.clientX,e.clientY);lastTap=0}else lastTap=t})})();
 $('#del').onclick=function(){remove(sel)};
 $('#undo').onclick=function(){var h=hist.pop();if(!h)return;if(h.a==='add'){if(h.el.parentNode)h.el.remove();if(sel===h.el)sel=null}else{h.ov.appendChild(h.el)}};
 /* ---------- signature ---------- */
@@ -975,7 +1507,7 @@ function placePhoto(url){KXSIG.loadImg(url).then(function(im){var p=visiblePage(
 function ocrLib(){if(window.Tesseract)return Promise.resolve(window.Tesseract);if(!ocrP)ocrP=new Promise(function(res,rej){var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';s.onload=function(){res(window.Tesseract)};s.onerror=function(){ocrP=null;rej(new Error('Could not load the text-detection engine. Check your connection and try again.'))};document.head.appendChild(s)});return ocrP}
 function clearOcr(){ocrBoxes.forEach(function(b){if(b.parentNode)b.remove()});ocrBoxes=[]}
 function placeOcrHit(p,hit){var x=+hit.style.getPropertyValue('--x'),y=+hit.style.getPropertyValue('--y'),w=+hit.style.getPropertyValue('--w'),h=+hit.style.getPropertyValue('--h'),text=hit.dataset.text||'';
- mk(p,'white',Math.max(0,x-2),Math.max(0,y-2),{w:w+4,h:h+4,c:'#ffffff'});
+ mk(p,'white',Math.max(0,x-2),Math.max(0,y-2),{w:w+4,h:h+4,c:'#000000'});
  var sz=Math.max(8,Math.min(28,Math.round(h*.72)));
  var e=mk(p,'text',x,y+(h-sz)/2,{text:text,s:sz});select(e);
  ocrBoxes=ocrBoxes.filter(function(b){return b!==hit});hit.remove();
@@ -1001,8 +1533,41 @@ function userMap(R,cb){var W=cb.width,H=cb.height;return function(xd,yd){var x,y
 function hexRgb(L,h){h=h.replace('#','');return L.rgb(parseInt(h.substr(0,2),16)/255,parseInt(h.substr(2,2),16)/255,parseInt(h.substr(4,2),16)/255)}
 function dataBytes(u){var b=atob(u.split(',')[1]),a=new Uint8Array(b.length);for(var i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a}
 function textImg(txt,size,color){var c=document.createElement('canvas'),x=c.getContext('2d'),f=size*3;x.font=f+'px Arial, sans-serif';var lines=txt.split('\n'),w=Math.ceil(Math.max.apply(null,lines.map(function(l){return x.measureText(l).width}))),h=Math.ceil(f*1.2*lines.length);c.width=w+4;c.height=h+4;x=c.getContext('2d');x.font=f+'px Arial, sans-serif';x.fillStyle=color;x.textBaseline='top';lines.forEach(function(l,i){x.fillText(l,2,2+i*f*1.2)});return{url:c.toDataURL('image/png'),w:(w+4)/3,h:(h+4)/3}}
-$('#dl').onclick=function(){var btn=this;btn.disabled=true;btn.firstElementChild.nextSibling.textContent='Preparing...';
- pdfLib().then(function(L){return L.PDFDocument.load(bytes,{ignoreEncryption:true,updateMetadata:false}).then(function(d){return L.StandardFonts?d.embedFont(L.StandardFonts.Helvetica).then(function(font){return[L,d,font]}):[L,d,null]})}).then(function(r){var L=r[0],d=r[1],font=r[2],chain=Promise.resolve();
+/* Collect the redaction boxes in PDF user space. The same corner mapping the drawing code
+   uses is applied to two opposite corners, so a rotated or cropped page lands right. */
+function redactBoxes(L,d){
+ var out={},any=false,pgs=d.getPages();
+ P.forEach(function(p,pi){var page=pgs[pi];if(!page)return;
+  var R=((page.getRotation().angle%360)+360)%360,cb=page.getCropBox?page.getCropBox():page.getSize(),map=userMap(R,{x:cb.x||0,y:cb.y||0,width:cb.width,height:cb.height});
+  p.ov.querySelectorAll('.it').forEach(function(it){
+   if(it.dataset.type!=='white')return;
+   var x=+it.style.getPropertyValue('--x'),y=+it.style.getPropertyValue('--y'),w=+it.dataset.w,h=+it.dataset.h;
+   var a=map(x,y),b=map(x+w,y+h);
+   var hx=(it.dataset.c||'#000000').replace('#','');
+   (out[pi]=out[pi]||[]).push({x:Math.min(a.x,b.x),y:Math.min(a.y,b.y),
+     w:Math.abs(a.x-b.x),h:Math.abs(a.y-b.y),
+     color:[parseInt(hx.substr(0,2),16)/255,parseInt(hx.substr(2,2),16)/255,parseInt(hx.substr(4,2),16)/255]});
+   any=true})});
+ return any?out:null}
+$('#dl').onclick=function(){var btn=this,redacted=false,onPicture=false;btn.disabled=true;btn.firstElementChild.nextSibling.textContent='Preparing...';
+ pdfLib().then(function(L){
+  /* A redaction has to happen on the file itself, before anything is painted over it - the
+     point is that the words stop existing, not that something sits on top of them. */
+  if(!KX.PdfRedact)return bytes;
+  return L.PDFDocument.load(bytes,{ignoreEncryption:true,updateMetadata:false}).then(function(probe){
+   var boxes=redactBoxes(L,probe);
+   if(!boxes)return bytes;
+   btn.firstElementChild.nextSibling.textContent='Redacting...';
+   return KX.PdfRedact.apply(L,bytes,boxes,{}).then(function(r){redacted=true;
+    /* Text under the bar is gone from the file. Pixels are not - a scanned passport is a
+       picture, and blacking it out here only paints over it. Say so plainly instead of
+       letting someone assume the bar did more than it did. */
+    if(r.onImage)onPicture=true;
+    return r.bytes})
+  })
+ }).catch(function(){redacted=false;return bytes})
+ .then(function(srcBytes){return pdfLib().then(function(L){return [L,srcBytes]})})
+ .then(function(rr){var L=rr[0],srcBytes=rr[1];return L.PDFDocument.load(srcBytes,{ignoreEncryption:true,updateMetadata:false}).then(function(d){return L.StandardFonts?d.embedFont(L.StandardFonts.Helvetica).then(function(font){return[L,d,font]}):[L,d,null]})}).then(function(r){var L=r[0],d=r[1],font=r[2],chain=Promise.resolve();
   if(fields.length){try{var form=d.getForm();fields.forEach(function(f){var el=$('#f'+f.id);if(!el)return;try{if(f.t==='text')form.getTextField(f.name).setText(el.value);else if(f.t==='check'){var c=form.getCheckBox(f.name);el.checked?c.check():c.uncheck()}else if(f.t==='drop'){if(el.value)form.getDropdown(f.name).select(el.value)}else if(f.t==='radio'){if(el.value)form.getRadioGroup(f.name).select(el.value)}}catch(e){}});
    try{form.updateFieldAppearances(font)}catch(e){}if($('#flat').checked){try{form.flatten()}catch(e){}}}catch(e){}}
   var pgs=d.getPages();
@@ -1013,11 +1578,16 @@ $('#dl').onclick=function(){var btn=this;btn.disabled=true;btn.firstElementChild
      if(ok){lines.forEach(function(l,i){var a=map(x,y+s*.945+i*s*1.2);page.drawText(l,{x:a.x,y:a.y,size:s,font:font,color:c,rotate:L.degrees(R)})})}
      else{var ti=textImg(txt,s,it.dataset.c||'#111111');chain=chain.then(function(){return d.embedPng(dataBytes(ti.url))}).then(function(img){var a=map(x,y+ti.h);page.drawImage(img,{x:a.x,y:a.y,width:ti.w,height:ti.h,rotate:L.degrees(R)})})}}
     else{var w=+it.dataset.w,h=+it.dataset.h;
-     if(t==='white'){var a=map(x,y+h);page.drawRectangle({x:a.x,y:a.y,width:w,height:h,color:L.rgb(1,1,1),rotate:L.degrees(R)})}
+     /* The redaction pass has already removed the text and drawn the bar. It only gets drawn
+        here when that pass did not run - otherwise a failure would hand back a file with the
+        covered thing in plain view, which is the one outcome worse than the old behaviour. */
+     if(t==='white'){if(!redacted){var a=map(x,y+h);page.drawRectangle({x:a.x,y:a.y,width:w,height:h,color:c,rotate:L.degrees(R)})}}
      else if(t==='tick'||t==='cross'){var th=Math.max(1,Math.min(w,h)*.12),segs=t==='tick'?[[.12,.55,.38,.82],[.38,.82,.88,.18]]:[[.16,.16,.84,.84],[.84,.16,.16,.84]];segs.forEach(function(g){var a=map(x+g[0]*w,y+g[1]*h),b=map(x+g[2]*w,y+g[3]*h);page.drawLine({start:a,end:b,thickness:th,color:c,lineCap:L.LineCapStyle?L.LineCapStyle.Round:undefined})})}
      else if(t==='sig'||t==='img'){var img=it.dataset.img,rotDeg=+it.dataset.rot||0,aTot=R-rotDeg,rad=aTot*Math.PI/180,cC=map(x+w/2,y+h/2),cos=Math.cos(rad),sin=Math.sin(rad),ax=cC.x-(w/2*cos-h/2*sin),ay=cC.y-(w/2*sin+h/2*cos);
       chain=chain.then(function(){return d.embedPng(dataBytes(img))}).then(function(im){page.drawImage(im,{x:ax,y:ay,width:w,height:h,rotate:L.degrees(aTot)})})}}})});
-  return chain.then(function(){return d.save()})}).then(function(out){var blob=new Blob([out],{type:'application/pdf'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=fname+'-filled.pdf';document.body.appendChild(a);a.click();a.remove();$('#after').classList.remove('hide');$('#again').onclick=function(ev){ev.preventDefault();var b=document.createElement('a');b.href=u;b.download=fname+'-filled.pdf';document.body.appendChild(b);b.click();b.remove()};window.__lastPdf=out;KX.toast('Downloaded')}).catch(function(e){KX.toast(e&&e.message||'Could not save the PDF')}).then(function(){btn.disabled=false;btn.firstElementChild.nextSibling.textContent='Download PDF'})};
+  return chain.then(function(){return d.save()})}).then(function(out){
+  if(onPicture)err('One of your boxes was over a picture, not text. The bar covers it, but the picture itself is still inside the file - for a scanned passport or certificate, crop the page instead.');
+ var blob=new Blob([out],{type:'application/pdf'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=fname+'-filled.pdf';document.body.appendChild(a);a.click();a.remove();$('#after').classList.remove('hide');$('#again').onclick=function(ev){ev.preventDefault();var b=document.createElement('a');b.href=u;b.download=fname+'-filled.pdf';document.body.appendChild(b);b.click();b.remove()};window.__lastPdf=out;KX.toast('Downloaded')}).catch(function(e){KX.toast(e&&e.message||'Could not save the PDF')}).then(function(){btn.disabled=false;btn.firstElementChild.nextSibling.textContent='Download PDF'})};
 window.__kx={openFile:openFile};
 })();
 </script>

@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Order your CV | KINETIX</title><meta name="description" content="KINETIX - professional CVs, certificates and career documents for jobs in the UAE and GCC.">
+<title>Order your CV | KINETIX</title><meta name="description" content="KINETIX - professional CVs, certificates and career documents for jobs in the UAE and GCC."><meta property="og:type" content="website"><meta property="og:site_name" content="KINETIX"><meta property="og:title" content="Order your CV | KINETIX"><meta property="og:description" content="KINETIX - professional CVs, certificates and career documents for jobs in the UAE and GCC."><meta property="og:url" content="https://max-meely.github.io/GCC-CV/intake.html"><meta name="twitter:card" content="summary_large_image"><meta property="og:image" content="https://max-meely.github.io/GCC-CV/share-card.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#071633"><link rel="icon" href="favicon.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="KINETIX">
 <script>try{var t=localStorage.getItem('kx-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <style>:root{--bg:#eef3fb;--card:rgba(255,255,255,.66);--card2:rgba(255,255,255,.86);--ink:#0b1730;--muted:#44526b;--line:rgba(24,48,102,.14);--soft:rgba(37,99,235,.07);--acc:#1d4ed8;--acc2:#0284c7;--accg:linear-gradient(135deg,#1d4ed8,#0284c7);--on:#fff;--ok:#157347;--okbg:rgba(21,115,71,.12);--err:#b42318;--errbg:rgba(180,35,24,.1);--warn:#8a5a00;--warnbg:rgba(224,160,20,.16);--r:18px;--sh:0 10px 34px rgba(30,55,120,.12),inset 0 1px 0 rgba(255,255,255,.8);--bd:rgba(255,255,255,.85);--blur:blur(18px) saturate(1.5);--b1:rgba(37,99,235,.30);--b2:rgba(147,80,255,.22);--b3:rgba(0,190,170,.22)}
@@ -241,6 +241,23 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 .bhero.phero::before{background:linear-gradient(180deg,rgba(4,10,24,.88),rgba(4,10,24,.72))}
 .kxapp{width:auto!important;padding:0 12px;display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.82rem;background:var(--accg,#2563eb)!important;color:#fff!important;border-color:transparent!important}.kxapp .ic{width:16px;height:16px}.kxapp[hidden]{display:none!important}
 @media(max-width:560px){.kxapp{padding:0!important;width:40px!important;justify-content:center}.kxapp span{display:none}.kxapp .ic{width:18px;height:18px}}
+
+/* Video tiles. Used on the blog index and on the tool pages, so a client meets the walkthrough
+   where they are already standing rather than hunting for it in the footer. */
+.vstrip{margin:26px 0 8px}
+.vstrip h2{font-size:1.12rem;margin:0 0 12px}
+.vrow{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:620px){.vrow{grid-template-columns:1fr 1fr}}
+.vtile{display:block;text-decoration:none;color:inherit;border:1px solid var(--bd);border-radius:16px;overflow:hidden;background:var(--card)}
+.vtile:hover .vpl{transform:translate(-50%,-50%) scale(1.08)}
+.vtile .vth{position:relative;display:block;aspect-ratio:16/9;background:#0b1326;overflow:hidden}
+.vtile .vth img{width:100%;height:100%;object-fit:cover;display:block}
+.vpl{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:rgba(10,19,38,.72);display:grid;place-items:center;transition:transform .15s}
+.vpl .ic{width:22px;height:22px;color:#fff;margin-left:2px}
+.vlen{position:absolute;right:8px;bottom:8px;background:rgba(10,19,38,.82);color:#fff;font-size:.72rem;padding:1px 7px;border-radius:99px}
+.vtile b{display:block;padding:12px 14px 2px;font-size:.96rem}
+.vtile .vsub{display:block;padding:0 14px 13px;font-size:.84rem;color:var(--mut)}
+.vone{max-width:380px}
 </style></head><body><svg xmlns="http://www.w3.org/2000/svg" style="display:none"><defs>
 <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
 <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
@@ -300,7 +317,7 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 <symbol id="i-selall" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="m8 12.5 3 3 5-6"/></symbol>
 <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h13v4"/><path d="M3 7v11a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1H5a2 2 0 0 1-2-2z"/><path d="M16 14.5h2"/></symbol>
 <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
-<symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></symbol>
+
 <symbol id="i-sign" viewBox="0 0 24 24"><path d="M3 21c3-1 5-2 7-5l8-9-3-3-9 8c-3 2-4 5-4 7z"/><path d="M14 6l4 4"/><path d="M14 21h7"/></symbol>
 <symbol id="i-type" viewBox="0 0 24 24"><path d="M5 6V4h14v2M12 4v16M9 20h6"/></symbol>
 <symbol id="i-box" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/></symbol>
@@ -309,27 +326,45 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
 <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14h6M9 17h4"/></symbol>
 </defs></svg>
 
-<header class="top"><div class="wrap"><a class="brand" href="index.html" aria-label="KINETIX home"><img class="bm" src="kinetix-logo.png" alt="" width="45" height="34"><span class="wm" aria-hidden="true"><img src="kinetix-k.png" alt="" width="25" height="22">INETIX</span></a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html" aria-current="page">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html">PDF tools</a><a href="order-status.html">Track order</a></nav><div class="tools"><button class="tt" id="menubtn" type="button" aria-haspopup="dialog" aria-label="Browse all pages"><svg class="ic"><use href="#i-menu"/></svg></button><button class="tt" type="button" data-share aria-label="Share KINETIX"><svg class="ic"><use href="#i-share"/></svg></button><button class="tt kxapp" type="button" data-install aria-label="Install the KINETIX app"><svg class="ic"><use href="#i-down"/></svg><span>App</span></button><span class="curwrap"><svg class="ic"><use href="#i-globe"/></svg><select class="curs" id="cur" aria-label="Currency"><option>AED</option></select></span><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></div></header>
+<header class="top"><div class="wrap"><a class="brand" href="index.html" aria-label="KINETIX home"><img class="bm" src="kinetix-logo.webp" alt="" width="45" height="34"><span class="wm" aria-hidden="true"><img src="kinetix-k.webp" alt="" width="25" height="22">INETIX</span></a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="intake.html" aria-current="page">Order a CV</a><a href="other-services.html">Other services</a><a href="pdf-tools.html">PDF tools</a><a href="order-status.html">Track order</a></nav><div class="tools"><button class="tt" id="menubtn" type="button" aria-haspopup="dialog" aria-label="Browse all pages"><svg class="ic"><use href="#i-menu"/></svg></button><button class="tt" type="button" data-share aria-label="Share KINETIX"><svg class="ic"><use href="#i-share"/></svg></button><button class="tt kxapp" type="button" data-install aria-label="Install the KINETIX app"><svg class="ic"><use href="#i-down"/></svg><span>App</span></button><span class="curwrap"><svg class="ic"><use href="#i-globe"/></svg><select class="curs" id="cur" aria-label="Currency"><option>AED</option></select></span><button class="tt" id="theme" type="button" aria-label="Switch light or dark mode"></button></div></div></header>
 <dialog id="sitemenu" aria-label="Browse KINETIX">
 <div class="row sp" style="margin-bottom:6px"><b style="font-size:1.1rem">Browse KINETIX</b><button type="button" class="tt" id="menux" aria-label="Close menu"><svg class="ic"><use href="#i-x"/></svg></button></div>
 <div class="smgrid">
 <div><h3>Get started</h3><a href="index.html">Home</a><a href="how-it-works.html">How it works</a><a href="intake.html">Order a CV</a><a href="other-services.html">Other services</a><a href="samples.html">Sample CVs</a></div>
-<div><h3>Free PDF tools</h3><a href="pdf-tools.html">All free PDF tools</a><a href="pdf-fill.html">Fill and sign PDF</a><a href="signature-tool.html">Signature maker</a><a href="pdf-unlock.html">PDF password remover</a><a href="pdf-help.html">Free help ticket</a><a href="tutorials.html">Video tutorials</a></div>
+<div><h3>Free PDF tools</h3><a href="pdf-tools.html">All free PDF tools</a><a href="pdf-fill.html">Fill and sign PDF</a><a href="signature-tool.html">Signature maker</a><a href="pdf-protect.html">Add a PDF password</a><a href="pdf-unlock.html">PDF password remover</a><a href="pdf-help.html">Free help ticket</a><a href="tutorials.html">Video tutorials</a></div>
 <div><h3>Company</h3><a href="about.html">What we do</a><a href="blog.html">Blog</a><a href="contact.html">Contact us</a><a href="order-status.html">Track your order</a></div>
 <div><h3>Legal</h3><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a><a href="legal-notice.html">Legal Notice</a><a href="copyright.html">Copyright Notice</a></div>
 </div></dialog>
 <style>
 /* CV style picker: a preview of each style beside its name */
-.styopt{align-items:flex-start}
-.styth{flex:0 0 auto;width:76px;height:107px;border-radius:6px;border:1px solid var(--line,#d6dce6);
-  object-fit:cover;object-position:top center;background:#fff;cursor:zoom-in;align-self:flex-start}
-.styopt input:checked~.styth{border-color:var(--pri,#2d5fa8);box-shadow:0 0 0 2px rgba(45,95,168,.25)}
+/* Thirteen full-width rows was a very long scroll on a phone. Grouped into four tiers and
+   laid out two to a row, the whole choice fits in about one screen and a half, and the best
+   work is the first thing seen rather than the last. */
+.stygrp{margin:4px 0 2px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.stygrp b{font-size:.95rem}
+.stygrp span{font-size:.78rem;color:var(--mut);flex:1 1 100%}
+.stygrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:8px 0 16px}
+.styopt{display:block;position:relative;padding:8px;border:1px solid var(--bd);border-radius:14px;
+  background:var(--card);cursor:pointer}
+.styopt input{position:absolute;opacity:0;pointer-events:none}
+.styopt:has(input:checked){border-color:var(--acc);box-shadow:0 0 0 2px rgba(45,95,168,.22)}
+.styth{display:block;width:100%;height:auto;aspect-ratio:1/0.82;cursor:pointer;border-radius:8px;border:1px solid var(--line,#d6dce6);
+  object-fit:cover;object-position:top center;background:#fff}
+.styopt input:checked~.styth{border-color:var(--pri,#2d5fa8)}
+.stynm{display:block;margin-top:7px;font-size:.86rem;font-weight:650;line-height:1.25}
+.styd{display:block;margin-top:2px;font-size:.75rem;color:var(--mut);line-height:1.35}
+.styopt .tag{font-size:.64rem;padding:0 5px;vertical-align:1px}
+.styopt{position:relative}
+.styzoom{position:absolute;right:13px;top:13px;width:30px;height:30px;border-radius:50%;border:0;
+  background:rgba(10,19,38,.72);color:#fff;display:grid;place-items:center;cursor:zoom-in;padding:0}
+.styzoom .ic{width:15px;height:15px}
+.styzoom:hover{background:rgba(10,19,38,.9)}
+@media (min-width:620px){.stygrid{grid-template-columns:repeat(3,1fr)}}
 #bigDlg{border:0;background:transparent;padding:0;max-width:94vw;max-height:94vh}
 #bigDlg::backdrop{background:rgba(6,12,24,.82)}
 #bigDlg img{display:block;max-width:92vw;max-height:84vh;width:auto;height:auto;border-radius:8px;
   box-shadow:0 18px 50px rgba(0,0,0,.5);background:#fff}
 #bigCap{color:#fff;text-align:center;margin-top:10px;font-weight:600}
-@media (max-width:420px){.styth{width:62px;height:87px}}
 </style>
 <main><div class="wrap" style="max-width:760px">
 <h1 data-i18n="Order your CV">Order your CV</h1>
@@ -368,7 +403,7 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
   <div class="card" style="padding:14px;margin-bottom:16px" id="mrzCard">
     <b data-i18n="Scan your ID or passport">Scan your ID or passport</b>
     <div class="muted small" style="margin-top:4px" data-i18n="Optional. We try to read your name, nationality and date of birth from a photo of the printed strip at the bottom of your passport, or the back of your Emirates ID - so you can check it instead of typing it. You can still type everything yourself below.">Optional. We try to read your name, nationality and date of birth from a photo of the printed strip at the bottom of your passport, or the back of your Emirates ID - so you can check it instead of typing it. You can still type everything yourself below.</div>
-    <input type="file" id="mrzIn" accept="image/*" capture="environment" style="margin-top:10px">
+    <input type="file" id="mrzIn" aria-label="Scan your passport or Emirates ID" accept="image/*" capture="environment" style="margin-top:10px">
     <div id="mrzStatus" class="muted small" style="margin-top:8px"></div>
     <div id="mrzReview" class="hide" style="margin-top:12px">
       <div class="tw"><table id="mrzTable"></table></div>
@@ -384,7 +419,7 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
     <div class="f"><label class="l" for="phone" data-i18n="Phone / WhatsApp">Phone / WhatsApp</label><input id="phone" name="phone" type="tel" data-req autocomplete="tel" inputmode="tel" placeholder="+971 5x xxx xxxx"><div class="e" data-i18n="Enter your phone number with country code.">Enter your phone number with country code.</div></div>
     <div class="f"><label class="l" for="nationality" data-i18n="Nationality">Nationality</label><select id="nationality" name="nationality" data-req></select><div class="e" data-i18n="Select your nationality.">Select your nationality.</div></div>
     <div class="f"><label class="l" for="country" data-i18n="Where are you now?">Where are you now?</label><select id="country" name="country" data-req></select><div class="e" data-i18n="Select your current country.">Select your current country.</div></div>
-    <div class="f"><label class="l" for="city" data-i18n="City / area">City / area</label><select id="city" name="city"></select><input id="cityOther" name="cityOther" class="hide" placeholder="Type your city" data-i18n-ph="Type your city" style="margin-top:8px"></div>
+    <div class="f"><label class="l" for="city" data-i18n="City / area">City / area</label><select id="city" name="city"></select><input id="cityOther" name="cityOther" aria-label="Type your city" class="hide" placeholder="Type your city" data-i18n-ph="Type your city" style="margin-top:8px"></div>
     <div class="f" id="dobF"><label class="l" for="dob"><span data-i18n="Date of birth">Date of birth</span> <span class="opt-t" data-i18n="(optional)">(optional)</span></label><input id="dob" name="dob" type="date"><div class="e" data-i18n="Check this date of birth - it doesn't look right.">Check this date of birth - it doesn't look right.</div></div>
     <div class="f"><label class="l" for="marital"><span data-i18n="Marital status">Marital status</span> <span class="opt-t" data-i18n="(optional)">(optional)</span></label><select id="marital" name="marital"></select></div>
   </div>
@@ -695,7 +730,12 @@ dialog{border-radius:20px;color:var(--ink);max-width:min(480px,92vw);padding:24p
   };
   /* ---------- PDF engine + thumbnails ---------- */
   var pjsP = null;
-  KX.pdfjs = function () { if (!pjsP) pjsP = import('./pdf.min.mjs').then(function (m) { m.GlobalWorkerOptions.workerSrc = 'pdf.worker.min.mjs'; return m; }).catch(function () { pjsP = null; throw new Error('Could not load the PDF viewer engine.'); }); return pjsP; };
+  /* An absolute URL, never a bare name. When the real Worker cannot start - one dropped
+     request on a phone is enough - pdf.js retries by import()ing the worker on the main
+     thread, and a bare specifier like 'pdf.worker.min.mjs' is not a thing the browser can
+     resolve. That is what produced "Failed to resolve module specifier" instead of the
+     document opening. With a real URL the fallback works: slower, but it opens. */
+  KX.pdfjs = function () { if (!pjsP) pjsP = import('./pdf.min.mjs').then(function (m) { m.GlobalWorkerOptions.workerSrc = new URL('pdf.worker.min.mjs', document.baseURI).href; return m; }).catch(function () { pjsP = null; throw new Error('Could not load the PDF viewer engine.'); }); return pjsP; };
   KX.pdfThumb = function (file, w) {
     w = w || 240;
     return KX.pdfjs().then(function (J) { return file.arrayBuffer().then(function (b) { return J.getDocument({ data: b }).promise; }); }).then(function (doc) {
@@ -827,25 +867,22 @@ function kxOffline() {
     licenceCountries: ["UAE","Home country only","None"],
     marital: ["Single","Married","Divorced","Widowed"],
     styles: [
-      /* Every style here is now built by the premium renderers: personal details in the
-         header, grey section bands, key skills explained in a line each, a serif name. The
-         difference between them is the shape and the colour, not the quality.
-         needs:'2.1' marks a style the older backend cannot build. The order form checks what
-         the live backend reports and hides these until it can, so the site and the Apps Script
-         deployment can never get out of step in a way a client notices. */
-      { k: "ats_classic", l: "Classic ATS", ats: true, d: "Strict single column, no tables at all. The safest choice for recruitment software." },
-      { k: "ats_compact", l: "Compact ATS", ats: true, d: "The same strict layout, tighter spacing for a long work history." },
-      { k: "exec_navy", l: "Executive navy", ats: false, d: "Deep navy header band with your details inside it. Corporate and office roles." },
-      { needs: "2.1", k: "exec_royal", l: "Executive royal", ats: false, d: "The same header band in a brighter royal blue. Stands out without shouting." },
-      { needs: "2.1", k: "exec_slate", l: "Slate blue", ats: false, d: "Slate header band with a bright blue accent. Supervisors and engineers." },
-      { k: "side_navy", l: "Modern sidebar", ats: false, d: "Dark navy sidebar with contact, details and language bars." },
-      { needs: "2.1", k: "side_steel", l: "Steel sidebar", ats: false, d: "Light steel-blue sidebar. Easy to read, easy to print." },
-      { k: "side_teal", l: "Fresh sidebar", ats: false, d: "Light sidebar with a teal accent. Softer than the navy one." },
-      { k: "site_bold", l: "Site-ready", ats: false, d: "Bold charcoal band with amber accents. Trades, oil and gas, site work." },
-      { needs: "2.1", k: "prem_ats", l: "Premium ATS", ats: true, d: "Full-width grey section bands, still single column so software reads it." },
-      { needs: "2.1", k: "prem_midnight", l: "Premium Midnight", ats: false, d: "Monogram tile, language bars, serif name. Our most exclusive layout." },
-      { needs: "2.1", k: "prem_royal", l: "Premium Royal", ats: false, d: "The premium layout in a brighter royal blue." },
-      { needs: "2.1", k: "prem_steel", l: "Premium Steel", ats: false, d: "Premium layout on a light steel panel. Prints beautifully." }
+      /* Ordered best first: premium, then sidebar, then header band, then the strict ATS
+         layouts. 'tier' groups them under a heading on the order form so thirteen options
+         read as four choices rather than one long scroll. */
+      { needs: "2.1", k: "prem_midnight", l: "Premium Midnight", ats: false, d: "Monogram tile, language bars, serif name. The most exclusive.", tier: "Premium", tnote: "Our best work - details in the header, grey section bands, skills explained in a line each." },
+      { needs: "2.1", k: "prem_royal", l: "Premium Royal", ats: false, d: "The premium layout in a brighter royal blue.", tier: "Premium" },
+      { needs: "2.1", k: "prem_steel", l: "Premium Steel", ats: false, d: "Premium layout on a light steel panel. Prints beautifully.", tier: "Premium" },
+      { needs: "2.1", k: "prem_ats", l: "Premium ATS", ats: true, d: "Full-width grey bands, single column so software still reads it.", tier: "Premium" },
+      { k: "side_navy", l: "Modern sidebar", ats: false, d: "Dark navy panel with contact, details and language bars.", tier: "With a sidebar", tnote: "A coloured panel down the side for contact, details and languages." },
+      { needs: "2.1", k: "side_steel", l: "Steel sidebar", ats: false, d: "Light steel-blue panel. Easy to read, easy to print.", tier: "With a sidebar" },
+      { k: "side_teal", l: "Fresh sidebar", ats: false, d: "Light panel with a teal accent. Softer than the navy.", tier: "With a sidebar" },
+      { k: "exec_navy", l: "Executive navy", ats: false, d: "Deep navy band with your details inside it. Office roles.", tier: "With a header band", tnote: "A solid colour block across the top carrying your name and details." },
+      { needs: "2.1", k: "exec_royal", l: "Executive royal", ats: false, d: "The same band in a brighter royal blue.", tier: "With a header band" },
+      { needs: "2.1", k: "exec_slate", l: "Slate blue", ats: false, d: "Slate band, bright blue accent. Supervisors and engineers.", tier: "With a header band" },
+      { k: "site_bold", l: "Site-ready", ats: false, d: "Charcoal band, amber accents. Trades, oil and gas, site work.", tier: "With a header band" },
+      { k: "ats_classic", l: "Classic ATS", ats: true, d: "Single column, no tables at all. The safest choice.", tier: "Strict ATS", tnote: "The plainest layouts. No tables anywhere, which is the safest thing to send into recruitment software." },
+      { k: "ats_compact", l: "Compact ATS", ats: true, d: "The same strict layout, tighter for a long work history.", tier: "Strict ATS" }
     ],
     certKinds: ["Safety","Technical / Trade","Professional","Medical","Driving / Equipment","Academic","Other"]
   };
@@ -1976,6 +2013,25 @@ function kxOffline() {
 </script>
 <script>
 (function(){
+/* The repeating rows (jobs, schools, certificates) are built from strings, so their visible
+   labels cannot use for= without colliding ids. A screen reader therefore met a page of
+   anonymous boxes. This copies each visible label onto its own field, and re-runs whenever a
+   row is added, so new rows are covered too. */
+function nameFields(root){
+ (root||document).querySelectorAll('.f').forEach(function(f){
+  var l=f.querySelector('label.l'),i=f.querySelector('input,select,textarea');
+  if(!l||!i||i.getAttribute('aria-label'))return;
+  var t=(l.textContent||'').replace(/\s+/g,' ').trim();
+  if(t)i.setAttribute('aria-label',t)});
+ (root||document).querySelectorAll('select[data-k],input[data-k],textarea[data-k]').forEach(function(i){
+  if(i.getAttribute('aria-label'))return;
+  var k=i.getAttribute('data-k');
+  if(k)i.setAttribute('aria-label',k.charAt(0).toUpperCase()+k.slice(1))});
+}
+try{nameFields();
+ new MutationObserver(function(m){m.forEach(function(r){
+  Array.prototype.forEach.call(r.addedNodes,function(n){if(n.nodeType===1)nameFields(n)})})})
+  .observe(document.body,{childList:true,subtree:true})}catch(e){}
 var $=KX.$,$$=KX.$$,esc=KX.esc,C=KX.cfg,D=KX_DATA,CAT=KX_CATALOG;
 var F=$('#f'),steps=$$('section[data-step]',F),cur=0,state={photo:null,files:[],sample:null},sending=false;
 var DRAFT='kx-draft-v2';
@@ -2009,14 +2065,31 @@ $('#svcs').innerHTML=intakeSvcs.map(function(s,i){return '<label class="opt"><in
    until the Apps Script deployment reports that version, so if the site is updated before the
    backend is, a client sees a shorter list instead of having their order refused at the last
    step. The check is async, so start from the safe list and add the rest when the ping lands. */
-function styleHtml(list){return list.map(function(s,i){return '<label class="opt styopt"><input type="radio" name="style" value="'+s.k+'"'+(i===0?' checked':'')+'>'+
-  '<img class="styth" src="style-img/'+s.k+'.jpg" alt="" width="76" height="107" data-big="'+s.k+'" data-l="'+esc(s.l)+'" loading="lazy" decoding="async">'+
-  '<div><b>'+esc(s.l)+(s.ats?' <span class="tag ok">ATS</span>':'')+'</b><span>'+esc(s.d)+'</span></div></label>'}).join('')}
+function styleHtml(list){
+ /* Walk the list in order and open a new heading whenever the tier changes, so the grouping
+    always matches the data rather than being hard-coded here. */
+ var out='',tier=null,open=false;
+ list.forEach(function(s,i){
+  if(s.tier!==tier){
+   if(open)out+='</div>';
+   tier=s.tier;open=true;
+   out+='<div class="stygrp"><b>'+esc(tier)+'</b>'+(s.tnote?'<span>'+esc(s.tnote)+'</span>':'')+'</div><div class="stygrid">';
+  }
+  out+='<label class="styopt"><input type="radio" name="style" value="'+s.k+'"'+(i===0?' checked':'')+'>'+
+   '<img class="styth" src="style-img/'+s.k+'.webp" alt="" width="152" height="215" loading="lazy" data-big="'+s.k+'" data-l="'+esc(s.l)+'">'+
+   '<button type="button" class="styzoom" aria-label="'+esc('Preview '+s.l)+'" title="Preview">'+KX.icon('search')+'</button>'+
+   '<span class="stynm">'+esc(s.l)+(s.ats?' <span class="tag ok">ATS</span>':'')+'</span>'+
+   '<span class="styd">'+esc(s.d)+'</span></label>';
+ });
+ return out+(open?'</div>':'')}
+var styTouched=false;
 function paintStyles(){
-  var keep=radio('style');
+  var keep=styTouched?radio('style'):null;
   $('#styles').innerHTML=styleHtml(STY);
   var r=keep&&F.querySelector('input[name=style][value="'+keep+'"]');
   if(r)r.checked=true; else {var f=F.querySelector('input[name=style]');if(f)f.checked=true}
+  /* Once the client picks for themselves their choice is never overridden again. */
+  $('#styles').addEventListener('change',function(){styTouched=true},{once:true});
   try{KX.applyI18n($('#styles'))}catch(e){}
 }
 /* off:true styles stay defined (the backend still builds them, and old orders still refer to
@@ -2037,9 +2110,10 @@ if(KX.ready&&KX.ready()&&STY.length<OFFER.length){
   }).catch(function(){/* offline, or a backend too old to answer - the safe list stays */});
 }
 $('#styles').addEventListener('click',function(e){
-  var im=e.target.closest('.styth');if(!im)return;
+  var zb=e.target.closest('.styzoom');if(!zb)return;
+  var im=zb.parentNode.querySelector('.styth');if(!im)return;
   e.preventDefault();e.stopPropagation();
-  $('#bigImg').src='style-img/'+im.getAttribute('data-big')+'-big.jpg';
+  $('#bigImg').src='style-img/'+im.getAttribute('data-big')+'-big.webp';
   $('#bigCap').textContent=im.getAttribute('data-l');
   var d=$('#bigDlg');try{d.showModal()}catch(x){d.setAttribute('open','')}
 });
